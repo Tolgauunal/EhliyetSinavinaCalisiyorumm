@@ -1,10 +1,13 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.home
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -12,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -27,41 +31,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.unallapps.ehliyetsinavinacalisiyorum.DatabaseDersler
+import com.unallapps.ehliyetsinavinacalisiyorum.DatabaseKonular
+import com.unallapps.ehliyetsinavinacalisiyorum.Dersler
+import com.unallapps.ehliyetsinavinacalisiyorum.Konular
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun Home() {
-    val dersler = remember {
-        mutableListOf(
-            "Deneme",
-            "Deneme",
-            "Deneme",
-            "Deneme",
-            "Deneme",
-            "Deneme",
-        )
-    }
-    val konular = remember {
-        mutableListOf(
-            "konular",
-            "konular",
-            "konular",
-            "konular",
-            "konular",
-            "konular",
-        )
-    }
-    val konular1 = remember { mutableListOf("konular1", "konular1", "konular1", "konular1") }
-    val secilenKonular = remember { mutableListOf(null) }
     val derslerSelectedItem = remember { mutableStateOf(0) }
     val searchText = remember { mutableStateOf("") }
     Column(modifier = Modifier
         .fillMaxSize()
         .padding(16.dp),
-        verticalArrangement = Arrangement.SpaceAround,
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally) {
         Row(verticalAlignment = Alignment.Top,
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -69,6 +56,7 @@ fun Home() {
             Text(text = "Merhaba Misafir Kullanıcı!")
             Icon(painter = painterResource(id = R.drawable.home), contentDescription = "Profil Fotoğrafı")
         }
+        Spacer(modifier = Modifier.padding(5.dp))
         Card(modifier = Modifier.fillMaxWidth()) {
             Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Column(modifier = Modifier
@@ -86,39 +74,77 @@ fun Home() {
                         .size(100.dp))
             }
         }
+        Spacer(modifier = Modifier.padding(5.dp))
         Column(verticalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
             Text(text = "Ders Seçiniz")
+            Spacer(modifier = Modifier.padding(top = 10.dp))
             LazyRow(modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween) {
-                items(count = dersler.count(), itemContent = {
-                    val ders = dersler[it]
-                    Card(colors = CardDefaults.cardColors(Color.Blue),
-                        shape = CircleShape,
-                        modifier = Modifier.clickable { derslerSelectedItem.value=it }) {
-                        Text(text = ders, modifier = Modifier.padding(10.dp), color = Color.White)
+                items(count = DatabaseDersler.derslerList.count(), itemContent = {
+                    val ders = DatabaseDersler.derslerList[it]
+                    if (derslerSelectedItem.value == it) {
+                        Card(colors = CardDefaults.cardColors(Color.Blue),
+                            shape = RoundedCornerShape(5.dp),
+                            modifier = Modifier.clickable { derslerSelectedItem.value = it }) {
+                            Row(verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.Center) {
+                                Text(text = ders.name, modifier = Modifier.padding(10.dp), color = Color.White)
+                                Image(painter = painterResource(id = ders.icon), contentDescription = "")
+                            }
+                        }
+                    } else {
+                        Card(colors = CardDefaults.cardColors(Color.White),
+                            modifier = Modifier
+                                .clickable { derslerSelectedItem.value = it }
+                                .border(border = BorderStroke(1.dp, Color.Black), shape = RoundedCornerShape(5.dp))) {
+                            Row(verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.Center) {
+                                Text(text = ders.name, modifier = Modifier.padding(10.dp), color = Color.Blue)
+                                Image(painter = painterResource(id = ders.icon), contentDescription = "")
+                            }
+                        }
                     }
+                    Spacer(modifier = Modifier.padding(start = 0.dp, top = 10.dp, end = 10.dp, bottom = 10.dp))
                 })
             }
         }
+        Spacer(modifier = Modifier.padding(5.dp))
         Column(verticalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
             Text(text = "Önerilen Konular")
             LazyColumn(modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.SpaceBetween,
                 horizontalAlignment = Alignment.Start) {
-                items(count = konular.count(), itemContent = {
-                    val ders = konular[it]
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        Card(colors = CardDefaults.cardColors(Color.Blue),
-                            shape = RectangleShape,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(5.dp)) {
-                            Text(text = ders, modifier = Modifier.padding(10.dp), color = Color.White)
+                items(count = DatabaseKonular.konularList.count(), itemContent = {
+                    val konular = DatabaseKonular.konularList[it]
+                    if (konular.id == derslerSelectedItem.value) {
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            Card(colors = CardDefaults.cardColors(Color.Blue),
+                                shape = RoundedCornerShape(5.dp),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(5.dp)) {
+                                Row(verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(10.dp)) {
+                                    Text(text = konular.name, modifier = Modifier.padding(10.dp), color = Color.White)
+                                    Image(painter = painterResource(id = konular.icon), contentDescription = "")
+                                }
+                            }
                         }
                     }
                 })
             }
         }
     }
+}
+
+
+
+@Preview(showSystemUi = true, showBackground = true)
+@Composable
+fun HomePreview() {
+    Home()
 }
