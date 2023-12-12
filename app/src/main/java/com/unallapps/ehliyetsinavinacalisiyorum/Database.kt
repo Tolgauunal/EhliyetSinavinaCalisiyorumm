@@ -1,7 +1,5 @@
 package com.unallapps.ehliyetsinavinacalisiyorum
 
-import android.graphics.drawable.Icon
-
 data class Dersler(val id: Int, val name: String, val icon: Int)
 
 data class Konular(val id: Int, val name: String, val icon: Int)
