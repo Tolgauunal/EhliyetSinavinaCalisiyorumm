@@ -31,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.unallapps.ehliyetsinavinacalisiyorum.bilgikartlari.BilgiKartlari
 import com.unallapps.ehliyetsinavinacalisiyorum.home.Home
 import com.unallapps.ehliyetsinavinacalisiyorum.konular.Konular
 import com.unallapps.ehliyetsinavinacalisiyorum.profil.Profil
@@ -55,7 +56,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting() {
     val navigationSelectedItem = remember { mutableStateOf(0) }
-    val navigationItem = listOf("Home", "Konular", "Testler", "Profil")
+    val navigationItem = listOf("Home", "Konular", "Testler", "Profil","Profill")
     Scaffold(bottomBar = {
         NavigationBar {
             navigationItem.forEachIndexed { index, item ->
@@ -68,6 +69,7 @@ fun Greeting() {
                                 contentDescription = "Ana Sayfa")
                             "Testler" -> Icon(imageVector = Icons.Default.Home, contentDescription = "Testler")
                             "Profil" -> Icon(imageVector = Icons.Default.Person, contentDescription = "Profil")
+                            "Profill" -> Icon(imageVector = Icons.Default.Person, contentDescription = "Profil")
                         }
                     },
                     label = {
@@ -88,6 +90,9 @@ fun Greeting() {
             }
             if (navigationSelectedItem.value == 3) {
                 Profil()
+            }
+            if (navigationSelectedItem.value == 4) {
+                BilgiKartlari(1)
             }
         }
     })
