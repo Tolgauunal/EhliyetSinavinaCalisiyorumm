@@ -30,7 +30,7 @@ import com.unallapps.ehliyetsinavinacalisiyorum.DatabaseDersler
 import com.unallapps.ehliyetsinavinacalisiyorum.DatabaseKonular
 
 @Composable
-fun Konular() {
+fun Konular(paddingModifier: Modifier) {
     val derslerSelectedItem = remember { mutableStateOf(0) }
     Column(modifier = Modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.Top,
@@ -99,10 +99,4 @@ fun Konular() {
             }
         }
     }
-}
-
-@Preview(showSystemUi = true, showBackground = true)
-@Composable
-fun KonularPreview() {
-    Konular()
 }

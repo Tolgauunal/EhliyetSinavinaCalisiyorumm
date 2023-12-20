@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import com.unallapps.ehliyetsinavinacalisiyorum.DatabaseDersler
 
 @Composable
-fun Testler() {
+fun Testler(paddingModifier: Modifier) {
     val selectedDersItemIndex = remember { mutableStateOf(0) }
     Column(modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top,
@@ -73,10 +73,4 @@ fun Testler() {
             Text(text = "Testi Başlat")
         }
     }
-}
-
-@Preview(showSystemUi = true, showBackground = true)
-@Composable
-fun TestlerPreview() {
-    Testler()
 }
