@@ -31,5 +31,8 @@ fun BottomNavigationGraph(
         composable(route= BottomBarScreen.Profil.route) {
             Profil(paddingModifier)
         }
+        composable(route= BottomBarScreen.BilgiKartlari.route) {
+            BilgiKartlari(1,paddingModifier)
+        }
     }
 }

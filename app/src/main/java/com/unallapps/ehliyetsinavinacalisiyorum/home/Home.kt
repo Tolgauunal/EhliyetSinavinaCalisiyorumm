@@ -129,7 +129,6 @@ fun Home(paddingModifier: Modifier) {
                                 shape = RoundedCornerShape(5.dp),
                                 onClick = {
                                     alertDialog.value = true
-                                    selectedKonu.value = konular
                                 },
                                 modifier = Modifier
                                     .fillMaxWidth()
@@ -185,9 +184,5 @@ fun AlertDialogSample(alertDialog: MutableState<Boolean>, secilenKonu: Dersler) 
                 })
             }
         }
-    }
-    if (click.value) {
-        NavigationGraph(navController = navController, paddingModifier = Modifier)
-        navController.navigate("bilgiKartlari")
     }
 }

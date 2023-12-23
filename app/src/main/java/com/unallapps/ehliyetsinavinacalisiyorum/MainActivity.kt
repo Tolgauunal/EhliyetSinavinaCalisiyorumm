@@ -58,14 +58,19 @@ fun AppBottomBar(navController: NavHostController) {
         BottomBarScreen.Home,
         BottomBarScreen.Konular,
         BottomBarScreen.Testler,
-        BottomBarScreen.Profil
+        BottomBarScreen.Profil,
+        BottomBarScreen.BilgiKartlari
     )
     NavigationBar() {
+
         screens.forEach { screen ->
-            AddItem(
-                screen = screen,
-                navController = navController
-            )
+            when(screen){
+                is BottomBarScreen.Home,BottomBarScreen.Konular,BottomBarScreen.Testler,BottomBarScreen.Profil ->  AddItem(
+                    screen = screen,
+                    navController = navController
+                )
+                else-> Unit
+            }
         }
     }
 }
