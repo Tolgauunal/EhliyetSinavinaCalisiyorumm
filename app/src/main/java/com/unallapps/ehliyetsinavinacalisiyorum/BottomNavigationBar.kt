@@ -34,4 +34,14 @@ sealed class BottomBarScreen(
         label ="BilgiKartlari",
         icon = R.drawable.baseline_person_24
     )
+    object TestEkrani: BottomBarScreen(
+        route ="testEkrani",
+        label ="TestEkrani",
+        icon = R.drawable.baseline_person_24
+    )
+    object KonuAnlatimi: BottomBarScreen(
+        route ="konuAnlatimi",
+        label ="KonuAnlatimi",
+        icon = R.drawable.baseline_person_24
+    )
 }

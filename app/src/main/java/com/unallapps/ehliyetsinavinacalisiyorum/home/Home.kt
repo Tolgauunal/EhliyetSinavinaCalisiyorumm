@@ -32,7 +32,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -41,12 +44,11 @@ import androidx.navigation.compose.rememberNavController
 import com.unallapps.ehliyetsinavinacalisiyorum.DatabaseDersler
 import com.unallapps.ehliyetsinavinacalisiyorum.DatabaseKonular
 import com.unallapps.ehliyetsinavinacalisiyorum.Dersler
-import com.unallapps.ehliyetsinavinacalisiyorum.NavigationGraph
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun Home(paddingModifier: Modifier) {
+fun Home(paddingModifier: Modifier, navController: NavHostController) {
     val derslerSelectedItem = remember { mutableStateOf(0) }
     val searchText = remember { mutableStateOf("") }
     val alertDialog = remember { mutableStateOf(false) }
@@ -59,7 +61,7 @@ fun Home(paddingModifier: Modifier) {
         Row(verticalAlignment = Alignment.Top,
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()) {
-            Text(text = "Merhaba Misafir Kullanıcı!")
+            Text(text = "Merhaba Misafir Kullanıcı!", color = colorResource(id = R.color.kapaliMavi))
             Icon(painter = painterResource(id = R.drawable.home), contentDescription = "Profil Fotoğrafı")
         }
         Spacer(modifier = Modifier.padding(5.dp))
@@ -71,7 +73,7 @@ fun Home(paddingModifier: Modifier) {
                     Text(text = "Bütün Konulara Hızlı ve Kolay Yoldan Ulaşın")
                     OutlinedTextField(value = searchText.value,
                         onValueChange = { searchText.value = it },
-                        label = { Text(text = "Konu Arayın", fontSize = 10.sp) })
+                        label = { Text(text = "Konu Arayın", fontSize = 10.sp) }, maxLines = 1)
                 }
                 Image(painter = painterResource(id = R.drawable.learningback),
                     contentDescription = "",
@@ -95,8 +97,8 @@ fun Home(paddingModifier: Modifier) {
                             modifier = Modifier.clickable { derslerSelectedItem.value = it }) {
                             Row(verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.Center) {
-                                Text(text = ders.name, modifier = Modifier.padding(10.dp), color = Color.White)
                                 Image(painter = painterResource(id = ders.icon), contentDescription = "")
+                                Text(text = ders.name, modifier = Modifier.padding(10.dp), color = Color.White)
                             }
                         }
                     } else {
@@ -134,12 +136,12 @@ fun Home(paddingModifier: Modifier) {
                                     .fillMaxWidth()
                                     .padding(5.dp)) {
                                 Row(verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    horizontalArrangement = Arrangement.Start,
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(10.dp)) {
-                                    Text(text = konular.name, modifier = Modifier.padding(10.dp), color = Color.White)
                                     Image(painter = painterResource(id = konular.icon), contentDescription = "")
+                                    Text(text = konular.name, modifier = Modifier.padding(10.dp), color = Color.White)
                                 }
                             }
                         }
@@ -148,14 +150,13 @@ fun Home(paddingModifier: Modifier) {
             }
         }
         if (alertDialog.value) {
-            AlertDialogSample(alertDialog, selectedKonu.value)
+            AlertDialogSample(alertDialog, selectedKonu.value,navController)
         }
     }
 }
 
 @Composable
-fun AlertDialogSample(alertDialog: MutableState<Boolean>, secilenKonu: Dersler) {
-    val navController = rememberNavController()
+fun AlertDialogSample(alertDialog: MutableState<Boolean>, secilenKonu: Dersler, navController: NavHostController) {
     val click = remember { mutableStateOf(false) }
     MaterialTheme {
         Column {
@@ -171,15 +172,17 @@ fun AlertDialogSample(alertDialog: MutableState<Boolean>, secilenKonu: Dersler) 
                         openDialog.value = false
                         alertDialog.value = false
                         click.value = true
+                        navController.navigate("bilgiKartlari")
                     }) {
-                        Text("Konu Anlatım")
+                        Text("Bilgi Kartları")
                     }
                 }, dismissButton = {
                     Button(onClick = {
                         openDialog.value = false
                         alertDialog.value = false
+                        navController.navigate("konuAnlatimi")
                     }) {
-                        Text("Testler")
+                        Text("Konu Anlatımı")
                     }
                 })
             }

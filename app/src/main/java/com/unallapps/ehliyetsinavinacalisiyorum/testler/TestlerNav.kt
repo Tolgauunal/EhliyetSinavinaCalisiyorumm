@@ -21,13 +21,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.unallapps.ehliyetsinavinacalisiyorum.DatabaseDersler
 
 @Composable
-fun Testler(paddingModifier: Modifier) {
+fun Testler(paddingModifier: Modifier, navController: NavHostController) {
     val selectedDersItemIndex = remember { mutableStateOf(0) }
     Column(modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top,
@@ -69,7 +69,7 @@ fun Testler(paddingModifier: Modifier) {
                 }
             }
         })
-        Button(onClick = { Log.e("Test","Testi Başlat")}) {
+        Button(onClick = {navController.navigate("testEkrani")}) {
             Text(text = "Testi Başlat")
         }
     }

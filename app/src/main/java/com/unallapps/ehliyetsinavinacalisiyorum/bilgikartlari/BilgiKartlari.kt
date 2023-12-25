@@ -27,7 +27,7 @@ import com.unallapps.ehliyetsinavinacalisiyorum.R
 fun BilgiKartlari(konuId: Int, paddingModifier: Modifier) {
     var progress by remember { mutableStateOf(0) }
     var bilgiKartiSize = 10f //Gelen veri ile eşleşecek size
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = paddingModifier) {
         Row(modifier = Modifier
             .fillMaxWidth()
             .padding(20.dp)) {
