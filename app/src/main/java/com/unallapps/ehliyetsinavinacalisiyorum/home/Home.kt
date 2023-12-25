@@ -2,6 +2,7 @@ package com.unallapps.ehliyetsinavinacalisiyorum.home
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,6 +25,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -53,31 +56,21 @@ fun Home(paddingModifier: Modifier, navController: NavHostController) {
     val searchText = remember { mutableStateOf("") }
     val alertDialog = remember { mutableStateOf(false) }
     val selectedKonu = remember { mutableStateOf(DatabaseKonular.konularList[0]) }
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally) {
-        Row(verticalAlignment = Alignment.Top,
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth()) {
+    Column(modifier = paddingModifier.padding(start = 8.dp, end = 8.dp, top = 8.dp), verticalArrangement = Arrangement.Top, horizontalAlignment = Alignment.CenterHorizontally) {
+        Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
             Text(text = "Merhaba Misafir Kullanıcı!", color = colorResource(id = R.color.kapaliMavi))
             Icon(painter = painterResource(id = R.drawable.home), contentDescription = "Profil Fotoğrafı")
         }
         Spacer(modifier = Modifier.padding(5.dp))
-        Card(modifier = Modifier.fillMaxWidth()) {
+        Card(modifier = Modifier.fillMaxWidth(), colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.kapaliMavi))) {
             Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Column(modifier = Modifier
-                    .weight(1f)
-                    .padding(10.dp)) {
-                    Text(text = "Bütün Konulara Hızlı ve Kolay Yoldan Ulaşın")
-                    OutlinedTextField(value = searchText.value,
-                        onValueChange = { searchText.value = it },
-                        label = { Text(text = "Konu Arayın", fontSize = 10.sp) }, maxLines = 1)
+                        .weight(1f)
+                        .padding(10.dp)) {
+                    Text(text = "Bütün Konulara Hızlı ve Kolay Yoldan Ulaşın", color = colorResource(id = R.color.white), textAlign = TextAlign.Center)
+                    OutlinedTextField(value = searchText.value, onValueChange = { searchText.value = it }, colors = TextFieldDefaults.outlinedTextFieldColors(containerColor = Color.White, textColor = Color.White, disabledTextColor = Color.Black, disabledBorderColor = colorResource(id = R.color.acikmavi), focusedLabelColor = Color.White, focusedBorderColor = colorResource(id = R.color.acikmavi)), label = { Text(text = "Konu Arayın", fontSize = 10.sp) }, maxLines = 1)
                 }
-                Image(painter = painterResource(id = R.drawable.learningback),
-                    contentDescription = "",
-                    modifier = Modifier
+                Image(painter = painterResource(id = R.drawable.learningback), contentDescription = "", modifier = Modifier
                         .weight(1f)
                         .size(100.dp))
             }
@@ -86,30 +79,21 @@ fun Home(paddingModifier: Modifier, navController: NavHostController) {
         Column(verticalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
             Text(text = "Ders Seçiniz")
             Spacer(modifier = Modifier.padding(top = 10.dp))
-            LazyRow(modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween) {
+            LazyRow(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
                 items(count = DatabaseDersler.derslerList.count(), itemContent = {
                     val ders = DatabaseDersler.derslerList[it]
                     if (derslerSelectedItem.value == it) {
-                        Card(colors = CardDefaults.cardColors(Color.Blue),
-                            shape = RoundedCornerShape(5.dp),
-                            modifier = Modifier.clickable { derslerSelectedItem.value = it }) {
-                            Row(verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.Center) {
+                        Card(colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.kapaliMavi), contentColor = Color.White), border = BorderStroke(1.dp, color = colorResource(id = R.color.kapaliMavi)), elevation = CardDefaults.cardElevation(16.dp), shape = RoundedCornerShape(10.dp), modifier = Modifier.clickable { derslerSelectedItem.value = it }) {
+                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
                                 Image(painter = painterResource(id = ders.icon), contentDescription = "")
-                                Text(text = ders.name, modifier = Modifier.padding(10.dp), color = Color.White)
+                                Text(text = ders.name, modifier = Modifier.padding(10.dp), color = Color.White, fontSize = 16.sp)
                             }
                         }
                     } else {
-                        Card(colors = CardDefaults.cardColors(Color.White),
-                            modifier = Modifier
-                                .clickable { derslerSelectedItem.value = it }
-                                .border(border = BorderStroke(1.dp, Color.Black), shape = RoundedCornerShape(5.dp))) {
-                            Row(verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.Center) {
-                                Text(text = ders.name, modifier = Modifier.padding(10.dp), color = Color.Blue)
+                        Card(colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.white), contentColor = Color.White), border = BorderStroke(1.dp, color = colorResource(id = R.color.kapaliMavi)), elevation = CardDefaults.cardElevation(16.dp), shape = RoundedCornerShape(10.dp), modifier = Modifier.clickable { derslerSelectedItem.value = it }) {
+                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
                                 Image(painter = painterResource(id = ders.icon), contentDescription = "")
+                                Text(text = ders.name, modifier = Modifier.padding(10.dp), color = colorResource(id = R.color.kapaliMavi))
                             }
                         }
                     }
@@ -120,28 +104,28 @@ fun Home(paddingModifier: Modifier, navController: NavHostController) {
         Spacer(modifier = Modifier.padding(5.dp))
         Column(verticalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
             Text(text = "Önerilen Konular")
-            LazyColumn(modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.SpaceBetween,
-                horizontalAlignment = Alignment.Start) {
+            LazyColumn(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.SpaceBetween, horizontalAlignment = Alignment.Start) {
                 items(count = DatabaseKonular.konularList.count(), itemContent = {
                     val konular = DatabaseKonular.konularList[it]
                     if (konular.id == derslerSelectedItem.value) {
                         Row(modifier = Modifier.fillMaxWidth()) {
-                            Card(colors = CardDefaults.cardColors(Color.Blue),
-                                shape = RoundedCornerShape(5.dp),
-                                onClick = {
-                                    alertDialog.value = true
-                                },
-                                modifier = Modifier
+                            Card(colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.kapaliMavi)), shape = RoundedCornerShape(20.dp), onClick = {
+                                alertDialog.value = true
+                            }, modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(5.dp)) {
-                                Row(verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.Start,
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(10.dp)) {
+                                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start, modifier = Modifier
+                                        .fillMaxWidth()) {
                                     Image(painter = painterResource(id = konular.icon), contentDescription = "")
-                                    Text(text = konular.name, modifier = Modifier.padding(10.dp), color = Color.White)
+                                    Column (modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally){
+                                        Text(text = konular.name, modifier = Modifier.padding(10.dp), color = Color.White)
+                                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
+                                            Image(painter = painterResource(id = konular.icon), contentDescription = "")
+                                            Text(text = konular.name, modifier = Modifier.padding(10.dp), color = Color.White)
+                                            Image(painter = painterResource(id = konular.icon), contentDescription = "")
+                                            Text(text = konular.name, modifier = Modifier.padding(10.dp), color = Color.White)
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -150,7 +134,7 @@ fun Home(paddingModifier: Modifier, navController: NavHostController) {
             }
         }
         if (alertDialog.value) {
-            AlertDialogSample(alertDialog, selectedKonu.value,navController)
+            AlertDialogSample(alertDialog, selectedKonu.value, navController)
         }
     }
 }
