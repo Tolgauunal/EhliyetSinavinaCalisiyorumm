@@ -17,10 +17,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,9 +32,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -50,33 +56,9 @@ fun Profil(paddingModifier: Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.verticalScroll(rememberScrollState())) {
         Box(modifier = Modifier
-            .background(Color.Blue)
+            .background(colorResource(id = R.color.kapaliMavi))
             .fillMaxWidth()
             .padding(10.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable {
-                        launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
-                    }) {
-                if (photoUri != null) { //Use Coil to display the selected image
-                    val painter =
-                        rememberAsyncImagePainter(ImageRequest.Builder(LocalContext.current).data(data = photoUri)
-                            .build())
-                    Image(painter = painter,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .size(150.dp)
-                            .padding(5.dp),
-                        contentScale = ContentScale.Fit)
-                } else {
-                    Image(painter = painterResource(id = R.drawable.baseline_person_24),
-                        contentDescription = "Profil",
-                        modifier = Modifier.size(150.dp))
-                }
-            }
             Row(horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.Top,
                 modifier = Modifier
@@ -84,57 +66,62 @@ fun Profil(paddingModifier: Modifier) {
                     .size(50.dp)) {
                 Image(painter = painterResource(id = R.drawable.baseline_settings_24), contentDescription = "Profil")
             }
+            Row(verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth()) {
+                if (photoUri != null) { //Use Coil to display the selected image
+                    val painter =
+                        rememberAsyncImagePainter(ImageRequest.Builder(LocalContext.current).data(data = photoUri)
+                            .build())
+                    Image(painter = painter,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(150.dp)
+                            .clip(CircleShape)
+                            .fillMaxWidth()
+                            .clickable {
+                                launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
+                            }
+                            .padding(5.dp),
+                        contentScale = ContentScale.Crop)
+                } else {
+                    Image(painter = painterResource(id = R.drawable.baseline_person_24),
+                        contentDescription = "",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .clip(CircleShape)
+                            .size(150.dp)
+                            .clickable {
+                                launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
+                            })
+                }
+            }
         }
+        Text(text = "Ayarlar", color = colorResource(id = R.color.kapaliMavi))
         Spacer(modifier = Modifier.padding(10.dp))
-        Button(onClick = { /*TODO*/ }) {
-            Row(verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()) {
-                Icon(painter = painterResource(id = R.drawable.home), contentDescription = "")
-                Text(text = "Deneme")
-                Icon(painter = painterResource(id = R.drawable.home), contentDescription = "")
-            }
-        }
+        CustomButton(title = "Deneme", onClick = {})
         Spacer(modifier = Modifier.padding(5.dp))
-        Button(onClick = { /*TODO*/ }) {
-            Row(verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()) {
-                Icon(painter = painterResource(id = R.drawable.home), contentDescription = "")
-                Text(text = "Deneme")
-                Icon(painter = painterResource(id = R.drawable.home), contentDescription = "")
-            }
-        }
+        CustomButton(title = "Deneme", onClick = {})
+        Spacer(modifier = Modifier.padding(5.dp))
+        CustomButton(title = "Deneme", onClick = {})
+        Spacer(modifier = Modifier.padding(5.dp))
+        CustomButton(title = "Deneme", onClick = {})
+        Spacer(modifier = Modifier.padding(5.dp))
+    }
+}
 
-        Spacer(modifier = Modifier.padding(5.dp))
-        Button(onClick = { /*TODO*/ }) {
-            Row(verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()) {
-                Icon(painter = painterResource(id = R.drawable.home), contentDescription = "")
-                Text(text = "Deneme")
-                Icon(painter = painterResource(id = R.drawable.home), contentDescription = "")
-            }
-        }
-        Spacer(modifier = Modifier.padding(5.dp))
-        Button(onClick = { /*TODO*/ }) {
-            Row(verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()) {
-                Icon(painter = painterResource(id = R.drawable.home), contentDescription = "")
-                Text(text = "Deneme")
-                Icon(painter = painterResource(id = R.drawable.home), contentDescription = "")
-            }
-        }
-        Spacer(modifier = Modifier.padding(5.dp))
-        Button(onClick = { /*TODO*/ }) {
-            Row(verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()) {
-                Icon(painter = painterResource(id = R.drawable.home), contentDescription = "")
-                Text(text = "Deneme")
-                Icon(painter = painterResource(id = R.drawable.home), contentDescription = "")
-            }
+@Composable
+fun CustomButton(title: String, onClick: () -> Unit) {
+    Button(onClick = { onClick },
+        colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.acikmavi))) {
+        Row(verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth()) {
+            Icon(painter = painterResource(id = R.drawable.home), contentDescription = "")
+            Text(text = title, color = colorResource(id = R.color.kapaliMavi))
+            Icon(painter = painterResource(id = R.drawable.baseline_keyboard_arrow_right_24),
+                contentDescription = "",
+                tint = colorResource(id = R.color.kapaliMavi))
         }
     }
 }

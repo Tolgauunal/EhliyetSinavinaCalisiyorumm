@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -23,7 +24,11 @@ fun BottomNavigationGraph(
     navController: NavHostController,
     paddingModifier: Modifier
 ) {
-    paddingModifier.fillMaxSize().padding(16.dp).background(Color.LightGray)
+    paddingModifier
+        .fillMaxSize()
+        .background(color = colorResource(id = R.color.kapaliMavi))
+        .padding(16.dp)
+        .background(Color.LightGray)
     NavHost(navController = navController,
         startDestination = BottomBarScreen.Home.route
     ) {
@@ -31,7 +36,7 @@ fun BottomNavigationGraph(
             Home(paddingModifier,navController)
         }
         composable(route= BottomBarScreen.Konular.route) {
-            Konular(paddingModifier)
+            Konular(paddingModifier,navController)
         }
         composable(route= BottomBarScreen.Testler.route) {
             Testler(paddingModifier,navController)

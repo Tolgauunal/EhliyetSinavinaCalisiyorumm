@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -17,11 +18,13 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.unallapps.ehliyetsinavinacalisiyorum.home.AlertDialogSample
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.theme.EhliyetSinavinaCalisiyorumTheme
 
 class MainActivity : ComponentActivity() {
@@ -29,7 +32,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             EhliyetSinavinaCalisiyorumTheme { // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                Surface(modifier = Modifier.fillMaxSize(), color = colorResource(id = R.color.kapaliMavi)) {
                     Greeting()
                 }
             }
@@ -61,7 +64,7 @@ fun AppBottomBar(navController: NavHostController) {
         BottomBarScreen.Profil,
         BottomBarScreen.BilgiKartlari
     )
-    NavigationBar() {
+    NavigationBar(modifier = Modifier, containerColor = colorResource(id = R.color.acikmavi)) {
 
         screens.forEach { screen ->
             when(screen){

@@ -28,70 +28,27 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.unallapps.ehliyetsinavinacalisiyorum.DatabaseDersler
 import com.unallapps.ehliyetsinavinacalisiyorum.DatabaseKonular
 import com.unallapps.ehliyetsinavinacalisiyorum.R
+import com.unallapps.ehliyetsinavinacalisiyorum.home.AlertDialogSample
+import com.unallapps.ehliyetsinavinacalisiyorum.home.DersSecinLazyColumn
+import com.unallapps.ehliyetsinavinacalisiyorum.home.KonuSecinLazyColumn
 
 @Composable
-fun Konular(paddingModifier: Modifier) {
+fun Konular(paddingModifier: Modifier, navController: NavHostController) {
     val derslerSelectedItem = remember { mutableStateOf(0) }
+    val selectedKonu = remember { mutableStateOf(DatabaseKonular.konularList[0]) }
+    val alertDialog = remember { mutableStateOf(false) }
     Column(modifier = paddingModifier.padding(8.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally) {
-        Column(verticalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-            Text(text = "Ders Seçiniz")
-            Spacer(modifier = Modifier.padding(top = 10.dp))
-            LazyRow(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
-                items(count = DatabaseDersler.derslerList.count(), itemContent = {
-                    val ders = DatabaseDersler.derslerList[it]
-                    if (derslerSelectedItem.value == it) {
-                        Card(colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.kapaliMavi), contentColor = Color.White), border = BorderStroke(1.dp, color = colorResource(id = R.color.kapaliMavi)), elevation = CardDefaults.cardElevation(16.dp), shape = RoundedCornerShape(10.dp), modifier = Modifier.clickable { derslerSelectedItem.value = it }) {
-                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
-                                Image(painter = painterResource(id = ders.icon), contentDescription = "")
-                                Text(text = ders.name, modifier = Modifier.padding(10.dp), color = Color.White, fontSize = 16.sp)
-                            }
-                        }
-                    } else {
-                        Card(colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.white), contentColor = Color.White), border = BorderStroke(1.dp, color = colorResource(id = R.color.kapaliMavi)), elevation = CardDefaults.cardElevation(16.dp), shape = RoundedCornerShape(10.dp), modifier = Modifier.clickable { derslerSelectedItem.value = it }) {
-                            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
-                                Image(painter = painterResource(id = ders.icon), contentDescription = "")
-                                Text(text = ders.name, modifier = Modifier.padding(10.dp), color = colorResource(id = R.color.kapaliMavi))
-                            }
-                        }
-                    }
-                    Spacer(modifier = Modifier.padding(start = 0.dp, top = 10.dp, end = 10.dp, bottom = 10.dp))
-                })
-            }
-        }
+        DersSecinLazyColumn(derslerSelectedItem = derslerSelectedItem)
         Spacer(modifier = Modifier.padding(5.dp))
-        Column(verticalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-            Text(text = "Önerilen Konular")
-            LazyColumn(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.SpaceBetween, horizontalAlignment = Alignment.Start) {
-                items(count = DatabaseKonular.konularList.count(), itemContent = {
-                    val konular = DatabaseKonular.konularList[it]
-                    if (konular.id == derslerSelectedItem.value) {
-                        Row(modifier = Modifier.fillMaxWidth()) {
-                            Card(colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.kapaliMavi)), shape = RoundedCornerShape(20.dp), modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(5.dp)) {
-                                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Start, modifier = Modifier
-                                        .fillMaxWidth()) {
-                                    Image(painter = painterResource(id = konular.icon), contentDescription = "")
-                                    Column (modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally){
-                                        Text(text = konular.name, modifier = Modifier.padding(10.dp), color = Color.White)
-                                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
-                                            Image(painter = painterResource(id = konular.icon), contentDescription = "")
-                                            Text(text = konular.name, modifier = Modifier.padding(10.dp), color = Color.White)
-                                            Image(painter = painterResource(id = konular.icon), contentDescription = "")
-                                            Text(text = konular.name, modifier = Modifier.padding(10.dp), color = Color.White)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                })
-            }
+        KonuSecinLazyColumn(derslerSelectedItem = derslerSelectedItem, alertDialog = alertDialog)
+        if (alertDialog.value){
+            AlertDialogSample(alertDialog = alertDialog, secilenKonu = selectedKonu.value, navController = navController)
         }
     }
 }
