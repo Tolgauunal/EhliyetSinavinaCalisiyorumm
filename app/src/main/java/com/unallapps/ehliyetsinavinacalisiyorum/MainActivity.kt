@@ -8,6 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -18,13 +19,15 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.unallapps.ehliyetsinavinacalisiyorum.home.AlertDialogSample
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.theme.EhliyetSinavinaCalisiyorumTheme
 
 class MainActivity : ComponentActivity() {
@@ -46,7 +49,7 @@ class MainActivity : ComponentActivity() {
 fun Greeting() {
     val navController = rememberNavController()
     Scaffold(
-        bottomBar = { AppBottomBar(navController = navController) },
+        bottomBar = { AppBottomBar(navController = navController)},
     ) //content:
     {paddingValues->
         BottomNavigationGraph(
@@ -64,7 +67,7 @@ fun AppBottomBar(navController: NavHostController) {
         BottomBarScreen.Profil,
         BottomBarScreen.BilgiKartlari
     )
-    NavigationBar(modifier = Modifier, containerColor = colorResource(id = R.color.acikmavi)) {
+    NavigationBar(modifier = Modifier.clip(shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp)), containerColor = colorResource(id = R.color.white)) {
 
         screens.forEach { screen ->
             when(screen){
@@ -85,10 +88,18 @@ fun RowScope.AddItem(
     val backStackEntry = navController.currentBackStackEntryAsState()
     NavigationBarItem(
         label = {
-            Text(text = screen.label)
+            if (screen.route==backStackEntry.value?.destination?.route){
+                Text(text = screen.label)
+            }
         },
         icon = {
-            Icon(painter = painterResource(id = screen.icon), contentDescription = screen.label)
+            if (screen.route==backStackEntry.value?.destination?.route){
+                Icon(painter = painterResource(id = screen.icon), contentDescription = screen.label, tint = colorResource(
+                    id = R.color.kapaliMavi))
+            }else{
+                Icon(painter = painterResource(id = screen.icon), contentDescription = screen.label, tint = colorResource(
+                    id = R.color.acikmavi))
+            }
         },
         selected = screen.route == backStackEntry.value?.destination?.route,
         onClick = {

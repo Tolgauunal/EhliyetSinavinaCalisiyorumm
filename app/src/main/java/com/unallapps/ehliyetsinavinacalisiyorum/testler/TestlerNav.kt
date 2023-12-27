@@ -6,9 +6,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Button
@@ -34,10 +37,11 @@ import com.unallapps.ehliyetsinavinacalisiyorum.R
 @Composable
 fun Testler(paddingModifier: Modifier, navController: NavHostController) {
     val selectedDersItemIndex = remember { mutableStateOf(0) }
-    Column(modifier = Modifier.fillMaxSize(),
+    Column(modifier = paddingModifier.padding(start = 8.dp, end = 8.dp, top = 8.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally) {
         Text(text = "Testler")
+        Spacer(modifier = Modifier.padding(8.dp))
         LazyVerticalGrid(columns = GridCells.Adaptive(128.dp), content = {
             items(DatabaseDersler.derslerList.size) { index ->
                 val ders = DatabaseDersler.derslerList[index]
@@ -48,13 +52,15 @@ fun Testler(paddingModifier: Modifier, navController: NavHostController) {
                         .clickable { selectedDersItemIndex.value = index },
                         colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.green))) {
                         Column(verticalArrangement = Arrangement.Top,
-                            horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
+                            horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp)) {
                             Image(painter = painterResource(id = ders.icon),
                                 contentDescription = "",
-                                alignment = Alignment.TopCenter)
+                                alignment = Alignment.TopCenter, modifier = Modifier.size(100.dp))
                             Text(text = ders.name,
                                 fontWeight = FontWeight.Bold,
-                                fontSize = 20.sp,
+                                fontSize = 18.sp,
                                 color = Color(0xFFFFFFFF),
                                 textAlign = TextAlign.Center,
                                 modifier = Modifier.padding(16.dp))
@@ -70,13 +76,15 @@ fun Testler(paddingModifier: Modifier, navController: NavHostController) {
                         colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.kapaliMavi)),
                     ) {
                         Column(verticalArrangement = Arrangement.Top,
-                            horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
+                            horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp)) {
                             Image(painter = painterResource(id = ders.icon),
                                 contentDescription = "",
-                                alignment = Alignment.TopCenter)
+                                alignment = Alignment.TopCenter,modifier = Modifier.size(100.dp))
                             Text (text = ders.name,
                             fontWeight = FontWeight.Bold,
-                            fontSize = 20.sp,
+                            fontSize = 18.sp,
                             color = Color(0xFFFFFFFF),
                             textAlign = TextAlign.Center,
                             modifier = Modifier.padding(16.dp))
@@ -85,8 +93,9 @@ fun Testler(paddingModifier: Modifier, navController: NavHostController) {
                 }
             }
         })
-        Button(onClick = { navController.navigate("testEkrani") }) {
-            Text(text = "Testi Başlat")
+        Spacer(modifier = Modifier.padding(8.dp))
+        Button(onClick = { navController.navigate("testEkrani") }, modifier = Modifier.padding(16.dp)) {
+            Text(text = "Testi Başlat", fontSize = 16.sp)
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.profil
 
-import android.graphics.ImageDecoder.*
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
@@ -18,13 +17,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,16 +27,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.unallapps.ehliyetsinavinacalisiyorum.R
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CustomButton
 
 @Composable
 fun Profil(paddingModifier: Modifier) {
@@ -99,29 +92,14 @@ fun Profil(paddingModifier: Modifier) {
         }
         Text(text = "Ayarlar", color = colorResource(id = R.color.kapaliMavi))
         Spacer(modifier = Modifier.padding(10.dp))
-        CustomButton(title = "Deneme", onClick = {})
+        CustomButton(title = "Gizlilik Politikası", onClick = {})
         Spacer(modifier = Modifier.padding(5.dp))
-        CustomButton(title = "Deneme", onClick = {})
+        CustomButton(title = "Şartlar ve Koşullar", onClick = {})
         Spacer(modifier = Modifier.padding(5.dp))
-        CustomButton(title = "Deneme", onClick = {})
+        CustomButton(title = "Bize Oy Verin", onClick = {})
         Spacer(modifier = Modifier.padding(5.dp))
-        CustomButton(title = "Deneme", onClick = {})
+        CustomButton(title = "Hata Bildir", onClick = {})
         Spacer(modifier = Modifier.padding(5.dp))
-    }
-}
-
-@Composable
-fun CustomButton(title: String, onClick: () -> Unit) {
-    Button(onClick = { onClick },
-        colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.acikmavi))) {
-        Row(verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth()) {
-            Icon(painter = painterResource(id = R.drawable.home), contentDescription = "")
-            Text(text = title, color = colorResource(id = R.color.kapaliMavi))
-            Icon(painter = painterResource(id = R.drawable.baseline_keyboard_arrow_right_24),
-                contentDescription = "",
-                tint = colorResource(id = R.color.kapaliMavi))
-        }
+        CustomButton(title = "İletişim", onClick = {})
     }
 }
