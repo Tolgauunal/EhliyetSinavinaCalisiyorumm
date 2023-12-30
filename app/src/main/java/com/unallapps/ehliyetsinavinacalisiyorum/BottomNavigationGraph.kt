@@ -9,8 +9,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import com.google.gson.Gson
 import com.unallapps.ehliyetsinavinacalisiyorum.bilgikartlari.BilgiKartlari
 import com.unallapps.ehliyetsinavinacalisiyorum.home.Home
 import com.unallapps.ehliyetsinavinacalisiyorum.konular.KonuAnlatim
@@ -44,8 +47,14 @@ fun BottomNavigationGraph(
         composable(route= BottomBarScreen.Profil.route) {
             Profil(paddingModifier)
         }
-        composable(route= BottomBarScreen.BilgiKartlari.route) {
-            BilgiKartlari(1,paddingModifier)
+        composable(route= BottomBarScreen.BilgiKartlari.route, arguments = listOf(
+            navArgument("konuAdi"){
+                type = NavType.StringType
+            }
+        )) {
+            val json = it.arguments?.getString("konuAdi")
+            val nesne=Gson().fromJson(json,Konular::class.java)
+            BilgiKartlari(nesne,paddingModifier)
         }
         composable(route= BottomBarScreen.TestEkrani.route) {
             TestEkrani(1,paddingModifier)

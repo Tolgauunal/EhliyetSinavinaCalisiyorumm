@@ -11,6 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavHostController
+import com.google.gson.Gson
 import com.unallapps.ehliyetsinavinacalisiyorum.Dersler
 import com.unallapps.ehliyetsinavinacalisiyorum.Konular
 
@@ -31,7 +32,7 @@ fun CustomAlertDialog(alertDialog: MutableState<Boolean>, secilenKonu: Konular, 
                         openDialog.value = false
                         alertDialog.value = false
                         click.value = true
-                        navController.navigate("bilgiKartlari")
+                        navController.navigate("bilgiKartlari/${secilenKonu.name}")
                     }) {
                         Text("Bilgi Kartları")
                     }

@@ -1,8 +1,12 @@
 package com.unallapps.ehliyetsinavinacalisiyorum
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 data class Dersler(val id: Int, val name: String, val icon: Int)
 
-data class Konular(val id: Int, val name: String, val icon: Int)
+@Parcelize
+data class Konular(val id: Int, val name: String, val icon: Int) : Parcelable
 object DatabaseDersler {
     val derslerList = mutableListOf(
         Dersler(0, "İlk Yardım", R.drawable.ilkyardim),

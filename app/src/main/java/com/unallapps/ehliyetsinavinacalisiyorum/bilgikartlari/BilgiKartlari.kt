@@ -21,12 +21,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.unallapps.ehliyetsinavinacalisiyorum.Konular
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 
 @Composable
-fun BilgiKartlari(konuId: Int, paddingModifier: Modifier) {
+fun BilgiKartlari(konuId: Konular, paddingModifier: Modifier) {
     var progress by remember { mutableStateOf(0) }
     var bilgiKartiSize = 10f //Gelen veri ile eşleşecek size
+    println(konuId.name)
     Column(modifier = paddingModifier) {
         Row(modifier = Modifier
             .fillMaxWidth()

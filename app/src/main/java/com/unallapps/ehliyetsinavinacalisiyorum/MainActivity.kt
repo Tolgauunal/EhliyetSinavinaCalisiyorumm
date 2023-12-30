@@ -13,7 +13,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -49,64 +52,52 @@ class MainActivity : ComponentActivity() {
 fun Greeting() {
     val navController = rememberNavController()
     Scaffold(
-        bottomBar = { AppBottomBar(navController = navController)},
+        bottomBar = { AppBottomBar(navController = navController) },
     ) //content:
-    {paddingValues->
-        BottomNavigationGraph(
-            navController = navController,
-            paddingModifier = Modifier.padding(paddingValues)
-        )
+    { paddingValues ->
+        BottomNavigationGraph(navController = navController, paddingModifier = Modifier.padding(paddingValues))
     }
 }
+
 @Composable
 fun AppBottomBar(navController: NavHostController) {
-    val screens = listOf(
-        BottomBarScreen.Home,
+    val screens = listOf(BottomBarScreen.Home,
         BottomBarScreen.Konular,
         BottomBarScreen.Testler,
         BottomBarScreen.Profil,
-        BottomBarScreen.BilgiKartlari
-    )
-    NavigationBar(modifier = Modifier.clip(shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp)), containerColor = colorResource(id = R.color.white)) {
-
+        BottomBarScreen.BilgiKartlari)
+    NavigationBar(modifier = Modifier.clip(shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp)),
+        containerColor = colorResource(id = R.color.white)) {
         screens.forEach { screen ->
-            when(screen){
-                is BottomBarScreen.Home,BottomBarScreen.Konular,BottomBarScreen.Testler,BottomBarScreen.Profil ->  AddItem(
+            when (screen) {
+                is BottomBarScreen.Home, BottomBarScreen.Konular, BottomBarScreen.Testler, BottomBarScreen.Profil -> AddItem(
                     screen = screen,
-                    navController = navController
-                )
-                else-> Unit
+                    navController = navController)
+                else -> Unit
             }
         }
     }
 }
+
 @Composable
-fun RowScope.AddItem(
-    screen: BottomBarScreen,
-    navController: NavHostController
-) {
+fun RowScope.AddItem(screen: BottomBarScreen, navController: NavHostController) {
     val backStackEntry = navController.currentBackStackEntryAsState()
-    NavigationBarItem(
-        label = {
-            if (screen.route==backStackEntry.value?.destination?.route){
-                Text(text = screen.label)
-            }
-        },
+    NavigationBarItem(label = {
+        Text(text = screen.label)
+    },
         icon = {
-            if (screen.route==backStackEntry.value?.destination?.route){
-                Icon(painter = painterResource(id = screen.icon), contentDescription = screen.label, tint = colorResource(
-                    id = R.color.kapaliMavi))
-            }else{
-                Icon(painter = painterResource(id = screen.icon), contentDescription = screen.label, tint = colorResource(
-                    id = R.color.acikmavi))
-            }
+            Icon(painter = painterResource(id = screen.icon), contentDescription = screen.label)
         },
         selected = screen.route == backStackEntry.value?.destination?.route,
         onClick = {
             navController.navigate(screen.route)
-        }
-    )
+        },
+        alwaysShowLabel = false,
+        colors = NavigationBarItemDefaults.colors(selectedIconColor = colorResource(id = R.color.kapaliMavi),
+            unselectedIconColor = colorResource(id = R.color.Gray),
+            indicatorColor = colorResource(id = R.color.acikmavi)))
 }
+
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun GreetingPreview() {
