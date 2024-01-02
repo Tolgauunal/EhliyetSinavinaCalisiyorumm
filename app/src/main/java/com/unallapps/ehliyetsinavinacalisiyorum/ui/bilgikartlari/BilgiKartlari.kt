@@ -1,4 +1,4 @@
-package com.unallapps.ehliyetsinavinacalisiyorum.bilgikartlari
+package com.unallapps.ehliyetsinavinacalisiyorum.ui.bilgikartlari
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -21,14 +21,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.unallapps.ehliyetsinavinacalisiyorum.Konular
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 
 @Composable
-fun BilgiKartlari(konuId: Konular, paddingModifier: Modifier) {
+fun BilgiKartlari(konuName: String, paddingModifier: Modifier) {
     var progress by remember { mutableStateOf(0) }
     var bilgiKartiSize = 10f //Gelen veri ile eşleşecek size
-    println(konuId.name)
+    println(konuName)
     Column(modifier = paddingModifier) {
         Row(modifier = Modifier
             .fillMaxWidth()

@@ -1,4 +1,4 @@
-package com.unallapps.ehliyetsinavinacalisiyorum.testler
+package com.unallapps.ehliyetsinavinacalisiyorum.ui.testler
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement

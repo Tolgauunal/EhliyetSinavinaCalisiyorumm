@@ -1,4 +1,4 @@
-package com.unallapps.ehliyetsinavinacalisiyorum.home
+package com.unallapps.ehliyetsinavinacalisiyorum.ui.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -12,7 +12,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
@@ -31,7 +30,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.unallapps.ehliyetsinavinacalisiyorum.DatabaseKonular
+import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseKonular
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CustomAlertDialog
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.DersSecinLazyRow

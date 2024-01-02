@@ -1,6 +1,7 @@
-package com.unallapps.ehliyetsinavinacalisiyorum
+package com.unallapps.ehliyetsinavinacalisiyorum.data
 
 import android.os.Parcelable
+import com.unallapps.ehliyetsinavinacalisiyorum.R
 import kotlinx.parcelize.Parcelize
 
 data class Dersler(val id: Int, val name: String, val icon: Int)

@@ -1,4 +1,4 @@
-package com.unallapps.ehliyetsinavinacalisiyorum.konular
+package com.unallapps.ehliyetsinavinacalisiyorum.ui.konular
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.unallapps.ehliyetsinavinacalisiyorum.DatabaseKonular
+import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseKonular
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CustomAlertDialog
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.DersSecinLazyRow
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.KonuSecinLazyColumn

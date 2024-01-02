@@ -23,8 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.unallapps.ehliyetsinavinacalisiyorum.DatabaseDersler
+import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseDersler
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 @Composable
 fun DersSecinLazyRow(derslerSelectedItem: MutableState<Int>) {

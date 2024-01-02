@@ -1,4 +1,4 @@
-package com.unallapps.ehliyetsinavinacalisiyorum.profil
+package com.unallapps.ehliyetsinavinacalisiyorum.ui.profil
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -41,6 +40,8 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.unallapps.ehliyetsinavinacalisiyorum.R
@@ -48,7 +49,7 @@ import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CustomButton
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Profil(paddingModifier: Modifier) {
+fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hiltViewModel()) {
     var photoUri: Uri? by remember { mutableStateOf(null) }
     val state = rememberScrollState()
     val launcher =
@@ -71,9 +72,7 @@ fun Profil(paddingModifier: Modifier) {
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxSize()) {
                 if (photoUri != null) {
-                    val painter =
-                        rememberAsyncImagePainter(ImageRequest.Builder(LocalContext.current).data(data = photoUri)
-                            .build())
+                    val painter = rememberAsyncImagePainter(ImageRequest.Builder(LocalContext.current).data(data = photoUri).build())
                     Image(painter = painter,
                         contentDescription = null,
                         modifier = Modifier
@@ -99,13 +98,10 @@ fun Profil(paddingModifier: Modifier) {
                     if (!settingsState.value) {
                         Text(text = nameStateText.value, color = Color.White, fontSize = 15.sp)
                     } else {
-                        TextField(value = nameStateTextField.value,
-                            onValueChange = {
-                                nameStateTextField.value = it
-                                nameStateText.value = it
-                            },
-                            colors = TextFieldDefaults.textFieldColors(containerColor = Color.Green,
-                                textColor = Color.Black))
+                        TextField(value = nameStateTextField.value, onValueChange = {
+                            nameStateTextField.value = it
+                            nameStateText.value = it
+                        }, colors = TextFieldDefaults.textFieldColors(containerColor = Color.Green, textColor = Color.Black))
                     }
                     if (!settingsIcon.value) {
                         Icon(painter = painterResource(id = R.drawable.baseline_settings_24),
@@ -124,6 +120,7 @@ fun Profil(paddingModifier: Modifier) {
                                 .clickable {
                                     settingsState.value = false
                                     settingsIcon.value = false
+                                    profileViewModel.insert(nameStateTextField.value)
                                 })
                     }
                 }

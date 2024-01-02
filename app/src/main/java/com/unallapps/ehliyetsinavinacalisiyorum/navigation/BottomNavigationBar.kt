@@ -1,14 +1,6 @@
-package com.unallapps.ehliyetsinavinacalisiyorum
+package com.unallapps.ehliyetsinavinacalisiyorum.navigation
 
-import android.graphics.drawable.Icon
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.CheckCircle
-import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material3.Icon
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
+import com.unallapps.ehliyetsinavinacalisiyorum.R
 
 sealed class BottomBarScreen(
     val route: String,
@@ -28,7 +20,7 @@ sealed class BottomBarScreen(
     object Testler: BottomBarScreen(
         route ="testler",
         label ="Testler",
-        icon = R.drawable.test
+        icon = R.drawable.home
     )
     object Profil: BottomBarScreen(
         route ="profil",
@@ -46,7 +38,7 @@ sealed class BottomBarScreen(
         icon = R.drawable.baseline_person_24
     )
     object KonuAnlatimi: BottomBarScreen(
-        route ="konuAnlatimi",
+        route ="konuAnlatimi/{konuAdi}",
         label ="KonuAnlatimi",
         icon = R.drawable.baseline_person_24
     )

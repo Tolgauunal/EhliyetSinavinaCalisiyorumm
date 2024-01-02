@@ -11,9 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavHostController
-import com.google.gson.Gson
-import com.unallapps.ehliyetsinavinacalisiyorum.Dersler
-import com.unallapps.ehliyetsinavinacalisiyorum.Konular
+import com.unallapps.ehliyetsinavinacalisiyorum.data.Konular
 
 @Composable
 fun CustomAlertDialog(alertDialog: MutableState<Boolean>, secilenKonu: Konular, navController: NavHostController) {
@@ -40,7 +38,7 @@ fun CustomAlertDialog(alertDialog: MutableState<Boolean>, secilenKonu: Konular, 
                     Button(onClick = {
                         openDialog.value = false
                         alertDialog.value = false
-                        navController.navigate("konuAnlatimi")
+                        navController.navigate("konuAnlatimi/${secilenKonu.name}")
                     }) {
                         Text("Konu Anlatımı")
                     }
