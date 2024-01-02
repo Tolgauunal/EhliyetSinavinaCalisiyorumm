@@ -1,5 +1,6 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.ui.profil
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -22,8 +24,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -38,41 +40,52 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CustomButton
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.theme.sdp
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
+@SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hiltViewModel()) {
     var photoUri: Uri? by remember { mutableStateOf(null) }
-    val state = rememberScrollState()
     val launcher =
         rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri -> //When the user has selected a photo, its URI is returned here
             photoUri = uri
         }
-    val nameStateText = remember { mutableStateOf("Misafir Kullanıcı") }
+    val nameStateText = remember { mutableStateOf("") }
     val nameStateTextField = remember { mutableStateOf("") }
     val settingsState = remember { mutableStateOf(false) }
     val settingsIcon = remember { mutableStateOf(false) }
+    profileViewModel.getUserName()
+    CoroutineScope(Dispatchers.Main).launch {
+        profileViewModel.userInfo.collect {
+            nameStateText.value = it.userName
+        }
+    }
     Column(verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.verticalScroll(rememberScrollState())) {
         Box(modifier = Modifier
             .background(colorResource(id = R.color.kapaliMavi))
             .fillMaxWidth()
-            .height(150.dp)
             .padding(10.dp)) {
             Column(horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxSize()) {
                 if (photoUri != null) {
-                    val painter = rememberAsyncImagePainter(ImageRequest.Builder(LocalContext.current).data(data = photoUri).build())
+                    val painter =
+                        rememberAsyncImagePainter(ImageRequest.Builder(LocalContext.current).data(data = photoUri)
+                            .build())
                     Image(painter = painter,
                         contentDescription = null,
                         modifier = Modifier
@@ -94,14 +107,15 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
                                 launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
                             })
                 }
-                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxHeight()) {
                     if (!settingsState.value) {
                         Text(text = nameStateText.value, color = Color.White, fontSize = 15.sp)
+                        nameStateTextField.value=nameStateText.value
                     } else {
-                        TextField(value = nameStateTextField.value, onValueChange = {
-                            nameStateTextField.value = it
-                            nameStateText.value = it
-                        }, colors = TextFieldDefaults.textFieldColors(containerColor = Color.Green, textColor = Color.Black))
+                        OutlinedTextField(value = nameStateTextField.value,
+                            onValueChange = { nameStateTextField.value=it },
+                            label = { Text(text = "İsminizi Yazınız", color = Color.White) },
+                            colors = TextFieldDefaults.outlinedTextFieldColors(textColor = Color.White))
                     }
                     if (!settingsIcon.value) {
                         Icon(painter = painterResource(id = R.drawable.baseline_settings_24),
@@ -120,7 +134,7 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
                                 .clickable {
                                     settingsState.value = false
                                     settingsIcon.value = false
-                                    profileViewModel.insert(nameStateTextField.value)
+                                    profileViewModel.insertOrUpdate(nameStateTextField.value)
                                 })
                     }
                 }

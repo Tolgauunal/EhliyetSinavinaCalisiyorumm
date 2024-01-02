@@ -1,6 +1,5 @@
-package com.unallapps.ehliyetsinavinacalisiyorum.ui.profil
+package com.unallapps.ehliyetsinavinacalisiyorum.ui.home
 
-import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.UserEntity
@@ -14,28 +13,22 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
+class HomeViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
     val defaultUser = UserEntity(1, "Misafir Kullanıcı")
     private val _userInfo: MutableStateFlow<UserEntity> = MutableStateFlow(defaultUser)
     val userInfo: StateFlow<UserEntity> = _userInfo
-
-    fun getUserName() {
+    init {
         viewModelScope.launch {
             userRepository.getUserName()?.let {
-                _userInfo.value = it
+                _userInfo.value=it
             }
         }
     }
 
-    fun insertOrUpdate(name: String) {
+    fun getUserIno() {
         viewModelScope.launch {
-            if (userRepository.getUserSize().size > 0) {
-                userRepository.updateUserName(name, 1)
-                _userInfo.value = userRepository.getUserName()
-            } else {
-                val newUser = UserEntity(userName = name)
-                userRepository.insert(newUser)
-                _userInfo.value = userRepository.getUserName()
+            userRepository.getUserName()?.let {
+                _userInfo.value=it
             }
         }
     }

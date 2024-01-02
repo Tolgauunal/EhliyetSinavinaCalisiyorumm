@@ -1,5 +1,6 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.ui.home
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,33 +30,46 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseKonular
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CustomAlertDialog
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.DersSecinLazyRow
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.KonuSecinLazyColumn
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
+@SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun Home(paddingModifier: Modifier, navController: NavHostController) {
+fun Home(paddingModifier: Modifier, navController: NavHostController, homeViewModel: HomeViewModel = hiltViewModel()) {
     val derslerSelectedItem = remember { mutableStateOf(0) }
     val searchText = remember { mutableStateOf("") }
     val alertDialog = remember { mutableStateOf(false) }
+    val nameStateText = remember { mutableStateOf("") }
     val selectedKonu = remember { mutableStateOf(DatabaseKonular.konularList[0]) }
+    homeViewModel.getUserIno()
+    CoroutineScope(Dispatchers.Main).launch {
+        homeViewModel.userInfo.collect {
+            nameStateText.value = it.userName
+        }
+    }
     Column(modifier = paddingModifier.padding(start = 8.dp, end = 8.dp, top = 8.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally) {
         Row(verticalAlignment = Alignment.Top,
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()) {
-            Text(text = "Merhaba Misafir Kullanıcı!", color = colorResource(id = R.color.kapaliMavi))
+            Text(text = nameStateText.value, color = colorResource(id = R.color.kapaliMavi))
             Image(painter = painterResource(id = R.drawable.person),
                 contentDescription = "",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .clip(CircleShape)
-                    .size(24.dp))        }
+                    .size(24.dp))
+        }
         Spacer(modifier = Modifier.padding(5.dp))
         Card(modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.kapaliMavi))) {
