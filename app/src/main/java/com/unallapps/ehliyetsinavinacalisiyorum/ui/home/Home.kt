@@ -1,7 +1,11 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.ui.home
 
 import android.annotation.SuppressLint
+import android.graphics.BitmapFactory
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,9 +28,11 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -62,13 +68,25 @@ fun Home(paddingModifier: Modifier, navController: NavHostController, homeViewMo
         Row(verticalAlignment = Alignment.Top,
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()) {
-            Text(text = nameStateText.value, color = colorResource(id = R.color.kapaliMavi))
-            Image(painter = painterResource(id = R.drawable.person),
-                contentDescription = "",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .clip(CircleShape)
-                    .size(24.dp))
+            Text(text = nameStateText.value, color = colorResource(id = R.color.kapaliMavi), fontSize = 16.sp)
+            if (homeViewModel.userInfo.value.userPhoto != null) {
+                val userPhoto = homeViewModel.userInfo.value.userPhoto
+                val bitmap = BitmapFactory.decodeByteArray(userPhoto, 0, userPhoto!!.size)
+                Image(bitmap = bitmap.asImageBitmap(),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(32.dp)
+                        .clip(CircleShape)
+                        .fillMaxWidth(),
+                    contentScale = ContentScale.Crop)
+            } else {
+                Image(painter = painterResource(id = R.drawable.person),
+                    contentDescription = "",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .clip(CircleShape)
+                        .size(24.dp))
+            }
         }
         Spacer(modifier = Modifier.padding(5.dp))
         Card(modifier = Modifier.fillMaxWidth(),

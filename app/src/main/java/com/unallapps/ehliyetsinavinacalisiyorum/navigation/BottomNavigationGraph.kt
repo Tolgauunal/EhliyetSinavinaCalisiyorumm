@@ -1,5 +1,6 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.navigation
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -24,6 +25,7 @@ import com.unallapps.ehliyetsinavinacalisiyorum.ui.profil.ProfileViewModel
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.testler.TestEkrani
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.testler.Testler
 
+@SuppressLint("NewApi")
 @Composable
 fun BottomNavigationGraph(navController: NavHostController, paddingModifier: Modifier) {
     paddingModifier
@@ -51,7 +53,7 @@ fun BottomNavigationGraph(navController: NavHostController, paddingModifier: Mod
             BilgiKartlari(json!!, paddingModifier)
         }
         composable(route = BottomBarScreen.TestEkrani.route) {
-            TestEkrani(1, paddingModifier)
+            TestEkrani( paddingModifier)
         }
         composable(route = BottomBarScreen.KonuAnlatimi.route, arguments = listOf(navArgument("konuAdi") {
             type = NavType.StringType

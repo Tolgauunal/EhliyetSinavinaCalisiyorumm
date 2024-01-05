@@ -31,23 +31,3 @@ val Typography = Typography(bodyLarge = TextStyle(fontFamily = FontFamily.Defaul
         letterSpacing = 0.5.sp
     )
     */)
-val Int.sdp: Dp
-    get() {
-        val value = (this / VALUE12).toInt()
-        val name = when {
-            value in 1..SIZE599 -> "_${value}sdp"
-            value > -SIZE60 && value < 0 -> "_minus${abs(value)}sdp"
-            else -> null
-        }
-        if (App.isInstanceInitialized().not()) return this.dp
-        return name?.let {
-            val context = App.instance
-            val id = context.resources.getIdentifier(name, "dimen", context.packageName)
-            val dimensionPx = context.resources.getDimension(id)
-            val dp: Float = dimensionPx / context.resources.displayMetrics.density
-            Dp(dp)
-        } ?: this.dp
-    }
-const val VALUE12 = 1.2f
-const val SIZE599 = 599
-const val SIZE60 = 599

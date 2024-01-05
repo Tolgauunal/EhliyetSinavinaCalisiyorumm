@@ -1,5 +1,6 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.data.dao
 
+import android.net.Uri
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Entity
@@ -19,5 +20,8 @@ interface UserDao {
     suspend fun getUserName(): UserEntity
 
     @Query("UPDATE UserEntity SET userName = :userName WHERE userid = :id")
-    suspend fun updateUserImage(userName: String, id: Int)
+    suspend fun updateUserName(userName: String, id: Int)
+
+    @Query("UPDATE UserEntity SET userPhoto = :image WHERE userid = :id")
+    suspend fun updateUserImage(image: ByteArray?, id: Int)
 }

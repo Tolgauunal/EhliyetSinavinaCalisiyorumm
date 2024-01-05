@@ -9,7 +9,7 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
         return userDao.insert(userEntity)
     }
 
-    override suspend fun getUserName():UserEntity {
+    override suspend fun getUser(): UserEntity {
         return userDao.getUserName()
     }
 
@@ -17,7 +17,10 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : Use
         return userDao.getUserSize()
     }
 
-    override suspend fun updateUserName(userName:String,userId:Int) {
-        return userDao.updateUserImage(userName,userId)
+    override suspend fun updateUserName(userName: String, userId: Int) {
+        return userDao.updateUserName(userName, userId)
+    }
+    override suspend fun updateImage(image: ByteArray?, id: Int) {
+        return userDao.updateUserImage(image = image, id)
     }
 }

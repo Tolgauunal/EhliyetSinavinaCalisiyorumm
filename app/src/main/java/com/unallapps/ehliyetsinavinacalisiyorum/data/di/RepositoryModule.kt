@@ -1,5 +1,7 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.data.di
 
+import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestlerRepository
+import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestlerRepositoryImpl
 import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.UserRepository
 import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.UserRepositoryImpl
 import dagger.Module
@@ -15,4 +17,7 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository = userRepositoryImpl
+    @Provides
+    @Singleton
+    fun provideTestlerRepository(testlerRepositoryImpl: TestlerRepositoryImpl): TestlerRepository = testlerRepositoryImpl
 }

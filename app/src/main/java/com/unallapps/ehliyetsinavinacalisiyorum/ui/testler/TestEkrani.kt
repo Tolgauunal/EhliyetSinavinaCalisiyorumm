@@ -16,10 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 
 @Composable
-fun TestEkrani(i: Int, paddingModifier: Modifier) {
+fun TestEkrani(paddingModifier: Modifier,testlerViewModel: TestlerViewModel= hiltViewModel()) {
+    println(testlerViewModel.getAllTest())
     Column(modifier = Modifier
         .fillMaxSize()
         .padding(16.dp),

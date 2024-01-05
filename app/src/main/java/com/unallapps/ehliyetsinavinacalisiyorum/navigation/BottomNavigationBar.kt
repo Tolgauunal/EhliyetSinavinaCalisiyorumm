@@ -20,7 +20,7 @@ sealed class BottomBarScreen(
     object Testler: BottomBarScreen(
         route ="testler",
         label ="Testler",
-        icon = R.drawable.home
+        icon = R.drawable.test
     )
     object Profil: BottomBarScreen(
         route ="profil",

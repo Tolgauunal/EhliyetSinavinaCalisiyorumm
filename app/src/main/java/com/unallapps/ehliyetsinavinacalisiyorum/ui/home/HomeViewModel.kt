@@ -19,7 +19,7 @@ class HomeViewModel @Inject constructor(private val userRepository: UserReposito
     val userInfo: StateFlow<UserEntity> = _userInfo
     init {
         viewModelScope.launch {
-            userRepository.getUserName()?.let {
+            userRepository.getUser()?.let {
                 _userInfo.value=it
             }
         }
@@ -27,7 +27,7 @@ class HomeViewModel @Inject constructor(private val userRepository: UserReposito
 
     fun getUserIno() {
         viewModelScope.launch {
-            userRepository.getUserName()?.let {
+            userRepository.getUser()?.let {
                 _userInfo.value=it
             }
         }

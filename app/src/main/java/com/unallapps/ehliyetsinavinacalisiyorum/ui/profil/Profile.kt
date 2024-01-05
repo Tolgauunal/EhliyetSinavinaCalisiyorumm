@@ -1,10 +1,14 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.ui.profil
 
 import android.annotation.SuppressLint
+import android.graphics.BitmapFactory
+import android.graphics.ImageDecoder
 import android.net.Uri
+import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,7 +20,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -36,11 +39,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -48,25 +52,28 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CustomButton
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.theme.sdp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+@RequiresApi(Build.VERSION_CODES.P)
 @SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hiltViewModel()) {
+    profileViewModel.getUserName()
     var photoUri: Uri? by remember { mutableStateOf(null) }
-    val launcher =
-        rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri -> //When the user has selected a photo, its URI is returned here
-            photoUri = uri
-        }
     val nameStateText = remember { mutableStateOf("") }
     val nameStateTextField = remember { mutableStateOf("") }
     val settingsState = remember { mutableStateOf(false) }
     val settingsIcon = remember { mutableStateOf(false) }
-    profileViewModel.getUserName()
+    val context = LocalContext.current
+    val launcher =
+        rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri -> //When the user has selected a photo, its URI is returned here
+            photoUri = uri
+            val source = ImageDecoder.decodeBitmap(ImageDecoder.createSource(context.contentResolver, photoUri!!))
+            profileViewModel.savePhoto(source)
+        }
     CoroutineScope(Dispatchers.Main).launch {
         profileViewModel.userInfo.collect {
             nameStateText.value = it.userName
@@ -96,6 +103,20 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
                                 launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
                             },
                         contentScale = ContentScale.Crop)
+
+                } else if (profileViewModel.userInfo.value.userPhoto != null) {
+                    val userPhoto=profileViewModel.userInfo.value.userPhoto
+                    val bitmap = BitmapFactory.decodeByteArray(userPhoto, 0, userPhoto!!.size )
+                    Image(bitmap = bitmap.asImageBitmap(),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(100.dp)
+                            .clip(CircleShape)
+                            .fillMaxWidth()
+                            .clickable {
+                                launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
+                            },
+                        contentScale = ContentScale.Crop)
                 } else {
                     Image(painter = painterResource(id = R.drawable.person),
                         contentDescription = "",
@@ -107,13 +128,15 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
                                 launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
                             })
                 }
-                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxHeight()) {
+                Row(verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxHeight()) {
                     if (!settingsState.value) {
                         Text(text = nameStateText.value, color = Color.White, fontSize = 15.sp)
-                        nameStateTextField.value=nameStateText.value
+                        nameStateTextField.value = nameStateText.value
                     } else {
                         OutlinedTextField(value = nameStateTextField.value,
-                            onValueChange = { nameStateTextField.value=it },
+                            onValueChange = { nameStateTextField.value = it },
                             label = { Text(text = "İsminizi Yazınız", color = Color.White) },
                             colors = TextFieldDefaults.outlinedTextFieldColors(textColor = Color.White))
                     }

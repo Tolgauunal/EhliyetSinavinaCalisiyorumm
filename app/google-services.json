@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "31659496524",
+    "project_id": "ehliyetsinavi-f2853",
+    "storage_bucket": "ehliyetsinavi-f2853.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:31659496524:android:e66696ae8a1d7c411f90e9",
+        "android_client_info": {
+          "package_name": "com.unallapps.ehliyetsinavinacalisiyorum"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZeJRuDSFA7gof_QKxuUT7nMpiYcVeklY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
