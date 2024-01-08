@@ -9,19 +9,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.unallapps.ehliyetsinavinacalisiyorum.R
+import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestlerEntity
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.bilgikartlari.BilgiKartlari
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.home.Home
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.konular.KonuAnlatim
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.konular.Konular
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.profil.Profile
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.profil.ProfileViewModel
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.testler.TestEkrani
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.testler.Testler
 
@@ -53,7 +52,7 @@ fun BottomNavigationGraph(navController: NavHostController, paddingModifier: Mod
             BilgiKartlari(json!!, paddingModifier)
         }
         composable(route = BottomBarScreen.TestEkrani.route) {
-            TestEkrani( paddingModifier)
+                TestEkrani(paddingModifier)
         }
         composable(route = BottomBarScreen.KonuAnlatimi.route, arguments = listOf(navArgument("konuAdi") {
             type = NavType.StringType
