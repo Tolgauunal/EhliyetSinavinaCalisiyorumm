@@ -1,7 +1,6 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.ui.profil
 
 import android.graphics.Bitmap
-import android.graphics.ImageDecoder
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.UserEntity
@@ -15,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
-    val defaultUser = UserEntity(1, "Misafir Kullanıcı")
+    private val defaultUser = UserEntity(1, "Misafir Kullanıcı")
     private val _userInfo: MutableStateFlow<UserEntity> = MutableStateFlow(defaultUser)
     val userInfo: StateFlow<UserEntity> = _userInfo
     private var byteArray: ByteArray? = null
@@ -29,7 +28,7 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
 
     fun getUserName() {
         viewModelScope.launch {
-            userRepository.getUser()?.let {
+            userRepository.getUser().let {
                 _userInfo.value = it
             }
         }
@@ -50,13 +49,13 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
 
     fun savePhoto(photoBitmap: Bitmap) {
         viewModelScope.launch {
-            photoBitmap?.let {
+            photoBitmap.let {
                 val outputStream = ByteArrayOutputStream()
                 photoBitmap.compress(Bitmap.CompressFormat.PNG, 50, outputStream)
                 byteArray = outputStream.toByteArray()
                 userRepository.updateImage(byteArray, 1)
                 _userInfo.value = userRepository.getUser()
-            }?.runCatching {}
+            }.runCatching {}
         }
     }
 }

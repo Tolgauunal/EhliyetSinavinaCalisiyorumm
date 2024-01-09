@@ -26,7 +26,8 @@ fun Konular(paddingModifier: Modifier, navController: NavHostController) {
         horizontalAlignment = Alignment.CenterHorizontally) {
         DersSecinLazyRow(derslerSelectedItem = derslerSelectedItem)
         Spacer(modifier = Modifier.padding(5.dp))
-        KonuSecinLazyColumn(derslerSelectedItem = derslerSelectedItem, alertDialog = alertDialog)
+        KonuSecinLazyColumn(derslerSelectedItem = derslerSelectedItem,
+            navController = navController)
         if (alertDialog.value){
             CustomAlertDialog(alertDialog = alertDialog, secilenKonu = selectedKonu.value, navController = navController)
         }

@@ -1,9 +1,6 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.data.dao
 
-import android.net.Uri
 import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Entity
 import androidx.room.Insert
 import androidx.room.Query
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.UserEntity

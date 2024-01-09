@@ -2,10 +2,7 @@ package com.unallapps.ehliyetsinavinacalisiyorum.ui.home
 
 import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
-import androidx.activity.result.PickVisualMediaRequest
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,10 +18,10 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -32,15 +29,12 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseKonular
 import com.unallapps.ehliyetsinavinacalisiyorum.R
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CustomAlertDialog
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.DersSecinLazyRow
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.KonuSecinLazyColumn
 import kotlinx.coroutines.CoroutineScope
@@ -48,14 +42,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Home(paddingModifier: Modifier, navController: NavHostController, homeViewModel: HomeViewModel = hiltViewModel()) {
-    val derslerSelectedItem = remember { mutableStateOf(0) }
+    val derslerSelectedItem = remember { mutableIntStateOf(0) }
     val searchText = remember { mutableStateOf("") }
-    val alertDialog = remember { mutableStateOf(false) }
     val nameStateText = remember { mutableStateOf("") }
-    val selectedKonu = remember { mutableStateOf(DatabaseKonular.konularList[0]) }
     homeViewModel.getUserIno()
     CoroutineScope(Dispatchers.Main).launch {
         homeViewModel.userInfo.collect {
@@ -119,9 +111,6 @@ fun Home(paddingModifier: Modifier, navController: NavHostController, homeViewMo
         Spacer(modifier = Modifier.padding(5.dp))
         DersSecinLazyRow(derslerSelectedItem = derslerSelectedItem)
         Spacer(modifier = Modifier.padding(5.dp))
-        KonuSecinLazyColumn(derslerSelectedItem = derslerSelectedItem, alertDialog = alertDialog)
-        if (alertDialog.value) {
-            CustomAlertDialog(alertDialog, selectedKonu.value, navController)
-        }
+        KonuSecinLazyColumn(derslerSelectedItem = derslerSelectedItem,navController)
     }
 }

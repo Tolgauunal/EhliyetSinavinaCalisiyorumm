@@ -16,9 +16,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -34,13 +32,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseDersler
 import com.unallapps.ehliyetsinavinacalisiyorum.R
-import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestlerEntity
-import com.unallapps.ehliyetsinavinacalisiyorum.data.state.TestlerState
+
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
-fun Testler(paddingModifier: Modifier, navController: NavHostController, testlerNavViewModel: TestlerNavViewModel = hiltViewModel()) {
-    val selectedDersItemIndex = remember { mutableStateOf(0) }
+fun Testler(paddingModifier: Modifier,
+    navController: NavHostController,
+    testlerNavViewModel: TestlerNavViewModel = hiltViewModel()) {
+    val selectedDersItemIndex = remember { mutableIntStateOf(0) }
+    val selectedDersItemText = remember { mutableStateOf("İlk Yardım") }
     Column(modifier = paddingModifier.padding(start = 8.dp, end = 8.dp, top = 8.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally) {
@@ -49,11 +49,14 @@ fun Testler(paddingModifier: Modifier, navController: NavHostController, testler
         LazyVerticalGrid(columns = GridCells.Adaptive(128.dp), content = {
             items(DatabaseDersler.derslerList.size) { index ->
                 val ders = DatabaseDersler.derslerList[index]
-                if (selectedDersItemIndex.value == index) {
+                if (selectedDersItemIndex.intValue == index) {
                     Card(modifier = Modifier
+                        .clickable {
+                            selectedDersItemIndex.intValue = index
+                            selectedDersItemText.value = ders.name
+                        }
                         .padding(4.dp)
-                        .fillMaxWidth()
-                        .clickable { selectedDersItemIndex.value = index },
+                        .fillMaxWidth(),
                         colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.green))) {
                         Column(verticalArrangement = Arrangement.Top,
                             horizontalAlignment = Alignment.CenterHorizontally,
@@ -75,10 +78,12 @@ fun Testler(paddingModifier: Modifier, navController: NavHostController, testler
                 } else {
                     Card(
                         modifier = Modifier
+                            .clickable {
+                                selectedDersItemIndex.intValue = index
+                                selectedDersItemText.value = ders.name
+                            }
                             .padding(4.dp)
-                            .fillMaxWidth()
-                            .clickable { selectedDersItemIndex.value = index }
-                            .clickable { selectedDersItemIndex.value = index },
+                            .fillMaxWidth(),
                         colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.kapaliMavi)),
                     ) {
                         Column(verticalArrangement = Arrangement.Top,
@@ -102,7 +107,8 @@ fun Testler(paddingModifier: Modifier, navController: NavHostController, testler
             }
         })
         Spacer(modifier = Modifier.padding(8.dp))
-        Button(onClick = {  navController.navigate("testEkrani") }, modifier = Modifier.padding(16.dp)) {
+        Button(onClick = { navController.navigate("testEkrani/${selectedDersItemText.value}") },
+            modifier = Modifier.padding(16.dp)) {
             Text(text = "Testi Başlat", fontSize = 16.sp)
         }
     }

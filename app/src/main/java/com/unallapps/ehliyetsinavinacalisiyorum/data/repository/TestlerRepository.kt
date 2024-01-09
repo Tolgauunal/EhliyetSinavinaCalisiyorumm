@@ -3,5 +3,5 @@ package com.unallapps.ehliyetsinavinacalisiyorum.data.repository
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestlerEntity
 
 interface TestlerRepository {
-    suspend fun getTestlerData():List<TestlerEntity>
+    suspend fun getTestlerData(dersAdi:String):List<TestlerEntity>
 }

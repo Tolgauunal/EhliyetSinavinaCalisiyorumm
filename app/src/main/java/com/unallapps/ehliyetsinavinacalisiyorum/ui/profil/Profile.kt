@@ -39,7 +39,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -71,8 +70,9 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
     val launcher =
         rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri -> //When the user has selected a photo, its URI is returned here
             photoUri = uri
-            val source = ImageDecoder.decodeBitmap(ImageDecoder.createSource(context.contentResolver, photoUri!!))
-            profileViewModel.savePhoto(source)
+            photoUri?.let {
+                profileViewModel.savePhoto(ImageDecoder.decodeBitmap(ImageDecoder.createSource(context.contentResolver, it)))
+            }
         }
     CoroutineScope(Dispatchers.Main).launch {
         profileViewModel.userInfo.collect {

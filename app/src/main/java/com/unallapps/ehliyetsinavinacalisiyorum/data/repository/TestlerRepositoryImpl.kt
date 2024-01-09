@@ -8,10 +8,10 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class TestlerRepositoryImpl @Inject constructor(private val firestore: FirebaseFirestore) : TestlerRepository {
-    override suspend fun getTestlerData(): List<TestlerEntity> {
-        var testlerEntity = mutableListOf<TestlerEntity>()
+    override suspend fun getTestlerData(dersAdi: String): List<TestlerEntity> {
+        val testlerEntity = mutableListOf<TestlerEntity>()
         try {
-            firestore.collection("Testler").get().await().map {
+            firestore.collection(dersAdi).get().await().map {
                 val result = it.toObject(TestlerEntity::class.java)
                 testlerEntity.add(result)
             }

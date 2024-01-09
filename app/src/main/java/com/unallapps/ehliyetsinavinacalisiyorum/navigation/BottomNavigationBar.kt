@@ -33,7 +33,7 @@ sealed class BottomBarScreen(
         icon = R.drawable.baseline_person_24
     )
     object TestEkrani: BottomBarScreen(
-        route ="testEkrani",
+        route ="testEkrani/{dersAdi}",
         label ="TestEkrani",
         icon = R.drawable.baseline_person_24
     )

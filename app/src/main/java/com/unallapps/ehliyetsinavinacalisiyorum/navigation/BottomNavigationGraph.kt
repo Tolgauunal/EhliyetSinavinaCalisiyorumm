@@ -15,7 +15,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.unallapps.ehliyetsinavinacalisiyorum.R
-import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestlerEntity
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.bilgikartlari.BilgiKartlari
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.home.Home
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.konular.KonuAnlatim
@@ -51,8 +50,11 @@ fun BottomNavigationGraph(navController: NavHostController, paddingModifier: Mod
             val json = it.arguments?.getString("konuAdi")
             BilgiKartlari(json!!, paddingModifier)
         }
-        composable(route = BottomBarScreen.TestEkrani.route) {
-                TestEkrani(paddingModifier)
+        composable(route = BottomBarScreen.TestEkrani.route, arguments = listOf(navArgument("dersAdi") {
+            type = NavType.StringType
+        })) {
+            val json = it.arguments?.getString("dersAdi")
+            TestEkrani(paddingModifier,json!!, navController = navController)
         }
         composable(route = BottomBarScreen.KonuAnlatimi.route, arguments = listOf(navArgument("konuAdi") {
             type = NavType.StringType

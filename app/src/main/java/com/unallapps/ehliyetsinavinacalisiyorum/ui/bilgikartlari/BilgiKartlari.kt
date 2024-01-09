@@ -12,7 +12,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -21,13 +24,44 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.unallapps.ehliyetsinavinacalisiyorum.R
+import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.BilgiKartlariEntity
+import com.unallapps.ehliyetsinavinacalisiyorum.data.state.KonularState
 
 @Composable
-fun BilgiKartlari(konuName: String, paddingModifier: Modifier) {
-    var progress by remember { mutableStateOf(0) }
-    var bilgiKartiSize = 10f //Gelen veri ile eşleşecek size
-    println(konuName)
+fun BilgiKartlari(konuName: String,
+    paddingModifier: Modifier,
+    bilgiKartlariViewModel: BilgiKartlariViewModel = hiltViewModel()) {
+    bilgiKartlariViewModel.getKonu(konuAdi = konuName)
+    val bilgiKartlariEntity = remember { mutableListOf<BilgiKartlariEntity>() }
+    val uiKontrol = remember { mutableStateOf(false) }
+    LaunchedEffect(key1 = true) {
+        bilgiKartlariViewModel._stateFlow.collect {
+            when (it) {
+                KonularState.Idle -> {
+
+                }
+                KonularState.Loading -> {
+                }
+                is KonularState.Result -> {
+                    for (text in it.konu) {
+                        bilgiKartlariEntity.add(text)
+                    }
+                    uiKontrol.value = true
+                }
+            }
+        }
+    }
+    if (uiKontrol.value) {
+        GetUi(paddingModifier, bilgiKartlariEntity)
+    }
+}
+
+@Composable
+private fun GetUi(paddingModifier: Modifier, bilgiKartlariEntity: MutableList<BilgiKartlariEntity>) {
+    var progress by remember { mutableIntStateOf(0) }
+    val bilgiKartiSize by remember { mutableFloatStateOf(bilgiKartlariEntity.size.toFloat()) }
     Column(modifier = paddingModifier) {
         Row(modifier = Modifier
             .fillMaxWidth()
@@ -40,7 +74,7 @@ fun BilgiKartlari(konuName: String, paddingModifier: Modifier) {
             .border(width = 1.dp, color = Color.Blue),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "Tolga", modifier = Modifier.padding(40.dp))
+            Text(text = bilgiKartlariEntity[progress].content.toString(), modifier = Modifier.padding(40.dp))
             Row(modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),
@@ -66,6 +100,6 @@ fun BilgiKartlari(konuName: String, paddingModifier: Modifier) {
 }
 
 @Composable
-fun ProgressBar(progress: Int, size: Float) {
+private fun ProgressBar(progress: Int, size: Float) {
     LinearProgressIndicator(progress = progress / size, modifier = Modifier.fillMaxWidth())
 }

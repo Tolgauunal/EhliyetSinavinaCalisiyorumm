@@ -1,6 +1,7 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.ui.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +17,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -23,14 +26,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseKonular
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun KonuSecinLazyColumn(derslerSelectedItem: MutableState<Int>, alertDialog: MutableState<Boolean>) {
-    Column(verticalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-        Text(text = "Önerilen Konular")
+fun KonuSecinLazyColumn(derslerSelectedItem: MutableState<Int>,
+    navController: NavHostController) {
+    val selectedKonu = remember { mutableStateOf(DatabaseKonular.konularList[0]) }
+    val alertDialog = remember { mutableStateOf(false) }
+    Column(verticalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) { Text(text = "Önerilen Konular")
         LazyColumn(modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.Start) {
@@ -48,7 +54,10 @@ fun KonuSecinLazyColumn(derslerSelectedItem: MutableState<Int>, alertDialog: Mut
                                 .padding(5.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.Start,
-                                modifier = Modifier
+                                modifier = Modifier.clickable {
+                                    selectedKonu.value = konular
+                                    alertDialog.value=true
+                                }
                                     .fillMaxWidth()
                                     .padding(5.dp)) {
                                 Image(painter = painterResource(id = konular.icon),
@@ -84,5 +93,8 @@ fun KonuSecinLazyColumn(derslerSelectedItem: MutableState<Int>, alertDialog: Mut
                 }
             })
         }
+    }
+    if (alertDialog.value) {
+        CustomAlertDialog(alertDialog, selectedKonu.value, navController)
     }
 }
