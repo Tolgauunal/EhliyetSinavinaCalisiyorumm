@@ -13,12 +13,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,22 +41,26 @@ fun TestEkrani(paddingModifier: Modifier,
     dersAdi: String,
     testlerViewModel: TestlerViewModel = hiltViewModel(),
     navController: NavHostController) {
-    testlerViewModel.testlerList(dersAdi)
-    val soruKontrol = remember { mutableStateOf(true) }
-    val uiDurum = remember { mutableStateOf(false) }
-    val soruNumarasi = remember { mutableIntStateOf(0) }
-    val soruSize = remember { mutableIntStateOf(0) }
-    val testler = remember { mutableListOf<TestItemEntity>() }
-    val testIcon = remember { mutableListOf(R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d) }
-    val soru = remember { mutableStateOf("") }
-    val dogruCevap = remember { mutableStateOf("") }
-    val dogruCevapIndex = remember { mutableIntStateOf(0) }
-    val cevapKontrol = remember { mutableStateOf(false) }
-    val secilenCevap = remember { mutableStateOf("") }
-    val dogruCevapSayisi = remember { mutableIntStateOf(0) }
-    val yanlisCevapSayisi = remember { mutableIntStateOf(0) }
-    val soruImage = remember { mutableStateOf("") }
+    testlerViewModel.TestlerList(dersAdi)
+    val soruKontrol = rememberSaveable { mutableStateOf(true) }
+    val progressShow = rememberSaveable { mutableStateOf(false) }
+    val uiDurum = rememberSaveable { mutableStateOf(false) }
+    val showIcon = rememberSaveable { mutableStateOf(false) }
+    val soruIndex = rememberSaveable { mutableIntStateOf(0) }
+    val soruSize = rememberSaveable { mutableIntStateOf(0) }
+    val testler = rememberSaveable { mutableListOf<TestItemEntity>() }
+    val soruNumarasi = rememberSaveable { mutableIntStateOf(1) }
+    val testIcon = rememberSaveable { mutableListOf(R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d) }
+    val soru = rememberSaveable { mutableStateOf("") }
+    val dogruCevap = rememberSaveable { mutableStateOf("") }
+    val dogruCevapIndex = rememberSaveable { mutableIntStateOf(0) }
+    val cevapKontrol = rememberSaveable { mutableStateOf(false) }
+    val secilenCevap = rememberSaveable { mutableStateOf("") }
+    val dogruCevapSayisi = rememberSaveable { mutableIntStateOf(0) }
+    val yanlisCevapSayisi = rememberSaveable { mutableIntStateOf(0) }
+    val soruImage = rememberSaveable { mutableStateOf("") }
     var secilenDers = Dersler(0, "İlk Yardım", R.drawable.ilkyardim)
+    var enabled = rememberSaveable { mutableStateOf(true) }
     for (dersler in DatabaseDersler.derslerList) {
         if (dersAdi == dersler.name) {
             secilenDers = DatabaseDersler.derslerList.get(index = dersler.id)
@@ -63,14 +68,21 @@ fun TestEkrani(paddingModifier: Modifier,
     }
     if (soruKontrol.value) {
         LaunchedEffect(key1 = true) {
-            testlerViewModel.stateFlow.collect {
+            testlerViewModel.firebaseListState.collect {
                 when (it) {
                     TestlerState.Idle -> {}
+                    TestlerState.Loading -> {
+                        progressShow.value = true
+                    }
                     is TestlerState.result -> {
+                        progressShow.value = false
                         soruSize.intValue = it.testlerList.size
-                        if (soruNumarasi.intValue != it.testlerList.size) {
-                            val test = it.testlerList[soruNumarasi.intValue]
+                        if (soruIndex.intValue != it.testlerList.size) {
+                            val test = it.testlerList[soruIndex.intValue]
                             soru.value = test.content.toString()
+                            testler.clear()
+                            uiDurum.value = true
+                            cevapKontrol.value = false
                             testler.add(TestItemEntity(test.aTest.toString(), Color.White))
                             testler.add(TestItemEntity(test.bTest.toString(), Color.White))
                             testler.add(TestItemEntity(test.cTest.toString(), Color.White))
@@ -78,15 +90,26 @@ fun TestEkrani(paddingModifier: Modifier,
                             dogruCevap.value = test.correct.toString()
                             soruImage.value = test.imageTest.toString()
                             soruKontrol.value = false
-                            uiDurum.value = true
+                            for (dogruCevapItemIndex in 0..3) {
+                                if (testler[dogruCevapItemIndex].testString == dogruCevap.value) {
+                                    dogruCevapIndex.intValue = dogruCevapItemIndex
+                                }
+                            }
                         }
                     }
                 }
             }
         }
     }
+    if (progressShow.value) {
+        Column(verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize()) {
+            CircularProgressIndicator()
+        }
+    }
     if (uiDurum.value) {
-        Column(modifier = Modifier
+        Column(modifier = paddingModifier
             .fillMaxSize()
             .padding(16.dp),
             verticalArrangement = Arrangement.Top,
@@ -101,7 +124,7 @@ fun TestEkrani(paddingModifier: Modifier,
                 Image(painter = painterResource(id = R.drawable.baseline_close_24),
                     contentDescription = "",
                     modifier = Modifier.clickable {
-                        navController.navigate("testler")
+                        testlerViewModel.Navigate(navController)
                     })
             }
             Spacer(modifier = Modifier.padding(top = 20.dp))
@@ -142,10 +165,19 @@ fun TestEkrani(paddingModifier: Modifier,
             for (i in 0..3) {
                 Card(modifier = Modifier
                     .fillMaxWidth()
-                    .clickable {
+                    .clickable(enabled = enabled.value) {
                         secilenCevap.value = testler[i].testString
-                        soruKontrol.value = true
-                        soruNumarasi.intValue = +1
+                        showIcon.value = true
+                        enabled.value = false
+                        if (secilenCevap.value != "") {
+                            if (secilenCevap.value == dogruCevap.value) {
+                                dogruCevapSayisi.intValue += 1
+                                cevapKontrol.value = true
+                            } else {
+                                yanlisCevapSayisi.intValue += 1
+                                cevapKontrol.value = false
+                            }
+                        }
                         if (cevapKontrol.value) {
                             testler[i].color = Color.Green
                         } else {
@@ -165,24 +197,37 @@ fun TestEkrani(paddingModifier: Modifier,
                     }
                 }
             }
-        }
-        for (dogruCevapItemIndex in 0..3) {
-            if (testler[dogruCevapItemIndex].testString == dogruCevap.value) {
-                dogruCevapIndex.intValue = dogruCevapItemIndex
-            }
-        }
-        if (secilenCevap.value != "") {
-            if (secilenCevap.value == dogruCevap.value) {
-                dogruCevapSayisi.intValue = +1
-                secilenCevap.value = ""
-                cevapKontrol.value = true
-                dogruCevap.value = ""
-                testler.clear()
-            } else {
-                yanlisCevapSayisi.intValue = +1
-                cevapKontrol.value = false
-                secilenCevap.value = ""
-                dogruCevap.value = ""
+            if (showIcon.value) {
+                Row(verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()) {
+                    if (soruIndex.intValue != 0) {
+                        Image(painter = painterResource(id = R.drawable.baseline_keyboard_arrow_left_24),
+                            contentDescription = "",
+                            modifier = Modifier.clickable {
+                                soruKontrol.value = true
+                                dogruCevap.value = ""
+                                secilenCevap.value = ""
+                                showIcon.value = false
+                                enabled.value = true
+                                soruIndex.intValue -= 1
+                                soruNumarasi.intValue -= 1
+                            })
+                    }
+                    if (soruIndex.intValue != (soruSize.intValue) - 1) {
+                        Image(painter = painterResource(id = R.drawable.baseline_keyboard_arrow_right_24),
+                            contentDescription = "",
+                            modifier = Modifier.clickable {
+                                soruKontrol.value = true
+                                soruIndex.intValue += 1
+                                dogruCevap.value = ""
+                                enabled.value = true
+                                secilenCevap.value = ""
+                                showIcon.value = false
+                                soruNumarasi.intValue += 1
+                            })
+                    }
+                }
             }
         }
     }
