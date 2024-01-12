@@ -163,16 +163,19 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
                 }
             }
         }
-        Text(text = "Ayarlar", color = colorResource(id = R.color.kapaliMavi))
         Spacer(modifier = Modifier.padding(10.dp))
-        CustomButton(title = "Gizlilik Politikası", R.drawable.gizlilik, onClick = {})
-        Spacer(modifier = Modifier.padding(5.dp))
-        CustomButton(title = "Şartlar ve Koşullar", R.drawable.sartlar, onClick = {})
-        Spacer(modifier = Modifier.padding(5.dp))
-        CustomButton(title = "Bize Oy Verin", R.drawable.baseline_keyboard_arrow_right_24, onClick = {})
-        Spacer(modifier = Modifier.padding(5.dp))
-        CustomButton(title = "Hata Bildir", R.drawable.baseline_keyboard_arrow_right_24, onClick = {})
-        Spacer(modifier = Modifier.padding(5.dp))
-        CustomButton(title = "İletişim", R.drawable.contact, onClick = {})
+        Text(text = "Ayarlar", color = colorResource(id = R.color.kapaliMavi), fontSize = 16.sp)
+        Column(modifier = Modifier.padding(10.dp)) {
+            Spacer(modifier = Modifier.padding(10.dp))
+            CustomButton(title = "Gizlilik Politikası", R.drawable.gizlilik, onClick = {})
+            Spacer(modifier = Modifier.padding(5.dp))
+            CustomButton(title = "Şartlar ve Koşullar", R.drawable.sartlar, onClick = {})
+            Spacer(modifier = Modifier.padding(5.dp))
+            CustomButton(title = "Bize Oy Verin", R.drawable.oy, onClick = {})
+            Spacer(modifier = Modifier.padding(5.dp))
+            CustomButton(title = "Hata Bildir", R.drawable.error, onClick = {})
+            Spacer(modifier = Modifier.padding(5.dp))
+            CustomButton(title = "İletişim", R.drawable.contact, onClick = {})
+        }
     }
 }

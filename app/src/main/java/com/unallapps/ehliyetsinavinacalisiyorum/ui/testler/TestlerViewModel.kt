@@ -12,23 +12,22 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TestlerViewModel @Inject constructor(private val testlerRepository: TestlerRepository) :
-    ViewModel() {
+class TestlerViewModel @Inject constructor(private val testlerRepository: TestlerRepository) : ViewModel() {
     private var _firebaseListState: MutableStateFlow<TestlerState> = MutableStateFlow(TestlerState.Idle)
-    val firebaseListState:MutableStateFlow<TestlerState> = _firebaseListState
-    private var isProgressBar=false
-    fun TestlerList(dersAdi:String) {
+    val firebaseListState: MutableStateFlow<TestlerState> = _firebaseListState
+    private var isProgressBar = false
+    fun testlerList(dersAdi: String) {
         viewModelScope.launch {
-            if (!isProgressBar){
-                _firebaseListState.value=TestlerState.Loading
+            if (!isProgressBar) {
+                _firebaseListState.value = TestlerState.Loading
                 delay(500)
             }
-            isProgressBar=true
+            isProgressBar = true
             _firebaseListState.value = TestlerState.result(testlerRepository.getTestlerData(dersAdi))
         }
     }
 
-    fun Navigate(navController: NavHostController) {
+    fun navigate(navController: NavHostController) {
         navController.navigate("testler")
     }
 }

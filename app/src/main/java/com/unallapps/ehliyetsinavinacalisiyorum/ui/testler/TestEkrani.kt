@@ -23,6 +23,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -41,7 +42,7 @@ fun TestEkrani(paddingModifier: Modifier,
     dersAdi: String,
     testlerViewModel: TestlerViewModel = hiltViewModel(),
     navController: NavHostController) {
-    testlerViewModel.TestlerList(dersAdi)
+    testlerViewModel.testlerList(dersAdi)
     val soruKontrol = rememberSaveable { mutableStateOf(true) }
     val progressShow = rememberSaveable { mutableStateOf(false) }
     val uiDurum = rememberSaveable { mutableStateOf(false) }
@@ -60,7 +61,7 @@ fun TestEkrani(paddingModifier: Modifier,
     val yanlisCevapSayisi = rememberSaveable { mutableIntStateOf(0) }
     val soruImage = rememberSaveable { mutableStateOf("") }
     var secilenDers = Dersler(0, "İlk Yardım", R.drawable.ilkyardim)
-    var enabled = rememberSaveable { mutableStateOf(true) }
+    val enabled = rememberSaveable { mutableStateOf(true) }
     for (dersler in DatabaseDersler.derslerList) {
         if (dersAdi == dersler.name) {
             secilenDers = DatabaseDersler.derslerList.get(index = dersler.id)
@@ -83,10 +84,10 @@ fun TestEkrani(paddingModifier: Modifier,
                             testler.clear()
                             uiDurum.value = true
                             cevapKontrol.value = false
-                            testler.add(TestItemEntity(test.aTest.toString(), Color.White))
-                            testler.add(TestItemEntity(test.bTest.toString(), Color.White))
-                            testler.add(TestItemEntity(test.cTest.toString(), Color.White))
-                            testler.add(TestItemEntity(test.dTest.toString(), Color.White))
+                            testler.add(TestItemEntity(test.aTest.toString(), R.color.acikmavi))
+                            testler.add(TestItemEntity(test.bTest.toString(), R.color.acikmavi))
+                            testler.add(TestItemEntity(test.cTest.toString(), R.color.acikmavi))
+                            testler.add(TestItemEntity(test.dTest.toString(), R.color.acikmavi))
                             dogruCevap.value = test.correct.toString()
                             soruImage.value = test.imageTest.toString()
                             soruKontrol.value = false
@@ -124,7 +125,7 @@ fun TestEkrani(paddingModifier: Modifier,
                 Image(painter = painterResource(id = R.drawable.baseline_close_24),
                     contentDescription = "",
                     modifier = Modifier.clickable {
-                        testlerViewModel.Navigate(navController)
+                        testlerViewModel.navigate(navController)
                     })
             }
             Spacer(modifier = Modifier.padding(top = 20.dp))
@@ -163,6 +164,7 @@ fun TestEkrani(paddingModifier: Modifier,
             }
             Spacer(modifier = Modifier.padding(top = 50.dp))
             for (i in 0..3) {
+                Spacer(modifier = Modifier.padding(10.dp))
                 Card(modifier = Modifier
                     .fillMaxWidth()
                     .clickable(enabled = enabled.value) {
@@ -179,17 +181,18 @@ fun TestEkrani(paddingModifier: Modifier,
                             }
                         }
                         if (cevapKontrol.value) {
-                            testler[i].color = Color.Green
+                            testler[i].color = R.color.green
                         } else {
-                            testler[i].color = Color.Red
-                            testler[dogruCevapIndex.intValue].color = Color.Green
+                            testler[i].color = R.color.red
+                            testler[dogruCevapIndex.intValue].color = R.color.green
                         }
                     }) {
                     Row(verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Start,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(color = testler[i].color)) {
+                            .background(color = colorResource(id = testler[i].color))
+                            .padding(10.dp)) {
                         Image(painter = painterResource(testIcon[i]),
                             contentDescription = "",
                             modifier = Modifier.size(24.dp))
@@ -197,35 +200,25 @@ fun TestEkrani(paddingModifier: Modifier,
                     }
                 }
             }
+            Spacer(modifier = Modifier.padding(10.dp))
             if (showIcon.value) {
                 Row(verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
+                    horizontalArrangement = Arrangement.End,
                     modifier = Modifier.fillMaxWidth()) {
-                    if (soruIndex.intValue != 0) {
-                        Image(painter = painterResource(id = R.drawable.baseline_keyboard_arrow_left_24),
-                            contentDescription = "",
-                            modifier = Modifier.clickable {
-                                soruKontrol.value = true
-                                dogruCevap.value = ""
-                                secilenCevap.value = ""
-                                showIcon.value = false
-                                enabled.value = true
-                                soruIndex.intValue -= 1
-                                soruNumarasi.intValue -= 1
-                            })
-                    }
                     if (soruIndex.intValue != (soruSize.intValue) - 1) {
                         Image(painter = painterResource(id = R.drawable.baseline_keyboard_arrow_right_24),
                             contentDescription = "",
-                            modifier = Modifier.clickable {
-                                soruKontrol.value = true
-                                soruIndex.intValue += 1
-                                dogruCevap.value = ""
-                                enabled.value = true
-                                secilenCevap.value = ""
-                                showIcon.value = false
-                                soruNumarasi.intValue += 1
-                            })
+                            modifier = Modifier
+                                .clickable {
+                                    soruKontrol.value = true
+                                    soruIndex.intValue += 1
+                                    dogruCevap.value = ""
+                                    enabled.value = true
+                                    secilenCevap.value = ""
+                                    showIcon.value = false
+                                    soruNumarasi.intValue += 1
+                                }
+                                .size(36.dp))
                     }
                 }
             }

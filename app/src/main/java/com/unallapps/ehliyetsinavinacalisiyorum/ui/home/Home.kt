@@ -22,6 +22,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -90,7 +91,8 @@ fun Home(paddingModifier: Modifier, navController: NavHostController, homeViewMo
                     Text(text = "Bütün Konulara Hızlı ve Kolay Yoldan Ulaşın",
                         color = colorResource(id = R.color.white),
                         textAlign = TextAlign.Center)
-                    OutlinedTextField(value = searchText.value,
+                    OutlinedTextField(
+                        value = searchText.value,
                         onValueChange = { searchText.value = it },
                         colors = TextFieldDefaults.outlinedTextFieldColors(containerColor = Color.White,
                             textColor = Color.White,
@@ -99,7 +101,8 @@ fun Home(paddingModifier: Modifier, navController: NavHostController, homeViewMo
                             focusedLabelColor = Color.White,
                             focusedBorderColor = colorResource(id = R.color.acikmavi)),
                         label = { Text(text = "Konu Arayın", fontSize = 10.sp) },
-                        maxLines = 1)
+                        maxLines = 1,
+                    )
                 }
                 Image(painter = painterResource(id = R.drawable.learningback),
                     contentDescription = "",
@@ -111,6 +114,6 @@ fun Home(paddingModifier: Modifier, navController: NavHostController, homeViewMo
         Spacer(modifier = Modifier.padding(5.dp))
         DersSecinLazyRow(derslerSelectedItem = derslerSelectedItem)
         Spacer(modifier = Modifier.padding(5.dp))
-        KonuSecinLazyColumn(derslerSelectedItem = derslerSelectedItem,navController)
+        KonuSecinLazyColumn(derslerSelectedItem = derslerSelectedItem, navController)
     }
 }

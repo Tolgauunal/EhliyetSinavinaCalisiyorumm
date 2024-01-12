@@ -14,4 +14,4 @@ data class TestlerEntity(val idTest: Int? = null,
     val cTest: String? = null,
     val dTest: String? = null,
     val correct: String? = null,
-    var color:Int? = R.color.white) : Parcelable
+    var color:Int?=R.color.white) : Parcelable
