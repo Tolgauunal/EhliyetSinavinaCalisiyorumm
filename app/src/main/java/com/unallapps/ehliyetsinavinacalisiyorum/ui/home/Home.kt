@@ -18,11 +18,11 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.unallapps.ehliyetsinavinacalisiyorum.R
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.AutoComplete
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.DersSecinLazyRow
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.KonuSecinLazyColumn
 import kotlinx.coroutines.CoroutineScope
@@ -46,15 +47,11 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Home(paddingModifier: Modifier, navController: NavHostController, homeViewModel: HomeViewModel = hiltViewModel()) {
-    val derslerSelectedItem = remember { mutableIntStateOf(0) }
-    val searchText = remember { mutableStateOf("") }
-    val nameStateText = remember { mutableStateOf("") }
-    homeViewModel.getUserIno()
-    CoroutineScope(Dispatchers.Main).launch {
-        homeViewModel.userInfo.collect {
-            nameStateText.value = it.userName
-        }
-    }
+    val derslerSelectedItem = rememberSaveable { mutableIntStateOf(0) }
+    val searchText = rememberSaveable { mutableStateOf("") }
+    val nameStateText = rememberSaveable { mutableStateOf("") }
+    homeViewModel.getUserInfo()
+    getProfileInfo(homeViewModel, nameStateText)
     Column(modifier = paddingModifier.padding(start = 8.dp, end = 8.dp, top = 8.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally) {
@@ -62,9 +59,10 @@ fun Home(paddingModifier: Modifier, navController: NavHostController, homeViewMo
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()) {
             Text(text = nameStateText.value, color = colorResource(id = R.color.kapaliMavi), fontSize = 16.sp)
-            if (homeViewModel.userInfo.value.userPhoto != null) {
-                val userPhoto = homeViewModel.userInfo.value.userPhoto
-                val bitmap = BitmapFactory.decodeByteArray(userPhoto, 0, userPhoto!!.size)
+            homeViewModel.userInfo.value.userPhoto?.let {
+                val bitmap = BitmapFactory.decodeByteArray(homeViewModel.userInfo.value.userPhoto,
+                    0,
+                    homeViewModel.userInfo.value.userPhoto!!.size)
                 Image(bitmap = bitmap.asImageBitmap(),
                     contentDescription = null,
                     modifier = Modifier
@@ -72,7 +70,7 @@ fun Home(paddingModifier: Modifier, navController: NavHostController, homeViewMo
                         .clip(CircleShape)
                         .fillMaxWidth(),
                     contentScale = ContentScale.Crop)
-            } else {
+            } ?: run {
                 Image(painter = painterResource(id = R.drawable.person),
                     contentDescription = "",
                     contentScale = ContentScale.Crop,
@@ -91,18 +89,7 @@ fun Home(paddingModifier: Modifier, navController: NavHostController, homeViewMo
                     Text(text = "Bütün Konulara Hızlı ve Kolay Yoldan Ulaşın",
                         color = colorResource(id = R.color.white),
                         textAlign = TextAlign.Center)
-                    OutlinedTextField(
-                        value = searchText.value,
-                        onValueChange = { searchText.value = it },
-                        colors = TextFieldDefaults.outlinedTextFieldColors(containerColor = Color.White,
-                            textColor = Color.White,
-                            disabledTextColor = Color.Black,
-                            disabledBorderColor = colorResource(id = R.color.acikmavi),
-                            focusedLabelColor = Color.White,
-                            focusedBorderColor = colorResource(id = R.color.acikmavi)),
-                        label = { Text(text = "Konu Arayın", fontSize = 10.sp) },
-                        maxLines = 1,
-                    )
+                    AutoComplete()
                 }
                 Image(painter = painterResource(id = R.drawable.learningback),
                     contentDescription = "",
@@ -114,6 +101,14 @@ fun Home(paddingModifier: Modifier, navController: NavHostController, homeViewMo
         Spacer(modifier = Modifier.padding(5.dp))
         DersSecinLazyRow(derslerSelectedItem = derslerSelectedItem)
         Spacer(modifier = Modifier.padding(5.dp))
-        KonuSecinLazyColumn(derslerSelectedItem = derslerSelectedItem, navController)
+        KonuSecinLazyColumn(derslerSelectedItem = derslerSelectedItem, navController,true)
+    }
+}
+
+private fun getProfileInfo(homeViewModel: HomeViewModel, nameStateText: MutableState<String>) {
+    CoroutineScope(Dispatchers.Main).launch {
+        homeViewModel.userInfo.collect {
+            nameStateText.value = it.userName
+        }
     }
 }

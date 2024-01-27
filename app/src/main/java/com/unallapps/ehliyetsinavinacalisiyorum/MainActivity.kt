@@ -23,6 +23,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.view.ViewCompat.animate
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -30,6 +31,7 @@ import com.unallapps.ehliyetsinavinacalisiyorum.navigation.BottomBarScreen
 import com.unallapps.ehliyetsinavinacalisiyorum.navigation.BottomNavigationGraph
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.theme.EhliyetSinavinaCalisiyorumTheme
 import dagger.hilt.android.AndroidEntryPoint
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,5 +1,6 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.ui.component
 
+import android.provider.ContactsContract.Data
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -32,16 +33,21 @@ import com.unallapps.ehliyetsinavinacalisiyorum.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun KonuSecinLazyColumn(derslerSelectedItem: MutableState<Int>,
-    navController: NavHostController) {
+fun KonuSecinLazyColumn(derslerSelectedItem: MutableState<Int>, navController: NavHostController, controller: Boolean) {
     val selectedKonu = remember { mutableStateOf(DatabaseKonular.konularList[0]) }
     val alertDialog = remember { mutableStateOf(false) }
-    Column(verticalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) { Text(text = "Önerilen Konular")
+    Column(verticalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
+        val currentList = if (controller) {
+            DatabaseKonular.konularList.filter { it.id == derslerSelectedItem.value }.take(5).toMutableList()
+        } else {
+            DatabaseKonular.konularList
+        }
+        Text(text = "Önerilen Konular")
         LazyColumn(modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.Start) {
-            items(count = DatabaseKonular.konularList.count(), itemContent = {
-                val konular = DatabaseKonular.konularList[it]
+            items(count = currentList.size, itemContent = {
+                val konular = currentList[it]
                 if (konular.id == derslerSelectedItem.value) {
                     Row(modifier = Modifier.fillMaxWidth()) {
                         Card(colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.acikmavi)),
@@ -54,15 +60,17 @@ fun KonuSecinLazyColumn(derslerSelectedItem: MutableState<Int>,
                                 .padding(5.dp)) {
                             Row(verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.Start,
-                                modifier = Modifier.clickable {
-                                    selectedKonu.value = konular
-                                    alertDialog.value=true
-                                }
+                                modifier = Modifier
+                                    .clickable {
+                                        selectedKonu.value = konular
+                                        alertDialog.value = true
+                                    }
                                     .fillMaxWidth()
                                     .padding(5.dp)) {
-                                Image(painter = painterResource(id = konular.icon),
+                                Image(
+                                    painter = painterResource(id = konular.icon),
                                     contentDescription = "",
-                                    modifier = Modifier.size(50.dp))
+                                )
                                 Column(modifier = Modifier.fillMaxWidth(),
                                     verticalArrangement = Arrangement.Center,
                                     horizontalAlignment = Alignment.CenterHorizontally) {
@@ -75,16 +83,22 @@ fun KonuSecinLazyColumn(derslerSelectedItem: MutableState<Int>,
                                         horizontalArrangement = Arrangement.Center) {
                                         Icon(painter = painterResource(id = R.drawable.info),
                                             contentDescription = "",
-                                            tint = colorResource(id = R.color.kapaliMavi),modifier = Modifier.size(14.dp))
+                                            tint = colorResource(id = R.color.kapaliMavi),
+                                            modifier = Modifier.size(14.dp))
                                         Text(text = "Bilgi Kartları",
                                             modifier = Modifier.padding(3.dp),
-                                            color = colorResource(id = R.color.kapaliMavi),fontSize = 12.sp, textAlign = TextAlign.Center)
+                                            color = colorResource(id = R.color.kapaliMavi),
+                                            fontSize = 12.sp,
+                                            textAlign = TextAlign.Center)
                                         Icon(painter = painterResource(id = R.drawable.infobook),
                                             contentDescription = "",
-                                            tint = colorResource(id = R.color.kapaliMavi), modifier = Modifier.size(12.dp))
+                                            tint = colorResource(id = R.color.kapaliMavi),
+                                            modifier = Modifier.size(12.dp))
                                         Text(text = "Konu Anlatım",
                                             modifier = Modifier.padding(3.dp),
-                                            color = colorResource(id = R.color.kapaliMavi), fontSize = 12.sp,textAlign = TextAlign.Center)
+                                            color = colorResource(id = R.color.kapaliMavi),
+                                            fontSize = 12.sp,
+                                            textAlign = TextAlign.Center)
                                     }
                                 }
                             }

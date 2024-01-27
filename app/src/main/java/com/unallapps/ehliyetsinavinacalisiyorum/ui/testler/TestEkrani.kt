@@ -22,7 +22,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -35,6 +34,8 @@ import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseDersler
 import com.unallapps.ehliyetsinavinacalisiyorum.data.Dersler
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestItemEntity
 import com.unallapps.ehliyetsinavinacalisiyorum.data.state.TestlerState
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CloseAlert
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.FinishAlert
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
@@ -42,7 +43,7 @@ fun TestEkrani(paddingModifier: Modifier,
     dersAdi: String,
     testlerViewModel: TestlerViewModel = hiltViewModel(),
     navController: NavHostController) {
-    testlerViewModel.testlerList(dersAdi)
+    testlerViewModel.getTestIdData(dersAdi)
     val soruKontrol = rememberSaveable { mutableStateOf(true) }
     val progressShow = rememberSaveable { mutableStateOf(false) }
     val uiDurum = rememberSaveable { mutableStateOf(false) }
@@ -60,11 +61,28 @@ fun TestEkrani(paddingModifier: Modifier,
     val dogruCevapSayisi = rememberSaveable { mutableIntStateOf(0) }
     val yanlisCevapSayisi = rememberSaveable { mutableIntStateOf(0) }
     val soruImage = rememberSaveable { mutableStateOf("") }
+    val closeTest = rememberSaveable { mutableStateOf(false) }
+    val finishAlertDialog = rememberSaveable { mutableStateOf(false) }
     var secilenDers = Dersler(0, "İlk Yardım", R.drawable.ilkyardim)
     val enabled = rememberSaveable { mutableStateOf(true) }
     for (dersler in DatabaseDersler.derslerList) {
         if (dersAdi == dersler.name) {
             secilenDers = DatabaseDersler.derslerList.get(index = dersler.id)
+        }
+    }
+    LaunchedEffect(key1 = true) {
+        testlerViewModel.testIdData.collect {
+            it?.let {
+                dogruCevapSayisi.intValue = it.dogruSayisi
+                yanlisCevapSayisi.intValue = it.yanlisSayisi
+                if (it.testNum==0){
+                  soruNumarasi.intValue=1
+                }else{
+                    soruNumarasi.intValue = it.testNum
+                }
+                soruSize.intValue = it.soruSize
+                testlerViewModel.firebaseTestList(dersAdi,it.testNum)
+            }
         }
     }
     if (soruKontrol.value) {
@@ -77,8 +95,10 @@ fun TestEkrani(paddingModifier: Modifier,
                     }
                     is TestlerState.result -> {
                         progressShow.value = false
-                        soruSize.intValue = it.testlerList.size
-                        if (soruIndex.intValue != it.testlerList.size) {
+                        if (soruSize.intValue == 0) {
+                            soruSize.intValue = it.testlerList.size
+                        }
+                        if (soruIndex.intValue < it.testlerList.size) {
                             val test = it.testlerList[soruIndex.intValue]
                             soru.value = test.content.toString()
                             testler.clear()
@@ -125,7 +145,7 @@ fun TestEkrani(paddingModifier: Modifier,
                 Image(painter = painterResource(id = R.drawable.baseline_close_24),
                     contentDescription = "",
                     modifier = Modifier.clickable {
-                        testlerViewModel.navigate(navController)
+                        closeTest.value = true
                     })
             }
             Spacer(modifier = Modifier.padding(top = 20.dp))
@@ -205,7 +225,7 @@ fun TestEkrani(paddingModifier: Modifier,
                 Row(verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.End,
                     modifier = Modifier.fillMaxWidth()) {
-                    if (soruIndex.intValue != (soruSize.intValue) - 1) {
+                    if (soruNumarasi.intValue != soruSize.intValue) {
                         Image(painter = painterResource(id = R.drawable.baseline_keyboard_arrow_right_24),
                             contentDescription = "",
                             modifier = Modifier
@@ -219,9 +239,25 @@ fun TestEkrani(paddingModifier: Modifier,
                                     soruNumarasi.intValue += 1
                                 }
                                 .size(36.dp))
+                    }else{
+                        finishAlertDialog.value=true
+
                     }
                 }
             }
+        }
+        if (finishAlertDialog.value){
+            FinishAlert(navController,testlerViewModel,dersAdi,finishAlertDialog)
+        }
+        if (closeTest.value) {
+            CloseAlert(testlerViewModel,
+                navController,
+                closeTest,
+                soruNumarasi.intValue,
+                dersAdi,
+                dogruCevapSayisi.intValue,
+                yanlisCevapSayisi.intValue,
+                soruSize.intValue)
         }
     }
 }

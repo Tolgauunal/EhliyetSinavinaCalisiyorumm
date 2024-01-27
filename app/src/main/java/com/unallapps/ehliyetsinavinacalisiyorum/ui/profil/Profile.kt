@@ -1,10 +1,12 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.ui.profil
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
+import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -25,12 +27,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -66,22 +70,25 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
     val nameStateTextField = remember { mutableStateOf("") }
     val settingsState = remember { mutableStateOf(false) }
     val settingsIcon = remember { mutableStateOf(false) }
+
+    val camerPermissionresultLauncher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.RequestPermission(), onResult = {
+            profileViewModel.onPermissionResult(permission = Manifest.permission.READ_EXTERNAL_STORAGE, isGranted = it)
+        })
+
     val context = LocalContext.current
-    val launcher =
-        rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri -> //When the user has selected a photo, its URI is returned here
-            photoUri = uri
-            photoUri?.let {
-                profileViewModel.savePhoto(ImageDecoder.decodeBitmap(ImageDecoder.createSource(context.contentResolver, it)))
-            }
-        }
-    CoroutineScope(Dispatchers.Main).launch {
-        profileViewModel.userInfo.collect {
-            nameStateText.value = it.userName
+    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        photoUri = uri
+        photoUri?.let {
+            profileViewModel.savePhoto(ImageDecoder.decodeBitmap(ImageDecoder.createSource(context.contentResolver,
+                it)))
         }
     }
+    getProfileInfo(profileViewModel, nameStateText)
+
     Column(verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.verticalScroll(rememberScrollState())) {
+        modifier = paddingModifier.verticalScroll(rememberScrollState())) {
         Box(modifier = Modifier
             .background(colorResource(id = R.color.kapaliMavi))
             .fillMaxWidth()
@@ -89,6 +96,7 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
             Column(horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxSize()) {
+                Button(onClick = { camerPermissionresultLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE) }) {}
                 if (photoUri != null) {
                     val painter =
                         rememberAsyncImagePainter(ImageRequest.Builder(LocalContext.current).data(data = photoUri)
@@ -99,22 +107,20 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
                             .size(100.dp)
                             .clip(CircleShape)
                             .fillMaxWidth()
-                            .clickable {
-                                launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
+                            .clickable { //startLauncher(launcher)
                             },
                         contentScale = ContentScale.Crop)
 
                 } else if (profileViewModel.userInfo.value.userPhoto != null) {
-                    val userPhoto=profileViewModel.userInfo.value.userPhoto
-                    val bitmap = BitmapFactory.decodeByteArray(userPhoto, 0, userPhoto!!.size )
+                    val userPhoto = profileViewModel.userInfo.value.userPhoto
+                    val bitmap = BitmapFactory.decodeByteArray(userPhoto, 0, userPhoto!!.size)
                     Image(bitmap = bitmap.asImageBitmap(),
                         contentDescription = null,
                         modifier = Modifier
                             .size(100.dp)
                             .clip(CircleShape)
                             .fillMaxWidth()
-                            .clickable {
-                                launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
+                            .clickable { //startLauncher(launcher)
                             },
                         contentScale = ContentScale.Crop)
                 } else {
@@ -124,10 +130,10 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
                         modifier = Modifier
                             .clip(CircleShape)
                             .size(100.dp)
-                            .clickable {
-                                launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
+                            .clickable { //startLauncher(launcher)
                             })
                 }
+                Spacer(modifier = Modifier.padding(5.dp))
                 Row(verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier.fillMaxHeight()) {
@@ -141,7 +147,7 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
                             colors = TextFieldDefaults.outlinedTextFieldColors(textColor = Color.White))
                     }
                     if (!settingsIcon.value) {
-                        Icon(painter = painterResource(id = R.drawable.baseline_settings_24),
+                        Icon(painter = painterResource(id = R.drawable.baseline_edit_24),
                             contentDescription = "",
                             modifier = Modifier
                                 .padding(start = 16.dp)
@@ -150,7 +156,7 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
                                     settingsIcon.value = true
                                 })
                     } else {
-                        Icon(painter = painterResource(id = R.drawable.home),
+                        Icon(painter = painterResource(id = R.drawable.baseline_done_24),
                             contentDescription = "",
                             modifier = Modifier
                                 .padding(start = 16.dp)
@@ -178,4 +184,16 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
             CustomButton(title = "İletişim", R.drawable.contact, onClick = {})
         }
     }
+}
+
+private fun getProfileInfo(profileViewModel: ProfileViewModel, nameStateText: MutableState<String>) {
+    CoroutineScope(Dispatchers.Main).launch {
+        profileViewModel.userInfo.collect {
+            nameStateText.value = it.userName
+        }
+    }
+}
+
+private fun startLauncher(launcher: ManagedActivityResultLauncher<PickVisualMediaRequest, Uri?>) {
+    launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
 }

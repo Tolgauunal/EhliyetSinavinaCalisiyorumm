@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -18,18 +19,19 @@ import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.KonuSecinLazyColumn
 
 @Composable
 fun Konular(paddingModifier: Modifier, navController: NavHostController) {
-    val derslerSelectedItem = remember { mutableStateOf(0) }
-    val selectedKonu = remember { mutableStateOf(DatabaseKonular.konularList[0]) }
-    val alertDialog = remember { mutableStateOf(false) }
+    val derslerSelectedItem = rememberSaveable { mutableStateOf(0) }
+    val selectedKonu = rememberSaveable { mutableStateOf(DatabaseKonular.konularList[0]) }
+    val alertDialog = rememberSaveable { mutableStateOf(false) }
     Column(modifier = paddingModifier.padding(8.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally) {
         DersSecinLazyRow(derslerSelectedItem = derslerSelectedItem)
         Spacer(modifier = Modifier.padding(5.dp))
-        KonuSecinLazyColumn(derslerSelectedItem = derslerSelectedItem,
-            navController = navController)
-        if (alertDialog.value){
-            CustomAlertDialog(alertDialog = alertDialog, secilenKonu = selectedKonu.value, navController = navController)
+        KonuSecinLazyColumn(derslerSelectedItem = derslerSelectedItem, navController = navController,false)
+        if (alertDialog.value) {
+            CustomAlertDialog(alertDialog = alertDialog,
+                secilenKonu = selectedKonu.value,
+                navController = navController)
         }
     }
 }

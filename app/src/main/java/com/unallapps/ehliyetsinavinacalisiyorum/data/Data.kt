@@ -3,21 +3,24 @@ package com.unallapps.ehliyetsinavinacalisiyorum.data
 import android.os.Parcelable
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import kotlinx.parcelize.Parcelize
+import javax.annotation.concurrent.Immutable
 
 data class Dersler(val id: Int, val name: String, val icon: Int)
 
 @Parcelize
 data class Konular(val id: Int, val name: String, val icon: Int) : Parcelable
+
+@Immutable
 object DatabaseDersler {
-    val derslerList = mutableListOf(
-        Dersler(0, "İlk Yardım", R.drawable.ilkyardim),
+    val derslerList = mutableListOf(Dersler(0, "İlk Yardım", R.drawable.ilkyardim),
         Dersler(1, "Trafik", R.drawable.car),
         Dersler(2, "Motor", R.drawable.engine))
 }
 
+@Immutable
 object DatabaseKonular {
     val konularList = mutableListOf(Konular(0, "Genel İlk Yardım Bilgileri", R.drawable.ilkyardim),
-        Konular(0, "Hasta / Yaralının ve Olay Yerinin Değerlendirilmesi", R.drawable.ilkyardimbir),
+        Konular(0, "Hasta, Yaralının ve Olay Yerinin Değerlendirilmesi", R.drawable.ilkyardimbir),
         Konular(0, "Temel Yaşam Desteği", R.drawable.ilkyardimiki),
         Konular(0, "Kanamalarda İlkYardım", R.drawable.ilkyardimuc),
         Konular(0, "Yaralanmalarda İlkYardım", R.drawable.ilkyardimdort),
@@ -38,6 +41,7 @@ object DatabaseKonular {
         Konular(1, "Trafik Tescil İşlemleri", R.drawable.car),
         Konular(1, "Araç Muayenesi", R.drawable.trafikonbes),
         Konular(1, "Asli Kusurlar", R.drawable.trafiksekiz),
+        Konular(1, "Trafik İşaret Levhaları", R.drawable.trafikonbes),
         Konular(2, "Motor Bilgisi", R.drawable.motorbir),
         Konular(2, "Araç gösterge paneli işaretleri ve anlamları", R.drawable.motoriki),
         Konular(2, "Dizel partikül filtresi nedir?", R.drawable.motoruc),
@@ -53,6 +57,5 @@ object DatabaseKonular {
         Konular(2, "Biyel Kolu", R.drawable.motoronik),
         Konular(2, "Hava filtresi", R.drawable.motoronuc),
         Konular(2, "Piston", R.drawable.motorondort),
-        Konular(2, "Krank mili nedir? ne işe yarar?", R.drawable.motoronbes)
-        )
+        Konular(2, "Krank mili nedir? ne işe yarar?", R.drawable.motoronbes))
 }

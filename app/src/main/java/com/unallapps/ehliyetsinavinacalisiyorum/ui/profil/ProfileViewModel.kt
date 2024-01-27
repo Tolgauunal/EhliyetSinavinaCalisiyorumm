@@ -18,6 +18,15 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
     private val _userInfo: MutableStateFlow<UserEntity> = MutableStateFlow(defaultUser)
     val userInfo: StateFlow<UserEntity> = _userInfo
     private var byteArray: ByteArray? = null
+    val visiblePermissionDialogQueue= mutableListOf<String>()
+    fun dismissDialog(){
+        visiblePermissionDialogQueue.removeLast()
+    }
+    fun onPermissionResult(permission:String,isGranted:Boolean){
+            if (!isGranted){
+                visiblePermissionDialogQueue.add(0,permission)
+            }
+    }
     init {
         viewModelScope.launch {
             if (userRepository.getUserSize().size == 0) {
@@ -51,7 +60,7 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
         viewModelScope.launch {
             photoBitmap.let {
                 val outputStream = ByteArrayOutputStream()
-                photoBitmap.compress(Bitmap.CompressFormat.PNG, 50, outputStream)
+                photoBitmap.compress(Bitmap.CompressFormat.JPEG, 10, outputStream)
                 byteArray = outputStream.toByteArray()
                 userRepository.updateImage(byteArray, 1)
                 _userInfo.value = userRepository.getUser()
