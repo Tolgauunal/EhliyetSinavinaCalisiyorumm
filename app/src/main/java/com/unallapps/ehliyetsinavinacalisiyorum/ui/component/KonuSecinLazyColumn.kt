@@ -1,6 +1,6 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.ui.component
 
-import android.provider.ContactsContract.Data
+import android.app.AlertDialog
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,7 +17,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -30,15 +29,17 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseKonular
 import com.unallapps.ehliyetsinavinacalisiyorum.R
+import com.unallapps.ehliyetsinavinacalisiyorum.data.Konular
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun KonuSecinLazyColumn(derslerSelectedItem: MutableState<Int>, navController: NavHostController, controller: Boolean) {
-    val selectedKonu = remember { mutableStateOf(DatabaseKonular.konularList[0]) }
-    val alertDialog = remember { mutableStateOf(false) }
+fun KonuSecinLazyColumn(derslerSelectedItem: Int,
+    controller: Boolean,
+    onSelectedKonu: (Konular) -> Unit,
+    onAlertDialog:(Boolean) -> Unit) {
     Column(verticalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
         val currentList = if (controller) {
-            DatabaseKonular.konularList.filter { it.id == derslerSelectedItem.value }.take(5).toMutableList()
+            DatabaseKonular.konularList.filter { it.id == derslerSelectedItem}.take(5).toMutableList()
         } else {
             DatabaseKonular.konularList
         }
@@ -48,12 +49,12 @@ fun KonuSecinLazyColumn(derslerSelectedItem: MutableState<Int>, navController: N
             horizontalAlignment = Alignment.Start) {
             items(count = currentList.size, itemContent = {
                 val konular = currentList[it]
-                if (konular.id == derslerSelectedItem.value) {
+                if (konular.id == derslerSelectedItem) {
                     Row(modifier = Modifier.fillMaxWidth()) {
                         Card(colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.acikmavi)),
                             shape = RoundedCornerShape(20.dp),
                             onClick = {
-                                alertDialog.value = true
+                                onAlertDialog(true)
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -62,8 +63,8 @@ fun KonuSecinLazyColumn(derslerSelectedItem: MutableState<Int>, navController: N
                                 horizontalArrangement = Arrangement.Start,
                                 modifier = Modifier
                                     .clickable {
-                                        selectedKonu.value = konular
-                                        alertDialog.value = true
+                                        onSelectedKonu(konular)
+                                        onAlertDialog(true)
                                     }
                                     .fillMaxWidth()
                                     .padding(5.dp)) {
@@ -107,8 +108,5 @@ fun KonuSecinLazyColumn(derslerSelectedItem: MutableState<Int>, navController: N
                 }
             })
         }
-    }
-    if (alertDialog.value) {
-        CustomAlertDialog(alertDialog, selectedKonu.value, navController)
     }
 }

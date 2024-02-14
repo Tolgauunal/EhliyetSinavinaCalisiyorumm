@@ -16,18 +16,11 @@ import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.testler.TestlerViewModel
 
 @Composable
-fun CloseAlert(testlerViewModel: TestlerViewModel,
-    navController: NavHostController,
-    closeTest: MutableState<Boolean>,
-    soruNumarasi: Int,
-    dersAdi: String,
-    dogruCevapSayisi: Int,
-    yanlisCevapSayisi: Int,
-    soruSize: Int) {
+fun CloseAlert(onClose: (Boolean) -> Unit, onClick: () -> Unit) {
     AlertDialog(containerColor = colorResource(id = R.color.kapaliMavi),
         modifier = Modifier.padding(10.dp),
         onDismissRequest = {
-            closeTest.value = false
+            onClose(false)
         },
         title = {
             Text(text = "Testi Sonlandırmak İstediğinizden Emin Misiniz ?", color = Color.White)
@@ -35,7 +28,7 @@ fun CloseAlert(testlerViewModel: TestlerViewModel,
         dismissButton = {
             Button(colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                 onClick = {
-                    closeTest.value = false
+                    onClose(false)
                 }) {
                 Text("Hayır")
             }
@@ -43,9 +36,8 @@ fun CloseAlert(testlerViewModel: TestlerViewModel,
         confirmButton = {
             Button(colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                 onClick = {
-                    testlerViewModel.saveTestId(soruNumarasi, dersAdi, dogruCevapSayisi, yanlisCevapSayisi, soruSize)
-                    closeTest.value = false
-                    testlerViewModel.navigate(navController = navController)
+                    onClose(false)
+                    onClick()
                 }) {
                 Text("Evet")
             }

@@ -1,5 +1,8 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.ui.testler
 
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestSaveIdEntity
@@ -11,8 +14,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TestlerNavViewModel @Inject constructor(val testSaveIdRepository: TestSaveIdRepository) : ViewModel() {
-    private val _testAlertControl: MutableStateFlow<Boolean?> = MutableStateFlow(null)
-    val testAlertControl: MutableStateFlow<Boolean?> = _testAlertControl
+    private val _selectedDersItemIndex: MutableStateFlow<Int> = MutableStateFlow(0)
+     val selectedDersItemIndex: MutableStateFlow<Int> = _selectedDersItemIndex
+
+    private val _selectedDersItemText: MutableStateFlow<String> = MutableStateFlow("İlk Yardım")
+    val selectedDersItemText: MutableStateFlow<String> = _selectedDersItemText
     private val testIdNameList =
         listOf(TestSaveIdEntity(1, "İlk Yardım", 0), TestSaveIdEntity(2, "Trafik", 0), TestSaveIdEntity(3, "Motor", 0))
 
@@ -23,18 +29,6 @@ class TestlerNavViewModel @Inject constructor(val testSaveIdRepository: TestSave
                 testIdNameList.forEach {
                     testSaveIdRepository.insert(it)
                 }
-            }
-        }
-    }
-
-    fun getAlertDialogControl(dersAdi: String) {
-        viewModelScope.launch {
-            testSaveIdRepository.getTestData(dersAdi = dersAdi)?.let {
-                if (it.soruSize != 0) {
-                    _testAlertControl.value = true
-                }
-            } ?: run {
-                _testAlertControl.value = false
             }
         }
     }

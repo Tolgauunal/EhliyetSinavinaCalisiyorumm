@@ -1,13 +1,10 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.ui.profil
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
-import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import androidx.activity.compose.ManagedActivityResultLauncher
-import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -27,14 +24,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -66,25 +62,12 @@ import kotlinx.coroutines.launch
 fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hiltViewModel()) {
     profileViewModel.getUserName()
     var photoUri: Uri? by remember { mutableStateOf(null) }
-    val nameStateText = remember { mutableStateOf("") }
-    val nameStateTextField = remember { mutableStateOf("") }
     val settingsState = remember { mutableStateOf(false) }
-    val settingsIcon = remember { mutableStateOf(false) }
-
-    val camerPermissionresultLauncher =
-        rememberLauncherForActivityResult(contract = ActivityResultContracts.RequestPermission(), onResult = {
-            profileViewModel.onPermissionResult(permission = Manifest.permission.READ_EXTERNAL_STORAGE, isGranted = it)
-        })
-
-    val context = LocalContext.current
-    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        photoUri = uri
-        photoUri?.let {
-            profileViewModel.savePhoto(ImageDecoder.decodeBitmap(ImageDecoder.createSource(context.contentResolver,
-                it)))
-        }
-    }
-    getProfileInfo(profileViewModel, nameStateText)
+    val nameStateTextField = remember { mutableStateOf("") }
+    val nameStateText = profileViewModel.nameStateText.collectAsState()
+    val settingsIconControl = profileViewModel._isDeleteAll.collectAsState()
+    val settingsIconn = profileViewModel.settingsIcon.collectAsState()
+    getProfileInfo(profileViewModel, nameStateText.value)
 
     Column(verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -96,7 +79,6 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
             Column(horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxSize()) {
-                Button(onClick = { camerPermissionresultLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE) }) {}
                 if (photoUri != null) {
                     val painter =
                         rememberAsyncImagePainter(ImageRequest.Builder(LocalContext.current).data(data = photoUri)
@@ -146,26 +128,15 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
                             label = { Text(text = "İsminizi Yazınız", color = Color.White) },
                             colors = TextFieldDefaults.outlinedTextFieldColors(textColor = Color.White))
                     }
-                    if (!settingsIcon.value) {
-                        Icon(painter = painterResource(id = R.drawable.baseline_edit_24),
-                            contentDescription = "",
-                            modifier = Modifier
-                                .padding(start = 16.dp)
-                                .clickable {
-                                    settingsState.value = true
-                                    settingsIcon.value = true
-                                })
-                    } else {
-                        Icon(painter = painterResource(id = R.drawable.baseline_done_24),
-                            contentDescription = "",
-                            modifier = Modifier
-                                .padding(start = 16.dp)
-                                .clickable {
-                                    settingsState.value = false
-                                    settingsIcon.value = false
-                                    profileViewModel.insertOrUpdate(nameStateTextField.value)
-                                })
-                    }
+                    Icon(painter = painterResource(settingsIconn.value),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .padding(start = 16.dp)
+                            .clickable {
+                                profileViewModel._isDeleteAll.value = !settingsIconControl.value
+                                profileViewModel.setSettingsIcon()
+                                settingsState.value = settingsIconControl.value
+                            })
                 }
             }
         }
@@ -186,14 +157,10 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
     }
 }
 
-private fun getProfileInfo(profileViewModel: ProfileViewModel, nameStateText: MutableState<String>) {
+private fun getProfileInfo(profileViewModel: ProfileViewModel, nameStateText: String) {
     CoroutineScope(Dispatchers.Main).launch {
         profileViewModel.userInfo.collect {
-            nameStateText.value = it.userName
+            profileViewModel.nameStateText.value = nameStateText
         }
     }
-}
-
-private fun startLauncher(launcher: ManagedActivityResultLauncher<PickVisualMediaRequest, Uri?>) {
-    launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
 }

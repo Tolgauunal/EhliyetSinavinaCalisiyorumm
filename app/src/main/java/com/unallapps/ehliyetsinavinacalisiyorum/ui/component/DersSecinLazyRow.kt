@@ -16,7 +16,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,8 +24,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseDersler
 import com.unallapps.ehliyetsinavinacalisiyorum.R
+
 @Composable
-fun DersSecinLazyRow(derslerSelectedItem: MutableState<Int>) {
+fun DersSecinLazyRow(derslerSelectedItem: Int, onClick: (Int) -> Unit) {
     Column(verticalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
         Text(text = "Ders Seçiniz")
         Spacer(modifier = Modifier.padding(top = 10.dp))
@@ -35,22 +35,20 @@ fun DersSecinLazyRow(derslerSelectedItem: MutableState<Int>) {
             horizontalArrangement = Arrangement.SpaceBetween) {
             items(count = DatabaseDersler.derslerList.count(), itemContent = {
                 val ders = DatabaseDersler.derslerList[it]
-                if (derslerSelectedItem.value == it) {
+                if (derslerSelectedItem == it) {
                     Card(colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.kapaliMavi),
                         contentColor = Color.White),
                         border = BorderStroke(1.dp, color = colorResource(id = R.color.kapaliMavi)),
                         elevation = CardDefaults.cardElevation(16.dp),
                         shape = RoundedCornerShape(10.dp),
-                        modifier = Modifier.clickable { derslerSelectedItem.value = it }) {
+                        modifier = Modifier.clickable { onClick(it) }) {
                         Row(verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.Center,
                             modifier = Modifier.padding(5.dp)) {
                             Image(painter = painterResource(id = ders.icon),
                                 contentDescription = "",
                                 modifier = Modifier.size(30.dp))
-                            Text(text = ders.name,
-                                modifier = Modifier.padding(10.dp),
-                                color = Color.White)
+                            Text(text = ders.name, modifier = Modifier.padding(10.dp), color = Color.White)
                         }
                     }
                 } else {
@@ -59,7 +57,7 @@ fun DersSecinLazyRow(derslerSelectedItem: MutableState<Int>) {
                         border = BorderStroke(1.dp, color = colorResource(id = R.color.kapaliMavi)),
                         elevation = CardDefaults.cardElevation(16.dp),
                         shape = RoundedCornerShape(10.dp),
-                        modifier = Modifier.clickable { derslerSelectedItem.value = it }) {
+                        modifier = Modifier.clickable { onClick(it) }) {
                         Row(verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.Center,
                             modifier = Modifier.padding(5.dp)) {

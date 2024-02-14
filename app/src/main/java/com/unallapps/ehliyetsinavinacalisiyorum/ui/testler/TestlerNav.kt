@@ -23,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -45,8 +46,8 @@ import com.unallapps.ehliyetsinavinacalisiyorum.R
 fun Testler(paddingModifier: Modifier,
     navController: NavHostController,
     testlerNavViewModel: TestlerNavViewModel = hiltViewModel()) {
-    val selectedDersItemIndex = remember { mutableIntStateOf(0) }
-    val selectedDersItemText = remember { mutableStateOf("İlk Yardım") }
+    val selectedDersItemIndex = testlerNavViewModel.selectedDersItemIndex.collectAsState()
+    val selectedDersItemText = testlerNavViewModel.selectedDersItemText.collectAsState()
     Column(modifier = paddingModifier.padding(start = 8.dp, end = 8.dp, top = 8.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally) {
@@ -55,11 +56,11 @@ fun Testler(paddingModifier: Modifier,
         LazyVerticalGrid(columns = GridCells.Adaptive(128.dp), content = {
             items(DatabaseDersler.derslerList.size) { index ->
                 val ders = DatabaseDersler.derslerList[index]
-                if (selectedDersItemIndex.intValue == index) {
+                if (selectedDersItemIndex.value == index) {
                     Card(modifier = Modifier
                         .clickable {
-                            selectedDersItemIndex.intValue = index
-                            selectedDersItemText.value = ders.name
+                            testlerNavViewModel.selectedDersItemText.value =  ders.name
+                            testlerNavViewModel.selectedDersItemIndex.value = index
                         }
                         .padding(4.dp)
                         .fillMaxWidth(),
@@ -85,8 +86,8 @@ fun Testler(paddingModifier: Modifier,
                     Card(
                         modifier = Modifier
                             .clickable {
-                                selectedDersItemIndex.intValue = index
-                                selectedDersItemText.value = ders.name
+                                testlerNavViewModel.selectedDersItemText.value =  ders.name
+                                testlerNavViewModel.selectedDersItemIndex.value = index
                             }
                             .padding(4.dp)
                             .fillMaxWidth(),
@@ -121,14 +122,18 @@ fun Testler(paddingModifier: Modifier,
                     testlerNavViewModel.defaultTestItem(selectedDersItemText.value)
                     navController.navigate("testEkrani/${selectedDersItemText.value}")
                 },
-                modifier = Modifier.padding(16.dp).weight(0.5f)) {
+                modifier = Modifier
+                    .padding(16.dp)
+                    .weight(0.5f)) {
                 Text(text = "Baştan Başla", fontSize = 16.sp)
             }
             Button(colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                 onClick = {
                     navController.navigate("testEkrani/${selectedDersItemText.value}")
                 },
-                modifier = Modifier.padding(16.dp).weight(0.5f)) {
+                modifier = Modifier
+                    .padding(16.dp)
+                    .weight(0.5f)) {
                 Text(text = "Devam Et", fontSize = 16.sp)
             }
         }

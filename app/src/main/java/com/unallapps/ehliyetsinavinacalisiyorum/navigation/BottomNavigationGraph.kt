@@ -36,7 +36,7 @@ fun BottomNavigationGraph(navController: NavHostController, paddingModifier: Mod
             Home(paddingModifier, navController)
         }
         composable(route = BottomBarScreen.Konular.route) {
-            Konular(paddingModifier, navController)
+            Konular(paddingModifier,navController)
         }
         composable(route = BottomBarScreen.Testler.route) {
             Testler(paddingModifier, navController)

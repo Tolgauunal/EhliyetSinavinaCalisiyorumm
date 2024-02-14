@@ -41,7 +41,7 @@ import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseKonular
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AutoComplete(navController: NavHostController) {
+fun AutoComplete(isClick: (String) -> Unit) {
     var category by remember { mutableStateOf("") }
     val heightTextFields by remember { mutableStateOf(55.dp) }
     var textFieldSize by remember { mutableStateOf(Size.Zero) }
@@ -82,7 +82,7 @@ fun AutoComplete(navController: NavHostController) {
                             CategoryItems(title = it.name) {
                                 category = it
                                 expanded = false
-                                navController.navigate("konuAnlatimi/${it}")
+                                isClick(it)
                             }
                         }
                     }
@@ -93,7 +93,7 @@ fun AutoComplete(navController: NavHostController) {
 }
 
 @Composable
-fun CategoryItems(title: String,onSelect: (String) -> Unit) {
+fun CategoryItems(title: String, onSelect: (String) -> Unit) {
     Row(modifier = Modifier
         .fillMaxWidth()
         .clickable { onSelect(title) }) {

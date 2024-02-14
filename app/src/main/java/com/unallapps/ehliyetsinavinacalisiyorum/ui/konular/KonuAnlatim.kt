@@ -14,8 +14,7 @@ import org.jsoup.Jsoup
 @SuppressLint("UnrememberedMutableState")
 @Composable
 fun KonuAnlatim(konuAdi: String,
-    paddingModifier: Modifier,
-    konuAnlatimViewModel: KonuAnlatimViewModel = hiltViewModel()) {
+    paddingModifier: Modifier) {
     val filePath ="file:///android_asset/$konuAdi.html"
     Column (modifier = paddingModifier){
         AndroidView(

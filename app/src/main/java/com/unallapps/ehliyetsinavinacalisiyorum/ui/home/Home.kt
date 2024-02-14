@@ -14,18 +14,12 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
@@ -37,6 +31,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.AutoComplete
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CustomAlertDialog
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.DersSecinLazyRow
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.KonuSecinLazyColumn
 import kotlinx.coroutines.CoroutineScope
@@ -44,14 +39,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Home(paddingModifier: Modifier, navController: NavHostController, homeViewModel: HomeViewModel = hiltViewModel()) {
-    val derslerSelectedItem = rememberSaveable { mutableIntStateOf(0) }
-    val searchText = rememberSaveable { mutableStateOf("") }
-    val nameStateText = rememberSaveable { mutableStateOf("") }
+    val nameStateText = homeViewModel.nameStateText.collectAsState()
+    val derslerSelectedItem = homeViewModel.derslerSelectedItem.collectAsState()
+    val selectedKonu = homeViewModel.selectedKonu.collectAsState()
+    val alertDialog = homeViewModel.alertDialog.collectAsState()
+
     homeViewModel.getUserInfo()
-    getProfileInfo(homeViewModel, nameStateText)
+    getProfileInfo(homeViewModel, nameStateText.value)
     Column(modifier = paddingModifier.padding(start = 8.dp, end = 8.dp, top = 8.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally) {
@@ -89,7 +85,9 @@ fun Home(paddingModifier: Modifier, navController: NavHostController, homeViewMo
                     Text(text = "Bütün Konulara Hızlı ve Kolay Yoldan Ulaşın",
                         color = colorResource(id = R.color.white),
                         textAlign = TextAlign.Center)
-                    AutoComplete(navController)
+                    AutoComplete() {
+                        navController.navigate("konuAnlatimi/${it}")
+                    }
                 }
                 Image(painter = painterResource(id = R.drawable.learningback),
                     contentDescription = "",
@@ -99,16 +97,28 @@ fun Home(paddingModifier: Modifier, navController: NavHostController, homeViewMo
             }
         }
         Spacer(modifier = Modifier.padding(5.dp))
-        DersSecinLazyRow(derslerSelectedItem = derslerSelectedItem)
+        DersSecinLazyRow(derslerSelectedItem = derslerSelectedItem.value) {
+            homeViewModel.derslerSelectedItem.value = it
+        }
         Spacer(modifier = Modifier.padding(5.dp))
-        KonuSecinLazyColumn(derslerSelectedItem = derslerSelectedItem, navController,true)
+        KonuSecinLazyColumn(derslerSelectedItem = derslerSelectedItem.value,
+            controller = true,
+            onSelectedKonu = { homeViewModel.selectedKonu.value = it },
+            onAlertDialog = { homeViewModel.alertDialog.value = it })
+    }
+    if (alertDialog.value) {
+        CustomAlertDialog(alertDialog.value,
+            selectedKonu.value,
+            onAlertDialogChange = { homeViewModel.alertDialog.value = it }) {
+            navController.navigate("konuAnlatimi/${it}")
+        }
     }
 }
 
-private fun getProfileInfo(homeViewModel: HomeViewModel, nameStateText: MutableState<String>) {
+private fun getProfileInfo(homeViewModel: HomeViewModel, nameStateText: String) {
     CoroutineScope(Dispatchers.Main).launch {
         homeViewModel.userInfo.collect {
-            nameStateText.value = it.userName
+            homeViewModel.nameStateText.value = nameStateText
         }
     }
 }

@@ -1,8 +1,10 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.ui.profil
 
 import android.graphics.Bitmap
+import androidx.annotation.DrawableRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.UserEntity
 import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,14 +20,17 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
     private val _userInfo: MutableStateFlow<UserEntity> = MutableStateFlow(defaultUser)
     val userInfo: StateFlow<UserEntity> = _userInfo
     private var byteArray: ByteArray? = null
-    val visiblePermissionDialogQueue= mutableListOf<String>()
-    fun dismissDialog(){
-        visiblePermissionDialogQueue.removeLast()
-    }
-    fun onPermissionResult(permission:String,isGranted:Boolean){
-            if (!isGranted){
-                visiblePermissionDialogQueue.add(0,permission)
-            }
+    private val _nameStateText: MutableStateFlow<String> = MutableStateFlow("Misafir Kullanıcı")
+    val nameStateText : MutableStateFlow<String> = _nameStateText
+
+    val _isDeleteAll: MutableStateFlow<Boolean> = MutableStateFlow(true)
+
+    @DrawableRes
+    private val _settingsIcon = MutableStateFlow(R.drawable.baseline_settings_24)
+     val settingsIcon = _settingsIcon
+     fun setSettingsIcon() {
+        _settingsIcon.value =
+            if (_isDeleteAll.value) R.drawable.baseline_settings_24 else R.drawable.baseline_edit_24
     }
     init {
         viewModelScope.launch {
@@ -37,8 +42,12 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
 
     fun getUserName() {
         viewModelScope.launch {
-            userRepository.getUser().let {
+            userRepository.getUser()?.let {
                 _userInfo.value = it
+                _nameStateText.value =it.userName
+            } ?: run {
+                userRepository.insert(defaultUser)
+                _userInfo.value = defaultUser
             }
         }
     }

@@ -16,14 +16,13 @@ import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.testler.TestlerViewModel
 
 @Composable
-fun FinishAlert(navController: NavHostController,
-    testlerViewModel: TestlerViewModel,
-    dersAdi: String,
-    finishAlertDialog: MutableState<Boolean>) {
+fun FinishAlert(
+    onfinishAlertDialog:(Boolean)->Unit,
+    onClick: (Boolean) -> Unit) {
     AlertDialog(containerColor = colorResource(id = R.color.kapaliMavi),
         modifier = Modifier.padding(10.dp),
         onDismissRequest = {
-            finishAlertDialog.value = false
+            onfinishAlertDialog (false)
         },
         title = {
             Text(text = "Testlerimiz Bitti Baştan Başlamak İster Misiniz ?", color = Color.White)
@@ -31,20 +30,17 @@ fun FinishAlert(navController: NavHostController,
         confirmButton = {
             Button(colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                 onClick = {
-                finishAlertDialog.value = false
-                testlerViewModel.saveTestId(0, dersAdi, 0, 0, 0)
-                testlerViewModel.firebaseTestList(dersAdi = dersAdi, 0)
-                navController.navigate("testEkrani/${dersAdi}")
-            }) {
+                    onClick(false)
+                }) {
                 Text("Evet")
             }
         },
         dismissButton = {
             Button(colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                 onClick = {
-                finishAlertDialog.value = false
-                testlerViewModel.navigate(navController = navController)
-            }) {
+                    onfinishAlertDialog (false)
+                    onClick(true)
+                }) {
                 Text("Hayır")
             }
         })

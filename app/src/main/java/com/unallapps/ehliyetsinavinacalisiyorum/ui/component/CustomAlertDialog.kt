@@ -8,7 +8,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -22,7 +21,10 @@ import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.data.Konular
 
 @Composable
-fun CustomAlertDialog(alertDialog: MutableState<Boolean>, secilenKonu: Konular, navController: NavHostController) {
+fun CustomAlertDialog(alertDialog: Boolean,
+    secilenKonu: Konular,
+    onAlertDialogChange: (Boolean) -> Unit,
+    onClick: (String) -> Unit) {
     val click = remember { mutableStateOf(false) }
     MaterialTheme {
         Column {
@@ -32,7 +34,7 @@ fun CustomAlertDialog(alertDialog: MutableState<Boolean>, secilenKonu: Konular, 
                     modifier = Modifier.padding(10.dp),
                     onDismissRequest = {
                         openDialog.value = false
-                        alertDialog.value = false
+                        onAlertDialogChange(false)
                     },
                     title = {
                         Text(text = secilenKonu.name,
@@ -46,9 +48,9 @@ fun CustomAlertDialog(alertDialog: MutableState<Boolean>, secilenKonu: Konular, 
                         Button(colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                             onClick = {
                                 openDialog.value = false
-                                alertDialog.value = false
+                                onAlertDialogChange(false)
                                 click.value = true
-                                navController.navigate("bilgiKartlari/${secilenKonu.name}")
+                                onClick(secilenKonu.name)
                             }) {
                             Text("Bilgi Kartları",
                                 modifier = Modifier
@@ -61,8 +63,8 @@ fun CustomAlertDialog(alertDialog: MutableState<Boolean>, secilenKonu: Konular, 
                         Button(colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                             onClick = {
                                 openDialog.value = false
-                                alertDialog.value = false
-                                navController.navigate("konuAnlatimi/${secilenKonu.name}")
+                                onAlertDialogChange(false)
+                                onClick(secilenKonu.name)
                             }) {
                             Text("Konu Anlatımı",
                                 modifier = Modifier

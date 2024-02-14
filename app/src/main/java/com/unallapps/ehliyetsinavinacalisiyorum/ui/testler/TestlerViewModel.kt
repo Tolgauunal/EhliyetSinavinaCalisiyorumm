@@ -1,5 +1,7 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.ui.testler
 
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
@@ -20,22 +22,28 @@ class TestlerViewModel @Inject constructor(private val testlerRepository: Testle
     val firebaseListState: MutableStateFlow<TestlerState> = _firebaseListState
     private var _testIdData: MutableStateFlow<TestSaveIdEntity?> = MutableStateFlow(null)
     val testIdData: MutableStateFlow<TestSaveIdEntity?> = _testIdData
-    private var isProgressBar = false
-
-
-    fun firebaseTestList(dersAdi: String,testNum:Int) {
+    private var _isProgressBar: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val isProgressBar: MutableStateFlow<Boolean> = _isProgressBar
+    private var _soruKontrol: MutableStateFlow<Boolean> = MutableStateFlow(true)
+    val soruKontrol: MutableStateFlow<Boolean> = _soruKontrol
+    private var _uiDurum: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val uiDurum: MutableStateFlow<Boolean> = _uiDurum
+    private var _showIcon: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val showIcon: MutableStateFlow<Boolean> = _showIcon
+    private var _soruIndex: MutableStateFlow<Int> = MutableStateFlow(0)
+    val soruIndex: MutableStateFlow<Int> = _soruIndex
+    private var _testerSize: MutableStateFlow<Int> = MutableStateFlow(0)
+    val testerSize: MutableStateFlow<Int> = _testerSize
+    fun firebaseTestList(dersAdi: String, testNum: Int) {
         viewModelScope.launch {
-            if (!isProgressBar) {
+            if (!isProgressBar.value) {
                 _firebaseListState.value = TestlerState.Loading
                 delay(500)
             }
-            isProgressBar = true
+            _isProgressBar.value = true
             _firebaseListState.value = TestlerState.result(testlerRepository.getTestlerData(dersAdi, testNum))
+            testerSize.value = testlerRepository.getTestlerData(dersAdi, testNum).size
         }
-    }
-
-    fun navigate(navController: NavHostController) {
-        navController.navigate("testler")
     }
 
     fun getTestIdData(konuAdi: String) {
