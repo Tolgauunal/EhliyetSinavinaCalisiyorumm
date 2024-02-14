@@ -75,13 +75,13 @@ fun TestEkrani(paddingModifier: Modifier,
             it?.let {
                 dogruCevapSayisi.intValue = it.dogruSayisi
                 yanlisCevapSayisi.intValue = it.yanlisSayisi
-                if (it.testNum==0){
-                  soruNumarasi.intValue=1
-                }else{
+                if (it.testNum == 0) {
+                    soruNumarasi.intValue = 1
+                } else {
                     soruNumarasi.intValue = it.testNum
                 }
                 soruSize.intValue = it.soruSize
-                testlerViewModel.firebaseTestList(dersAdi,it.testNum)
+                testlerViewModel.firebaseTestList(dersAdi, it.testNum)
             }
         }
     }
@@ -172,17 +172,20 @@ fun TestEkrani(paddingModifier: Modifier,
                 }
             }
             Spacer(modifier = Modifier.padding(top = 20.dp))
-            Row(verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()) {
-                Image(painter = rememberAsyncImagePainter(model = soruImage.value),
-                    contentDescription = "",
-                    modifier = Modifier.size(20.dp))
+            if (soruImage.value.isEmpty()) {
+                Row(verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxWidth()) {
+                    Image(painter = rememberAsyncImagePainter(model = soruImage.value),
+                        contentDescription = "",
+                        modifier = Modifier.size(height = 100.dp, width = 250.dp))
+                }
             }
+            Spacer(modifier = Modifier.padding(5.dp))
             Row(modifier = Modifier.fillMaxWidth()) {
                 Text(text = soru.value)
             }
-            Spacer(modifier = Modifier.padding(top = 50.dp))
+            Spacer(modifier = Modifier.padding(top = 10.dp))
             for (i in 0..3) {
                 Spacer(modifier = Modifier.padding(10.dp))
                 Card(modifier = Modifier
@@ -239,15 +242,15 @@ fun TestEkrani(paddingModifier: Modifier,
                                     soruNumarasi.intValue += 1
                                 }
                                 .size(36.dp))
-                    }else{
-                        finishAlertDialog.value=true
+                    } else {
+                        finishAlertDialog.value = true
 
                     }
                 }
             }
         }
-        if (finishAlertDialog.value){
-            FinishAlert(navController,testlerViewModel,dersAdi,finishAlertDialog)
+        if (finishAlertDialog.value) {
+            FinishAlert(navController, testlerViewModel, dersAdi, finishAlertDialog)
         }
         if (closeTest.value) {
             CloseAlert(testlerViewModel,

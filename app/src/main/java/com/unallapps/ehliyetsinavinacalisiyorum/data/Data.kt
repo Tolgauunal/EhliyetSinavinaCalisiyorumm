@@ -1,6 +1,9 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.data
 
 import android.os.Parcelable
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import kotlinx.parcelize.Parcelize
 import javax.annotation.concurrent.Immutable
@@ -59,3 +62,6 @@ object DatabaseKonular {
         Konular(2, "Piston", R.drawable.motorondort),
         Konular(2, "Krank mili nedir? ne işe yarar?", R.drawable.motoronbes))
 }
+val fontFamily = FontFamily(
+    Font(R.font.nunitosans)
+)

@@ -89,7 +89,7 @@ fun Home(paddingModifier: Modifier, navController: NavHostController, homeViewMo
                     Text(text = "Bütün Konulara Hızlı ve Kolay Yoldan Ulaşın",
                         color = colorResource(id = R.color.white),
                         textAlign = TextAlign.Center)
-                    AutoComplete()
+                    AutoComplete(navController)
                 }
                 Image(painter = painterResource(id = R.drawable.learningback),
                     contentDescription = "",

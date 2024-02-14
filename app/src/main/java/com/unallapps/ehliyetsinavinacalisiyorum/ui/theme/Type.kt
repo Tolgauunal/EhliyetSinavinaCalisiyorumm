@@ -8,14 +8,15 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.unallapps.ehliyetsinavinacalisiyorum.App
+import com.unallapps.ehliyetsinavinacalisiyorum.data.fontFamily
 import kotlin.math.abs
 
 // Set of Material typography styles to start with
-val Typography = Typography(bodyLarge = TextStyle(fontFamily = FontFamily.Default,
-    fontWeight = FontWeight.Normal,
-    fontSize = 13.sp,
+val Typography = Typography(bodyLarge = TextStyle(fontFamily = fontFamily,
+    fontWeight = FontWeight.W700,
+    fontSize = 14.sp,
     lineHeight = 24.sp,
-    letterSpacing = 0.2.sp)/* Other default text styles to override
+    letterSpacing = 0.1.sp)/* Other default text styles to override
     titleLarge = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
