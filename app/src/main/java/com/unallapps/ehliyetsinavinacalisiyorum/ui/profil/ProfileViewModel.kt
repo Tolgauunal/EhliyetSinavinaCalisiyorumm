@@ -22,6 +22,8 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
     private var byteArray: ByteArray? = null
     private val _nameStateText: MutableStateFlow<String> = MutableStateFlow("Misafir Kullanıcı")
     val nameStateText : MutableStateFlow<String> = _nameStateText
+    private val _userImage: MutableStateFlow<ByteArray?> = MutableStateFlow(null)
+    val userImage : MutableStateFlow<ByteArray?> = _userImage
 
     val _isDeleteAll: MutableStateFlow<Boolean> = MutableStateFlow(true)
 
@@ -45,6 +47,7 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
             userRepository.getUser()?.let {
                 _userInfo.value = it
                 _nameStateText.value =it.userName
+                _userImage.value=it.userPhoto
             } ?: run {
                 userRepository.insert(defaultUser)
                 _userInfo.value = defaultUser

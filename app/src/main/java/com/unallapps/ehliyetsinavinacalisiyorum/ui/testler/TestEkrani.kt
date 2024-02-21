@@ -46,12 +46,11 @@ fun TestEkrani(paddingModifier: Modifier,
     testlerViewModel: TestlerViewModel = hiltViewModel(),
     navController: NavHostController) {
     testlerViewModel.getTestIdData(dersAdi)
-    val soruKontrol by testlerViewModel.soruKontrol.collectAsState()
-    val progressShow by testlerViewModel.isProgressBar.collectAsState()
-    val uiDurum by testlerViewModel.uiDurum.collectAsState()
-    val showIcon by testlerViewModel.showIcon.collectAsState()
-    val soruIndex by testlerViewModel.soruIndex.collectAsState()
-    val testlerSize by testlerViewModel.testerSize.collectAsState()
+    val soruKontrol = rememberSaveable { mutableStateOf(true) }
+    val progressShow = rememberSaveable { mutableStateOf(false) }
+    val uiDurum = rememberSaveable { mutableStateOf(false) }
+    val showIcon = rememberSaveable { mutableStateOf(false) }
+    val soruIndex = rememberSaveable { mutableIntStateOf(0) }
     val soruSize = rememberSaveable { mutableIntStateOf(0) }
     val testler = rememberSaveable { mutableListOf<TestItemEntity>() }
     val soruNumarasi = rememberSaveable { mutableIntStateOf(1) }
@@ -88,22 +87,24 @@ fun TestEkrani(paddingModifier: Modifier,
             }
         }
     }
-    if (soruKontrol) {
+    if (soruKontrol.value) {
         LaunchedEffect(key1 = true) {
             testlerViewModel.firebaseListState.collect {
                 when (it) {
                     TestlerState.Idle -> {}
-                    TestlerState.Loading -> {}
+                    TestlerState.Loading -> {
+                        progressShow.value = true
+                    }
                     is TestlerState.result -> {
-                        testlerViewModel.isProgressBar.value = false
+                        progressShow.value = false
                         if (soruSize.intValue == 0) {
                             soruSize.intValue = it.testlerList.size
                         }
-                        if (soruIndex < testlerSize) {
-                            val test = it.testlerList[soruIndex]
+                        if (soruIndex.intValue < it.testlerList.size) {
+                            val test = it.testlerList[soruIndex.intValue]
                             soru.value = test.content.toString()
                             testler.clear()
-                            testlerViewModel.uiDurum.value = true
+                            uiDurum.value = true
                             cevapKontrol.value = false
                             testler.add(TestItemEntity(test.aTest.toString(), R.color.acikmavi))
                             testler.add(TestItemEntity(test.bTest.toString(), R.color.acikmavi))
@@ -111,7 +112,7 @@ fun TestEkrani(paddingModifier: Modifier,
                             testler.add(TestItemEntity(test.dTest.toString(), R.color.acikmavi))
                             dogruCevap.value = test.correct.toString()
                             soruImage.value = test.imageTest.toString()
-                            testlerViewModel.soruKontrol.value = false
+                            soruKontrol.value = false
                             for (dogruCevapItemIndex in 0..3) {
                                 if (testler[dogruCevapItemIndex].testString == dogruCevap.value) {
                                     dogruCevapIndex.intValue = dogruCevapItemIndex
@@ -123,14 +124,14 @@ fun TestEkrani(paddingModifier: Modifier,
             }
         }
     }
-    if (progressShow) {
+    if (progressShow.value) {
         Column(verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxSize()) {
             CircularProgressIndicator()
         }
     }
-    if (uiDurum) {
+    if (uiDurum.value) {
         Column(modifier = paddingModifier
             .fillMaxSize()
             .padding(16.dp),
@@ -193,7 +194,7 @@ fun TestEkrani(paddingModifier: Modifier,
                     .fillMaxWidth()
                     .clickable(enabled = enabled.value) {
                         secilenCevap.value = testler[i].testString
-                        testlerViewModel.showIcon.value = true
+                        showIcon.value = true
                         enabled.value = false
                         if (secilenCevap.value != "") {
                             if (secilenCevap.value == dogruCevap.value) {
@@ -225,7 +226,7 @@ fun TestEkrani(paddingModifier: Modifier,
                 }
             }
             Spacer(modifier = Modifier.padding(10.dp))
-            if (showIcon) {
+            if (showIcon.value) {
                 Row(verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.End,
                     modifier = Modifier.fillMaxWidth()) {
@@ -234,12 +235,12 @@ fun TestEkrani(paddingModifier: Modifier,
                             contentDescription = "",
                             modifier = Modifier
                                 .clickable {
-                                    testlerViewModel.soruKontrol.value = true
-                                    testlerViewModel.soruIndex.value += 1
+                                    soruKontrol.value = true
+                                    soruIndex.intValue += 1
                                     dogruCevap.value = ""
                                     enabled.value = true
                                     secilenCevap.value = ""
-                                    testlerViewModel.showIcon.value = false
+                                    showIcon.value = false
                                     soruNumarasi.intValue += 1
                                 }
                                 .size(36.dp))

@@ -92,7 +92,7 @@ fun RowScope.AddItem(screen: BottomBarScreen, navController: NavHostController) 
         onClick = {
             navController.navigate(screen.route)
         },
-        alwaysShowLabel = false,
+        alwaysShowLabel = true,
         colors = NavigationBarItemDefaults.colors(selectedIconColor = colorResource(id = R.color.kapaliMavi),
             unselectedIconColor = colorResource(id = R.color.Gray),
             indicatorColor = colorResource(id = R.color.acikmavi)))

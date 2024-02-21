@@ -39,7 +39,8 @@ fun Konular(paddingModifier: Modifier,
         if (alertDialog.value) {
             CustomAlertDialog(alertDialog = alertDialog.value,
                 secilenKonu = selectedKonu.value,
-                onAlertDialogChange = { konularViewModel.alertDialog.value = it }) {
+                onAlertDialogChange = { konularViewModel.alertDialog.value = it },
+                onClickBilgiKartlari = { navController.navigate("bilgiKartlari/${it}") }) {
                 navController.navigate("konuAnlatimi/${it}")
             }
         }

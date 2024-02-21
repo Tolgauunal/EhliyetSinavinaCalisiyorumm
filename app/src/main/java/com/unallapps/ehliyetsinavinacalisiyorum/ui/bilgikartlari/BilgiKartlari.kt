@@ -1,13 +1,16 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.ui.bilgikartlari
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
@@ -25,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.rememberAsyncImagePainter
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.BilgiKartlariEntity
 import com.unallapps.ehliyetsinavinacalisiyorum.data.state.KonularState
@@ -74,6 +78,9 @@ private fun GetUi(paddingModifier: Modifier, bilgiKartlariEntity: MutableList<Bi
             .border(width = 1.dp, color = Color.Blue),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally) {
+            Image(painter = rememberAsyncImagePainter(model = bilgiKartlariEntity[progress].image),
+                contentDescription = "",
+                modifier = Modifier.size(height = 100.dp, width = 250.dp))
             Text(text = bilgiKartlariEntity[progress].content.toString(), modifier = Modifier.padding(40.dp))
             Row(modifier = Modifier
                 .fillMaxWidth()

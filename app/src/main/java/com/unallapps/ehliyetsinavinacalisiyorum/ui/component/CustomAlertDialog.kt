@@ -24,7 +24,8 @@ import com.unallapps.ehliyetsinavinacalisiyorum.data.Konular
 fun CustomAlertDialog(alertDialog: Boolean,
     secilenKonu: Konular,
     onAlertDialogChange: (Boolean) -> Unit,
-    onClick: (String) -> Unit) {
+    onClickBilgiKartlari: (String) -> Unit,
+    onClickKonuAnlatimi: (String) -> Unit) {
     val click = remember { mutableStateOf(false) }
     MaterialTheme {
         Column {
@@ -50,7 +51,7 @@ fun CustomAlertDialog(alertDialog: Boolean,
                                 openDialog.value = false
                                 onAlertDialogChange(false)
                                 click.value = true
-                                onClick(secilenKonu.name)
+                                onClickBilgiKartlari(secilenKonu.name)
                             }) {
                             Text("Bilgi Kartları",
                                 modifier = Modifier
@@ -64,7 +65,7 @@ fun CustomAlertDialog(alertDialog: Boolean,
                             onClick = {
                                 openDialog.value = false
                                 onAlertDialogChange(false)
-                                onClick(secilenKonu.name)
+                                onClickKonuAnlatimi(secilenKonu.name)
                             }) {
                             Text("Konu Anlatımı",
                                 modifier = Modifier

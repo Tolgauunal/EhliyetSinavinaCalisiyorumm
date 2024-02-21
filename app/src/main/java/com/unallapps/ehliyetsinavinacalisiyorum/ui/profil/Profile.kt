@@ -2,9 +2,11 @@ package com.unallapps.ehliyetsinavinacalisiyorum.ui.profil
 
 import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
+import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import androidx.activity.compose.ManagedActivityResultLauncher
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -39,10 +41,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -65,10 +70,17 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
     val settingsState = remember { mutableStateOf(false) }
     val nameStateTextField = remember { mutableStateOf("") }
     val nameStateText = profileViewModel.nameStateText.collectAsState()
+    val userImage = profileViewModel.userImage.collectAsState()
     val settingsIconControl = profileViewModel._isDeleteAll.collectAsState()
     val settingsIconn = profileViewModel.settingsIcon.collectAsState()
+    val context = LocalContext.current
     getProfileInfo(profileViewModel, nameStateText.value)
-
+    val launcher =
+        rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri -> //When the user has selected a photo, its URI is returned here
+            photoUri = uri
+            val source = ImageDecoder.decodeBitmap(ImageDecoder.createSource(context.contentResolver, photoUri!!))
+            profileViewModel.savePhoto(source)
+        }
     Column(verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = paddingModifier.verticalScroll(rememberScrollState())) {
@@ -89,12 +101,13 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
                             .size(100.dp)
                             .clip(CircleShape)
                             .fillMaxWidth()
-                            .clickable { //startLauncher(launcher)
+                            .clickable {
+                                launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
                             },
                         contentScale = ContentScale.Crop)
 
-                } else if (profileViewModel.userInfo.value.userPhoto != null) {
-                    val userPhoto = profileViewModel.userInfo.value.userPhoto
+                } else if (userImage.value?.isNotEmpty() == true) {
+                    val userPhoto = userImage.value
                     val bitmap = BitmapFactory.decodeByteArray(userPhoto, 0, userPhoto!!.size)
                     Image(bitmap = bitmap.asImageBitmap(),
                         contentDescription = null,
@@ -102,7 +115,8 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
                             .size(100.dp)
                             .clip(CircleShape)
                             .fillMaxWidth()
-                            .clickable { //startLauncher(launcher)
+                            .clickable {
+                                launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
                             },
                         contentScale = ContentScale.Crop)
                 } else {
@@ -112,7 +126,8 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
                         modifier = Modifier
                             .clip(CircleShape)
                             .size(100.dp)
-                            .clickable { //startLauncher(launcher)
+                            .clickable {
+                                launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
                             })
                 }
                 Spacer(modifier = Modifier.padding(5.dp))

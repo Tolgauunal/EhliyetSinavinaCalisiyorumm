@@ -109,7 +109,8 @@ fun Home(paddingModifier: Modifier, navController: NavHostController, homeViewMo
     if (alertDialog.value) {
         CustomAlertDialog(alertDialog.value,
             selectedKonu.value,
-            onAlertDialogChange = { homeViewModel.alertDialog.value = it }) {
+            onAlertDialogChange = { homeViewModel.alertDialog.value = it },
+            onClickBilgiKartlari = { navController.navigate("bilgiKartlari/${it}") }) {
             navController.navigate("konuAnlatimi/${it}")
         }
     }
