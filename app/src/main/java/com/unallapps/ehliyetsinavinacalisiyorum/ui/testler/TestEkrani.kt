@@ -106,10 +106,10 @@ fun TestEkrani(paddingModifier: Modifier,
                             testler.clear()
                             uiDurum.value = true
                             cevapKontrol.value = false
-                            testler.add(TestItemEntity(test.aTest.toString(), R.color.acikmavi))
-                            testler.add(TestItemEntity(test.bTest.toString(), R.color.acikmavi))
-                            testler.add(TestItemEntity(test.cTest.toString(), R.color.acikmavi))
-                            testler.add(TestItemEntity(test.dTest.toString(), R.color.acikmavi))
+                            testler.add(TestItemEntity(test.atest.toString(), R.color.acikmavi))
+                            testler.add(TestItemEntity(test.btest.toString(), R.color.acikmavi))
+                            testler.add(TestItemEntity(test.ctest.toString(), R.color.acikmavi))
+                            testler.add(TestItemEntity(test.dtest.toString(), R.color.acikmavi))
                             dogruCevap.value = test.correct.toString()
                             soruImage.value = test.imageTest.toString()
                             soruKontrol.value = false

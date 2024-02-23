@@ -42,4 +42,9 @@ sealed class BottomBarScreen(
         label ="KonuAnlatimi",
         icon = R.drawable.baseline_person_24
     )
+    object TestAdd: BottomBarScreen(
+        route ="testAdd",
+        label ="TestAdd",
+        icon = R.drawable.baseline_person_24
+    )
 }

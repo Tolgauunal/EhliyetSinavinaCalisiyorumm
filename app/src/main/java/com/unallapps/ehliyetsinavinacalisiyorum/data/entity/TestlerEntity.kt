@@ -9,9 +9,9 @@ import kotlinx.parcelize.Parcelize
 data class TestlerEntity(val idTest: Int? = null,
     val content: String? = null,
     val imageTest: String? = null,
-    val aTest: String? = null,
-    val bTest: String? = null,
-    val cTest: String? = null,
-    val dTest: String? = null,
+    val atest: String? = null,
+    val btest: String? = null,
+    val ctest: String? = null,
+    val dtest: String? = null,
     val correct: String? = null,
     var color:Int?=R.color.white) : Parcelable

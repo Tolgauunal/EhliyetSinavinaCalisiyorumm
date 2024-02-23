@@ -46,8 +46,7 @@ fun DersSecinLazyRow(derslerSelectedItem: Int, onClick: (Int) -> Unit) {
                             horizontalArrangement = Arrangement.Center,
                             modifier = Modifier.padding(5.dp)) {
                             Image(painter = painterResource(id = ders.icon),
-                                contentDescription = "",
-                                modifier = Modifier.size(30.dp))
+                                contentDescription = "")
                             Text(text = ders.name, modifier = Modifier.padding(10.dp), color = Color.White)
                         }
                     }
@@ -62,8 +61,7 @@ fun DersSecinLazyRow(derslerSelectedItem: Int, onClick: (Int) -> Unit) {
                             horizontalArrangement = Arrangement.Center,
                             modifier = Modifier.padding(5.dp)) {
                             Image(painter = painterResource(id = ders.icon),
-                                contentDescription = "",
-                                modifier = Modifier.size(30.dp))
+                                contentDescription = "")
                             Text(text = ders.name,
                                 modifier = Modifier.padding(10.dp),
                                 color = colorResource(id = R.color.kapaliMavi))

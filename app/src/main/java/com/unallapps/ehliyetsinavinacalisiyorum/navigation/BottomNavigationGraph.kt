@@ -20,6 +20,7 @@ import com.unallapps.ehliyetsinavinacalisiyorum.ui.home.Home
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.konular.KonuAnlatim
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.konular.Konular
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.profil.Profile
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.testler.TestAdd
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.testler.TestEkrani
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.testler.Testler
 
@@ -34,6 +35,9 @@ fun BottomNavigationGraph(navController: NavHostController, paddingModifier: Mod
     NavHost(navController = navController, startDestination = BottomBarScreen.Home.route) {
         composable(route = BottomBarScreen.Home.route) {
             Home(paddingModifier, navController)
+        }
+        composable(route = BottomBarScreen.TestAdd.route) {
+            TestAdd(paddingModifier)
         }
         composable(route = BottomBarScreen.Konular.route) {
             Konular(paddingModifier,navController)

@@ -2,6 +2,8 @@ package com.unallapps.ehliyetsinavinacalisiyorum.data.di
 
 import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.BilgiKartlariRepository
 import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.BilgiKartlariRepositoryImpl
+import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestAddRepository
+import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestAddRepositoryImpl
 import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestSaveIdRepository
 import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestSaveIdRepositoryImpl
 import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestlerRepository
@@ -35,4 +37,9 @@ object RepositoryModule {
     @Singleton
     fun provideTestSaveIdRepository(testSaveIdRepositoryImpl: TestSaveIdRepositoryImpl): TestSaveIdRepository =
         testSaveIdRepositoryImpl
+
+    @Provides
+    @Singleton
+    fun provideTestAddRepository(testAddRepositoryImpl: TestAddRepositoryImpl): TestAddRepository =
+        testAddRepositoryImpl
 }

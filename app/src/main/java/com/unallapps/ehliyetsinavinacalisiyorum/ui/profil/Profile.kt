@@ -78,8 +78,10 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
     val launcher =
         rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri -> //When the user has selected a photo, its URI is returned here
             photoUri = uri
-            val source = ImageDecoder.decodeBitmap(ImageDecoder.createSource(context.contentResolver, photoUri!!))
-            profileViewModel.savePhoto(source)
+            photoUri?.let {
+                val source = ImageDecoder.decodeBitmap(ImageDecoder.createSource(context.contentResolver, it))
+                profileViewModel.savePhoto(source)
+            }
         }
     Column(verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,

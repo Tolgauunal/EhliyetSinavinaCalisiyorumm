@@ -15,9 +15,9 @@ data class Konular(val id: Int, val name: String, val icon: Int) : Parcelable
 
 @Immutable
 object DatabaseDersler {
-    val derslerList = mutableListOf(Dersler(0, "İlk Yardım", R.drawable.ilkyardim),
-        Dersler(1, "Trafik", R.drawable.car),
-        Dersler(2, "Motor", R.drawable.engine))
+    val derslerList = mutableListOf(Dersler(0, "İlk Yardım", R.drawable.ilkyardimm),
+        Dersler(1, "Trafik", R.drawable.carr),
+        Dersler(2, "Motor", R.drawable.enginee))
 }
 
 @Immutable
