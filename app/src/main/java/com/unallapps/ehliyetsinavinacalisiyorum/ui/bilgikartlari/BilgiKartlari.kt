@@ -3,6 +3,7 @@ package com.unallapps.ehliyetsinavinacalisiyorum.ui.bilgikartlari
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,6 +12,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
@@ -81,7 +84,9 @@ private fun GetUi(paddingModifier: Modifier, bilgiKartlariEntity: MutableList<Bi
             Image(painter = rememberAsyncImagePainter(model = bilgiKartlariEntity[progress].image),
                 contentDescription = "",
                 modifier = Modifier.size(height = 100.dp, width = 250.dp))
-            Text(text = bilgiKartlariEntity[progress].content.toString(), modifier = Modifier.padding(40.dp))
+            Text(text = bilgiKartlariEntity[progress].content.toString(),
+                modifier = Modifier.padding(20.dp).weight(1f)
+                    .verticalScroll(rememberScrollState()))
             Row(modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp),

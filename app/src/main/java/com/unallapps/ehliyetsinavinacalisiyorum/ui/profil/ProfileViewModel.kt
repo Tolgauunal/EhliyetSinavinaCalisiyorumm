@@ -39,6 +39,7 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
             if (userRepository.getUserSize().size == 0) {
                 userRepository.insert(defaultUser)
             }
+            getUserName()
         }
     }
 

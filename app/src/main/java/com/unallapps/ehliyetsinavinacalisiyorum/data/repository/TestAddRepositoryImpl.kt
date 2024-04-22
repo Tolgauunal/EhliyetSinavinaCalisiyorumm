@@ -6,6 +6,6 @@ import javax.inject.Inject
 
 class TestAddRepositoryImpl @Inject constructor(private val firebaseFirestore: FirebaseFirestore) : TestAddRepository {
     override suspend fun addTest(test: TestlerEntity) {
-        firebaseFirestore.collection("Trafik").add(test)
+        firebaseFirestore.collection("Motor").document(test.idTest.toString()).set(test)
     }
 }

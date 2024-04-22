@@ -1,6 +1,7 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.ui.component
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -55,11 +56,11 @@ fun AutoComplete(isClick: (String) -> Unit) {
                     category = it
                     expanded = true
                 },
-                label = { Text(text = "Konu Arayın", color = colorResource(id = R.color.white)) },
+                label = { Text(text = "Konu Arayın", color = colorResource(id = R.color.kapaliMavi)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(heightTextFields)
-                    .border(width = 1.dp, color = Color.Black, shape = RoundedCornerShape(15.dp))
+                    .background(color = Color.White, shape = RoundedCornerShape(15.dp))
                     .onGloballyPositioned { textFieldSize = it.size.toSize() },
                 colors = TextFieldDefaults.textFieldColors(containerColor = Color.Transparent,
                     focusedIndicatorColor = Color.Transparent,
@@ -74,11 +75,11 @@ fun AutoComplete(isClick: (String) -> Unit) {
             Card(modifier = Modifier
                 .padding(5.dp)
                 .width(textFieldSize.width.dp)) {
-                LazyColumn(modifier = Modifier.heightIn(50.dp)) {
+                LazyColumn {
                     if (category.isNotEmpty()) {
                         items(DatabaseKonular.konularList.filter {
                             it.name.lowercase().contains(category.lowercase()) || it.name.lowercase().contains("other")
-                        }) {
+                        }.take(1)) {
                             CategoryItems(title = it.name) {
                                 category = it
                                 expanded = false

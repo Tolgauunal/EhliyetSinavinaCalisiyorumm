@@ -151,6 +151,7 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
                             .padding(start = 16.dp)
                             .clickable {
                                 profileViewModel._isDeleteAll.value = !settingsIconControl.value
+                                profileViewModel.insertOrUpdate(nameStateTextField.value)
                                 profileViewModel.setSettingsIcon()
                                 settingsState.value = settingsIconControl.value
                             })
