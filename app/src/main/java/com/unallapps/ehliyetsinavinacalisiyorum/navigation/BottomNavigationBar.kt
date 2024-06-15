@@ -47,4 +47,9 @@ sealed class BottomBarScreen(
         label ="TestAdd",
         icon = R.drawable.baseline_person_24
     )
+    object PdfViewer: BottomBarScreen(
+        route ="pdfViewer",
+        label ="PdfViewer",
+        icon = R.drawable.baseline_person_24
+    )
 }

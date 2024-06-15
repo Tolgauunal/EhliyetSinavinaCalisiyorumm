@@ -6,4 +6,5 @@ sealed class TestlerState {
     object Idle:TestlerState()
     object Loading:TestlerState()
     class result(val testlerList:List<TestlerEntity>):TestlerState()
+    class resultPdf(val pdf:ByteArray?):TestlerState()
 }

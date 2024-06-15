@@ -120,6 +120,7 @@ fun TestEkrani(paddingModifier: Modifier,
                             }
                         }
                     }
+                    else ->{}
                 }
             }
         }

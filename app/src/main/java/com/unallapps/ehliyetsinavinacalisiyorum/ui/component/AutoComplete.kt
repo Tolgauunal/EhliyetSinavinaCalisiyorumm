@@ -2,13 +2,11 @@ package com.unallapps.ehliyetsinavinacalisiyorum.ui.component
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -36,7 +34,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
-import androidx.navigation.NavHostController
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseKonular
 
@@ -65,8 +62,8 @@ fun AutoComplete(isClick: (String) -> Unit) {
                 colors = TextFieldDefaults.textFieldColors(containerColor = Color.Transparent,
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
-                    cursorColor = Color.White),
-                textStyle = TextStyle(color = Color.White, fontSize = 16.sp),
+                    cursorColor = Color(R.color.kapaliMavi)),
+                textStyle = TextStyle(color = colorResource(id = R.color.kapaliMavi), fontSize = 16.sp),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Done),
                 singleLine = true,
             )
