@@ -12,6 +12,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestlerEntity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.tasks.await
+import java.io.File
 import javax.inject.Inject
 
 class TestlerRepositoryImpl @Inject constructor(private val firestore: FirebaseFirestore,
@@ -27,22 +28,5 @@ class TestlerRepositoryImpl @Inject constructor(private val firestore: FirebaseF
             Log.d("error", "$e")
         }
         return testlerEntity
-    }
-
-    override suspend fun getPdf(): ByteArray? {
-        val pdfUrl: MutableStateFlow<String?> = MutableStateFlow(null)
-        val pdfFile: MutableStateFlow<ByteArray?> = MutableStateFlow(null)
-        try {
-            val firestore = FirebaseFirestore.getInstance()
-            val documentSnapshot = firestore.collection("pdfs").document("deneme").get().await()
-            pdfUrl.value = documentSnapshot.getString("deneme")
-            pdfUrl.value?.let {
-                val storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(it)
-                pdfFile.value = storageReference.getBytes(Long.MAX_VALUE).await()
-            }
-        } catch (e: FirebaseFirestoreException) {
-            Log.d("error", "$e")
-        }
-        return pdfFile.value
     }
 }

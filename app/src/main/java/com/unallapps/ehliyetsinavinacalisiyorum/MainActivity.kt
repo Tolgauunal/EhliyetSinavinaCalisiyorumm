@@ -66,13 +66,12 @@ fun AppBottomBar(navController: NavHostController) {
         BottomBarScreen.Testler,
         BottomBarScreen.Profil,
         BottomBarScreen.BilgiKartlari,
-        BottomBarScreen.TestAdd,
-        BottomBarScreen.PdfViewer)
+        BottomBarScreen.TestAdd)
     NavigationBar(modifier = Modifier.clip(shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp)),
         containerColor = colorResource(id = R.color.white)) {
         screens.forEach { screen ->
             when (screen) {
-                is BottomBarScreen.Home, BottomBarScreen.Konular, BottomBarScreen.Testler, BottomBarScreen.Profil, BottomBarScreen.TestAdd,BottomBarScreen.PdfViewer -> AddItem(
+                is BottomBarScreen.Home, BottomBarScreen.Konular, BottomBarScreen.Testler, BottomBarScreen.Profil, BottomBarScreen.TestAdd -> AddItem(
                     screen = screen,
                     navController = navController)
                 else -> Unit

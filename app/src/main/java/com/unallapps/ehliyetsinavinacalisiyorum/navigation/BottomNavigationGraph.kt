@@ -15,7 +15,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.unallapps.ehliyetsinavinacalisiyorum.R
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.PdfViewer
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.bilgikartlari.BilgiKartlari
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.home.Home
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.konular.KonuAnlatim
@@ -48,9 +47,6 @@ fun BottomNavigationGraph(navController: NavHostController, paddingModifier: Mod
         }
         composable(route = BottomBarScreen.Profil.route) {
             Profile(paddingModifier)
-        }
-        composable(route = BottomBarScreen.PdfViewer.route) {
-            PdfViewer()
         }
         composable(route = BottomBarScreen.BilgiKartlari.route, arguments = listOf(navArgument("konuAdi") {
             type = NavType.StringType
