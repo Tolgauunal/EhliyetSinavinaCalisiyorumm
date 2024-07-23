@@ -72,32 +72,46 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
     val nameStateText = profileViewModel.nameStateText.collectAsState()
     val userImage = profileViewModel.userImage.collectAsState()
     val settingsIconControl = profileViewModel._isDeleteAll.collectAsState()
-    val settingsIconn = profileViewModel.settingsIcon.collectAsState()
+    val settingsIcon = profileViewModel.settingsIcon.collectAsState()
     val context = LocalContext.current
     getProfileInfo(profileViewModel, nameStateText.value)
     val launcher =
         rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri -> //When the user has selected a photo, its URI is returned here
             photoUri = uri
             photoUri?.let {
-                val source = ImageDecoder.decodeBitmap(ImageDecoder.createSource(context.contentResolver, it))
+                val source = ImageDecoder.decodeBitmap(
+                    ImageDecoder.createSource(
+                        context.contentResolver,
+                        it
+                    )
+                )
                 profileViewModel.savePhoto(source)
             }
         }
-    Column(verticalArrangement = Arrangement.Top,
+    Column(
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = paddingModifier.verticalScroll(rememberScrollState())) {
-        Box(modifier = Modifier
-            .background(colorResource(id = R.color.kapaliMavi))
-            .fillMaxWidth()
-            .padding(10.dp)) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = paddingModifier.verticalScroll(rememberScrollState())
+    ) {
+        Box(
+            modifier = Modifier
+                .background(colorResource(id = R.color.kapaliMavi))
+                .fillMaxWidth()
+                .padding(10.dp)
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxSize()) {
+                modifier = Modifier.fillMaxSize()
+            ) {
                 if (photoUri != null) {
                     val painter =
-                        rememberAsyncImagePainter(ImageRequest.Builder(LocalContext.current).data(data = photoUri)
-                            .build())
-                    Image(painter = painter,
+                        rememberAsyncImagePainter(
+                            ImageRequest.Builder(LocalContext.current).data(data = photoUri)
+                                .build()
+                        )
+                    Image(
+                        painter = painter,
                         contentDescription = null,
                         modifier = Modifier
                             .size(100.dp)
@@ -106,12 +120,14 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
                             .clickable {
                                 launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
                             },
-                        contentScale = ContentScale.Crop)
+                        contentScale = ContentScale.Crop
+                    )
 
                 } else if (userImage.value?.isNotEmpty() == true) {
                     val userPhoto = userImage.value
                     val bitmap = BitmapFactory.decodeByteArray(userPhoto, 0, userPhoto!!.size)
-                    Image(bitmap = bitmap.asImageBitmap(),
+                    Image(
+                        bitmap = bitmap.asImageBitmap(),
                         contentDescription = null,
                         modifier = Modifier
                             .size(100.dp)
@@ -120,7 +136,8 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
                             .clickable {
                                 launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
                             },
-                        contentScale = ContentScale.Crop)
+                        contentScale = ContentScale.Crop
+                    )
                 } else {
                     Image(painter = painterResource(id = R.drawable.person),
                         contentDescription = "",
@@ -133,19 +150,23 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
                             })
                 }
                 Spacer(modifier = Modifier.padding(5.dp))
-                Row(verticalAlignment = Alignment.CenterVertically,
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxHeight()) {
+                    modifier = Modifier.fillMaxHeight()
+                ) {
                     if (!settingsState.value) {
                         Text(text = nameStateText.value, color = Color.White, fontSize = 15.sp)
                         nameStateTextField.value = nameStateText.value
                     } else {
-                        OutlinedTextField(value = nameStateTextField.value,
+                        OutlinedTextField(
+                            value = nameStateTextField.value,
                             onValueChange = { nameStateTextField.value = it },
                             label = { Text(text = "İsminizi Yazınız", color = Color.White) },
-                            colors = TextFieldDefaults.outlinedTextFieldColors(textColor = Color.White))
+                            colors = TextFieldDefaults.outlinedTextFieldColors(textColor = Color.White)
+                        )
                     }
-                    Icon(painter = painterResource(settingsIconn.value),
+                    Icon(painter = painterResource(settingsIcon.value),
                         contentDescription = "",
                         modifier = Modifier
                             .padding(start = 16.dp)

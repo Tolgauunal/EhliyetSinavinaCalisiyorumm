@@ -20,17 +20,29 @@ import androidx.compose.ui.unit.sp
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 
 @Composable
-fun CustomButton(title: String,icon:Int ,onClick: () -> Unit) {
-    Button(onClick = { onClick },
-        colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.acikmavi))) {
-        Row(verticalAlignment = Alignment.CenterVertically,
+fun CustomButton(title: String, icon: Int, onClick: () -> Unit) {
+    Button(
+        onClick = { onClick },
+        colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.acikmavi))
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth().padding(8.dp)) {
-            Image(painter = painterResource(id = icon), contentDescription = "", modifier = Modifier.size(24.dp))
-            Text(text = title, color = colorResource(id = R.color.kapaliMavi), fontSize = 15.sp)
-            Icon(painter = painterResource(id = R.drawable.baseline_keyboard_arrow_right_24),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            Image(
+                painter = painterResource(id = icon),
                 contentDescription = "",
-                tint = colorResource(id = R.color.kapaliMavi))
+                modifier = Modifier.size(24.dp)
+            )
+            Text(text = title, color = colorResource(id = R.color.kapaliMavi), fontSize = 15.sp)
+            Icon(
+                painter = painterResource(id = R.drawable.baseline_keyboard_arrow_right_24),
+                contentDescription = "",
+                tint = colorResource(id = R.color.kapaliMavi)
+            )
         }
     }
 }

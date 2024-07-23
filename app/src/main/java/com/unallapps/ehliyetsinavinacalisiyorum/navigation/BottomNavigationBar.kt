@@ -7,49 +7,45 @@ sealed class BottomBarScreen(
     val label: String,
     val icon: Int
 ) {
-    object Home: BottomBarScreen(
-        route ="home",
-        label ="Home",
+    object Home : BottomBarScreen(
+        route = "home",
+        label = "Home",
         icon = R.drawable.home
     )
-    object Konular: BottomBarScreen(
-        route ="konular",
-        label ="Konular",
+
+    object Konular : BottomBarScreen(
+        route = "konular",
+        label = "Konular",
         icon = R.drawable.baseline_library_books_24
     )
-    object Testler: BottomBarScreen(
-        route ="testler",
-        label ="Testler",
+
+    object Testler : BottomBarScreen(
+        route = "testler",
+        label = "Testler",
         icon = R.drawable.test
     )
-    object Profil: BottomBarScreen(
-        route ="profil",
-        label ="Profil",
+
+    object Profil : BottomBarScreen(
+        route = "profil",
+        label = "Profil",
         icon = R.drawable.baseline_person_24
     )
-    object BilgiKartlari: BottomBarScreen(
-        route ="bilgiKartlari/{konuAdi}",
-        label ="BilgiKartlari",
+
+    object BilgiKartlari : BottomBarScreen(
+        route = "bilgiKartlari/{konuAdi}",
+        label = "BilgiKartlari",
         icon = R.drawable.baseline_person_24
     )
-    object TestEkrani: BottomBarScreen(
-        route ="testEkrani/{dersAdi}",
-        label ="TestEkrani",
+
+    object TestEkrani : BottomBarScreen(
+        route = "testEkrani/{dersAdi}",
+        label = "TestEkrani",
         icon = R.drawable.baseline_person_24
     )
-    object KonuAnlatimi: BottomBarScreen(
-        route ="konuAnlatimi/{konuAdi}",
-        label ="KonuAnlatimi",
-        icon = R.drawable.baseline_person_24
-    )
-    object TestAdd: BottomBarScreen(
-        route ="testAdd",
-        label ="TestAdd",
-        icon = R.drawable.baseline_person_24
-    )
-    object PdfViewer: BottomBarScreen(
-        route ="pdfViewer",
-        label ="PdfViewer",
+
+    object KonuAnlatimi : BottomBarScreen(
+        route = "konuAnlatimi/{konuAdi}",
+        label = "KonuAnlatimi",
         icon = R.drawable.baseline_person_24
     )
 }

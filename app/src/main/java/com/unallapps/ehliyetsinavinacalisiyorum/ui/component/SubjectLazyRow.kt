@@ -1,6 +1,5 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.ui.component
 
-import android.app.AlertDialog
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,8 +16,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -26,44 +23,50 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseKonular
+import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseSubject
 import com.unallapps.ehliyetsinavinacalisiyorum.R
-import com.unallapps.ehliyetsinavinacalisiyorum.data.Konular
+import com.unallapps.ehliyetsinavinacalisiyorum.data.Subject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun KonuSecinLazyColumn(derslerSelectedItem: Int,
+fun SubjectLazyRow(
+    lessonSelectedItemIndex: Int,
     controller: Boolean,
-    onSelectedKonu: (Konular) -> Unit,
-    onAlertDialog:(Boolean) -> Unit) {
+    onSelectedSubject: (Subject) -> Unit,
+    onAlertDialog: (Boolean) -> Unit
+) {
     Column(verticalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
         val currentList = if (controller) {
-            DatabaseKonular.konularList.filter { it.id == derslerSelectedItem}.take(5).toMutableList()
+            DatabaseSubject.subjectLists.filter { it.id == lessonSelectedItemIndex }.take(5)
+                .toMutableList()
         } else {
-            DatabaseKonular.konularList
+            DatabaseSubject.subjectLists
         }
         Text(text = "Önerilen Konular")
-        LazyColumn(modifier = Modifier.fillMaxWidth(),
+        LazyColumn(
+            modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.SpaceBetween,
-            horizontalAlignment = Alignment.Start) {
+            horizontalAlignment = Alignment.Start
+        ) {
             items(count = currentList.size, itemContent = {
                 val konular = currentList[it]
-                if (konular.id == derslerSelectedItem) {
+                if (konular.id == lessonSelectedItemIndex) {
                     Row(modifier = Modifier.fillMaxWidth()) {
-                        Card(colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.acikmavi)),
+                        Card(
+                            colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.acikmavi)),
                             shape = RoundedCornerShape(20.dp),
                             onClick = {
                                 onAlertDialog(true)
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(5.dp)) {
+                                .padding(5.dp)
+                        ) {
                             Row(verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.Start,
                                 modifier = Modifier
                                     .clickable {
-                                        onSelectedKonu(konular)
+                                        onSelectedSubject(konular)
                                         onAlertDialog(true)
                                     }
                                     .fillMaxWidth()
@@ -72,34 +75,48 @@ fun KonuSecinLazyColumn(derslerSelectedItem: Int,
                                     painter = painterResource(id = konular.icon),
                                     contentDescription = "",
                                 )
-                                Column(modifier = Modifier.fillMaxWidth(),
+                                Column(
+                                    modifier = Modifier.fillMaxWidth(),
                                     verticalArrangement = Arrangement.Center,
-                                    horizontalAlignment = Alignment.CenterHorizontally) {
-                                    Text(text = konular.name,
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Text(
+                                        text = konular.name,
                                         modifier = Modifier.padding(10.dp),
                                         color = colorResource(id = R.color.kapaliMavi),
                                         maxLines = 1,
-                                        textAlign = TextAlign.Center)
-                                    Row(verticalAlignment = Alignment.CenterVertically,
-                                        horizontalArrangement = Arrangement.Center) {
-                                        Icon(painter = painterResource(id = R.drawable.info),
+                                        textAlign = TextAlign.Center
+                                    )
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.Center
+                                    ) {
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.info),
                                             contentDescription = "",
                                             tint = colorResource(id = R.color.kapaliMavi),
-                                            modifier = Modifier.size(14.dp))
-                                        Text(text = "Bilgi Kartları",
+                                            modifier = Modifier.size(14.dp)
+                                        )
+                                        Text(
+                                            text = "Bilgi Kartları",
                                             modifier = Modifier.padding(3.dp),
                                             color = colorResource(id = R.color.kapaliMavi),
                                             fontSize = 12.sp,
-                                            textAlign = TextAlign.Center)
-                                        Icon(painter = painterResource(id = R.drawable.infobook),
+                                            textAlign = TextAlign.Center
+                                        )
+                                        Icon(
+                                            painter = painterResource(id = R.drawable.infobook),
                                             contentDescription = "",
                                             tint = colorResource(id = R.color.kapaliMavi),
-                                            modifier = Modifier.size(12.dp))
-                                        Text(text = "Konu Anlatım",
+                                            modifier = Modifier.size(12.dp)
+                                        )
+                                        Text(
+                                            text = "Konu Anlatım",
                                             modifier = Modifier.padding(3.dp),
                                             color = colorResource(id = R.color.kapaliMavi),
                                             fontSize = 12.sp,
-                                            textAlign = TextAlign.Center)
+                                            textAlign = TextAlign.Center
+                                        )
                                     }
                                 }
                             }

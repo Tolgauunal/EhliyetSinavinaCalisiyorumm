@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -32,83 +31,112 @@ import androidx.navigation.NavHostController
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.AutoComplete
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CustomAlertDialog
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.DersSecinLazyRow
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.KonuSecinLazyColumn
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.LessonLazyRow
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.SubjectLazyRow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
 @Composable
-fun Home(paddingModifier: Modifier, navController: NavHostController, homeViewModel: HomeViewModel = hiltViewModel()) {
+fun Home(
+    modifier: Modifier,
+    navController: NavHostController,
+    homeViewModel: HomeViewModel = hiltViewModel()
+) {
     val nameStateText = homeViewModel.nameStateText.collectAsState()
-    val derslerSelectedItem = homeViewModel.derslerSelectedItem.collectAsState()
-    val selectedKonu = homeViewModel.selectedKonu.collectAsState()
+    val lessonSelectedItem = homeViewModel.lessonSelectedItem.collectAsState()
+    val selectedSubject = homeViewModel.selectedSubject.collectAsState()
     val alertDialog = homeViewModel.alertDialog.collectAsState()
 
     homeViewModel.getUserInfo()
     getProfileInfo(homeViewModel, nameStateText.value)
-    Column(modifier = paddingModifier.padding(start = 8.dp, end = 8.dp, top = 8.dp),
+    Column(
+        modifier = modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp),
         verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally) {
-        Row(verticalAlignment = Alignment.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Row(
+            verticalAlignment = Alignment.Top,
             horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth()) {
-            Text(text = nameStateText.value, color = colorResource(id = R.color.kapaliMavi), fontSize = 16.sp)
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = nameStateText.value,
+                color = colorResource(id = R.color.kapaliMavi),
+                fontSize = 16.sp
+            )
             homeViewModel.userInfo.value.userPhoto?.let {
-                val bitmap = BitmapFactory.decodeByteArray(homeViewModel.userInfo.value.userPhoto,
+                val bitmap = BitmapFactory.decodeByteArray(
+                    homeViewModel.userInfo.value.userPhoto,
                     0,
-                    homeViewModel.userInfo.value.userPhoto!!.size)
-                Image(bitmap = bitmap.asImageBitmap(),
+                    homeViewModel.userInfo.value.userPhoto!!.size
+                )
+                Image(
+                    bitmap = bitmap.asImageBitmap(),
                     contentDescription = null,
                     modifier = Modifier
                         .size(32.dp)
                         .clip(CircleShape)
                         .fillMaxWidth(),
-                    contentScale = ContentScale.Crop)
+                    contentScale = ContentScale.Crop
+                )
             } ?: run {
-                Image(painter = painterResource(id = R.drawable.person),
+                Image(
+                    painter = painterResource(id = R.drawable.person),
                     contentDescription = "",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .clip(CircleShape)
-                        .size(24.dp))
+                        .size(24.dp)
+                )
             }
         }
         Spacer(modifier = Modifier.padding(5.dp))
-        Card(modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.kapaliMavi))) {
-            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                Column(modifier = Modifier
-                    .weight(1f)
-                    .padding(10.dp)) {
-                    Text(text = "Bütün Konulara Hızlı ve Kolay Yoldan Ulaşın",
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.kapaliMavi))
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(10.dp)
+                ) {
+                    Text(
+                        text = "Bütün Konulara Hızlı ve Kolay Yoldan Ulaşın",
                         color = colorResource(id = R.color.white),
-                        textAlign = TextAlign.Center)
+                        textAlign = TextAlign.Center
+                    )
                     AutoComplete {
                         navController.navigate("konuAnlatimi/${it}")
                     }
                 }
-                Image(painter = painterResource(id = R.drawable.learningback),
+                Image(
+                    painter = painterResource(id = R.drawable.learningback),
                     contentDescription = "",
                     modifier = Modifier
                         .weight(1f)
-                        .size(100.dp))
+                        .size(100.dp)
+                )
             }
         }
         Spacer(modifier = Modifier.padding(5.dp))
-        DersSecinLazyRow(derslerSelectedItem = derslerSelectedItem.value) {
-            homeViewModel.derslerSelectedItem.value = it
+        LessonLazyRow(lessonSelectedItem = lessonSelectedItem.value) {
+            homeViewModel.lessonSelectedItem.value = it
         }
         Spacer(modifier = Modifier.padding(5.dp))
-        KonuSecinLazyColumn(derslerSelectedItem = derslerSelectedItem.value,
+        SubjectLazyRow(lessonSelectedItemIndex = lessonSelectedItem.value,
             controller = true,
-            onSelectedKonu = { homeViewModel.selectedKonu.value = it },
+            onSelectedSubject = { homeViewModel.selectedSubject.value = it },
             onAlertDialog = { homeViewModel.alertDialog.value = it })
     }
     if (alertDialog.value) {
-        CustomAlertDialog(alertDialog.value,
-            selectedKonu.value,
+        CustomAlertDialog(
+            selectedSubject.value,
             onAlertDialogChange = { homeViewModel.alertDialog.value = it },
             onClickBilgiKartlari = { navController.navigate("bilgiKartlari/${it}") }) {
             navController.navigate("konuAnlatimi/${it}")

@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
 import com.unallapps.ehliyetsinavinacalisiyorum.R
-import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseKonular
+import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseSubject
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,29 +53,46 @@ fun AutoComplete(isClick: (String) -> Unit) {
                     category = it
                     expanded = true
                 },
-                label = { Text(text = "Konu Arayın", color = colorResource(id = R.color.kapaliMavi)) },
+                label = {
+                    Text(
+                        text = "Konu Arayın",
+                        color = colorResource(id = R.color.kapaliMavi)
+                    )
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(heightTextFields)
                     .background(color = Color.White, shape = RoundedCornerShape(15.dp))
                     .onGloballyPositioned { textFieldSize = it.size.toSize() },
-                colors = TextFieldDefaults.textFieldColors(containerColor = Color.Transparent,
+                colors = TextFieldDefaults.textFieldColors(
+                    containerColor = Color.Transparent,
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
-                    cursorColor = Color(R.color.kapaliMavi)),
-                textStyle = TextStyle(color = colorResource(id = R.color.kapaliMavi), fontSize = 16.sp),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Done),
+                    cursorColor = Color(R.color.kapaliMavi)
+                ),
+                textStyle = TextStyle(
+                    color = colorResource(id = R.color.kapaliMavi),
+                    fontSize = 16.sp
+                ),
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Done
+                ),
                 singleLine = true,
             )
         }
         AnimatedVisibility(visible = expanded) {
-            Card(modifier = Modifier
-                .padding(5.dp)
-                .width(textFieldSize.width.dp)) {
+            Card(
+                modifier = Modifier
+                    .padding(5.dp)
+                    .width(textFieldSize.width.dp)
+            ) {
                 LazyColumn {
                     if (category.isNotEmpty()) {
-                        items(DatabaseKonular.konularList.filter {
-                            it.name.lowercase().contains(category.lowercase()) || it.name.lowercase().contains("other")
+                        items(DatabaseSubject.subjectLists.filter {
+                            it.name.lowercase()
+                                .contains(category.lowercase()) || it.name.lowercase()
+                                .contains("other")
                         }.take(1)) {
                             CategoryItems(title = it.name) {
                                 category = it
@@ -95,6 +112,10 @@ fun CategoryItems(title: String, onSelect: (String) -> Unit) {
     Row(modifier = Modifier
         .fillMaxWidth()
         .clickable { onSelect(title) }) {
-        Text(text = title, modifier = Modifier.padding(5.dp), color = colorResource(id = R.color.kapaliMavi))
+        Text(
+            text = title,
+            modifier = Modifier.padding(5.dp),
+            color = colorResource(id = R.color.kapaliMavi)
+        )
     }
 }

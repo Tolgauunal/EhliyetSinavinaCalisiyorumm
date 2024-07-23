@@ -18,10 +18,12 @@ interface TestSaveIdDao {
     @Query("SELECT * FROM TestSaveIdEntity Where testName=:testName")
     suspend fun getTestData(testName: String): TestSaveIdEntity
 
-    @Query("UPDATE TestSaveIdEntity SET testNum = :testNum, dogruSayisi =:dogruCevapSayisi , yanlisSayisi =:yanlisCevapSayisi, soruSize=:soruSize WHERE testName = :testName")
-    suspend fun updateTestSaveId(testNum: Int,
+    @Query("UPDATE TestSaveIdEntity SET testNumber = :testNum, correctSize =:dogruCevapSayisi , wrongSize =:yanlisCevapSayisi, questionSize=:soruSize WHERE testName = :testName")
+    suspend fun updateTestSaveId(
+        testNum: Int,
         dogruCevapSayisi: Int,
         yanlisCevapSayisi: Int,
         soruSize: Int,
-        testName: String)
+        testName: String
+    )
 }

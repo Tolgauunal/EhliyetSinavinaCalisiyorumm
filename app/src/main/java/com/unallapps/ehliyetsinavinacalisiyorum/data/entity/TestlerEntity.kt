@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class TestlerEntity(val idTest: Int? = null,
     val content: String? = null,
-    val imageTest: String? = null,
+    val imageTest: Int? = null,
     val atest: String? = null,
     val btest: String? = null,
     val ctest: String? = null,

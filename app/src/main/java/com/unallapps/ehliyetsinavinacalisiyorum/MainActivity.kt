@@ -38,7 +38,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             EhliyetSinavinaCalisiyorumTheme { // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = colorResource(id = R.color.kapaliMavi)) {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = colorResource(id = R.color.kapaliMavi)
+                ) {
                     Greeting()
                 }
             }
@@ -55,26 +58,34 @@ fun Greeting() {
         bottomBar = { AppBottomBar(navController = navController) },
     ) //content:
     { paddingValues ->
-        BottomNavigationGraph(navController = navController, paddingModifier = Modifier.padding(paddingValues))
+        BottomNavigationGraph(
+            navController = navController,
+            paddingModifier = Modifier.padding(paddingValues)
+        )
     }
 }
 
 @Composable
 fun AppBottomBar(navController: NavHostController) {
-    val screens = listOf(BottomBarScreen.Home,
+    val screens = listOf(
+        BottomBarScreen.Home,
         BottomBarScreen.Konular,
         BottomBarScreen.Testler,
         BottomBarScreen.Profil,
-        BottomBarScreen.BilgiKartlari,
-        BottomBarScreen.TestAdd,
-        BottomBarScreen.PdfViewer)
-    NavigationBar(modifier = Modifier.clip(shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp)),
-        containerColor = colorResource(id = R.color.white)) {
+        BottomBarScreen.BilgiKartlari
+    )
+    NavigationBar(
+        modifier = Modifier.clip(shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp)),
+        containerColor = colorResource(id = R.color.white)
+    ) {
         screens.forEach { screen ->
             when (screen) {
-                is BottomBarScreen.Home, BottomBarScreen.Konular, BottomBarScreen.Testler, BottomBarScreen.Profil, BottomBarScreen.TestAdd,BottomBarScreen.PdfViewer -> AddItem(
+                is BottomBarScreen.Home, BottomBarScreen.Konular,
+                BottomBarScreen.Testler, BottomBarScreen.Profil -> AddItem(
                     screen = screen,
-                    navController = navController)
+                    navController = navController
+                )
+
                 else -> Unit
             }
         }
@@ -84,9 +95,10 @@ fun AppBottomBar(navController: NavHostController) {
 @Composable
 fun RowScope.AddItem(screen: BottomBarScreen, navController: NavHostController) {
     val backStackEntry = navController.currentBackStackEntryAsState()
-    NavigationBarItem(label = {
-        Text(text = screen.label)
-    },
+    NavigationBarItem(
+        label = {
+            Text(text = screen.label)
+        },
         icon = {
             Icon(painter = painterResource(id = screen.icon), contentDescription = screen.label)
         },
@@ -95,9 +107,12 @@ fun RowScope.AddItem(screen: BottomBarScreen, navController: NavHostController) 
             navController.navigate(screen.route)
         },
         alwaysShowLabel = true,
-        colors = NavigationBarItemDefaults.colors(selectedIconColor = colorResource(id = R.color.kapaliMavi),
+        colors = NavigationBarItemDefaults.colors(
+            selectedIconColor = colorResource(id = R.color.kapaliMavi),
             unselectedIconColor = colorResource(id = R.color.Gray),
-            indicatorColor = colorResource(id = R.color.acikmavi)))
+            indicatorColor = colorResource(id = R.color.acikmavi)
+        )
+    )
 }
 
 @Preview(showBackground = true, showSystemUi = true)

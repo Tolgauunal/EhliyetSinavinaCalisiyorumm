@@ -16,16 +16,16 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import com.unallapps.ehliyetsinavinacalisiyorum.R
-import com.unallapps.ehliyetsinavinacalisiyorum.data.Konular
+import com.unallapps.ehliyetsinavinacalisiyorum.data.Subject
 
 @Composable
-fun CustomAlertDialog(alertDialog: Boolean,
-    secilenKonu: Konular,
+fun CustomAlertDialog(
+    selectedSubject: Subject,
     onAlertDialogChange: (Boolean) -> Unit,
     onClickBilgiKartlari: (String) -> Unit,
-    onClickKonuAnlatimi: (String) -> Unit) {
+    onClickKonuAnlatimi: (String) -> Unit
+) {
     val click = remember { mutableStateOf(false) }
     MaterialTheme {
         Column {
@@ -38,40 +38,54 @@ fun CustomAlertDialog(alertDialog: Boolean,
                         onAlertDialogChange(false)
                     },
                     title = {
-                        Text(text = secilenKonu.name,
+                        Text(
+                            text = selectedSubject.name,
                             color = Color.White,
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(end = 10.dp, start = 10.dp),
-                            textAlign = TextAlign.Center)
+                            textAlign = TextAlign.Center
+                        )
                     },
                     confirmButton = {
-                        Button(colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
+                        Button(colors = ButtonDefaults.buttonColors(
+                            containerColor = colorResource(
+                                id = R.color.altinsarisi
+                            )
+                        ),
                             onClick = {
                                 openDialog.value = false
                                 onAlertDialogChange(false)
                                 click.value = true
-                                onClickBilgiKartlari(secilenKonu.name)
+                                onClickBilgiKartlari(selectedSubject.name)
                             }) {
-                            Text("Bilgi Kartları",
+                            Text(
+                                "Bilgi Kartları",
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(start = 10.dp, end = 10.dp),
-                                textAlign = TextAlign.Center)
+                                textAlign = TextAlign.Center
+                            )
                         }
                     },
                     dismissButton = {
-                        Button(colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
+                        Button(colors = ButtonDefaults.buttonColors(
+                            containerColor = colorResource(
+                                id = R.color.altinsarisi
+                            )
+                        ),
                             onClick = {
                                 openDialog.value = false
                                 onAlertDialogChange(false)
-                                onClickKonuAnlatimi(secilenKonu.name)
+                                onClickKonuAnlatimi(selectedSubject.name)
                             }) {
-                            Text("Konu Anlatımı",
+                            Text(
+                                "Konu Anlatımı",
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(start = 10.dp, end = 10.dp),
-                                textAlign = TextAlign.Center)
+                                textAlign = TextAlign.Center
+                            )
                         }
                     })
             }

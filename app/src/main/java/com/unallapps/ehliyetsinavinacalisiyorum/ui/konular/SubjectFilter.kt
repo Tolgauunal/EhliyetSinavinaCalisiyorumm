@@ -4,19 +4,18 @@ import android.annotation.SuppressLint
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.hilt.navigation.compose.hiltViewModel
-import org.jsoup.Jsoup
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
-fun KonuAnlatim(konuAdi: String,
-    paddingModifier: Modifier) {
-    val filePath ="file:///android_asset/$konuAdi.html"
-    Column (modifier = paddingModifier){
+fun SubjectFilter(
+    subjectName: String,
+    modifier: Modifier
+) {
+    val filePath = "file:///android_asset/$subjectName.html"
+    Column(modifier = modifier) {
         AndroidView(
             factory = { context ->
                 WebView(context).apply {
