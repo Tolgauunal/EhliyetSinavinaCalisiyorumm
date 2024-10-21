@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -65,6 +66,8 @@ class TestViewModel @Inject constructor(private val testRepository: TestReposito
     val backgroundColorC = _backgroundColorC.asStateFlow()
     private val _backgroundColorD: MutableStateFlow<Int?> = MutableStateFlow(null)
     val backgroundColorD = _backgroundColorD.asStateFlow()
+    private val _testClickable: MutableStateFlow<Boolean?> = MutableStateFlow(true)
+    val testClickable = _testClickable.asStateFlow()
 
     fun getTestList(lessonName: String) {
         viewModelScope.launch {
@@ -128,14 +131,18 @@ class TestViewModel @Inject constructor(private val testRepository: TestReposito
     }
 
     fun nextQuestion() {
-        if (_questionIndex.value != _questionSize.value - 1) {
-            _backgroundColorA.value = R.color.white
-            _backgroundColorB.value = R.color.white
-            _backgroundColorC.value = R.color.white
-            _backgroundColorD.value = R.color.white
-            _questionIndex.value += 1
-        } else {
-            setFinishAlertDialog(true)
+        selectedCorrect.value?.let {
+            if (_questionIndex.value != _questionSize.value - 1) {
+                _backgroundColorA.value = R.color.white
+                _backgroundColorB.value = R.color.white
+                _backgroundColorC.value = R.color.white
+                _backgroundColorD.value = R.color.white
+                _questionIndex.value += 1
+                _selectedCorrect.value = null
+            } else {
+                _testClickable.value = false
+                setFinishAlertDialog(true)
+            }
         }
     }
 

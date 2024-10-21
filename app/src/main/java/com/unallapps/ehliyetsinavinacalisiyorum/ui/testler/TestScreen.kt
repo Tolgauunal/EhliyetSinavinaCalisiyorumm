@@ -42,20 +42,12 @@ fun TestScreen(
     viewModel.getSelectedLesson(lessonName)
     viewModel.getTestList(lessonName)
     val selectedLesson = viewModel.getSelectedLessonInfo.collectAsState()
-    val soruKontrol = rememberSaveable { mutableStateOf(true) }
-    val progressShow = rememberSaveable { mutableStateOf(false) }
-    val showIcon = rememberSaveable { mutableStateOf(false) }
-    val testIcon = viewModel.testIcon.collectAsState()
     val questionIndex = viewModel.questionIndex.collectAsState()
     val questionSize = viewModel.questionSize.collectAsState()
     val question = viewModel.question.collectAsState()
-    val correct = viewModel.correct.collectAsState()
-    val correctControl = viewModel.correctControl.collectAsState()
-    val selectedCorrect = viewModel.selectedCorrect.collectAsState()
     val correctSum = viewModel.correctSum.collectAsState()
     val wrongSum = viewModel.wrongSum.collectAsState()
     val questionImage = viewModel.questionImage.collectAsState()
-    val closeTest = viewModel.closeTest.collectAsState()
     val optionA = viewModel.optionA.collectAsState()
     val optionB = viewModel.optionB.collectAsState()
     val optionC = viewModel.optionC.collectAsState()
@@ -66,6 +58,8 @@ fun TestScreen(
     val backgroundColorD = viewModel.backgroundColorD.collectAsState()
     val finishAlertDialog = viewModel.finishAlertDialog.collectAsState()
     val exitAlertDialog = viewModel.exitAlertDialog.collectAsState()
+    val testClickable = viewModel.testClickable.collectAsState()
+
 
     Column(
         modifier = modifier
@@ -177,13 +171,22 @@ fun TestScreen(
             viewModel.setSelectedCorrect(it)
         }
         Spacer(modifier = Modifier.padding(5.dp))
-        Image(
-            painter = painterResource(id = R.drawable.baseline_done_24),
-            contentDescription = "",
-            modifier = Modifier.clickable {
-                viewModel.nextQuestion()
-            }
-        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(24.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.End
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.baseline_done_24),
+                contentDescription = "",
+                modifier = Modifier.clickable {
+                    viewModel.nextQuestion()
+                }
+            )
+        }
+
         if (finishAlertDialog.value) {
             FinishAlert(onfinishAlertDialog = { viewModel.setFinishAlertDialog(it) }) {
                 navController.navigate("testEkrani/${selectedLesson.value?.name}")

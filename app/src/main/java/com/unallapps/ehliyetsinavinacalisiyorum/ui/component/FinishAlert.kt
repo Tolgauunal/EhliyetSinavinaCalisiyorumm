@@ -37,7 +37,6 @@ fun FinishAlert(
             Button(colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                 onClick = {
                     onfinishAlertDialog(false)
-                    onClick(true)
                 }) {
                 Text("Hayır")
             }
