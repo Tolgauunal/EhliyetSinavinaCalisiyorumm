@@ -16,8 +16,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -37,10 +35,11 @@ fun TestScreen(
     modifier: Modifier,
     lessonName: String,
     navController: NavHostController,
+    restartOrContinue: Boolean,
     viewModel: TestViewModel = hiltViewModel()
 ) {
-    viewModel.getSelectedLesson(lessonName)
-    viewModel.getTestList(lessonName)
+    viewModel.setLessonName(lessonName)
+    viewModel.setRestartOrContinue(restartOrContinue)
     val selectedLesson = viewModel.getSelectedLessonInfo.collectAsState()
     val questionIndex = viewModel.questionIndex.collectAsState()
     val questionSize = viewModel.questionSize.collectAsState()
@@ -58,7 +57,6 @@ fun TestScreen(
     val backgroundColorD = viewModel.backgroundColorD.collectAsState()
     val finishAlertDialog = viewModel.finishAlertDialog.collectAsState()
     val exitAlertDialog = viewModel.exitAlertDialog.collectAsState()
-    val testClickable = viewModel.testClickable.collectAsState()
 
 
     Column(
@@ -193,7 +191,8 @@ fun TestScreen(
             }
         }
         if (exitAlertDialog.value) {
-            FinishAlert(onfinishAlertDialog = { viewModel.setExitAlertDialog(it) }) {
+            CloseAlert(onClose = { viewModel.setExitAlertDialog(it) }) {
+                viewModel.setTestNumber(testNumber = questionIndex.value)
                 navController.navigate("testler")
             }
         }

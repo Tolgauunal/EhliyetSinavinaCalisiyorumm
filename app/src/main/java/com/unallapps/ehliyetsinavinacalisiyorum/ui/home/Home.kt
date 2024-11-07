@@ -48,9 +48,6 @@ fun Home(
     val lessonSelectedItem = homeViewModel.lessonSelectedItem.collectAsState()
     val selectedSubject = homeViewModel.selectedSubject.collectAsState()
     val alertDialog = homeViewModel.alertDialog.collectAsState()
-
-    homeViewModel.getUserInfo()
-    getProfileInfo(homeViewModel, nameStateText.value)
     Column(
         modifier = modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp),
         verticalArrangement = Arrangement.Top,
@@ -140,14 +137,6 @@ fun Home(
             onAlertDialogChange = { homeViewModel.alertDialog.value = it },
             onClickBilgiKartlari = { navController.navigate("bilgiKartlari/${it}") }) {
             navController.navigate("konuAnlatimi/${it}")
-        }
-    }
-}
-
-private fun getProfileInfo(homeViewModel: HomeViewModel, nameStateText: String) {
-    CoroutineScope(Dispatchers.Main).launch {
-        homeViewModel.userInfo.collect {
-            homeViewModel.nameStateText.value = nameStateText
         }
     }
 }

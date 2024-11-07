@@ -31,7 +31,7 @@ class HomeViewModel @Inject constructor(private val userRepository: UserReposito
         MutableStateFlow(DatabaseSubject.subjectLists[lessonSelectedItem.value])
     val selectedSubject: MutableStateFlow<Subject> = _selectedSubject
 
-    fun getUserInfo() {
+    init {
         viewModelScope.launch {
             userRepository.getUser()?.let {
                 _userInfo.value = it

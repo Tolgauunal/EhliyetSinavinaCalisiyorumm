@@ -17,5 +17,17 @@ class SubjectScreenViewModel @Inject constructor() : ViewModel() {
     val selectedSubject: MutableStateFlow<Subject> = _selectedSubject
 
     private val _alertDialog: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val alertDialog : MutableStateFlow<Boolean> = _alertDialog
+    val alertDialog: MutableStateFlow<Boolean> = _alertDialog
+
+    fun setLessonSelectedItem(lessonSelectedItem: Int) {
+        _lessonSelectedItem.value = lessonSelectedItem
+    }
+
+    fun setSelectedSubject(lessonSelectedItem: Int) {
+        _lessonSelectedItem.value = lessonSelectedItem
+    }
+
+    fun setAlertDialog(alertDialog: Boolean) {
+        _alertDialog.value = alertDialog
+    }
 }

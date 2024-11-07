@@ -7,9 +7,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Button
@@ -35,97 +37,119 @@ import com.unallapps.ehliyetsinavinacalisiyorum.R
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
-fun Testler(paddingModifier: Modifier,
+fun Testler(
+    paddingModifier: Modifier,
     navController: NavHostController,
-    testlerNavViewModel: TestlerNavViewModel = hiltViewModel()) {
+    testlerNavViewModel: TestlerNavViewModel = hiltViewModel()
+) {
     val selectedDersItemIndex = testlerNavViewModel.selectedDersItemIndex.collectAsState()
     val selectedDersItemText = testlerNavViewModel.selectedDersItemText.collectAsState()
-    Column(modifier = paddingModifier.padding(start = 8.dp, end = 8.dp, top = 8.dp),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(text = "Testler")
-        Spacer(modifier = Modifier.padding(8.dp))
-        LazyVerticalGrid(columns = GridCells.Adaptive(128.dp), content = {
+    Column(
+        modifier = paddingModifier
+            .padding(start = 8.dp, end = 8.dp, top = 8.dp)
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceBetween,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        LazyColumn(modifier = Modifier.fillMaxWidth(), content = {
             items(DatabaseLesson.derslerList.size) { index ->
                 val ders = DatabaseLesson.derslerList[index]
                 if (selectedDersItemIndex.value == index) {
                     Card(modifier = Modifier
                         .clickable {
-                            testlerNavViewModel.selectedDersItemText.value =  ders.name
+                            testlerNavViewModel.selectedDersItemText.value = ders.name
                             testlerNavViewModel.selectedDersItemIndex.value = index
                         }
                         .padding(4.dp)
                         .fillMaxWidth(),
                         colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.green))) {
-                        Column(verticalArrangement = Arrangement.Top,
-                            horizontalAlignment = Alignment.CenterHorizontally,
+                        Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(16.dp)) {
-                            Image(painter = painterResource(id = ders.icon),
+                                .padding(16.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Start
+                        ) {
+                            Image(
+                                painter = painterResource(id = ders.icon),
                                 contentDescription = "",
                                 alignment = Alignment.TopCenter,
-                                modifier = Modifier.size(100.dp))
-                            Text(text = ders.name,
+                                modifier = Modifier.size(75.dp)
+                            )
+                            Text(
+                                text = ders.name,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 18.sp,
                                 color = Color(0xFFFFFFFF),
                                 textAlign = TextAlign.Center,
-                                modifier = Modifier.padding(16.dp))
+                                modifier = Modifier.padding(16.dp)
+                            )
                         }
                     }
                 } else {
                     Card(
                         modifier = Modifier
                             .clickable {
-                                testlerNavViewModel.selectedDersItemText.value =  ders.name
+                                testlerNavViewModel.selectedDersItemText.value = ders.name
                                 testlerNavViewModel.selectedDersItemIndex.value = index
                             }
                             .padding(4.dp)
                             .fillMaxWidth(),
                         colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.kapaliMavi)),
                     ) {
-                        Column(verticalArrangement = Arrangement.Top,
-                            horizontalAlignment = Alignment.CenterHorizontally,
+                        Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(16.dp)) {
-                            Image(painter = painterResource(id = ders.icon),
+                                .padding(16.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Start
+                        ) {
+                            Image(
+                                painter = painterResource(id = ders.icon),
                                 contentDescription = "",
                                 alignment = Alignment.TopCenter,
-                                modifier = Modifier.size(100.dp))
-                            Text(text = ders.name,
+                                modifier = Modifier.size(75.dp)
+                            )
+                            Text(
+                                text = ders.name,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 18.sp,
                                 color = Color(0xFFFFFFFF),
                                 textAlign = TextAlign.Center,
-                                modifier = Modifier.padding(16.dp))
+                                modifier = Modifier.padding(16.dp)
+                            )
                         }
                     }
                 }
             }
         })
         Spacer(modifier = Modifier.padding(8.dp))
-        Row(modifier = Modifier.fillMaxWidth(),
+        Row(
+            modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenly) {
-            Button(colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            Button(
+                colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                 onClick = {
                     testlerNavViewModel.defaultTestItem(selectedDersItemText.value)
-                    navController.navigate("testEkrani/${selectedDersItemText.value}")
+                    navController.navigate("testEkrani/${selectedDersItemText.value}/${false}")
                 },
                 modifier = Modifier
                     .padding(16.dp)
-                    .weight(0.5f)) {
+                    .weight(0.5f)
+            ) {
                 Text(text = "Baştan Başla", fontSize = 16.sp)
             }
-            Button(colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
+            Button(
+                colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                 onClick = {
-                    navController.navigate("testEkrani/${selectedDersItemText.value}")
+                    navController.navigate("testEkrani/${selectedDersItemText.value}/${true}")
                 },
                 modifier = Modifier
                     .padding(16.dp)
-                    .weight(0.5f)) {
+                    .weight(0.5f)
+            ) {
                 Text(text = "Devam Et", fontSize = 16.sp)
             }
         }

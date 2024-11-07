@@ -2,7 +2,6 @@ package com.unallapps.ehliyetsinavinacalisiyorum.data.repository
 
 import com.unallapps.ehliyetsinavinacalisiyorum.data.dao.TestSaveIdDao
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestSaveIdEntity
-import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestlerEntity
 import javax.inject.Inject
 
 class TestSaveIdRepositoryImpl @Inject constructor(private val testSaveIdDao: TestSaveIdDao) : TestSaveIdRepository {
@@ -10,16 +9,16 @@ class TestSaveIdRepositoryImpl @Inject constructor(private val testSaveIdDao: Te
         testSaveIdDao.insert(testSaveIdEntity = testSaveIdEntity)
     }
 
-    override suspend fun updateTestSave(testNum: Int,
-        dersAdi: String,
-        dogruCevapSayisi: Int,
-        yanlisCevapSayisi: Int,
-        soruSize: Int) {
-        testSaveIdDao.updateTestSaveId(testNum = testNum,
-            testName = dersAdi,
-            dogruCevapSayisi = dogruCevapSayisi,
-            yanlisCevapSayisi = yanlisCevapSayisi,
-            soruSize = soruSize)
+    override suspend fun updateTestSave(testNumber: Int,
+                                        lessonName: String,
+                                        correctSum: Int,
+                                        wrongSum: Int,
+                                        questionNumber: Int) {
+        testSaveIdDao.updateTestSaveId(testNum = testNumber,
+            testName = lessonName,
+            dogruCevapSayisi = correctSum,
+            yanlisCevapSayisi = wrongSum,
+            soruSize = questionNumber)
     }
 
     override suspend fun getTestList(): List<TestSaveIdEntity> {

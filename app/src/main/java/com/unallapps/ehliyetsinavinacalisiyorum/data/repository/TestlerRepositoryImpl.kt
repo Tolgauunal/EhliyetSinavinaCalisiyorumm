@@ -7,8 +7,11 @@ import javax.inject.Inject
 class TestlerRepositoryImpl @Inject constructor() : TestRepository {
     override suspend fun getTestlerData(dersAdi: String, testNum: Int): List<TestlerEntity>? {
         var lessonList: List<TestlerEntity>? = null
-        if (dersAdi == "Motor") {
-            lessonList = DatabaseTestList.Motor
+        lessonList = when (dersAdi) {
+            "Motor" -> DatabaseTestList.Motor
+            "Trafik" -> DatabaseTestList.Trafik
+            "İlk Yardım" -> DatabaseTestList.IlkYardim
+            else -> emptyList()
         }
         return lessonList
     }

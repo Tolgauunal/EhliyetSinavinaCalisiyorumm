@@ -36,7 +36,7 @@ fun BottomNavigationGraph(navController: NavHostController, paddingModifier: Mod
             Home(paddingModifier, navController)
         }
         composable(route = BottomBarScreen.Konular.route) {
-            SubjectScreen(paddingModifier,navController)
+            SubjectScreen(paddingModifier, navController)
         }
         composable(route = BottomBarScreen.Testler.route) {
             Testler(paddingModifier, navController)
@@ -44,21 +44,38 @@ fun BottomNavigationGraph(navController: NavHostController, paddingModifier: Mod
         composable(route = BottomBarScreen.Profil.route) {
             Profile(paddingModifier)
         }
-        composable(route = BottomBarScreen.BilgiKartlari.route, arguments = listOf(navArgument("konuAdi") {
-            type = NavType.StringType
-        })) {
+        composable(
+            route = BottomBarScreen.BilgiKartlari.route,
+            arguments = listOf(navArgument("konuAdi") {
+                type = NavType.StringType
+            })
+        ) {
             val json = it.arguments?.getString("konuAdi")
-            InformationCardsUI(json!!,paddingModifier)
+            InformationCardsUI(json!!, paddingModifier)
         }
-        composable(route = BottomBarScreen.TestEkrani.route, arguments = listOf(navArgument("dersAdi") {
-            type = NavType.StringType
-        })) {
-            val json = it.arguments?.getString("dersAdi")
-            TestScreen(paddingModifier,json!!, navController = navController)
+        composable(
+            route = BottomBarScreen.TestEkrani.route,
+            arguments = listOf(navArgument("dersAdi") {
+                type = NavType.StringType
+            }, navArgument("restartOrContinue") { type = NavType.BoolType })
+        ) {
+            val dersAdi = it.arguments?.getString("dersAdi")
+            val restartOrContinue = it.arguments?.getBoolean("restartOrContinue")
+            if (dersAdi != null && restartOrContinue != null) {
+                TestScreen(
+                    paddingModifier,
+                    dersAdi,
+                    navController = navController,
+                    restartOrContinue = restartOrContinue
+                )
+            }
         }
-        composable(route = BottomBarScreen.KonuAnlatimi.route, arguments = listOf(navArgument("konuAdi") {
-            type = NavType.StringType
-        })) {
+        composable(
+            route = BottomBarScreen.KonuAnlatimi.route,
+            arguments = listOf(navArgument("konuAdi") {
+                type = NavType.StringType
+            })
+        ) {
             val json = it.arguments?.getString("konuAdi")
             SubjectFilter(json!!, paddingModifier)
         }

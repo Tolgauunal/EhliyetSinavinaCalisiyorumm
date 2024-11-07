@@ -31,17 +31,16 @@ fun SubjectScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         LessonLazyRow(lessonSelectedItem = lessonSelectedItem.value) {
-            konularViewModel.lessonSelectedItem.value = it
+            konularViewModel.setSelectedSubject(it)
         }
         Spacer(modifier = Modifier.padding(5.dp))
         SubjectLazyRow(lessonSelectedItemIndex = lessonSelectedItem.value,
             controller = false,
-            onSelectedSubject = { konularViewModel.selectedSubject.value = it },
-            onAlertDialog = { konularViewModel.alertDialog.value = it })
+            onSelectedSubject = { konularViewModel.setSelectedSubject(it.id) },
+            onAlertDialog = { konularViewModel.setAlertDialog(it) })
         if (alertDialog.value) {
-            CustomAlertDialog(
-                selectedSubject = selectedSubject.value,
-                onAlertDialogChange = { konularViewModel.alertDialog.value = it },
+            CustomAlertDialog(selectedSubject = selectedSubject.value,
+                onAlertDialogChange = { konularViewModel.setAlertDialog(it) },
                 onClickBilgiKartlari = { navController.navigate("bilgiKartlari/${it}") }) {
                 navController.navigate("konuAnlatimi/${it}")
             }
