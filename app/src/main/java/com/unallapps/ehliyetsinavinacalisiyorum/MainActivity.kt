@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            EhliyetSinavinaCalisiyorumTheme { // A surface container using the 'background' color from the theme
+            EhliyetSinavinaCalisiyorumTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = colorResource(id = R.color.kapaliMavi)
@@ -55,8 +55,7 @@ fun Greeting() {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = { AppBottomBar(navController = navController) },
-    ) //content:
-    { paddingValues ->
+    ) { paddingValues ->
         BottomNavigationGraph(
             navController = navController,
             paddingModifier = Modifier.padding(paddingValues)

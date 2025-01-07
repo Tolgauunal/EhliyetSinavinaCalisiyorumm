@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.UserEntity
 import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.UserRepository
+import com.unallapps.ehliyetsinavinacalisiyorum.data.util.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,11 +18,11 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(private val userRepository: UserRepository) :
     ViewModel() {
-    private val defaultUser = UserEntity(1, "Misafir Kullanıcı")
-    private val _userInfo: MutableStateFlow<UserEntity> = MutableStateFlow(defaultUser)
-    val userInfo: StateFlow<UserEntity> = _userInfo
+    private val _userInfo: MutableStateFlow<UserEntity?> = MutableStateFlow(null)
+    val userInfo: StateFlow<UserEntity?> = _userInfo
     private var byteArray: ByteArray? = null
-    private val _nameStateText: MutableStateFlow<String> = MutableStateFlow("Misafir Kullanıcı")
+    private val _nameStateText: MutableStateFlow<String> =
+        MutableStateFlow(R.string.Default_User.toString())
     val nameStateText: MutableStateFlow<String> = _nameStateText
     private val _userImage: MutableStateFlow<ByteArray?> = MutableStateFlow(null)
     val userImage: MutableStateFlow<ByteArray?> = _userImage
@@ -38,23 +39,9 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
 
     init {
         viewModelScope.launch {
-            if (userRepository.getUserSize().size == 0) {
-                userRepository.insert(defaultUser)
-            }
-            getUserName()
-        }
-    }
-
-    private fun getUserName() {
-        viewModelScope.launch {
-            userRepository.getUser()?.let {
-                _userInfo.value = it
-                _nameStateText.value = it.userName
-                _userImage.value = it.userPhoto
-            } ?: run {
-                userRepository.insert(defaultUser)
-                _userInfo.value = defaultUser
-            }
+            _userInfo.value = userRepository.getUser()
+            _nameStateText.value = userRepository.getUser()?.userName ?: Constants.String.DEFAULT_USER
+            _userImage.value = userInfo.value?.userPhoto
         }
     }
 
@@ -69,6 +56,7 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
                 _userInfo.value = userRepository.getUser()
             }
         }
+        _nameStateText.value = name
     }
 
     fun savePhoto(photoBitmap: Bitmap) {

@@ -57,11 +57,13 @@ fun HomeFragment(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(
-                text = nameStateText.value,
-                color = colorResource(id = R.color.kapaliMavi),
-                fontSize = 16.sp
-            )
+            nameStateText.value?.let {
+                Text(
+                    text = it,
+                    color = colorResource(id = R.color.kapaliMavi),
+                    fontSize = 16.sp
+                )
+            }
             userInfo.value.userPhoto?.let {
                 val bitmap = BitmapFactory.decodeByteArray(
                     userInfo.value.userPhoto,

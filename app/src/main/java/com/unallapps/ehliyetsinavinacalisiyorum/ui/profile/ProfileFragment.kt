@@ -184,33 +184,42 @@ fun ProfileFragment(
             }
         }
         Spacer(modifier = Modifier.padding(10.dp))
-        Text(text = "Ayarlar", color = colorResource(id = R.color.kapaliMavi), fontSize = 16.sp)
+        Text(
+            text = stringResource(R.string.Settings),
+            color = colorResource(id = R.color.kapaliMavi),
+            fontSize = 16.sp
+        )
         Column(modifier = Modifier.padding(10.dp)) {
             Spacer(modifier = Modifier.padding(10.dp))
             CustomButton(
                 title = stringResource(R.string.Privacy_Policy),
                 R.drawable.gizlilik,
-                onClick = {})
+                onClick = {}
+            )
             Spacer(modifier = Modifier.padding(5.dp))
             CustomButton(
                 title = stringResource(R.string.Terms_And_Conditions),
                 R.drawable.sartlar,
-                onClick = {})
+                onClick = {}
+            )
             Spacer(modifier = Modifier.padding(5.dp))
             CustomButton(
                 title = stringResource(R.string.Vote_For_Us),
                 R.drawable.oy,
-                onClick = {})
+                onClick = {}
+            )
             Spacer(modifier = Modifier.padding(5.dp))
             CustomButton(
                 title = stringResource(R.string.Report_Error),
                 R.drawable.error,
-                onClick = {})
+                onClick = {}
+            )
             Spacer(modifier = Modifier.padding(5.dp))
             CustomButton(
                 title = stringResource(R.string.Contact),
                 R.drawable.contact,
-                onClick = {})
+                onClick = {}
+            )
         }
     }
 }

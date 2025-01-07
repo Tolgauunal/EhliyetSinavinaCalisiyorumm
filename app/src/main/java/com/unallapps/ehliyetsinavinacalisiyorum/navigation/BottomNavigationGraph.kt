@@ -47,7 +47,7 @@ fun BottomNavigationGraph(navController: NavHostController, paddingModifier: Mod
         }
         composable(
             route = BottomBarScreen.InformationCard.route,
-            arguments = listOf(navArgument(Constants.STRING.SUBJECT_NAME) {
+            arguments = listOf(navArgument(Constants.String.SUBJECT_NAME) {
                 type = NavType.StringType
             })
         ) {
@@ -55,9 +55,9 @@ fun BottomNavigationGraph(navController: NavHostController, paddingModifier: Mod
         }
         composable(
             route = BottomBarScreen.TestScreen.route,
-            arguments = listOf(navArgument(Constants.STRING.LESSON_NAME) {
+            arguments = listOf(navArgument(Constants.String.LESSON_NAME) {
                 type = NavType.StringType
-            }, navArgument(Constants.STRING.RESTART_OR_CONTINUE) { type = NavType.BoolType })
+            }, navArgument(Constants.String.RESTART_OR_CONTINUE) { type = NavType.BoolType })
         ) {
             TestScreen(
                 paddingModifier,
@@ -66,11 +66,11 @@ fun BottomNavigationGraph(navController: NavHostController, paddingModifier: Mod
         }
         composable(
             route = BottomBarScreen.SubjectScreen.route,
-            arguments = listOf(navArgument(Constants.STRING.SUBJECT_NAME) {
+            arguments = listOf(navArgument(Constants.String.SUBJECT_NAME) {
                 type = NavType.StringType
             })
         ) {
-            val json = it.arguments?.getString(Constants.STRING.SUBJECT_NAME)
+            val json = it.arguments?.getString(Constants.String.SUBJECT_NAME)
             SubjectFilter(json!!, paddingModifier)
         }
     }

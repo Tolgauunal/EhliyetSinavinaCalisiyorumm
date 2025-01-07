@@ -9,9 +9,9 @@ class TestsRepositoryImpl @Inject constructor() : TestRepository {
     override suspend fun getTestsData(lessonName: String, testNumber: Int): List<TestsEntity>? {
         var lessonList: List<TestsEntity>? = null
         lessonList = when (lessonName) {
-            Constants.STRING.ENGINE -> DatabaseTestList.Motor
-            Constants.STRING.TRAFFIC -> DatabaseTestList.Trafik
-            Constants.STRING.FIRST_AID -> DatabaseTestList.IlkYardim
+            Constants.String.ENGINE -> DatabaseTestList.Motor
+            Constants.String.TRAFFIC -> DatabaseTestList.Trafik
+            Constants.String.FIRST_AID -> DatabaseTestList.IlkYardim
             else -> emptyList()
         }
         return lessonList

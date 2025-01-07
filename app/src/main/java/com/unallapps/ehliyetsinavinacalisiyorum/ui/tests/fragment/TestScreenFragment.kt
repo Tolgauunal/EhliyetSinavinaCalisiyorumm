@@ -184,7 +184,7 @@ fun TestScreen(
         }
 
         if (finishAlertDialog.value) {
-            FinishAlert(onfinishAlertDialog = { viewModel.setFinishAlertDialog(it) }) {
+            FinishAlert(onFinishAlertDialog = { viewModel.setFinishAlertDialog(it) }) {
                 navController.navigate("testScreen/${selectedLesson.value?.name}")
             }
         }

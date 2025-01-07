@@ -33,6 +33,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseLesson
 import com.unallapps.ehliyetsinavinacalisiyorum.R
+import com.unallapps.ehliyetsinavinacalisiyorum.data.util.Constants
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.tests.viewmodel.TestsNavViewModel
 
 @SuppressLint("CoroutineCreationDuringComposition")
@@ -132,12 +133,12 @@ fun TestsNavFragment(
             Button(
                 colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                 onClick = {
-                    viewModel.defaultTestItem(selectedLessonItemText.value)
+                    selectedLessonItemText.value?.let { viewModel.defaultTestItem(it) }
                     navController.navigate("testScreen/${selectedLessonItemText.value}/${false}")
                 },
                 modifier = Modifier
                     .padding(16.dp)
-                    .weight(0.5f)
+                    .weight(Constants.Fractions.FRACTION05)
             ) {
                 Text(text = stringResource(R.string.Restart), fontSize = 16.sp)
             }
@@ -148,7 +149,7 @@ fun TestsNavFragment(
                 },
                 modifier = Modifier
                     .padding(16.dp)
-                    .weight(0.5f)
+                    .weight(Constants.Fractions.FRACTION05)
             ) {
                 Text(text = stringResource(R.string.Continue), fontSize = 16.sp)
             }

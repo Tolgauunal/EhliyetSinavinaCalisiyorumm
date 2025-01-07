@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 
@@ -20,14 +21,14 @@ fun CloseAlert(onClose: (Boolean) -> Unit, onClick: () -> Unit) {
             onClose(false)
         },
         title = {
-            Text(text = "Testi Sonlandırmak İstediğinizden Emin Misiniz ?", color = Color.White)
+            Text(text = stringResource(R.string.Test_Finish), color = Color.White)
         },
         dismissButton = {
             Button(colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                 onClick = {
                     onClose(false)
                 }) {
-                Text("Hayır")
+                Text(stringResource(R.string.Yes))
             }
         },
         confirmButton = {
@@ -36,7 +37,7 @@ fun CloseAlert(onClose: (Boolean) -> Unit, onClick: () -> Unit) {
                     onClose(false)
                     onClick()
                 }) {
-                Text("Evet")
+                Text(stringResource(R.string.No))
             }
         })
 }

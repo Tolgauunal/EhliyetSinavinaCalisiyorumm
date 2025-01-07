@@ -19,17 +19,19 @@ import javax.inject.Singleton
 object RepositoryModule {
     @Provides
     @Singleton
-    fun provideUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository = userRepositoryImpl
+    fun provideUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository =
+        userRepositoryImpl
 
     @Provides
     @Singleton
-    fun provideTestlerRepository(testsRepositoryImpl: TestsRepositoryImpl): TestRepository =
+    fun provideTestsRepository(testsRepositoryImpl: TestsRepositoryImpl): TestRepository =
         testsRepositoryImpl
 
     @Provides
     @Singleton
-    fun provideKonuAnlatimRepository(konuAnlatimRepositoyImpl: InformationCardRepositoryImpl): InformationCardRepository =
-        konuAnlatimRepositoyImpl
+    fun provideSubjectsRepository(informationCardRepositoryImpl: InformationCardRepositoryImpl):
+        InformationCardRepository =
+        informationCardRepositoryImpl
 
     @Provides
     @Singleton

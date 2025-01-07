@@ -66,10 +66,10 @@ class TestScreenViewModel @Inject constructor(
     private val _restartOrContinue: MutableStateFlow<Boolean?> = MutableStateFlow(null)
 
     init {
-        savedStateHandle.get<String>(Constants.STRING.LESSON_NAME)?.let {
+        savedStateHandle.get<String>(Constants.String.LESSON_NAME)?.let {
             _lessonName.value = it
         }
-        savedStateHandle.get<Boolean>(Constants.STRING.RESTART_OR_CONTINUE)?.let {
+        savedStateHandle.get<Boolean>(Constants.String.RESTART_OR_CONTINUE)?.let {
             _restartOrContinue.value = it
         }
         getTestList()
@@ -88,18 +88,7 @@ class TestScreenViewModel @Inject constructor(
                     _restartOrContinue.value = false
                 }
             }
-            testRepository.getTestsData(_lessonName.value, _questionIndex.value)?.let {
-                _questionSize.value = it.size
-                _question.value = it[_questionIndex.value].content.toString()
-                _correct.value = it[_questionIndex.value].correct.toString()
-                it[_questionIndex.value].imageTest?.let { image ->
-                    _questionImage.value = image
-                }
-                _optionA.value = it[_questionIndex.value].atest.toString()
-                _optionB.value = it[_questionIndex.value].btest.toString()
-                _optionC.value = it[_questionIndex.value].ctest.toString()
-                _optionD.value = it[_questionIndex.value].dtest.toString()
-            }
+            getTestData()
         }
     }
 
@@ -161,7 +150,10 @@ class TestScreenViewModel @Inject constructor(
                 setFinishAlertDialog(true)
             }
         }
-        //Çalışılacak burada sürekli repository çekmeye gerek yok.
+        getTestData()
+    }
+
+    private fun getTestData() {
         viewModelScope.launch {
             testRepository.getTestsData(_lessonName.value, _questionIndex.value)?.let {
                 _questionSize.value = it.size
@@ -170,10 +162,10 @@ class TestScreenViewModel @Inject constructor(
                 it[_questionIndex.value].imageTest?.let { image ->
                     _questionImage.value = image
                 }
-                _optionA.value = it[_questionIndex.value].atest.toString()
-                _optionB.value = it[_questionIndex.value].btest.toString()
-                _optionC.value = it[_questionIndex.value].ctest.toString()
-                _optionD.value = it[_questionIndex.value].dtest.toString()
+                _optionA.value = it[_questionIndex.value].aTest.toString()
+                _optionB.value = it[_questionIndex.value].bTest.toString()
+                _optionC.value = it[_questionIndex.value].cTest.toString()
+                _optionD.value = it[_questionIndex.value].dTest.toString()
             }
         }
     }

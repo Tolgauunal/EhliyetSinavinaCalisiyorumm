@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class InformationCardViewModel @Inject constructor(
-    val informationCardRepository: InformationCardRepository,
+    private val informationCardRepository: InformationCardRepository,
     savedStateHandle: SavedStateHandle
 ) :
     ViewModel() {
@@ -28,7 +28,7 @@ class InformationCardViewModel @Inject constructor(
         MutableStateFlow(null)
 
     init {
-        savedStateHandle.get<String>(Constants.STRING.SUBJECT_NAME)?.let {
+        savedStateHandle.get<String>(Constants.String.SUBJECT_NAME)?.let {
             _subjectName.value = it
         }
         getInformationCard()

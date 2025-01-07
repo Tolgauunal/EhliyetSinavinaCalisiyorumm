@@ -22,7 +22,7 @@ import com.unallapps.ehliyetsinavinacalisiyorum.R
 @Composable
 fun CustomButton(title: String, icon: Int, onClick: () -> Unit) {
     Button(
-        onClick = { onClick },
+        onClick = { onClick() },
         colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.acikmavi))
     ) {
         Row(

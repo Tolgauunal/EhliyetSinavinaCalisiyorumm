@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -42,15 +43,15 @@ fun SubjectLazyRow(
         } else {
             DatabaseSubject.subjectLists
         }
-        Text(text = "Önerilen Konular")
+        Text(text = stringResource(R.string.Suggestion_lesson))
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.Start
         ) {
             items(count = currentList.size, itemContent = {
-                val konular = currentList[it]
-                if (konular.id == lessonSelectedItemIndex) {
+                val subjects = currentList[it]
+                if (subjects.id == lessonSelectedItemIndex) {
                     Row(modifier = Modifier.fillMaxWidth()) {
                         Card(
                             colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.acikmavi)),
@@ -66,13 +67,13 @@ fun SubjectLazyRow(
                                 horizontalArrangement = Arrangement.Start,
                                 modifier = Modifier
                                     .clickable {
-                                        onSelectedSubject(konular)
+                                        onSelectedSubject(subjects)
                                         onAlertDialog(true)
                                     }
                                     .fillMaxWidth()
                                     .padding(5.dp)) {
                                 Image(
-                                    painter = painterResource(id = konular.icon),
+                                    painter = painterResource(id = subjects.icon),
                                     contentDescription = "",
                                 )
                                 Column(
@@ -81,7 +82,7 @@ fun SubjectLazyRow(
                                     horizontalAlignment = Alignment.CenterHorizontally
                                 ) {
                                     Text(
-                                        text = konular.name,
+                                        text = subjects.name,
                                         modifier = Modifier.padding(10.dp),
                                         color = colorResource(id = R.color.kapaliMavi),
                                         maxLines = 1,
@@ -98,7 +99,7 @@ fun SubjectLazyRow(
                                             modifier = Modifier.size(14.dp)
                                         )
                                         Text(
-                                            text = "Bilgi Kartları",
+                                            text = stringResource(R.string.Information_Card),
                                             modifier = Modifier.padding(3.dp),
                                             color = colorResource(id = R.color.kapaliMavi),
                                             fontSize = 12.sp,
@@ -111,7 +112,7 @@ fun SubjectLazyRow(
                                             modifier = Modifier.size(12.dp)
                                         )
                                         Text(
-                                            text = "Konu Anlatım",
+                                            text = stringResource(R.string.Subject_Explanation),
                                             modifier = Modifier.padding(3.dp),
                                             color = colorResource(id = R.color.kapaliMavi),
                                             fontSize = 12.sp,
