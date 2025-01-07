@@ -1,13 +1,10 @@
-package com.unallapps.ehliyetsinavinacalisiyorum.ui.bilgikartlari
+package com.unallapps.ehliyetsinavinacalisiyorum.ui.informationCard
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -30,12 +27,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 
 @Composable
-fun InformationCardsUI(
-    subjectName: String,
+fun InformationCardFragment(
     modifier: Modifier,
     informationCardViewModel: InformationCardViewModel = hiltViewModel()
 ) {
-    informationCardViewModel.getInformationCard(subjectName = subjectName)
     val informationCardsInfo = informationCardViewModel.informationCardsInfo.collectAsState()
     val informationCardsSize = informationCardViewModel.informationCardsSize.collectAsState()
     var progress by remember { mutableIntStateOf(1) }

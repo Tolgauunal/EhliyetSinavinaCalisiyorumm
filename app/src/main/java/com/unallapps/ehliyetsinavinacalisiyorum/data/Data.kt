@@ -6,7 +6,7 @@ import androidx.compose.ui.text.font.FontFamily
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.InformationCards
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.InformationCardsInfo
-import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestlerEntity
+import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestsEntity
 import kotlinx.parcelize.Parcelize
 import javax.annotation.concurrent.Immutable
 
@@ -2029,7 +2029,7 @@ object DatabaseInformationCard {
 @Immutable
 object DatabaseTestList {
     val Motor = mutableListOf(
-        TestlerEntity(
+        TestsEntity(
             idTest = 1,
             content = "Motor yağ seviyesi hangi durumda kontrol edilmelidir?",
             imageTest = R.drawable.test,
@@ -2038,7 +2038,7 @@ object DatabaseTestList {
             ctest = "Araç hızla giderken",
             dtest = "Araç yük taşırken",
             correct = "Motor soğukken"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 2,
             content = "Araç aküsü hangi işaretle gösterilir?",
             imageTest = R.drawable.test,
@@ -2047,7 +2047,7 @@ object DatabaseTestList {
             ctest = "Akü işareti",
             dtest = "Far işareti",
             correct = "Akü işareti"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 3,
             content = "Hangi işaret, aracın fren lambalarının arızalı olduğunu gösterir?",
             imageTest = R.drawable.test,
@@ -2056,7 +2056,7 @@ object DatabaseTestList {
             ctest = "Motor arıza işareti",
             dtest = "Yakıt işareti",
             correct = "Fren lambası işareti"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 4,
             content = "ABS sisteminin görevi nedir?",
             imageTest = R.drawable.test,
@@ -2065,7 +2065,7 @@ object DatabaseTestList {
             ctest = "Egzoz gazını azaltmak",
             dtest = "Yakıt tasarrufu sağlamak",
             correct = "Frenlemede tekerleklerin kilitlenmesini önlemek"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 5,
             content = "Dikiz aynaları hangi amaçla kullanılır?",
             imageTest = R.drawable.test,
@@ -2074,7 +2074,7 @@ object DatabaseTestList {
             ctest = "Motor sıcaklığını kontrol etmek",
             dtest = "Aracın yağ seviyesini kontrol etmek",
             correct = "Aracın arkasını kontrol etmek"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 6,
             content = "Araç lastiklerinin diş derinliği kaç mm'nin altına inmemelidir?",
             imageTest = R.drawable.test,
@@ -2083,7 +2083,7 @@ object DatabaseTestList {
             ctest = "1.6 mm",
             dtest = "0.8 mm",
             correct = "1.6 mm"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 7,
             content = "Yağmur ve sisli havalarda hangi farlar kullanılmalıdır?",
             imageTest = R.drawable.test,
@@ -2092,7 +2092,7 @@ object DatabaseTestList {
             ctest = "Uzun farlar",
             dtest = "Arka park lambaları",
             correct = "Sis farları"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 8,
             content = "Araçta bulunan emniyet kemerleri hangi durum için zorunludur?",
             imageTest = R.drawable.test,
@@ -2101,7 +2101,7 @@ object DatabaseTestList {
             ctest = "Yalnızca şehir içi yollarda",
             dtest = "Sadece ön koltuktaki yolcular için",
             correct = "Tüm yolculuklarda"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 9,
             content = "Dönüşlerde sinyal vermek ne zaman gereklidir?",
             imageTest = R.drawable.test,
@@ -2110,7 +2110,7 @@ object DatabaseTestList {
             ctest = "Her dönüş öncesinde",
             dtest = "Yalnızca sağa dönüşlerde",
             correct = "Her dönüş öncesinde"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 10,
             content = "Hangi araç işareti, araçtaki kapılardan birinin açık olduğunu gösterir?",
             imageTest = R.drawable.test,
@@ -2119,7 +2119,7 @@ object DatabaseTestList {
             ctest = "Motor arıza işareti",
             dtest = "Lastik basıncı işareti",
             correct = "Kapı açık işareti"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 11,
             content = "Bir aracın hız limitini aşmaması için ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -2128,7 +2128,7 @@ object DatabaseTestList {
             ctest = "Hız limitine uyulmalı",
             dtest = "Aracın yükü artırılmalı",
             correct = "Hız limitine uyulmalı"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 12,
             content = "Hangi işaret aracın uzun farlarının açık olduğunu gösterir?",
             imageTest = R.drawable.test,
@@ -2137,7 +2137,7 @@ object DatabaseTestList {
             ctest = "Sis lambası işareti",
             dtest = "Fren lambası işareti",
             correct = "Uzun far işareti"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 13,
             content = "Motor soğutma sıvısı seviyesi hangi durumda kontrol edilmelidir?",
             imageTest = R.drawable.test,
@@ -2146,7 +2146,7 @@ object DatabaseTestList {
             ctest = "Motor soğukken",
             dtest = "Motor sıcakken",
             correct = "Motor soğukken"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 14,
             content = "Lastik basınçları ne zaman kontrol edilmelidir?",
             imageTest = R.drawable.test,
@@ -2155,7 +2155,7 @@ object DatabaseTestList {
             ctest = "Yola çıkmadan önce lastikler soğukken",
             dtest = "Uzun süreli park sonrası",
             correct = "Yola çıkmadan önce lastikler soğukken"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 15,
             content = "Aşağıdakilerden hangisi motorun aşırı ısınmasını önlemek için yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -2164,7 +2164,7 @@ object DatabaseTestList {
             ctest = "Lastik basıncını artırmak",
             dtest = "Egzoz sistemini kontrol etmek",
             correct = "Radyatör suyunu düzenli olarak kontrol etmek"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 16,
             content = "ABS fren sistemi nasıl çalışır?",
             imageTest = R.drawable.test,
@@ -2173,7 +2173,7 @@ object DatabaseTestList {
             ctest = "Motorun aşırı ısınmasını engeller",
             dtest = "Lastik basıncını kontrol eder",
             correct = "Tekerleklerin kilitlenmesini önler"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 17,
             content = "Dizel araçlarda hangi gösterge ışığı kızdırma bujilerinin ısındığını gösterir?",
             imageTest = R.drawable.test,
@@ -2182,7 +2182,7 @@ object DatabaseTestList {
             ctest = "Yakıt filtresi ışığı",
             dtest = "Fren arıza ışığı",
             correct = "Kızdırma bujisi ışığı"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 18,
             content = "Katalitik konvertörün görevi nedir?",
             imageTest = R.drawable.test,
@@ -2191,7 +2191,7 @@ object DatabaseTestList {
             ctest = "Yakıt tüketimini azaltmak",
             dtest = "Motorun aşırı ısınmasını önlemek",
             correct = "Egzoz gazlarını temizlemek"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 19,
             content = "Fren balatalarının aşınmasını gösteren ışık yandığında ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -2200,7 +2200,7 @@ object DatabaseTestList {
             ctest = "Yakıt deposu kontrol edilmelidir",
             dtest = "Yağ seviyesi kontrol edilmelidir",
             correct = "Fren balataları değiştirilmelidir"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 20,
             content = "Araç sinyal lambaları ne zaman kullanılmalıdır?",
             imageTest = R.drawable.test,
@@ -2209,7 +2209,7 @@ object DatabaseTestList {
             ctest = "Yalnızca gece sürüşlerinde",
             dtest = "Yalnızca kavşaklarda",
             correct = "Her dönüşte ve şerit değişiminde"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 21,
             content = "Aracın yağ filtresi ne kadar süre sonra değiştirilmelidir?",
             imageTest = R.drawable.test,
@@ -2218,7 +2218,7 @@ object DatabaseTestList {
             ctest = "Her lastik değişiminde",
             dtest = "Her 50.000 kilometrede bir",
             correct = "Her 10.000 kilometrede bir"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 22,
             content = "Dönüşlerde hangi sinyal lambası kullanılır?",
             imageTest = R.drawable.test,
@@ -2227,7 +2227,7 @@ object DatabaseTestList {
             ctest = "Uygun olan sinyal lambası",
             dtest = "Her iki sinyal lambası",
             correct = "Uygun olan sinyal lambası"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 23,
             content = "Yağmur ve sisli havalarda hangi farlar kullanılmalıdır?",
             imageTest = R.drawable.test,
@@ -2236,7 +2236,7 @@ object DatabaseTestList {
             ctest = "Uzun farlar",
             dtest = "Park lambaları",
             correct = "Sis farları"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 24,
             content = "Araç lastiklerinin basıncı ne sıklıkla kontrol edilmelidir?",
             imageTest = R.drawable.test,
@@ -2245,7 +2245,7 @@ object DatabaseTestList {
             ctest = "Yola çıkmadan önce ve her iki haftada bir",
             dtest = "Her yıl",
             correct = "Yola çıkmadan önce ve her iki haftada bir"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 25,
             content = "Araç yük taşırken hangi önlem alınmalıdır?",
             imageTest = R.drawable.test,
@@ -2254,7 +2254,7 @@ object DatabaseTestList {
             ctest = "Hız sınırları ihlal edilmemeli",
             dtest = "Yük, güvenli bir şekilde sabitlenmeli",
             correct = "Yük, güvenli bir şekilde sabitlenmeli"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 26,
             content = "Motorun soğutma sıvısı seviyesi neden kontrol edilmelidir?",
             imageTest = R.drawable.test,
@@ -2263,7 +2263,7 @@ object DatabaseTestList {
             ctest = "Yakıt tüketimini azaltmak için",
             dtest = "Fren performansını artırmak için",
             correct = "Motorun aşırı ısınmasını önlemek için"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 27,
             content = "Aracın hız göstergesi neyi belirtir?",
             imageTest = R.drawable.test,
@@ -2272,7 +2272,7 @@ object DatabaseTestList {
             ctest = "Motor sıcaklığını",
             dtest = "Yakıt seviyesini",
             correct = "Aracın hızını"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 28,
             content = "Akünün bitmiş olduğunu gösteren işaret hangisidir?",
             imageTest = R.drawable.test,
@@ -2281,7 +2281,7 @@ object DatabaseTestList {
             ctest = "Fren işareti",
             dtest = "Motor arıza işareti",
             correct = "Akü işareti"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 29,
             content = "Katalitik konvertörün temel işlevi nedir?",
             imageTest = R.drawable.test,
@@ -2290,7 +2290,7 @@ object DatabaseTestList {
             ctest = "Aracın hızını artırır",
             dtest = "Motoru soğutur",
             correct = "Egzoz gazlarını zararsız hale getirir"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 30,
             content = "Fren balatalarının ömrünü uzatmak için ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -2299,7 +2299,7 @@ object DatabaseTestList {
             ctest = "Düşük vites kullanılmalı",
             dtest = "Motor yağı sık sık değiştirilmeli",
             correct = "Ani fren yapmaktan kaçınılmalı"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 31,
             content = "Lastik basıncı düşükse araçta hangi sorun yaşanabilir?",
             imageTest = R.drawable.test,
@@ -2308,7 +2308,7 @@ object DatabaseTestList {
             ctest = "Motor performansı artar",
             dtest = "Fren mesafesi kısalır",
             correct = "Yol tutuşu zayıflar"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 32,
             content = "Emniyet kemeri neden kullanılmalıdır?",
             imageTest = R.drawable.test,
@@ -2317,7 +2317,7 @@ object DatabaseTestList {
             ctest = "Aracın hızını artırmak için",
             dtest = "Yakıt tasarrufu sağlamak için",
             correct = "Kaza anında güvenlik sağlamak için"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 33,
             content = "Aracın uzun farları ne zaman kullanılmalıdır?",
             imageTest = R.drawable.test,
@@ -2326,7 +2326,7 @@ object DatabaseTestList {
             ctest = "Karanlık yollarda ve açık alanda",
             dtest = "Sisli havada",
             correct = "Karanlık yollarda ve açık alanda"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 34,
             content = "ABS fren sisteminin avantajı nedir?",
             imageTest = R.drawable.test,
@@ -2335,7 +2335,7 @@ object DatabaseTestList {
             ctest = "Aracın hızını artırır",
             dtest = "Yağ basıncını kontrol eder",
             correct = "Fren sırasında tekerleklerin kilitlenmesini önler"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 35,
             content = "Araçtaki hangi sistem frenleme sırasında kaymayı önler?",
             imageTest = R.drawable.test,
@@ -2344,7 +2344,7 @@ object DatabaseTestList {
             ctest = "ASR",
             dtest = "EBD",
             correct = "ABS"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 36,
             content = "Egzoz emisyon testi hangi amaçla yapılır?",
             imageTest = R.drawable.test,
@@ -2353,7 +2353,7 @@ object DatabaseTestList {
             ctest = "Lastik basıncını kontrol etmek için",
             dtest = "Yakıt tasarrufu sağlamak için",
             correct = "Aracın egzoz gazı seviyesini kontrol etmek için"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 37,
             content = "Sinyal lambaları hangi durumlarda kullanılır?",
             imageTest = R.drawable.test,
@@ -2362,7 +2362,7 @@ object DatabaseTestList {
             ctest = "Park etme sırasında",
             dtest = "Aracı durdurma sırasında",
             correct = "Şerit değiştirme ve dönüşlerde"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 38,
             content = "Kış lastikleri ne zaman kullanılmalıdır?",
             imageTest = R.drawable.test,
@@ -2371,7 +2371,7 @@ object DatabaseTestList {
             ctest = "Her mevsim",
             dtest = "Yaz aylarında",
             correct = "Soğuk ve karlı havalarda"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 39,
             content = "Aracın motor yağı ne sıklıkla kontrol edilmelidir?",
             imageTest = R.drawable.test,
@@ -2380,7 +2380,7 @@ object DatabaseTestList {
             ctest = "Her 5.000 kilometrede",
             dtest = "Sadece bakım zamanı",
             correct = "Her 5.000 kilometrede"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 40,
             content = "Fren hidroliği seviyesinin düşük olması hangi soruna yol açabilir?",
             imageTest = R.drawable.test,
@@ -2389,7 +2389,7 @@ object DatabaseTestList {
             ctest = "Motor aşırı ısınır",
             dtest = "Lastik basıncı düşer",
             correct = "Fren performansı azalır"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 41,
             content = "Kısa farların açık olması gereken durumlar nelerdir?",
             imageTest = R.drawable.test,
@@ -2398,7 +2398,7 @@ object DatabaseTestList {
             ctest = "Gece sürüşleri ve sisli havalar",
             dtest = "Yalnızca park ederken",
             correct = "Gece sürüşleri ve sisli havalar"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 42,
             content = "Araç gösterge panelinde 'yağ lambası' yanıyorsa ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -2407,7 +2407,7 @@ object DatabaseTestList {
             ctest = "Araç hemen durdurulmalı",
             dtest = "Hiçbir şey yapılmamalı, sürüşe devam edilmeli",
             correct = "Yağ seviyesi kontrol edilmeli ve eksikse tamamlanmalı"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 43,
             content = "Aracın hava filtresi ne işe yarar?",
             imageTest = R.drawable.test,
@@ -2416,7 +2416,7 @@ object DatabaseTestList {
             ctest = "Egzoz gazlarını filtreler",
             dtest = "Lastik basıncını kontrol eder",
             correct = "Hava akışını temizleyerek motorun verimliliğini artırır"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 44,
             content = "Hava yastıkları hangi durumda açılır?",
             imageTest = R.drawable.test,
@@ -2425,7 +2425,7 @@ object DatabaseTestList {
             ctest = "Kaza anında",
             dtest = "Araç park halindeyken",
             correct = "Kaza anında"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 45,
             content = "Aracın hız sınırının aşıldığını gösteren ikaz lambası hangi durumda yanar?",
             imageTest = R.drawable.test,
@@ -2434,7 +2434,7 @@ object DatabaseTestList {
             ctest = "Araç çok düşük hızda seyrederken",
             dtest = "Araç ilk hareket ettiğinde",
             correct = "Aracın hız sınırını geçtiği durumda"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 46,
             content = "Emniyet kemerini takmamak ne tür bir risk oluşturur?",
             imageTest = R.drawable.test,
@@ -2443,7 +2443,7 @@ object DatabaseTestList {
             ctest = "Lastiklerin aşınmasını hızlandırır",
             dtest = "Fren mesafesini artırır",
             correct = "Kaza anında ciddi yaralanma riskini artırır"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 47,
             content = "Aracın motor arıza lambası yanıyorsa ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -2452,7 +2452,7 @@ object DatabaseTestList {
             ctest = "Aracın servise götürülmesi gerekmektedir",
             dtest = "Araç hemen stop ettirilmelidir",
             correct = "Aracın servise götürülmesi gerekmektedir"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 48,
             content = "Aracın direksiyon simidi hangi görev için kullanılır?",
             imageTest = R.drawable.test,
@@ -2461,7 +2461,7 @@ object DatabaseTestList {
             ctest = "Motoru çalıştırmak",
             dtest = "Frenleri kontrol etmek",
             correct = "Aracın yönünü değiştirmek"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 49,
             content = "Yakıt filtresinin düzenli olarak değiştirilmesinin amacı nedir?",
             imageTest = R.drawable.test,
@@ -2470,7 +2470,7 @@ object DatabaseTestList {
             ctest = "Lastik basıncını dengelemek",
             dtest = "Egzoz emisyonunu azaltmak",
             correct = "Yakıt akışını iyileştirmek ve motorun verimliliğini artırmak"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 50,
             content = "Yakıt filtresinin düzenli olarak değiştirilmesinin amacı nedir?",
             imageTest = R.drawable.test,
@@ -2479,7 +2479,7 @@ object DatabaseTestList {
             ctest = "Lastik basıncını dengelemek",
             dtest = "Egzoz emisyonunu azaltmak",
             correct = "Yakıt akışını iyileştirmek ve motorun verimliliğini artırmak"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 51,
             content = "Aracın motor yağı seviyesi azaldığında ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -2488,7 +2488,7 @@ object DatabaseTestList {
             ctest = "Fren pedalına basılmalıdır",
             dtest = "Lastik basıncı kontrol edilmelidir",
             correct = "Yağ eklemeli veya değiştirilmelidir"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 52,
             content = "ABS sisteminin amacı nedir?",
             imageTest = R.drawable.test,
@@ -2497,7 +2497,7 @@ object DatabaseTestList {
             ctest = "Motor sıcaklığını düşürmek",
             dtest = "Fren pedalının sertleşmesini sağlamak",
             correct = "Tekerleklerin frenleme sırasında kilitlenmesini önlemek"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 53,
             content = "Aracın şarj dinamosunun görevi nedir?",
             imageTest = R.drawable.test,
@@ -2506,7 +2506,7 @@ object DatabaseTestList {
             ctest = "Fren sistemini desteklemek",
             dtest = "Direksiyon hareketlerini yumuşatmak",
             correct = "Aküyü şarj etmek ve elektrik sistemini beslemek"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 54,
             content = "Lastik diş derinliği ne kadar olmalıdır?",
             imageTest = R.drawable.test,
@@ -2515,7 +2515,7 @@ object DatabaseTestList {
             ctest = "En az 2.5 mm",
             dtest = "En az 3.0 mm",
             correct = "En az 1.6 mm"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 55,
             content = "Motorun soğutma sistemi neden önemlidir?",
             imageTest = R.drawable.test,
@@ -2524,7 +2524,7 @@ object DatabaseTestList {
             ctest = "Yakıt tüketimini azaltır",
             dtest = "Aracın hızını artırır",
             correct = "Motorun aşırı ısınmasını önler"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 56,
             content = "Aracın egzoz sistemindeki arıza neye yol açabilir?",
             imageTest = R.drawable.test,
@@ -2533,7 +2533,7 @@ object DatabaseTestList {
             ctest = "Yakıt tüketimini artırabilir",
             dtest = "Lastiklerin aşınmasını hızlandırır",
             correct = "Yakıt tüketimini artırabilir"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 57,
             content = "Direksiyon sisteminde arıza varsa ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -2542,7 +2542,7 @@ object DatabaseTestList {
             ctest = "Araç hemen park edilmelidir",
             dtest = "Motoru durdurulmalıdır",
             correct = "Yavaşlayarak servise götürülmelidir"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 58,
             content = "Sinyal lambası neden önemlidir?",
             imageTest = R.drawable.test,
@@ -2551,7 +2551,7 @@ object DatabaseTestList {
             ctest = "Motorun ısınmasını önler",
             dtest = "Hız sınırını aşmamızı sağlar",
             correct = "Diğer sürücülere niyetimizi bildirir"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 59,
             content = "Yağmur sensörünün amacı nedir?",
             imageTest = R.drawable.test,
@@ -2560,7 +2560,7 @@ object DatabaseTestList {
             ctest = "Motoru soğutur",
             dtest = "Direksiyon tepkisini artırır",
             correct = "Sileceklerin otomatik çalışmasını sağlar"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 60,
             content = "Motorun hava filtresi düzenli olarak değiştirilmezse ne olabilir?",
             imageTest = R.drawable.test,
@@ -2569,7 +2569,7 @@ object DatabaseTestList {
             ctest = "Yakıt tasarrufu sağlanır",
             dtest = "Egzoz emisyonu azalır",
             correct = "Motor verimliliği azalır"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 61,
             content = "Hangi durumda lastik basıncının düzenli olarak kontrol edilmesi gerekir?",
             imageTest = R.drawable.test,
@@ -2578,7 +2578,7 @@ object DatabaseTestList {
             ctest = "Belirli aralıklarla veya her yolculuk öncesinde",
             dtest = "Sadece şehir içi kullanımda",
             correct = "Belirli aralıklarla veya her yolculuk öncesinde"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 62,
             content = "ABS fren sistemi hangi durumlarda etkilidir?",
             imageTest = R.drawable.test,
@@ -2587,7 +2587,7 @@ object DatabaseTestList {
             ctest = "Hem kuru hem de kaygan yollarda",
             dtest = "Sadece yüksek hızlarda",
             correct = "Hem kuru hem de kaygan yollarda"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 63,
             content = "Hangi gösterge motorun aşırı ısındığını belirtir?",
             imageTest = R.drawable.test,
@@ -2596,7 +2596,7 @@ object DatabaseTestList {
             ctest = "Yağ basıncı göstergesi",
             dtest = "Fren balataları göstergesi",
             correct = "Hararet göstergesi"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 64,
             content = "Egzoz sisteminin arızalanması aracın hangi özelliğini etkileyebilir?",
             imageTest = R.drawable.test,
@@ -2605,7 +2605,7 @@ object DatabaseTestList {
             ctest = "Lastiklerin aşınmasını azaltır",
             dtest = "Yakıt tasarrufunu sağlar",
             correct = "Motor performansını düşürebilir"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 65,
             content = "Yağ basıncı ikaz ışığı yanıyorsa ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -2614,7 +2614,7 @@ object DatabaseTestList {
             ctest = "Lastikleri kontrol edin",
             dtest = "Fren balatalarını kontrol edin",
             correct = "Yağ seviyesini kontrol edin"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 66,
             content = "Fren balatalarının aşınmasını gösteren işaret hangi renktedir?",
             imageTest = R.drawable.test,
@@ -2623,7 +2623,7 @@ object DatabaseTestList {
             ctest = "Sarı",
             dtest = "Mavi",
             correct = "Kırmızı"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 67,
             content = "Silecek suyunun bitmesi durumunda ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -2632,7 +2632,7 @@ object DatabaseTestList {
             ctest = "Motor yağı değiştirilmeli",
             dtest = "Fren sıvısı eklenmelidir",
             correct = "Yeni silecek suyu eklenmelidir"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 68,
             content = "Kısa farlar neden önemlidir?",
             imageTest = R.drawable.test,
@@ -2641,7 +2641,7 @@ object DatabaseTestList {
             ctest = "Gece sürüşlerinde karşıdan gelenleri rahatsız etmez",
             dtest = "Fren performansını artırır",
             correct = "Gece sürüşlerinde karşıdan gelenleri rahatsız etmez"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 69,
             content = "Lastik basıncı düşükse bu neye yol açabilir?",
             imageTest = R.drawable.test,
@@ -2650,7 +2650,7 @@ object DatabaseTestList {
             ctest = "Fren performansını artırır",
             dtest = "Lastiklerin daha uzun ömürlü olmasını sağlar",
             correct = "Yakıt tüketimini artırır"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 70,
             content = "Motorun çalışması sırasında çıkan beyaz duman neyin işareti olabilir?",
             imageTest = R.drawable.test,
@@ -2659,7 +2659,7 @@ object DatabaseTestList {
             ctest = "Yakıt seviyesinin düşmesi",
             dtest = "Fren balatalarının aşınması",
             correct = "Soğutma sıvısının motora karışması"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 71,
             content = "Aşırı hızda sürüşün en büyük dezavantajı nedir?",
             imageTest = R.drawable.test,
@@ -2668,7 +2668,7 @@ object DatabaseTestList {
             ctest = "Lastik basıncını artırır",
             dtest = "Motorun ömrünü uzatır",
             correct = "Fren mesafesini uzatır"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 72,
             content = "Araç aküsünün boşalmasına ne yol açabilir?",
             imageTest = R.drawable.test,
@@ -2677,7 +2677,7 @@ object DatabaseTestList {
             ctest = "Sık sık farların açık kalması",
             dtest = "Düşük lastik basıncı",
             correct = "Sık sık farların açık kalması"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 73,
             content = "Kışın araç kullanırken nelere dikkat edilmelidir?",
             imageTest = R.drawable.test,
@@ -2686,7 +2686,7 @@ object DatabaseTestList {
             ctest = "Yağ değişimi yapılmamalıdır",
             dtest = "Sadece lastikler kontrol edilmelidir",
             correct = "Kış lastikleri kullanılmalıdır"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 74,
             content = "Motor arıza lambası yanıyorsa ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -2695,7 +2695,7 @@ object DatabaseTestList {
             ctest = "Motor soğutma sıvısı eklenmelidir",
             dtest = "Fren sistemi kontrol edilmelidir",
             correct = "Servise götürülmeli"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 75,
             content = "Aracın lastikleri neden düzenli olarak kontrol edilmelidir?",
             imageTest = R.drawable.test,
@@ -2704,7 +2704,7 @@ object DatabaseTestList {
             ctest = "Fren sistemini korumak için",
             dtest = "Motor performansını artırmak için",
             correct = "Yol tutuşu ve güvenliği artırmak için"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 76,
             content = "Fren sistemindeki hidrolik sıvısının azalması neye yol açabilir?",
             imageTest = R.drawable.test,
@@ -2713,7 +2713,7 @@ object DatabaseTestList {
             ctest = "Lastiklerin aşınmasını hızlandırır",
             dtest = "Motorun ısınmasını engeller",
             correct = "Frenlerin etkisiz çalışmasına yol açar"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 77,
             content = "Aracın lastik diş derinliği ne zaman kontrol edilmelidir?",
             imageTest = R.drawable.test,
@@ -2722,7 +2722,7 @@ object DatabaseTestList {
             ctest = "Düzenli aralıklarla",
             dtest = "Sadece kışın",
             correct = "Düzenli aralıklarla"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 78,
             content = "Karbüratörlü araçlarda hava filtresi tıkalı ise ne olur?",
             imageTest = R.drawable.test,
@@ -2731,7 +2731,7 @@ object DatabaseTestList {
             ctest = "Fren mesafesi kısalır",
             dtest = "Lastik ömrü uzar",
             correct = "Yakıt tüketimi artar"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 79,
             content = "Egzoz gazı rengi mavi ise bu neyin işareti olabilir?",
             imageTest = R.drawable.test,
@@ -2740,7 +2740,7 @@ object DatabaseTestList {
             ctest = "Yakıt seviyesinin düştüğü",
             dtest = "Soğutma sıvısının bittiği",
             correct = "Yağın yanmaya başladığı"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 80,
             content = "Aracın fren lambalarının arızalı olması ne tür bir sorun yaratabilir?",
             imageTest = R.drawable.test,
@@ -2749,7 +2749,7 @@ object DatabaseTestList {
             ctest = "Yakıt tüketimini artırır",
             dtest = "Motorun fazla ısınmasına neden olur",
             correct = "Arkadan gelen araçların durumu anlamasını zorlaştırır"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 81,
             content = "Dört çeker sistem ne zaman kullanışlıdır?",
             imageTest = R.drawable.test,
@@ -2758,7 +2758,7 @@ object DatabaseTestList {
             ctest = "Sadece kışın",
             dtest = "Yalnızca uzun yolda",
             correct = "Kaygan ve engebeli arazilerde"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 82,
             content = "Sürüş sırasında araç lastiğinde oluşabilecek en büyük sorun nedir?",
             imageTest = R.drawable.test,
@@ -2767,7 +2767,7 @@ object DatabaseTestList {
             ctest = "Lastiğin patlaması",
             dtest = "Lastiğin ağırlık kaybetmesi",
             correct = "Lastiğin patlaması"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 83,
             content = "Hangi durumlarda sis lambaları kullanılmalıdır?",
             imageTest = R.drawable.test,
@@ -2776,7 +2776,7 @@ object DatabaseTestList {
             ctest = "Sadece gece sürüşlerinde",
             dtest = "Gündüz açık havalarda",
             correct = "Sisli, karlı ve yoğun yağışlı havalarda"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 84,
             content = "Hangi işaret lastik basıncı düşük olduğunu gösterir?",
             imageTest = R.drawable.test,
@@ -2785,7 +2785,7 @@ object DatabaseTestList {
             ctest = "ABS arıza ışığı",
             dtest = "Motor arıza ışığı",
             correct = "Lastik basınç uyarı ışığı"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 85,
             content = "Araçta far ayarlarının yanlış olması neye sebep olabilir?",
             imageTest = R.drawable.test,
@@ -2794,7 +2794,7 @@ object DatabaseTestList {
             ctest = "Diğer sürücüleri rahatsız eder",
             dtest = "Motor performansını düşürür",
             correct = "Diğer sürücüleri rahatsız eder"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 86,
             content = "Hangi durumda antifriz kullanılması önemlidir?",
             imageTest = R.drawable.test,
@@ -2803,7 +2803,7 @@ object DatabaseTestList {
             ctest = "Soğuk hava koşullarında",
             dtest = "Yalnızca uzun yolculuklarda",
             correct = "Soğuk hava koşullarında"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 87,
             content = "ABS fren sistemi ne işe yarar?",
             imageTest = R.drawable.test,
@@ -2812,7 +2812,7 @@ object DatabaseTestList {
             ctest = "Frenleme sırasında direksiyon hakimiyetini artırır",
             dtest = "Yakıt tüketimini azaltır",
             correct = "Frenleme sırasında direksiyon hakimiyetini artırır"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 88,
             content = "Araç yağ filtresi tıkalı ise bu neye yol açabilir?",
             imageTest = R.drawable.test,
@@ -2821,7 +2821,7 @@ object DatabaseTestList {
             ctest = "Motorun soğumasını sağlar",
             dtest = "Fren performansını artırır",
             correct = "Yağ akışını engelleyebilir ve motora zarar verebilir"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 89,
             content = "Süspansiyon sisteminin arızalı olması neyi etkiler?",
             imageTest = R.drawable.test,
@@ -2830,7 +2830,7 @@ object DatabaseTestList {
             ctest = "Yağ seviyesini artırır",
             dtest = "Lastik basıncını artırır",
             correct = "Sürüş konforunu ve yol tutuşunu olumsuz etkiler"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 90,
             content = "Yağ değişim zamanını belirlemenin en iyi yolu nedir?",
             imageTest = R.drawable.test,
@@ -2839,7 +2839,7 @@ object DatabaseTestList {
             ctest = "Lastik basıncına göre karar vermek",
             dtest = "Her sürüşten sonra değiştirmek",
             correct = "Araç kullanım kılavuzuna göre belirli aralıklarla değiştirmek"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 91,
             content = "Motorun çalışması sırasında meydana gelen aşırı titreşim neyi gösterebilir?",
             imageTest = R.drawable.test,
@@ -2848,7 +2848,7 @@ object DatabaseTestList {
             ctest = "Motor montajında sorun olduğunu",
             dtest = "Fren sistemi arızasını",
             correct = "Motor montajında sorun olduğunu"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 92,
             content = "Fren balatalarının sık sık kontrol edilmesinin nedeni nedir?",
             imageTest = R.drawable.test,
@@ -2857,7 +2857,7 @@ object DatabaseTestList {
             ctest = "Yakıt tasarrufu sağlamak",
             dtest = "Motoru soğutmak",
             correct = "Fren performansını ve güvenliği sağlamak"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 93,
             content = "Hangi gösterge motorun çalışma sıcaklığını gösterir?",
             imageTest = R.drawable.test,
@@ -2866,7 +2866,7 @@ object DatabaseTestList {
             ctest = "Yağ basıncı göstergesi",
             dtest = "Lastik basınç göstergesi",
             correct = "Hararet göstergesi"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 94,
             content = "Yakıt filtresinin tıkalı olması hangi soruna yol açabilir?",
             imageTest = R.drawable.test,
@@ -2875,7 +2875,7 @@ object DatabaseTestList {
             ctest = "Fren performansını artırır",
             dtest = "Lastik basıncını düşürür",
             correct = "Yakıt akışını engelleyerek motorun çalışmasını zorlaştırır"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 95,
             content = "Hangi durumda aracın motoru aşırı ısınabilir?",
             imageTest = R.drawable.test,
@@ -2884,7 +2884,7 @@ object DatabaseTestList {
             ctest = "Hava filtresi kirliyse",
             dtest = "Yakıt filtresi tıkalıysa",
             correct = "Antifriz sıvısı bitmişse"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 96,
             content = "Hangi durum lastiklerin aşırı ısınmasına sebep olabilir?",
             imageTest = R.drawable.test,
@@ -2893,7 +2893,7 @@ object DatabaseTestList {
             ctest = "Motor soğutma sıvısı eksikse",
             dtest = "Sis lambası açıkken uzun yola çıkılmışsa",
             correct = "Lastik basıncı düşükse"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 97,
             content = "Aracınızın direksiyon simidi sertleştiğinde ne yapmalısınız?",
             imageTest = R.drawable.test,
@@ -2902,7 +2902,7 @@ object DatabaseTestList {
             ctest = "Yağ seviyesini kontrol etmelisiniz",
             dtest = "Lastik basıncını kontrol etmelisiniz",
             correct = "Direksiyon sisteminde bir arıza olabilir, servise gitmelisiniz"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 98,
             content = "Aracınızın yakıt göstergesi neden hızlı bir şekilde düşer?",
             imageTest = R.drawable.test,
@@ -2911,7 +2911,7 @@ object DatabaseTestList {
             ctest = "Motor soğutma sıvısı eksiktir",
             dtest = "Yakıt sızıntısı olabilir",
             correct = "Yakıt sızıntısı olabilir"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 99,
             content = "Araçta duman çıkıyorsa hangi durum söz konusu olabilir?",
             imageTest = R.drawable.test,
@@ -2920,7 +2920,7 @@ object DatabaseTestList {
             ctest = "Fren balataları aşınmıştır",
             dtest = "Yağ filtresi kirlenmiştir",
             correct = "Egzoz sistemi tıkalıdır"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 100,
             content = "Fren pedalına sert basıldığında aracın durmaması, hangi sorunla ilişkili olabilir?",
             imageTest = R.drawable.test,
@@ -2932,7 +2932,7 @@ object DatabaseTestList {
         )
     )
     val IlkYardim = mutableListOf(
-        TestlerEntity(
+        TestsEntity(
             idTest = 1,
             content = "Kaza sonucu baygınlık geçiren birine nasıl müdahale etmelisiniz?",
             imageTest = R.drawable.test,
@@ -2942,7 +2942,7 @@ object DatabaseTestList {
             dtest = "Kişiyi uyandırmaya çalışmalısınız",
             correct = "Kişiyi sırt üstü yatırıp hava yolunu açmalısınız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 2,
             content = "Bir kişi bayıldığında ne yapmalısınız?",
             imageTest = R.drawable.test,
@@ -2952,7 +2952,7 @@ object DatabaseTestList {
             dtest = "Kişiye hemen bir şeyler içirmelisiniz",
             correct = "Kişiyi sırt üstü yatırıp başını hafifçe eğmelisiniz"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 3,
             content = "Yaralanan birine nasıl ilk yardım yapılır?",
             imageTest = R.drawable.test,
@@ -2962,7 +2962,7 @@ object DatabaseTestList {
             dtest = "Yarayı üzerine bir örtü örtüp beklemelisiniz",
             correct = "Yarayı temizleyip, üzerine bandaj sarılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 4,
             content = "Ağır bir yaralanma durumunda, nasıl müdahale edilmelidir?",
             imageTest = R.drawable.test,
@@ -2972,7 +2972,7 @@ object DatabaseTestList {
             dtest = "Yaralıyı hızlıca araçla hastaneye götürmelisiniz",
             correct = "Yaralıyı sabırla yerinde tutmalı ve yardım çağırmalısınız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 5,
             content = "Bir kişiye kalp masajı yaparken nelere dikkat edilmelidir?",
             imageTest = R.drawable.test,
@@ -2982,7 +2982,7 @@ object DatabaseTestList {
             dtest = "Hareketlerinizi yavaş ve sakin tutmalısınız",
             correct = "Ellerinizi göğsün ortasında yerleştirip ritmik bir şekilde baskı yapmalısınız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 6,
             content = "Yanık durumda yapılacak ilk müdahale nedir?",
             imageTest = R.drawable.test,
@@ -2992,7 +2992,7 @@ object DatabaseTestList {
             dtest = "Yanık bölgesine bir şey sürmemelisiniz",
             correct = "Yanık bölgesini soğuk suyla en az 10 dakika boyunca yıkamalısınız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 7,
             content = "Boğulma durumunda ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3002,7 +3002,7 @@ object DatabaseTestList {
             dtest = "Kişiyi hemen kucaklayıp, hastaneye götürmelisiniz",
             correct = "Kişiyi sırt üstü yatırmalı ve hava yolunu açmalısınız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 8,
             content = "Kusma halinde ne yapılması gerekmektedir?",
             imageTest = R.drawable.test,
@@ -3012,7 +3012,7 @@ object DatabaseTestList {
             dtest = "Kişiyi sırt üstü yatırıp, bir örtü örtmelisiniz",
             correct = "Kişiyi yavaşça sırt üstü yatırarak, başını yan yatırmalısınız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 9,
             content = "Kanama durumunda hangi önlem alınmalıdır?",
             imageTest = R.drawable.test,
@@ -3022,7 +3022,7 @@ object DatabaseTestList {
             dtest = "Kanayan bölgeyi tamamen sarmalı ve beklemelisiniz",
             correct = "Kanayan bölgeye basınç uygulanmalı ve yüksek tutularak hastaneye götürülmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 10,
             content = "Bir kişinin şok geçirdiği nasıl anlaşılır?",
             imageTest = R.drawable.test,
@@ -3032,7 +3032,7 @@ object DatabaseTestList {
             dtest = "Kişi bilinç kaybı yaşar ve başı döner",
             correct = "Kişinin nabzı hızlanır ve cildi solgunlaşır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 11,
             content = "Bir kişinin bilincinin kapalı olduğu durumlarda ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3042,7 +3042,7 @@ object DatabaseTestList {
             dtest = "Kişiyi kucaklayıp taşımalısınız",
             correct = "Kişiyi sırt üstü yatırarak hava yolunu açmalısınız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 12,
             content = "Ağır bir kanama durumunda, nasıl müdahale edilmelidir?",
             imageTest = R.drawable.test,
@@ -3052,7 +3052,7 @@ object DatabaseTestList {
             dtest = "Kanayan bölgeyi sıkıca bağlayıp, hareketsiz tutmalısınız",
             correct = "Kanayan bölgeye baskı yapmalı ve yaralıyı en yakın sağlık kuruluşuna götürmelisiniz"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 13,
             content = "Boğulma durumunda hangi işlem yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3062,7 +3062,7 @@ object DatabaseTestList {
             dtest = "Kişiyi düz bir zemine yatırarak, kurtarma solunumu yapmalısınız",
             correct = "Kişiyi sırt üstü yatırıp, başını geri doğru eğmelisiniz"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 14,
             content = "Fren balatası problemi ile ilgili aşağıdakilerden hangisi doğru bir müdahale olur?",
             imageTest = R.drawable.test,
@@ -3072,7 +3072,7 @@ object DatabaseTestList {
             dtest = "Araç fren sisteminde sorun yoksa fren balatalarını değiştirmelisiniz",
             correct = "Fren sistemi arızalandığında öncelikle fren balataları kontrol edilmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 15,
             content = "Ellerinizde bir yabancı cisim batarsa, nasıl bir müdahale yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3082,7 +3082,7 @@ object DatabaseTestList {
             dtest = "Yabancı cismi çıkarmak için yarayı iyice kanatmalısınız",
             correct = "Yabancı cismi çıkarmadan, yaranın etrafına bandaj sararak hastaneye gitmelisiniz"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 16,
             content = "Yaralanan bir kişi bilinç kaybı yaşarsa, nasıl müdahale etmelisiniz?",
             imageTest = R.drawable.test,
@@ -3092,7 +3092,7 @@ object DatabaseTestList {
             dtest = "Kişiyi hemen sedyeye alıp hastaneye taşımalısınız",
             correct = "Hemen bir sağlık ekiplerinden yardım istemeli ve kişiyi sırt üstü yatırmalısınız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 17,
             content = "Kişinin şok geçirdiği bir durumda ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3102,7 +3102,7 @@ object DatabaseTestList {
             dtest = "Kişinin kafasını yukarıya doğru kaldırmalısınız",
             correct = "Kişiyi düz bir zemin üzerine yatırıp bacaklarını yukarı kaldırmalısınız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 18,
             content = "Yanık durumunda nasıl müdahale edilmelidir?",
             imageTest = R.drawable.test,
@@ -3112,7 +3112,7 @@ object DatabaseTestList {
             dtest = "Yanık bölgesine bir örtü örtüp, bir süre beklemelisiniz",
             correct = "Yanık bölgesini hemen soğuk su ile en az 10 dakika boyunca yıkamalısınız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 19,
             content = "Bir kişinin boğazına yabancı bir cisim kaçarsa, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3122,7 +3122,7 @@ object DatabaseTestList {
             dtest = "Yabancı cismi ağzından almak için zorlamalısınız",
             correct = "Yabancı cismi karnına baskı yaparak çıkarmalısınız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 20,
             content = "Kusma durumu yaşayan bir kişiye nasıl yardımcı olabilirsiniz?",
             imageTest = R.drawable.test,
@@ -3132,7 +3132,7 @@ object DatabaseTestList {
             dtest = "Kişiye sıvı içirip, başını tutarak beklemelisiniz",
             correct = "Kişiyi sırt üstü yatırmalı ve başını yan yatırmalısınız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 20,
             content = "Bir kişiye kalp masajı yapılırken nelere dikkat edilmelidir?",
             imageTest = R.drawable.test,
@@ -3142,7 +3142,7 @@ object DatabaseTestList {
             dtest = "Masaj yaparken kişi ayakta olmalıdır",
             correct = "Masaj sırasında kişinin sırt üstü pozisyonda olması gerekmektedir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 21,
             content = "Yüksekten düşen bir kişiye nasıl müdahale edilmelidir?",
             imageTest = R.drawable.test,
@@ -3152,7 +3152,7 @@ object DatabaseTestList {
             dtest = "Kişiyi sırt üstü yatırmalı ve hemen su içirmelisiniz",
             correct = "Kişiyi yerinden hareket ettirmemeli, acil yardım çağırılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 22,
             content = "Hangi durumlarda kalp krizi geçiren bir kişiye aspirin verilmelidir?",
             imageTest = R.drawable.test,
@@ -3162,7 +3162,7 @@ object DatabaseTestList {
             dtest = "Eğer kişi nefes almakta zorluk çekiyorsa",
             correct = "Eğer kişi bilinçli ve yutma gücü varsa"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 23,
             content = "Bir kişinin vücut ısısının 35°C'nin altına düştüğü durum nedir?",
             imageTest = R.drawable.test,
@@ -3172,7 +3172,7 @@ object DatabaseTestList {
             dtest = "Güneş çarpması",
             correct = "Hipotermi"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 24,
             content = "Kişinin burnu kanadığında yapılması gereken ilk müdahale nedir?",
             imageTest = R.drawable.test,
@@ -3182,7 +3182,7 @@ object DatabaseTestList {
             dtest = "Kanayan burun ucuna buz koymalısınız",
             correct = "Kişiyi oturtmalı ve başını öne doğru eğmelisiniz"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 25,
             content = "Fren balatalarındaki sorunla ilgili nasıl bir müdahale yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3192,7 +3192,7 @@ object DatabaseTestList {
             dtest = "Fren balatalarını gevşetmelisiniz",
             correct = "Fren balataları kontrol edilmeli ve gerektiğinde değiştirilmeli"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 26,
             content = "Ağır bir elektrik çarpması durumunda nasıl bir müdahale yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3202,7 +3202,7 @@ object DatabaseTestList {
             dtest = "Kişi hemen ayakta tutularak yürütülmelidir",
             correct = "Elektrik akımı kesilmeli, kişiyi elektrik akımından uzaklaştırılmalı"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 27,
             content = "Bilinç kaybı yaşayan bir kişiye yapılması gereken ilk şey nedir?",
             imageTest = R.drawable.test,
@@ -3212,7 +3212,7 @@ object DatabaseTestList {
             dtest = "Kişiyi hemen sırt üstü yatırmalısınız",
             correct = "Kişiyi sırt üstü yatırmalı ve hava yolunu açmalısınız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 28,
             content = "Bir kişiye nasıl suni teneffüs yapılır?",
             imageTest = R.drawable.test,
@@ -3222,7 +3222,7 @@ object DatabaseTestList {
             dtest = "Sadece burun yoluyla 5 saniye arayla solunum yapılmalıdır",
             correct = "Ağız yoluyla 5 saniye arayla 2 kez solunum yaparak başlatılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 29,
             content = "Zehirlenme durumunda hangi maddeler için ilk yardım gereklidir?",
             imageTest = R.drawable.test,
@@ -3232,7 +3232,7 @@ object DatabaseTestList {
             dtest = "Sadece asidik maddeler",
             correct = "Asidik ve alkali maddeler, gazlar, ilaçlar ve bazı bitkiler"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 30,
             content = "Bir kişinin kalbi durmuşsa ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3242,7 +3242,7 @@ object DatabaseTestList {
             dtest = "Kişiye ilaç verilmelidir",
             correct = "Hemen kalp masajı ve suni teneffüs yapılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 31,
             content = "Bir kişi bayıldığında nasıl bir müdahale yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3252,7 +3252,7 @@ object DatabaseTestList {
             dtest = "Kişiyi yan yatırarak beklemelisiniz",
             correct = "Kişiyi sırt üstü yatırmalı ve ayaklarını yukarı kaldırmalısınız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 32,
             content = "Yüksek sıcaklık altında boğulma durumu yaşayan birine nasıl müdahale edilmelidir?",
             imageTest = R.drawable.test,
@@ -3262,7 +3262,7 @@ object DatabaseTestList {
             dtest = "Kişiye sadece soğuk su verilmelidir",
             correct = "Kişi soğuk bir ortama alınmalı ve su içirilmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 33,
             content = "Bir kişiye nasıl şok tedavisi yapılır?",
             imageTest = R.drawable.test,
@@ -3272,7 +3272,7 @@ object DatabaseTestList {
             dtest = "Kişiye sıcak içecekler verilmelidir",
             correct = "Kişiyi sırt üstü yatırmalı ve bacaklarını yukarı kaldırmalısınız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 34,
             content = "Bir kişiye baş dönmesi şikayeti ile müdahale ediliyorsa, yapılması gereken ilk şey nedir?",
             imageTest = R.drawable.test,
@@ -3282,7 +3282,7 @@ object DatabaseTestList {
             dtest = "Kişiyi hemen ayakta tutmalı ve hareket ettirmelisiniz",
             correct = "Kişiyi sırt üstü yatırmalı ve kafasını hafifçe yukarı kaldırmalısınız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 35,
             content = "Çocuklarda zehirlenme durumunda yapılması gereken ilk müdahale nedir?",
             imageTest = R.drawable.test,
@@ -3292,7 +3292,7 @@ object DatabaseTestList {
             dtest = "Zehirli maddeye göre, anne sütü verilmelidir",
             correct = "Acil servise bilgi verilmeli ve çocuk hemen hastaneye götürülmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 36,
             content = "Bir kişiye travma sonucu kanama meydana geldiyse, ilk müdahale nasıl olmalıdır?",
             imageTest = R.drawable.test,
@@ -3302,7 +3302,7 @@ object DatabaseTestList {
             dtest = "Kişiyi hemen yatakta istirahate almalıdır",
             correct = "Kanamanın olduğu bölgeye baskı uygulayarak kanama durdurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 37,
             content = "Bir kişinin şiddetli yanığı olduğunda ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3312,7 +3312,7 @@ object DatabaseTestList {
             dtest = "Yanık bölgesine kremler uygulanmalıdır",
             correct = "Yanık bölgeye soğuk su uygulanmalı ve bir acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 38,
             content = "Bir kişiye alerjik reaksiyon sonucu solunum zorluğu çekiyorsa, yapılması gereken ilk müdahale nedir?",
             imageTest = R.drawable.test,
@@ -3322,7 +3322,7 @@ object DatabaseTestList {
             dtest = "Kişiye ilaç verilmelidir",
             correct = "Hemen acil servise başvurulmalı ve kişi rahat bir pozisyonda tutulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 39,
             content = "Bir kişiye sokma durumunda ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3332,7 +3332,7 @@ object DatabaseTestList {
             dtest = "Sokma bölgesine sıcak su uygulanmalıdır",
             correct = "Sokmanın olduğu bölgeye soğuk kompres uygulanmalı ve kişiye acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 40,
             content = "Kanama durdurulamadığında, ne yapılması gerekir?",
             imageTest = R.drawable.test,
@@ -3342,7 +3342,7 @@ object DatabaseTestList {
             dtest = "Kanama bölgesine asidik bir madde sürülmelidir",
             correct = "Kanama bölgesine bir bandaj sarılmalı ve acil yardım çağrılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 41,
             content = "Bir kişiye ani bir nöbet geçirdiğinde yapılması gereken ilk şey nedir?",
             imageTest = R.drawable.test,
@@ -3352,7 +3352,7 @@ object DatabaseTestList {
             dtest = "Kişinin dilini ısırmaması için müdahale etmelisiniz",
             correct = "Kişiyi güvenli bir yere yatırmalı ve başını korumalısınız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 42,
             content = "Ağır bir baş yaralanmasında ilk yapılacak müdahale nedir?",
             imageTest = R.drawable.test,
@@ -3362,7 +3362,7 @@ object DatabaseTestList {
             dtest = "Baş bölgesine herhangi bir şey uygulanmamalıdır",
             correct = "Baş bölgesine baskı uygulanmalı ve kanama kontrol altına alınmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 43,
             content = "Bir kişide boğulma durumu varsa, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3372,7 +3372,7 @@ object DatabaseTestList {
             dtest = "Kişiye ağzından solunum yapılmalıdır",
             correct = "Kişiyi öne doğru eğmeli ve sırtına vurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 44,
             content = "Buzlu yollar veya kaygan zeminler nedeniyle bir kişi düşerse, ilk müdahale nasıl yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3382,7 +3382,7 @@ object DatabaseTestList {
             dtest = "Kişiye sıcak içecekler verin",
             correct = "Kişiyi sakinleştirerek, kırık veya yaralanma durumlarını kontrol edin ve acil yardım çağırın"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 45,
             content = "Bir kişi elektrik çarpması sonucu bayıldığında yapılacak ilk müdahale nedir?",
             imageTest = R.drawable.test,
@@ -3392,7 +3392,7 @@ object DatabaseTestList {
             dtest = "Kişiye soğuk su verilmelidir",
             correct = "Kişiyi güvenli bir alana taşıyıp, acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 46,
             content = "Bir kişi göğsüne darbeye bağlı olarak bayıldığında ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3402,7 +3402,7 @@ object DatabaseTestList {
             dtest = "Kişiye yemek verilmelidir",
             correct = "Kişiyi sırt üstü yatırmalı ve acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 47,
             content = "Bir kişiye boğulma durumu yaşanıyorsa, ilk yapılacak müdahale nedir?",
             imageTest = R.drawable.test,
@@ -3412,7 +3412,7 @@ object DatabaseTestList {
             dtest = "Kişiyi sırt üstü yatırarak yardım çağrılmalıdır",
             correct = "Kişiyi öne doğru eğmeli ve sırtına vurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 48,
             content = "Ağır bir yanık durumunda ilk müdahale nasıl olmalıdır?",
             imageTest = R.drawable.test,
@@ -3422,7 +3422,7 @@ object DatabaseTestList {
             dtest = "Yanık bölgesine bandaj sarılmalıdır",
             correct = "Yanık bölgeye soğuk su uygulamalı ve acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 49,
             content = "Yüksekten düşme sonucu bir kişide kırık meydana geldiyse, yapılması gereken ilk müdahale nedir?",
             imageTest = R.drawable.test,
@@ -3432,7 +3432,7 @@ object DatabaseTestList {
             dtest = "Kişiye sıcak içecek verilmelidir",
             correct = "Kişi hareket ettirilmeden hemen bir sağlık kuruluşuna yönlendirilmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 50,
             content = "Kanama durdurulamazsa, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3442,7 +3442,7 @@ object DatabaseTestList {
             dtest = "Kanama bölgesine asidik bir madde sürülmelidir",
             correct = "Kanamanın olduğu bölgeye baskı yapılmalı ve acil yardım çağrılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 51,
             content = "Alerjik bir reaksiyon sonucu bir kişide nefes darlığı başlamışsa, ilk yapılacak müdahale nedir?",
             imageTest = R.drawable.test,
@@ -3452,7 +3452,7 @@ object DatabaseTestList {
             dtest = "Kişiye soğuk kompres yapılmalıdır",
             correct = "Kişi sakin bir şekilde oturtulmalı ve acil yardım çağrılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 52,
             content = "Zehirlenme durumunda ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3462,7 +3462,7 @@ object DatabaseTestList {
             dtest = "Zehirli maddeyi yuttuğu kişi kusturulmalıdır",
             correct = "Zehirlenme türüne göre derhal acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 53,
             content = "Baş dönmesi ve halsizlik yaşayan bir kişiye ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3472,7 +3472,7 @@ object DatabaseTestList {
             dtest = "Kişiye hiçbir şey yapılmamalıdır",
             correct = "Kişi sırt üstü yatırılmalı ve bir sağlık kuruluşuna yönlendirilmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 54,
             content = "Bilinç kaybı yaşayan bir kişiye yapılacak ilk müdahale nedir?",
             imageTest = R.drawable.test,
@@ -3482,7 +3482,7 @@ object DatabaseTestList {
             dtest = "Kişiyi sırt üstü yatırmalı ve acil servise başvurulmalıdır",
             correct = "Kişiyi sırt üstü yatırmalı ve acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 55,
             content = "Kafaya darbeye bağlı baş ağrısı yaşayan bir kişi ne yapmalıdır?",
             imageTest = R.drawable.test,
@@ -3492,7 +3492,7 @@ object DatabaseTestList {
             dtest = "Kişiye sıcak içecek verilmelidir",
             correct = "Kişi dinlenmeli ve sağlık kuruluşuna başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 56,
             content = "Kişiye ciddi bir sokma durumunda nasıl müdahale edilmelidir?",
             imageTest = R.drawable.test,
@@ -3502,7 +3502,7 @@ object DatabaseTestList {
             dtest = "Sokma bölgesine asidik bir madde sürülmelidir",
             correct = "Sokma bölgesine soğuk kompres yapılmalı ve kişi acil servise yönlendirilmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 57,
             content = "Kişinin cilt rengi morarmışsa, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3512,7 +3512,7 @@ object DatabaseTestList {
             dtest = "Kişiye su verilmelidir",
             correct = "Kişi hemen sırt üstü yatırılmalı ve acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 58,
             content = "Bir kişi vücudunda baş dönmesi ve sersemlik hissediyorsa, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3522,7 +3522,7 @@ object DatabaseTestList {
             dtest = "Kişi yürütülmelidir",
             correct = "Kişi sırt üstü yatırılmalı ve başı yukarı kaldırılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 59,
             content = "Bir kişide kasılmalar başladıysa, ilk müdahale nasıl olmalıdır?",
             imageTest = R.drawable.test,
@@ -3532,7 +3532,7 @@ object DatabaseTestList {
             dtest = "Kişiye su verilmelidir",
             correct = "Kişinin etrafındaki sert cisimler kaldırılmalı ve acil servis aranmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 60,
             content = "Bir kişiye zehirli bir madde yutmuşsa, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3542,7 +3542,7 @@ object DatabaseTestList {
             dtest = "Kişiye meyve suyu verilmelidir",
             correct = "Kişiye kesinlikle herhangi bir şey verilmemelidir ve acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 61,
             content = "Ağır bir düşme sonucu bel ağrısı yaşayan bir kişiye ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3552,7 +3552,7 @@ object DatabaseTestList {
             dtest = "Kişiye sıcak içecek verilmelidir",
             correct = "Kişiye hareket ettirilmemeli ve hemen acil servis çağrılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 62,
             content = "Bir kişi gözünde kimyasal madde görmüşse, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3562,7 +3562,7 @@ object DatabaseTestList {
             dtest = "Göz üzerine soğuk kompres yapılmalıdır",
             correct = "Göz bol su ile yıkanmalıdır ve hemen acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 63,
             content = "Bir kişi solunum durması sonucu bayıldığında, ilk yapılacak müdahale nedir?",
             imageTest = R.drawable.test,
@@ -3572,7 +3572,7 @@ object DatabaseTestList {
             dtest = "Kişiye sıcak içecek verilmelidir",
             correct = "Ağızdan ağza solunum yapılmalı ve acil servis çağrılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 64,
             content = "Bir kişiye zehirli bir madde cildine sıçradığında, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3582,7 +3582,7 @@ object DatabaseTestList {
             dtest = "Cilt üzerine asidik madde uygulanmalıdır",
             correct = "Cilt hemen bol su ile yıkanmalıdır ve acil servis aranmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 65,
             content = "Ağır bir zehirlenme durumunda kişiye hangi durumlarda kusma yaptırılmalıdır?",
             imageTest = R.drawable.test,
@@ -3592,7 +3592,7 @@ object DatabaseTestList {
             dtest = "Zehirli madde yutan kişinin kendisinin kusması sağlanmalıdır",
             correct = "Yalnızca uzman bir sağlık personeli tarafından yapılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 66,
             content = "Bir kişi aşırı sıcak çarpması geçiriyorsa, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3602,7 +3602,7 @@ object DatabaseTestList {
             dtest = "Kişiye hemen sıcak içecek verilmelidir",
             correct = "Kişi serin bir yere alınmalı ve bol sıvı verilmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 67,
             content = "Bir kişi, bilincini kaybedip bayıldığında, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3612,7 +3612,7 @@ object DatabaseTestList {
             dtest = "Kişi sakin bir ortamda dinlendirilmelidir",
             correct = "Kişi sırt üstü yatırılmalı ve başı hafifçe kaldırılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 68,
             content = "Bir kişi, ağır bir kanama geçiriyorsa, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3622,7 +3622,7 @@ object DatabaseTestList {
             dtest = "Kanama bölgesine sıcak kompres uygulanmalıdır",
             correct = "Kanama bölgesine baskı yapılmalı ve acil servis çağrılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 69,
             content = "Ağır bir yanık meydana geldiğinde hangi müdahale yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3632,7 +3632,7 @@ object DatabaseTestList {
             dtest = "Yanık bölgesine dondurulmuş gıda maddesi konulmalıdır",
             correct = "Yanık bölgesi soğuk su ile yıkanmalı ve hemen hastaneye başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 70,
             content = "Bir kişi kalp krizi geçiriyorsa, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3642,7 +3642,7 @@ object DatabaseTestList {
             dtest = "Kişi derin nefes alması için cesaretlendirilmelidir",
             correct = "Kişiye aspirin verilmelidir ve acil servis çağrılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 71,
             content = "Bir kişi, vücudunda ani bir ağrı hissediyorsa, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3652,7 +3652,7 @@ object DatabaseTestList {
             dtest = "Kişiye su verilmelidir",
             correct = "Kişi hemen oturmalı ve dinlenmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 72,
             content = "Bir kişi, göğüs kafesinde sıkışma hissi yaşıyorsa, hangi durumlar söz konusu olabilir?",
             imageTest = R.drawable.test,
@@ -3662,7 +3662,7 @@ object DatabaseTestList {
             dtest = "Hava yolu enfeksiyonu olabilir",
             correct = "Kalp krizi, solunum yolu tıkanıklığı, veya gıda tıkanması olabilir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 73,
             content = "Ağır bir alerjik reaksiyon sonucu kişinin nefes alması zorlaşıyorsa, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3672,7 +3672,7 @@ object DatabaseTestList {
             dtest = "Kişiye meyve suyu verilmelidir",
             correct = "Kişiye adrenalin iğnesi yapılmalı ve acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 74,
             content = "Bir kişi aniden bayıldığında, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3682,7 +3682,7 @@ object DatabaseTestList {
             dtest = "Kişi hemen yürütülmelidir",
             correct = "Kişi sırt üstü yatırılmalı ve bacakları yukarı kaldırılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 75,
             content = "Bir kişi boğuluyorsa, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3692,7 +3692,7 @@ object DatabaseTestList {
             dtest = "Kişiye kesinlikle yemek verilmemelidir",
             correct = "Kişinin sırtına vurulmalı ve boğulma sırasında yardımcı olunmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 76,
             content = "Bacak veya kol kırılması durumunda ilk yardım nasıl yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3702,7 +3702,7 @@ object DatabaseTestList {
             dtest = "Kırık bölge asla hareketsiz bırakılmamalıdır",
             correct = "Kırık bölge sabitlenmeli ve acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 77,
             content = "Bir kişi kafa travması geçirmişse, ilk müdahale nasıl yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3712,7 +3712,7 @@ object DatabaseTestList {
             dtest = "Kişiye yemek verilmelidir",
             correct = "Kişi kesinlikle hareket ettirilmemeli ve acil servis aranmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 78,
             content = "Bir kişi kalp krizi geçiriyorsa, hangi belirtiler görülür?",
             imageTest = R.drawable.test,
@@ -3722,7 +3722,7 @@ object DatabaseTestList {
             dtest = "Bacaklarda ağrı",
             correct = "Göğüs ağrısı, nefes darlığı, soğuk terleme"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 79,
             content = "Bir kişi solunum sıkıntısı yaşıyorsa, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3732,7 +3732,7 @@ object DatabaseTestList {
             dtest = "Kişiye soğuk kompres yapılmalıdır",
             correct = "Kişiye sık sık nefes alması için yardımcı olunmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 80,
             content = "Bir kişi zehirlenmişse, ilk yapılacak şey nedir?",
             imageTest = R.drawable.test,
@@ -3742,7 +3742,7 @@ object DatabaseTestList {
             dtest = "Kişiye yemek verilmelidir",
             correct = "Kişiye bir şey verilmemeli ve acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 81,
             content = "Bir kişi boğuluyorsa, acil müdahale nasıl yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3752,7 +3752,7 @@ object DatabaseTestList {
             dtest = "Kişiye kalp masajı yapılmalıdır",
             correct = "Kişinin sırtına vurulmalı ve solunum yolunun açılması için yardımcı olunmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 82,
             content = "Bir kişi, yüksekten düşme sonucu bilinç kaybı yaşıyorsa, nasıl bir müdahale yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3762,7 +3762,7 @@ object DatabaseTestList {
             dtest = "Kişiye ağrı kesici verilmelidir",
             correct = "Kişi hareket ettirilmemeli ve başı desteklenmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 83,
             content = "Ağız yoluyla nefes alması zorlaşan bir kişi için ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3772,7 +3772,7 @@ object DatabaseTestList {
             dtest = "Kişiye soğuk kompres yapılmalıdır",
             correct = "Hızlıca müdahale edilerek hava yolu açılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 84,
             content = "Bir kişi travma nedeniyle şok geçiriyorsa, ilk yardım nasıl yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3782,7 +3782,7 @@ object DatabaseTestList {
             dtest = "Kişi hemen su içmelidir",
             correct = "Kişiye hemen bir şey verilmemeli ve acil servis çağrılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 85,
             content = "Bir kişi bayıldığında, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3792,7 +3792,7 @@ object DatabaseTestList {
             dtest = "Kişiye su verilmelidir",
             correct = "Kişi sırt üstü yatırılmalı, bacakları yukarı kaldırılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 86,
             content = "Bir kişi, ağır bir alerjik reaksiyon geçiriyorsa, nasıl bir müdahale yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3802,7 +3802,7 @@ object DatabaseTestList {
             dtest = "Kişiye sıcak kompres yapılmalıdır",
             correct = "Kişiye antihistaminik ilaç verilmelidir ve acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 87,
             content = "Bir kişi kafa travması geçiriyorsa, ilk müdahale nasıl yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3812,7 +3812,7 @@ object DatabaseTestList {
             dtest = "Kişiye yemek verilmelidir",
             correct = "Kişi hareket ettirilmemeli ve acil servis çağrılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 88,
             content = "Ağır bir zehirlenme durumunda, nasıl bir müdahale yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3822,7 +3822,7 @@ object DatabaseTestList {
             dtest = "Kişiye kesinlikle hiçbir şey verilmemelidir",
             correct = "Kişiye sıvı verilmeden acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 89,
             content = "Bir kişi, bir kesik veya yaralanma sonucu kanama geçiriyorsa, ilk yapılacak şey nedir?",
             imageTest = R.drawable.test,
@@ -3832,7 +3832,7 @@ object DatabaseTestList {
             dtest = "Kanama bölgesine bir şey verilmemelidir",
             correct = "Kanama bölgesine baskı yaparak kanama durdurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 90,
             content = "Ağır bir kırık durumunda ilk yapılacak müdahale nedir?",
             imageTest = R.drawable.test,
@@ -3842,7 +3842,7 @@ object DatabaseTestList {
             dtest = "Kırık bölge asla hareketsiz bırakılmamalıdır",
             correct = "Kırık bölge sabitlenmeli ve acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 80,
             content = "Bir kişi zehirlenmişse, ilk yapılacak şey nedir?",
             imageTest = R.drawable.test,
@@ -3852,7 +3852,7 @@ object DatabaseTestList {
             dtest = "Kişiye yemek verilmelidir",
             correct = "Kişiye bir şey verilmemeli ve acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 81,
             content = "Bir kişi boğuluyorsa, acil müdahale nasıl yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3862,7 +3862,7 @@ object DatabaseTestList {
             dtest = "Kişiye kalp masajı yapılmalıdır",
             correct = "Kişinin sırtına vurulmalı ve solunum yolunun açılması için yardımcı olunmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 82,
             content = "Bir kişi, yüksekten düşme sonucu bilinç kaybı yaşıyorsa, nasıl bir müdahale yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3872,7 +3872,7 @@ object DatabaseTestList {
             dtest = "Kişiye ağrı kesici verilmelidir",
             correct = "Kişi hareket ettirilmemeli ve başı desteklenmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 83,
             content = "Ağız yoluyla nefes alması zorlaşan bir kişi için ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3882,7 +3882,7 @@ object DatabaseTestList {
             dtest = "Kişiye soğuk kompres yapılmalıdır",
             correct = "Hızlıca müdahale edilerek hava yolu açılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 84,
             content = "Bir kişi travma nedeniyle şok geçiriyorsa, ilk yardım nasıl yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3892,7 +3892,7 @@ object DatabaseTestList {
             dtest = "Kişi hemen su içmelidir",
             correct = "Kişiye hemen bir şey verilmemeli ve acil servis çağrılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 85,
             content = "Bir kişi bayıldığında, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3902,7 +3902,7 @@ object DatabaseTestList {
             dtest = "Kişiye su verilmelidir",
             correct = "Kişi sırt üstü yatırılmalı, bacakları yukarı kaldırılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 86,
             content = "Bir kişi, ağır bir alerjik reaksiyon geçiriyorsa, nasıl bir müdahale yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3912,7 +3912,7 @@ object DatabaseTestList {
             dtest = "Kişiye sıcak kompres yapılmalıdır",
             correct = "Kişiye antihistaminik ilaç verilmelidir ve acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 87,
             content = "Bir kişi kafa travması geçiriyorsa, ilk müdahale nasıl yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3922,7 +3922,7 @@ object DatabaseTestList {
             dtest = "Kişiye yemek verilmelidir",
             correct = "Kişi hareket ettirilmemeli ve acil servis çağrılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 88,
             content = "Ağır bir zehirlenme durumunda, nasıl bir müdahale yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3932,7 +3932,7 @@ object DatabaseTestList {
             dtest = "Kişiye kesinlikle hiçbir şey verilmemelidir",
             correct = "Kişiye sıvı verilmeden acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 89,
             content = "Bir kişi, bir kesik veya yaralanma sonucu kanama geçiriyorsa, ilk yapılacak şey nedir?",
             imageTest = R.drawable.test,
@@ -3942,7 +3942,7 @@ object DatabaseTestList {
             dtest = "Kanama bölgesine bir şey verilmemelidir",
             correct = "Kanama bölgesine baskı yaparak kanama durdurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 90,
             content = "Ağır bir kırık durumunda ilk yapılacak müdahale nedir?",
             imageTest = R.drawable.test,
@@ -3952,7 +3952,7 @@ object DatabaseTestList {
             dtest = "Kırık bölge asla hareketsiz bırakılmamalıdır",
             correct = "Kırık bölge sabitlenmeli ve acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 91,
             content = "Bir kişi zehirli bir madde yuttuktan sonra ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3962,7 +3962,7 @@ object DatabaseTestList {
             dtest = "Kişiye yemek verilmelidir",
             correct = "Kişiye hiçbir şey verilmemelidir ve acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 92,
             content = "Bir kişi kalp krizi geçiriyorsa, ilk yardım olarak ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3972,7 +3972,7 @@ object DatabaseTestList {
             dtest = "Kişiye yemek verilmelidir",
             correct = "Kişiyi sakinleştirmeli ve acil servise başvurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 93,
             content = "Bir kişi travma sonucu başında kanama varsa, ilk yardım nasıl yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -3982,7 +3982,7 @@ object DatabaseTestList {
             dtest = "Kişi hemen yürütülmelidir",
             correct = "Baş bölgesine baskı yaparak kanama durdurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 94,
             content = "Bir kişi aşırı sıcak çarpması geçiriyorsa, ilk yapılacak şey nedir?",
             imageTest = R.drawable.test,
@@ -3992,7 +3992,7 @@ object DatabaseTestList {
             dtest = "Kişiye hiçbir şey verilmemelidir",
             correct = "Kişi serin bir yere alınmalı ve sıvı verilmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 95,
             content = "Bir kişi elektrik çarpması sonucu bayıldığında, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -4002,7 +4002,7 @@ object DatabaseTestList {
             dtest = "Kişi hemen yürütülmelidir",
             correct = "Elektrik bağlantısı kesilmeli, kişi kalp masajı ile uandırılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 96,
             content = "Bir kişi ağır bir kanama geçiriyorsa, hangi ilk yardım uygulaması yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -4012,7 +4012,7 @@ object DatabaseTestList {
             dtest = "Kanama bölgesine hiçbir şey yapılmamalıdır",
             correct = "Kanama bölgesine baskı yaparak kanama durdurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 97,
             content = "Bir kişi zehirli gazla zehirlenmişse, ilk yardım olarak ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -4022,7 +4022,7 @@ object DatabaseTestList {
             dtest = "Kişiye yemek verilmelidir",
             correct = "Kişi hemen havalandırılan bir alana çıkarılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 98,
             content = "Bir kişi kalp durması geçiriyorsa, ilk yapılacak şey nedir?",
             imageTest = R.drawable.test,
@@ -4032,7 +4032,7 @@ object DatabaseTestList {
             dtest = "Kişiye yemek verilmelidir",
             correct = "Kalp masajı ve suni solunum yapılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 99,
             content = "Bir kişi boğulma tehlikesi geçirdiğinde, nasıl bir müdahale yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -4042,7 +4042,7 @@ object DatabaseTestList {
             dtest = "Kişiye yiyecek verilmelidir",
             correct = "Kişiye sırtına vurulmalı ve su yutması engellenmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 100,
             content = "Bir kişi hipotermi geçiriyorsa, ilk yapılacak şey nedir?",
             imageTest = R.drawable.test,
@@ -4054,7 +4054,7 @@ object DatabaseTestList {
         )
     )
     val Trafik = mutableListOf(
-        TestlerEntity(
+        TestsEntity(
             idTest = 1,
             content = "Aşağıdakilerden hangisi hız limitini aşan bir sürücünün yapması gereken ilk şeydir?",
             imageTest = R.drawable.test,
@@ -4064,7 +4064,7 @@ object DatabaseTestList {
             dtest = "Hız limitine dikkat etmeyi unutmak",
             correct = "Hız limitine uygun hızda araç kullanmaya başlamak"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 2,
             content = "Trafik ışıkları kırmızı iken ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -4074,7 +4074,7 @@ object DatabaseTestList {
             dtest = "Yavaşça geçmek",
             correct = "Aracı durdurmak"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 3,
             content = "Bir kavşağa yaklaşıyorken ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -4084,7 +4084,7 @@ object DatabaseTestList {
             dtest = "Yol kenarındaki işaretlere bakılmamalıdır",
             correct = "Hız yavaşlatılmalı"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 4,
             content = "Trafikteki yaya geçidinin önünde durulması gereken durum nedir?",
             imageTest = R.drawable.test,
@@ -4094,7 +4094,7 @@ object DatabaseTestList {
             dtest = "Yaya geçidinin önünde durulmalıdır",
             correct = "Yaya geçidinin önünde durulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 5,
             content = "Motorlu araçlar hangi hızda otoyol girişine çıkabilirler?",
             imageTest = R.drawable.test,
@@ -4104,7 +4104,7 @@ object DatabaseTestList {
             dtest = "Otoyola göre değişir",
             correct = "120 km/saat"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 6,
             content = "Biri sinyal vermeden şerit değiştirdiğinde hangi işaret yakılır?",
             imageTest = R.drawable.test,
@@ -4114,7 +4114,7 @@ object DatabaseTestList {
             dtest = "Kavşak işareti",
             correct = "Sağa/sola sinyal işareti"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 7,
             content = "Trafikte bir araç sollarken dikkat edilmesi gereken en önemli husus nedir?",
             imageTest = R.drawable.test,
@@ -4124,7 +4124,7 @@ object DatabaseTestList {
             dtest = "Sola sinyal verilmesi",
             correct = "Aracı geçmek için yeterli mesafe bırakmak"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 8,
             content = "Bütün araçların zorunlu olarak sahip olması gereken araç gereç nedir?",
             imageTest = R.drawable.test,
@@ -4134,7 +4134,7 @@ object DatabaseTestList {
             dtest = "Yedek lastik",
             correct = "Yangın tüpü"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 9,
             content = "Bir araç, başka bir aracın kavşakta geçiş önceliğine sahip olduğunu fark ederse, ne yapmalıdır?",
             imageTest = R.drawable.test,
@@ -4144,7 +4144,7 @@ object DatabaseTestList {
             dtest = "Sinyal vermelidir",
             correct = "Yol vermelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 10,
             content = "Araba park ederken nelere dikkat edilmelidir?",
             imageTest = R.drawable.test,
@@ -4154,7 +4154,7 @@ object DatabaseTestList {
             dtest = "Dışarıdaki kişi tarafından yönlendirilmek",
             correct = "Park yerinin işaretlerine"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 11,
             content = "Bir trafik işareti olan hız sınırını, belirtilen değerin ne kadar üzerine çıkmak mümkündür?",
             imageTest = R.drawable.test,
@@ -4164,7 +4164,7 @@ object DatabaseTestList {
             dtest = "Hız sınırını yüzde 50 aşmak mümkündür",
             correct = "Hız sınırı aşılamaz"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 12,
             content = "Bir aracın acil durum sinyalleri nasıl yakılır?",
             imageTest = R.drawable.test,
@@ -4174,7 +4174,7 @@ object DatabaseTestList {
             dtest = "Dörtlü sinyaller açılarak",
             correct = "Dörtlü sinyaller açılarak"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 13,
             content = "Hangi durumda öncelikli geçiş hakkı sağlanır?",
             imageTest = R.drawable.test,
@@ -4184,7 +4184,7 @@ object DatabaseTestList {
             dtest = "Sola dönüş yapılırken",
             correct = "Diğer araçlar geçiş önceliğini bırakmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 14,
             content = "Trafik işaretlerinde yeşil ışık yakıldığında ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -4194,7 +4194,7 @@ object DatabaseTestList {
             dtest = "Sinyal verilmelidir",
             correct = "İleriye doğru gitmek"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 15,
             content = "Araçlar, hangi durumda park edilirken 'no parking' işaretini dikkate almalıdır?",
             imageTest = R.drawable.test,
@@ -4204,7 +4204,7 @@ object DatabaseTestList {
             dtest = "Yalnızca gündüz saatlerinde",
             correct = "Park yasağı olan tüm zamanlarda"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 16,
             content = "Bir yolun sağında park etmek yasak olduğunda, araç park edilmemelidir çünkü:",
             imageTest = R.drawable.test,
@@ -4214,7 +4214,7 @@ object DatabaseTestList {
             dtest = "Acil araçlar geçiş yapamaz",
             correct = "Karşıdan gelen araçların görüşü kapanır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 17,
             content = "Trafikte hız limitine uymadığınızda ne tür bir ceza uygulanır?",
             imageTest = R.drawable.test,
@@ -4224,7 +4224,7 @@ object DatabaseTestList {
             dtest = "Sadece bir uyarı levhası eklenir",
             correct = "Para cezası ve ehliyetin geçici olarak alınması"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 18,
             content = "Hangi durumda kırmızı ışıkta geçiş yapılabilir?",
             imageTest = R.drawable.test,
@@ -4234,7 +4234,7 @@ object DatabaseTestList {
             dtest = "Yeşil ışıkta geçiş yapmak daha tehlikelidir",
             correct = "Ambulans gibi acil araçlar geçerken"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 19,
             content = "Bir kavşağa geldiğinizde önceliği kime vermelisiniz?",
             imageTest = R.drawable.test,
@@ -4244,7 +4244,7 @@ object DatabaseTestList {
             dtest = "Önde giden araçlara",
             correct = "Sağdan gelen araçlara"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 20,
             content = "Aşağıdakilerden hangisi trafiğe çıkmadan önce yapmanız gereken bir kontrol değil?",
             imageTest = R.drawable.test,
@@ -4254,7 +4254,7 @@ object DatabaseTestList {
             dtest = "Lastiklerin hava basıncını kontrol etmek",
             correct = "Yol kenarındaki çukurları incelemek"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 21,
             content = "Hangi durumlarda hız limitine dikkat edilmelidir?",
             imageTest = R.drawable.test,
@@ -4264,7 +4264,7 @@ object DatabaseTestList {
             dtest = "Sadece sabah saatlerinde",
             correct = "Yağmurlu havalarda"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 22,
             content = "Sadece hangi durumda sol şeridi kullanmak yasal değildir?",
             imageTest = R.drawable.test,
@@ -4274,7 +4274,7 @@ object DatabaseTestList {
             dtest = "Eğer sola dönüş yapacaksanız",
             correct = "Kavşağa yaklaşırken"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 23,
             content = "Trafik ışığı yanarken bir aracın geçişini engellemek hangi durumda uygulanabilir?",
             imageTest = R.drawable.test,
@@ -4284,7 +4284,7 @@ object DatabaseTestList {
             dtest = "Acil bir durumda olmak",
             correct = "Acil bir durumda olmak"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 24,
             content = "Bir yolun sonunda 'dur' işareti varken, araç ne yapmalıdır?",
             imageTest = R.drawable.test,
@@ -4294,7 +4294,7 @@ object DatabaseTestList {
             dtest = "Geçmeden önce sinyal vermeli",
             correct = "Durmalı ve geçiş önceliği olan varsa yol vermeli"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 25,
             content = "Bir aracı gece yolculuğunda kullanırken hangi özelliklerin doğru olduğuna dikkat edilmelidir?",
             imageTest = R.drawable.test,
@@ -4304,7 +4304,7 @@ object DatabaseTestList {
             dtest = "Sis farlarının yanması",
             correct = "Farların temiz ve açık olması"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 26,
             content = "Yolda bir kazaya tanık olduğunuzda ilk yapmanız gereken nedir?",
             imageTest = R.drawable.test,
@@ -4314,7 +4314,7 @@ object DatabaseTestList {
             dtest = "Kazanın resimlerini çekmek",
             correct = "Polisi aramak"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 27,
             content = "Trafik kazasında yaralı bir kişi bulunduğunda, ilk yardım yapmadan önce hangi adım izlenmelidir?",
             imageTest = R.drawable.test,
@@ -4324,7 +4324,7 @@ object DatabaseTestList {
             dtest = "Ambulans çağırmak",
             correct = "Ambulans çağırmak"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 28,
             content = "Trafik ışıklarında yeşil yanarken, ancak karşıdan gelen araçlar geçiyorsa ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -4334,7 +4334,7 @@ object DatabaseTestList {
             dtest = "Hızla geçmek",
             correct = "Bekleyip yolun temizlenmesini beklemek"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 29,
             content = "Bir otobüs durağında aracın durması gerektiği durumda ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -4344,7 +4344,7 @@ object DatabaseTestList {
             dtest = "Yolcuları almak için aracın durması gerekir",
             correct = "Bir otobüs varsa durmak"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 30,
             content = "Bir şehir içinde hız sınırına uymanın önemi nedir?",
             imageTest = R.drawable.test,
@@ -4354,7 +4354,7 @@ object DatabaseTestList {
             dtest = "Yalnızca aracın daha hızlı gitmesini sağlamak",
             correct = "Yolda kazaların önlenmesi"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 31,
             content = "Bir şerit değişikliği yaparken, hangi adım izlenmelidir?",
             imageTest = R.drawable.test,
@@ -4364,7 +4364,7 @@ object DatabaseTestList {
             dtest = "Diğer araçlara sinyal vermek gerekmez",
             correct = "Sinyal verilmeli ve şerit değiştirilmeli"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 32,
             content = "Yolda hız yapmanın en önemli nedeni nedir?",
             imageTest = R.drawable.test,
@@ -4374,7 +4374,7 @@ object DatabaseTestList {
             dtest = "Güvenliği sağlamak",
             correct = "Güvenliği sağlamak"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 33,
             content = "Trafikte yavaş hareket eden bir araç gördüğünüzde ne yapmalısınız?",
             imageTest = R.drawable.test,
@@ -4384,7 +4384,7 @@ object DatabaseTestList {
             dtest = "Yol kapalı olduğu için geri dönmelisiniz",
             correct = "Sabırlı olup takip etmelisiniz"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 34,
             content = "Gece sürüşü sırasında araç farlarının ne zaman yüksek konumda olması gerekir?",
             imageTest = R.drawable.test,
@@ -4394,7 +4394,7 @@ object DatabaseTestList {
             dtest = "Yalnızca diğer araçlardan uzakken",
             correct = "Yalnızca şehir dışına çıktığınızda"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 35,
             content = "Bir trafik işareti 'yavaş' levhasını gösteriyorsa, hangi durumda hızınızı düşürmelisiniz?",
             imageTest = R.drawable.test,
@@ -4404,7 +4404,7 @@ object DatabaseTestList {
             dtest = "Yolda herhangi bir engel yokken",
             correct = "Trafik sıkışıklığında"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 36,
             content = "Eğer yol boyunca ilerleyen bir ambulans görürseniz, ne yapmalısınız?",
             imageTest = R.drawable.test,
@@ -4414,7 +4414,7 @@ object DatabaseTestList {
             dtest = "Ambulansa hiçbir şekilde yol vermemelisiniz",
             correct = "Durmalı ve geçiş hakkı vermelisiniz"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 37,
             content = "Yolda trafik ışığı kırmızı olduğunda, araçların ne yapması gereklidir?",
             imageTest = R.drawable.test,
@@ -4424,7 +4424,7 @@ object DatabaseTestList {
             dtest = "Işığa bakmadan geçilebilir",
             correct = "Durmalı ve ışığın yeşil olmasını beklemelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 38,
             content = "Trafikte karşıdan gelen araçla olan mesafenin güvenli olması için hangi kuralı izlemelisiniz?",
             imageTest = R.drawable.test,
@@ -4434,7 +4434,7 @@ object DatabaseTestList {
             dtest = "Mesafe önemlidir, fakat hızlı geçmek daha önemlidir",
             correct = "Yolun durumu ve trafik yoğunluğuna göre mesafeyi ayarlamalısınız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 39,
             content = "Bir park yerinde aracınızı park ederken en önemli güvenlik önlemi nedir?",
             imageTest = R.drawable.test,
@@ -4444,7 +4444,7 @@ object DatabaseTestList {
             dtest = "Hızla park etmek ve zaman kaybetmemek",
             correct = "Park alanına dikkatlice yaklaşmak"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 40,
             content = "Trafikte en güvenli hızda ilerlemek için ne yapmalısınız?",
             imageTest = R.drawable.test,
@@ -4454,7 +4454,7 @@ object DatabaseTestList {
             dtest = "Yalnızca trafik sıkışıklığından kaçınmalısınız",
             correct = "Yol ve hava koşullarına göre hızınızı ayarlamalısınız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 41,
             content = "Hangi durumda sürücü direksiyon başında cep telefonunu kullanabilir?",
             imageTest = R.drawable.test,
@@ -4464,7 +4464,7 @@ object DatabaseTestList {
             dtest = "Telefonu sadece sesli yanıtla kullanabilirsiniz",
             correct = "Yalnızca acil bir durumda"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 42,
             content = "Sürüş sırasında bir araç lastiği patlarsa, sürücü ne yapmalıdır?",
             imageTest = R.drawable.test,
@@ -4474,7 +4474,7 @@ object DatabaseTestList {
             dtest = "Yolun ortasında beklemeli ve yardım beklemelidir",
             correct = "Yavaşça kenara çekmeli ve lastiği değiştirmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 43,
             content = "Bir aracın viraj alırken kayması halinde, sürücü hangi adımı izlemelidir?",
             imageTest = R.drawable.test,
@@ -4484,7 +4484,7 @@ object DatabaseTestList {
             dtest = "Sadece direksiyonu çevirmelidir",
             correct = "Süratini azaltmalı ve direksiyonu yavaşça çevirmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 44,
             content = "Bir aracın arkasında park ederken en önemli şey nedir?",
             imageTest = R.drawable.test,
@@ -4494,7 +4494,7 @@ object DatabaseTestList {
             dtest = "Çevrenin güvenliğini kontrol etmek",
             correct = "Diğer araçların park durumlarına dikkat etmek"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 45,
             content = "Trafikte en fazla dikkat edilmesi gereken unsurlardan biri nedir?",
             imageTest = R.drawable.test,
@@ -4504,7 +4504,7 @@ object DatabaseTestList {
             dtest = "Yol kenarındaki tabelaları okumak",
             correct = "Trafik işaretlerine ve sinyallere dikkat etmek"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 46,
             content = "Bir aracı sağa veya sola dönerken hangi işaret yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -4514,7 +4514,7 @@ object DatabaseTestList {
             dtest = "Sadece direksiyon çevrilmelidir",
             correct = "Sinyal verilmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 47,
             content = "Aracın farları ne zaman kullanılmalıdır?",
             imageTest = R.drawable.test,
@@ -4524,7 +4524,7 @@ object DatabaseTestList {
             dtest = "Hiçbir zaman kullanılmamalıdır",
             correct = "Gece ve kötü hava koşullarında"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 48,
             content = "Trafikte araç kullanırken telefonla konuşmak için hangi durum geçerlidir?",
             imageTest = R.drawable.test,
@@ -4534,7 +4534,7 @@ object DatabaseTestList {
             dtest = "Telefonla konuşmak sadece durduğunuzda serbesttir",
             correct = "Sadece hands-free cihazları kullanarak konuşmak"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 49,
             content = "Bir aracı park etmek için ne kadar mesafe bırakılmalıdır?",
             imageTest = R.drawable.test,
@@ -4544,7 +4544,7 @@ object DatabaseTestList {
             dtest = "Sadece ön alan yeterlidir",
             correct = "Aracın ön ve arkasında yeterli alan bırakılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 50,
             content = "Bir aracın lastiklerinin havası nasıl kontrol edilmelidir?",
             imageTest = R.drawable.test,
@@ -4554,7 +4554,7 @@ object DatabaseTestList {
             dtest = "Lastiklerin havası sadece uzun yolculuklardan önce kontrol edilmelidir",
             correct = "Araç durdurulup lastiklerin havası kontrol edilmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 51,
             content = "Bir trafik işareti 'tehlikeli viraj' uyarısı yapıyorsa, sürücü ne yapmalıdır?",
             imageTest = R.drawable.test,
@@ -4564,7 +4564,7 @@ object DatabaseTestList {
             dtest = "Virajı hızlıca geçmelidir",
             correct = "Hızını azaltmalı ve virajı dikkatlice almalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 52,
             content = "Sürekli sağa sinyal vererek ilerlemek, trafik güvenliği açısından neyi işaret eder?",
             imageTest = R.drawable.test,
@@ -4574,7 +4574,7 @@ object DatabaseTestList {
             dtest = "Trafikte geçiş hakkı verir",
             correct = "Yanlış bir davranıştır ve trafikte tehlike oluşturur"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 53,
             content = "Trafikte hız sınırına uymamak ne gibi sonuçlar doğurabilir?",
             imageTest = R.drawable.test,
@@ -4584,7 +4584,7 @@ object DatabaseTestList {
             dtest = "Farklı bölgelerde hız sınırı geçerlidir",
             correct = "Cezai işlem ve trafikte tehlike oluşturma"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 54,
             content = "Bir aracın arka camında kullanılan sileceklerin durumu ne zaman kontrol edilmelidir?",
             imageTest = R.drawable.test,
@@ -4594,7 +4594,7 @@ object DatabaseTestList {
             dtest = "Yalnızca uzun yolculuklardan önce",
             correct = "Her gün ve araç kullanmadan önce"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 55,
             content = "Trafikte bir aracı takip ederken hangi mesafeyi bırakmalısınız?",
             imageTest = R.drawable.test,
@@ -4604,7 +4604,7 @@ object DatabaseTestList {
             dtest = "Trafikte hiçbir mesafe bırakılmadan ilerlenebilir",
             correct = "Her iki araç arasındaki mesafe, hızınıza bağlı olarak ayarlanmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 56,
             content = "Bir aracın arkasında hızla yaklaşırken nasıl güvenli bir mesafe sağlanır?",
             imageTest = R.drawable.test,
@@ -4614,7 +4614,7 @@ object DatabaseTestList {
             dtest = "Yolun ortasında ilerleyerek",
             correct = "Takip mesafesini artırarak ve hızınızı düşürerek"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 57,
             content = "Bir kavşağa yaklaşırken dikkat edilmesi gereken en önemli şey nedir?",
             imageTest = R.drawable.test,
@@ -4624,7 +4624,7 @@ object DatabaseTestList {
             dtest = "Kavşak öncesinde fren yapmak",
             correct = "Hızınızı azaltarak kavşağa yavaşça yaklaşmak"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 58,
             content = "Sürücülerin hız sınırlarına uymalarının amacı nedir?",
             imageTest = R.drawable.test,
@@ -4633,7 +4633,7 @@ object DatabaseTestList {
             ctest = "Yalnızca yasal zorunlulukları yerine getirmek",
             dtest = "Sadece cezai yaptırımlardan kaçınmak",
             correct = "Trafik güvenliğini sağlamak ve kaza riskini azaltmak"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 59,
             content = "Trafik ışıkları yeşil yandığında sürücü ne yapmalıdır?",
             imageTest = R.drawable.test,
@@ -4643,7 +4643,7 @@ object DatabaseTestList {
             dtest = "Işıklarda beklemelidir",
             correct = "Aracı hızla geçirmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 60,
             content = "Bir kavşaktan sağa dönerken hangi kurallara uyulmalıdır?",
             imageTest = R.drawable.test,
@@ -4653,7 +4653,7 @@ object DatabaseTestList {
             dtest = "Hız arttırılmalıdır",
             correct = "Kavşağa dikkatlice girilmeli, sinyal verilmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 61,
             content = "Bir araçta lastik patladığında ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -4663,7 +4663,7 @@ object DatabaseTestList {
             dtest = "Sadece motoru kapatmalısınız",
             correct = "Araç durdurulup, lastik değiştirilmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 62,
             content = "Otoyol çıkışlarına yaklaşırken sürücü ne yapmalıdır?",
             imageTest = R.drawable.test,
@@ -4673,7 +4673,7 @@ object DatabaseTestList {
             dtest = "Sadece sinyal vererek çıkışa yönelmelidir",
             correct = "Çıkış yapacağı yeri ve şeridi kontrol etmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 63,
             content = "Trafikte yavaş ilerleyen araçlarla karşılaşıldığında hangi önlem alınmalıdır?",
             imageTest = R.drawable.test,
@@ -4683,7 +4683,7 @@ object DatabaseTestList {
             dtest = "Kendini emniyete alıp, beklemelidir",
             correct = "Sabırlı olmalı ve aracı takip etmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 64,
             content = "Trafikte yaya geçidinden geçtiğinizde nelere dikkat etmelisiniz?",
             imageTest = R.drawable.test,
@@ -4693,7 +4693,7 @@ object DatabaseTestList {
             dtest = "Yaya geçidinden geçerken fren yapmalısınız",
             correct = "Yaya geçidine yaklaşırken yavaşlamalı ve yayaların geçişine izin verilmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 65,
             content = "Trafik kazası sırasında ilk olarak yapılması gereken nedir?",
             imageTest = R.drawable.test,
@@ -4703,7 +4703,7 @@ object DatabaseTestList {
             dtest = "Kaza yerini terk etmek ve yardım almak için polisi aramak",
             correct = "Olay yerinde yardım çağırmak ve gerekli güvenlik önlemlerini almak"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 66,
             content = "Karanlıkta, farlarınızı kullanmak için en iyi yaklaşım nedir?",
             imageTest = R.drawable.test,
@@ -4713,7 +4713,7 @@ object DatabaseTestList {
             dtest = "Sadece uzun farları kullanmalısınız",
             correct = "Farları açarak görüş mesafesini artırmalısınız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 67,
             content = "Bir yol kenarında, trafik güvenliğini tehlikeye atacak bir durum varsa, ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -4723,7 +4723,7 @@ object DatabaseTestList {
             dtest = "Bu tür durumlarda trafikte hiçbir işlem yapılmamalıdır",
             correct = "Durum hemen rapor edilmelidir ve trafik polisi çağrılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 68,
             content = "Bir sürücü hız sınırını aşarsa hangi sonuçlar ortaya çıkabilir?",
             imageTest = R.drawable.test,
@@ -4733,7 +4733,7 @@ object DatabaseTestList {
             dtest = "Sürücü, cezai işlem yapılmadan yoluna devam edebilir",
             correct = "Para cezası ve ehliyeti geçici olarak iptal edilebilir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 69,
             content = "Hangi durumda sürücüler alkollü içki kullanarak araç kullanamazlar?",
             imageTest = R.drawable.test,
@@ -4743,7 +4743,7 @@ object DatabaseTestList {
             dtest = "Alkol oranı %0.5'i geçtiğinde yasak olur",
             correct = "Alkol oranı yasal limitin üzerinde olduğunda"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 70,
             content = "Bir araç, karşıdan gelen aracı geçmek için hangi manevrayı yapmalıdır?",
             imageTest = R.drawable.test,
@@ -4753,7 +4753,7 @@ object DatabaseTestList {
             dtest = "Yavaşlayıp, geçişi beklemelidir",
             correct = "Soldan geçmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 71,
             content = "Trafik ışıkları kırmızı yandığında bir sürücü ne yapmalıdır?",
             imageTest = R.drawable.test,
@@ -4763,7 +4763,7 @@ object DatabaseTestList {
             dtest = "Kavşağa yaklaşarak hızını artırmalıdır",
             correct = "Durmalı ve etrafı kontrol etmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 72,
             content = "Otoyol gişelerinden geçerken hangi hızda gitmek gerekir?",
             imageTest = R.drawable.test,
@@ -4773,7 +4773,7 @@ object DatabaseTestList {
             dtest = "Hızlı gitmek önemlidir",
             correct = "Hız sınırını aşmadan ilerlemelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 73,
             content = "Bir araç kavşağa yaklaşıyor ve trafik ışıkları sönük. Ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -4783,7 +4783,7 @@ object DatabaseTestList {
             dtest = "Hızla geçilmelidir",
             correct = "Her iki yönden gelen araçlar kontrol edilmeli ve dikkatlice geçilmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 74,
             content = "Bir araç, sağa dönmek için sinyal verdikten sonra ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -4793,7 +4793,7 @@ object DatabaseTestList {
             dtest = "Sol şeritten dönülmelidir",
             correct = "Sağa dönmeden önce kavşağa dikkatlice yaklaşılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 75,
             content = "Trafikte bir araca yaklaşırken ne yapmalıyız?",
             imageTest = R.drawable.test,
@@ -4803,7 +4803,7 @@ object DatabaseTestList {
             dtest = "Yol işaretlerine göre hareket etmeliyiz",
             correct = "Yavaşlamalı ve gerekli güvenliği sağlamalıyız"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 76,
             content = "Bir araçta kış lastiği kullanımı ne zaman zorunludur?",
             imageTest = R.drawable.test,
@@ -4813,7 +4813,7 @@ object DatabaseTestList {
             dtest = "Kış aylarında, kar ve buz görülen bölgelerde",
             correct = "Kış aylarında, kar ve buz görülen bölgelerde"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 77,
             content = "Trafikte seyir halindeyken dikkat edilmesi gereken önemli unsurlar nelerdir?",
             imageTest = R.drawable.test,
@@ -4823,7 +4823,7 @@ object DatabaseTestList {
             dtest = "Sadece yol çizgileri",
             correct = "Hız, dikkat ve araç kontrolü"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 78,
             content = "Trafikte, karşıdan gelen bir aracı sollarken nelere dikkat edilmelidir?",
             imageTest = R.drawable.test,
@@ -4833,7 +4833,7 @@ object DatabaseTestList {
             dtest = "Yalnızca sol şeridi kullanmak",
             correct = "Geçiş için uygun olan alanı beklemek"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 79,
             content = "Hangi durumda araç hızını artırmak doğru değildir?",
             imageTest = R.drawable.test,
@@ -4842,7 +4842,7 @@ object DatabaseTestList {
             ctest = "Açık yolda hızlanmak",
             dtest = "Güvenli bir şeritte hızlanmak",
             correct = "Trafik sıkışıklığında hızlanmak"
-        ), TestlerEntity(
+        ), TestsEntity(
             idTest = 80,
             content = "Bir aracın önünde duruyorken, aracın motoru neden çalıştırılmamalıdır?",
             imageTest = R.drawable.test,
@@ -4852,7 +4852,7 @@ object DatabaseTestList {
             dtest = "Güvenli değil ve fazla yakıt tüketimine yol açar",
             correct = "Sıkışan hava ve yakıt tüketimi riski"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 81,
             content = "Bir araç, zemin kaygan olduğunda nasıl davranmalıdır?",
             imageTest = R.drawable.test,
@@ -4862,7 +4862,7 @@ object DatabaseTestList {
             dtest = "Yavaşça frene basarak durmalıdır",
             correct = "Yavaşlayarak ilerlemeli ve fren kullanmamalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 82,
             content = "Hangi durumda yaya geçidi öncesinde durulmalıdır?",
             imageTest = R.drawable.test,
@@ -4872,7 +4872,7 @@ object DatabaseTestList {
             dtest = "Yaya geçidi bulunmayan yerlerde durulmalıdır",
             correct = "Yaya geçidinden önce durulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 83,
             content = "Bir kavşaktan geçerken nelere dikkat edilmelidir?",
             imageTest = R.drawable.test,
@@ -4882,7 +4882,7 @@ object DatabaseTestList {
             dtest = "İşaretlere dikkat edilmeden geçilmelidir",
             correct = "Sağa ve sola bakılmalı, trafik işaretleri göz önünde bulundurulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 84,
             content = "Trafik ışıkları yeşil yanarken, geçiş önceliği kime aittir?",
             imageTest = R.drawable.test,
@@ -4892,7 +4892,7 @@ object DatabaseTestList {
             dtest = "Yalnızca sola dönen araçlara",
             correct = "Trafikteki tüm araçlara aittir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 85,
             content = "Bir aracı sollarken hangi kurallara dikkat edilmelidir?",
             imageTest = R.drawable.test,
@@ -4902,7 +4902,7 @@ object DatabaseTestList {
             dtest = "Karşıdan gelen araçları dikkate alarak geçiş yapılmalıdır",
             correct = "Karşıdan gelen araçları dikkate alarak geçiş yapılmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 86,
             content = "Yolun ortasında park etmiş bir araç karşısında ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -4912,7 +4912,7 @@ object DatabaseTestList {
             dtest = "Geçiş izni veren herhangi bir trafik işareti aranmalıdır",
             correct = "Sağdan ya da soldan geçilmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 87,
             content = "Trafik kazasında, sürücüler ne yapmalıdır?",
             imageTest = R.drawable.test,
@@ -4922,7 +4922,7 @@ object DatabaseTestList {
             dtest = "Yalnızca polise haber verilmelidir",
             correct = "Kazaya karışan kişilere yardım etmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 88,
             content = "Motorlu taşıtlar için hız sınırı nedir?",
             imageTest = R.drawable.test,
@@ -4932,7 +4932,7 @@ object DatabaseTestList {
             dtest = "Yalnızca otobüsler için hız sınırı vardır",
             correct = "Yolun türüne ve trafik koşullarına göre değişir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 89,
             content = "Aracın ışıkları yanmadığında ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -4942,7 +4942,7 @@ object DatabaseTestList {
             dtest = "İşaretler yapılmalıdır",
             correct = "Aracın ışıkları kontrol edilip değiştirilmelidir"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 90,
             content = "Bir araç, kavşağa yaklaştığında ne yapmalıdır?",
             imageTest = R.drawable.test,
@@ -4952,7 +4952,7 @@ object DatabaseTestList {
             dtest = "Herhangi bir şey yapmasına gerek yoktur",
             correct = "Hızını azaltarak dikkatlice yaklaşmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 91,
             content = "Trafikte, sinyal vermek ne zaman gereklidir?",
             imageTest = R.drawable.test,
@@ -4962,7 +4962,7 @@ object DatabaseTestList {
             dtest = "Trafikte hiçbir zaman",
             correct = "Yol değiştireceğiniz zaman"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 92,
             content = "Bir trafik işaretinin kırmızı ışıkta olması durumunda ne yapılmalıdır?",
             imageTest = R.drawable.test,
@@ -4972,7 +4972,7 @@ object DatabaseTestList {
             dtest = "Durdurulmaz",
             correct = "Geçmeden önce durulmalıdır"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 93,
             content = "Bir araç şerit değiştirmek için ne yapmalıdır?",
             imageTest = R.drawable.test,
@@ -4982,7 +4982,7 @@ object DatabaseTestList {
             dtest = "Sadece sol şeridi kullanmalıdır",
             correct = "Sinyal vermeli ve şeridi değiştirmeli"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 94,
             content = "Hangi durumda hızınızı artırmanız gereklidir?",
             imageTest = R.drawable.test,
@@ -4992,7 +4992,7 @@ object DatabaseTestList {
             dtest = "Hiçbir durumda hız artırılmamalıdır",
             correct = "Yolun boş olduğu durumlarda"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 95,
             content = "Otoparkta, bir aracı park ederken dikkat edilmesi gereken şey nedir?",
             imageTest = R.drawable.test,
@@ -5002,7 +5002,7 @@ object DatabaseTestList {
             dtest = "Park etmeye karar verildikten sonra hareket edilmelidir",
             correct = "Diğer araçların ve yayaların engellenmemesi"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 96,
             content = "Sürekli yola odaklanmak yerine ne zaman çevreye dikkat edilmelidir?",
             imageTest = R.drawable.test,
@@ -5012,7 +5012,7 @@ object DatabaseTestList {
             dtest = "Trafik sıkışıklığında",
             correct = "Yol dışındaki dikkat çekici durumlarda"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 97,
             content = "Bütün yol kullanıcılarının dikkat etmesi gereken en önemli kural nedir?",
             imageTest = R.drawable.test,
@@ -5022,7 +5022,7 @@ object DatabaseTestList {
             dtest = "Zebra geçitlerine dikkat etmek",
             correct = "Diğer araçların ve yayaların haklarına saygı göstermek"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 98,
             content = "Aşağıdakilerden hangisi sürücünün güvenliğini artırmaz?",
             imageTest = R.drawable.test,
@@ -5032,7 +5032,7 @@ object DatabaseTestList {
             dtest = "Düşük hızla hareket edilmesi",
             correct = "Sadece emniyet kemerinin takılması"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 99,
             content = "Trafikte gece sürüşü sırasında farlar hangi durumda kullanılmalıdır?",
             imageTest = R.drawable.test,
@@ -5042,7 +5042,7 @@ object DatabaseTestList {
             dtest = "Sadece çok erken saatlerde",
             correct = "Gece vakti ve yoğun karanlıkta"
         ),
-        TestlerEntity(
+        TestsEntity(
             idTest = 100,
             content = "Yolculuk sırasında telefonla konuşmanın en iyi alternatifi nedir?",
             imageTest = R.drawable.test,

@@ -1,4 +1,4 @@
-package com.unallapps.ehliyetsinavinacalisiyorum.ui.profil
+package com.unallapps.ehliyetsinavinacalisiyorum.ui.profile
 
 import android.graphics.Bitmap
 import androidx.annotation.DrawableRes
@@ -15,25 +15,27 @@ import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
+class ProfileViewModel @Inject constructor(private val userRepository: UserRepository) :
+    ViewModel() {
     private val defaultUser = UserEntity(1, "Misafir Kullanıcı")
     private val _userInfo: MutableStateFlow<UserEntity> = MutableStateFlow(defaultUser)
     val userInfo: StateFlow<UserEntity> = _userInfo
     private var byteArray: ByteArray? = null
     private val _nameStateText: MutableStateFlow<String> = MutableStateFlow("Misafir Kullanıcı")
-    val nameStateText : MutableStateFlow<String> = _nameStateText
+    val nameStateText: MutableStateFlow<String> = _nameStateText
     private val _userImage: MutableStateFlow<ByteArray?> = MutableStateFlow(null)
-    val userImage : MutableStateFlow<ByteArray?> = _userImage
-
-    val _isDeleteAll: MutableStateFlow<Boolean> = MutableStateFlow(true)
+    val userImage: MutableStateFlow<ByteArray?> = _userImage
+    private val _isDeleteAll: MutableStateFlow<Boolean> = MutableStateFlow(true)
+    val isDeleteAll: StateFlow<Boolean> = _isDeleteAll
 
     @DrawableRes
     private val _settingsIcon = MutableStateFlow(R.drawable.baseline_settings_24)
-     val settingsIcon = _settingsIcon
-     fun setSettingsIcon() {
+    val settingsIcon = _settingsIcon
+    fun setSettingsIcon() {
         _settingsIcon.value =
             if (_isDeleteAll.value) R.drawable.baseline_settings_24 else R.drawable.baseline_edit_24
     }
+
     init {
         viewModelScope.launch {
             if (userRepository.getUserSize().size == 0) {
@@ -43,12 +45,12 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
         }
     }
 
-    fun getUserName() {
+    private fun getUserName() {
         viewModelScope.launch {
             userRepository.getUser()?.let {
                 _userInfo.value = it
-                _nameStateText.value =it.userName
-                _userImage.value=it.userPhoto
+                _nameStateText.value = it.userName
+                _userImage.value = it.userPhoto
             } ?: run {
                 userRepository.insert(defaultUser)
                 _userInfo.value = defaultUser
@@ -79,5 +81,9 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
                 _userInfo.value = userRepository.getUser()
             }.runCatching {}
         }
+    }
+
+    fun setDeleteAll(boolean: Boolean) {
+        _isDeleteAll.value = boolean
     }
 }

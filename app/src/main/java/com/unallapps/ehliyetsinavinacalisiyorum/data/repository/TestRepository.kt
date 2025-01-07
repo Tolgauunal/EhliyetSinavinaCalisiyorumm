@@ -1,7 +1,7 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.data.repository
 
-import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestlerEntity
+import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestsEntity
 
 interface TestRepository {
-    suspend fun getTestlerData(dersAdi: String, testNum: Int): List<TestlerEntity>?
+    suspend fun getTestsData(lessonName: String, testNumber: Int): List<TestsEntity>?
 }

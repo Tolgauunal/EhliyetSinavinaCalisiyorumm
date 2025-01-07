@@ -1,7 +1,6 @@
-@file:Suppress("IMPLICIT_CAST_TO_ANY")
+package com.unallapps.ehliyetsinavinacalisiyorum.ui.tests.viewmodel
 
-package com.unallapps.ehliyetsinavinacalisiyorum.ui.testler
-
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.unallapps.ehliyetsinavinacalisiyorum.R
@@ -10,6 +9,7 @@ import com.unallapps.ehliyetsinavinacalisiyorum.data.Lesson
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestSaveIdEntity
 import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestRepository
 import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestSaveIdRepository
+import com.unallapps.ehliyetsinavinacalisiyorum.data.util.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,9 +18,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TestViewModel @Inject constructor(
+class TestScreenViewModel @Inject constructor(
     private val testRepository: TestRepository,
-    private val testSaveIdRepository: TestSaveIdRepository
+    private val testSaveIdRepository: TestSaveIdRepository,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val _getSelectedLessonInfo: MutableStateFlow<Lesson?> = MutableStateFlow(null)
     val getSelectedLessonInfo = _getSelectedLessonInfo.asStateFlow()
@@ -52,7 +53,6 @@ class TestViewModel @Inject constructor(
     private val _optionD: MutableStateFlow<String> = MutableStateFlow("")
     val optionD = _optionD.asStateFlow()
     private val _lessonName: MutableStateFlow<String> = MutableStateFlow("")
-    val lessonName = _lessonName.asStateFlow()
     private val _backgroundColorA: MutableStateFlow<Int?> = MutableStateFlow(null)
     val backgroundColorA = _backgroundColorA.asStateFlow()
     private val _backgroundColorB: MutableStateFlow<Int?> = MutableStateFlow(null)
@@ -62,21 +62,33 @@ class TestViewModel @Inject constructor(
     private val _backgroundColorD: MutableStateFlow<Int?> = MutableStateFlow(null)
     val backgroundColorD = _backgroundColorD.asStateFlow()
     private val _testClickable: MutableStateFlow<Boolean?> = MutableStateFlow(true)
-    val testClickable = _testClickable.asStateFlow()
-    private val deneme: MutableStateFlow<TestSaveIdEntity?> = MutableStateFlow(null)
+    private val continueTest: MutableStateFlow<TestSaveIdEntity?> = MutableStateFlow(null)
     private val _restartOrContinue: MutableStateFlow<Boolean?> = MutableStateFlow(null)
 
-    fun getTestList(lessonName: String) {
+    init {
+        savedStateHandle.get<String>(Constants.STRING.LESSON_NAME)?.let {
+            _lessonName.value = it
+        }
+        savedStateHandle.get<Boolean>(Constants.STRING.RESTART_OR_CONTINUE)?.let {
+            _restartOrContinue.value = it
+        }
+        getTestList()
+        getSelectedLesson()
+    }
+
+    private fun getTestList() {
         viewModelScope.launch {
             if (_restartOrContinue.value == true) {
-                deneme.value = testSaveIdRepository.getTestData(_lessonName.value)
-                _questionIndex.value = deneme.value!!.testNumber
-                _correctSum.value = deneme.value!!.correctSize
-                _wrongSum.value = deneme.value!!.wrongSize
-                _questionIndex.value = deneme.value!!.testNumber
-                _restartOrContinue.value = false
+                continueTest.value = testSaveIdRepository.getTestData(_lessonName.value)
+                continueTest.value?.let {
+                    _questionIndex.value = it.testNumber
+                    _correctSum.value = it.correctSize
+                    _wrongSum.value = it.wrongSize
+                    _questionIndex.value = it.testNumber
+                    _restartOrContinue.value = false
+                }
             }
-            testRepository.getTestlerData(lessonName, _questionIndex.value)?.let {
+            testRepository.getTestsData(_lessonName.value, _questionIndex.value)?.let {
                 _questionSize.value = it.size
                 _question.value = it[_questionIndex.value].content.toString()
                 _correct.value = it[_questionIndex.value].correct.toString()
@@ -126,7 +138,7 @@ class TestViewModel @Inject constructor(
         }
     }
 
-    fun getSelectedLesson() {
+    private fun getSelectedLesson() {
         DatabaseLesson.derslerList.forEach {
             if (it.name == _lessonName.value) {
                 _getSelectedLessonInfo.value = it
@@ -149,14 +161,22 @@ class TestViewModel @Inject constructor(
                 setFinishAlertDialog(true)
             }
         }
+        //Çalışılacak burada sürekli repository çekmeye gerek yok.
+        viewModelScope.launch {
+            testRepository.getTestsData(_lessonName.value, _questionIndex.value)?.let {
+                _questionSize.value = it.size
+                _question.value = it[_questionIndex.value].content.toString()
+                _correct.value = it[_questionIndex.value].correct.toString()
+                it[_questionIndex.value].imageTest?.let { image ->
+                    _questionImage.value = image
+                }
+                _optionA.value = it[_questionIndex.value].atest.toString()
+                _optionB.value = it[_questionIndex.value].btest.toString()
+                _optionC.value = it[_questionIndex.value].ctest.toString()
+                _optionD.value = it[_questionIndex.value].dtest.toString()
+            }
+        }
     }
-
-    fun setLessonName(lessonName: String) {
-        _lessonName.value = lessonName
-        getTestList(lessonName)
-        getSelectedLesson()
-    }
-
 
     fun setFinishAlertDialog(finishAlertDialog: Boolean) {
         _finishAlertDialog.value = finishAlertDialog
@@ -168,19 +188,13 @@ class TestViewModel @Inject constructor(
 
     fun setTestNumber(testNumber: Int) {
         viewModelScope.launch {
-            _lessonName.value?.let {
-                testSaveIdRepository.updateTestSave(
-                    testNumber,
-                    it,
-                    _correctSum.value,
-                    _wrongSum.value,
-                    _questionSize.value
-                )
-            }
+            testSaveIdRepository.updateTestSave(
+                testNumber,
+                _lessonName.value,
+                _correctSum.value,
+                _wrongSum.value,
+                _questionSize.value
+            )
         }
-    }
-
-    fun setRestartOrContinue(restartOrContinue: Boolean) {
-        _restartOrContinue.value = restartOrContinue
     }
 }

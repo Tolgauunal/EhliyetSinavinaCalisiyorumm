@@ -1,5 +1,6 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.ui.component
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -37,6 +38,7 @@ import androidx.compose.ui.unit.toSize
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseSubject
 
+@SuppressLint("ResourceAsColor")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AutoComplete(isClick: (String) -> Unit) {

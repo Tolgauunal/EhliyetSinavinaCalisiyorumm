@@ -1,4 +1,4 @@
-package com.unallapps.ehliyetsinavinacalisiyorum.ui.testler
+package com.unallapps.ehliyetsinavinacalisiyorum.ui.tests.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,18 +10,18 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TestlerNavViewModel @Inject constructor(val testSaveIdRepository: TestSaveIdRepository) :
+class TestsNavViewModel @Inject constructor(val testSaveIdRepository: TestSaveIdRepository) :
     ViewModel() {
-    private val _selectedDersItemIndex: MutableStateFlow<Int> = MutableStateFlow(0)
-    val selectedDersItemIndex: MutableStateFlow<Int> = _selectedDersItemIndex
+    private val _selectedLessonItemIndex: MutableStateFlow<Int> = MutableStateFlow(0)
+    val selectedLessonItemIndex: MutableStateFlow<Int> = _selectedLessonItemIndex
 
-    private val _selectedDersItemText: MutableStateFlow<String> = MutableStateFlow("İlk Yardım")
-    val selectedDersItemText: MutableStateFlow<String> = _selectedDersItemText
+    private val _selectedLessonItemText: MutableStateFlow<String> = MutableStateFlow("İlk Yardım")
+    val selectedLessonItemText: MutableStateFlow<String> = _selectedLessonItemText
     private val testIdNameList =
         listOf(
-            TestSaveIdEntity(1, "İlk Yardım", 0),
-            TestSaveIdEntity(2, "Trafik", 0),
-            TestSaveIdEntity(3, "Motor", 0)
+            TestSaveIdEntity(1, "İlk Yardım"),
+            TestSaveIdEntity(2, "Trafik"),
+            TestSaveIdEntity(3, "Motor")
         )
 
     init {
@@ -39,5 +39,12 @@ class TestlerNavViewModel @Inject constructor(val testSaveIdRepository: TestSave
         viewModelScope.launch {
             testSaveIdRepository.updateTestSave(0, lessonName = dersAdi, 0, 0, 0)
         }
+    }
+
+    fun setSelectedLessonItemText(data: String) {
+        _selectedLessonItemText.value = data
+    }
+    fun setSelectedLessonItemIndex(data: Int) {
+        _selectedLessonItemIndex.value = data
     }
 }

@@ -1,4 +1,4 @@
-package com.unallapps.ehliyetsinavinacalisiyorum.ui.testler
+package com.unallapps.ehliyetsinavinacalisiyorum.ui.tests.fragment
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -12,8 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -26,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -34,18 +33,19 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseLesson
 import com.unallapps.ehliyetsinavinacalisiyorum.R
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.tests.viewmodel.TestsNavViewModel
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
-fun Testler(
-    paddingModifier: Modifier,
+fun TestsNavFragment(
+    modifier: Modifier,
     navController: NavHostController,
-    testlerNavViewModel: TestlerNavViewModel = hiltViewModel()
+    viewModel: TestsNavViewModel = hiltViewModel()
 ) {
-    val selectedDersItemIndex = testlerNavViewModel.selectedDersItemIndex.collectAsState()
-    val selectedDersItemText = testlerNavViewModel.selectedDersItemText.collectAsState()
+    val selectedLessonItemIndex = viewModel.selectedLessonItemIndex.collectAsState()
+    val selectedLessonItemText = viewModel.selectedLessonItemText.collectAsState()
     Column(
-        modifier = paddingModifier
+        modifier = modifier
             .padding(start = 8.dp, end = 8.dp, top = 8.dp)
             .fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween,
@@ -53,12 +53,12 @@ fun Testler(
     ) {
         LazyColumn(modifier = Modifier.fillMaxWidth(), content = {
             items(DatabaseLesson.derslerList.size) { index ->
-                val ders = DatabaseLesson.derslerList[index]
-                if (selectedDersItemIndex.value == index) {
+                val lesson = DatabaseLesson.derslerList[index]
+                if (selectedLessonItemIndex.value == index) {
                     Card(modifier = Modifier
                         .clickable {
-                            testlerNavViewModel.selectedDersItemText.value = ders.name
-                            testlerNavViewModel.selectedDersItemIndex.value = index
+                            viewModel.selectedLessonItemText.value = lesson.name
+                            viewModel.selectedLessonItemIndex.value = index
                         }
                         .padding(4.dp)
                         .fillMaxWidth(),
@@ -71,16 +71,16 @@ fun Testler(
                             horizontalArrangement = Arrangement.Start
                         ) {
                             Image(
-                                painter = painterResource(id = ders.icon),
+                                painter = painterResource(id = lesson.icon),
                                 contentDescription = "",
                                 alignment = Alignment.TopCenter,
                                 modifier = Modifier.size(75.dp)
                             )
                             Text(
-                                text = ders.name,
+                                text = lesson.name,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 18.sp,
-                                color = Color(0xFFFFFFFF),
+                                color = Color.White,
                                 textAlign = TextAlign.Center,
                                 modifier = Modifier.padding(16.dp)
                             )
@@ -90,8 +90,8 @@ fun Testler(
                     Card(
                         modifier = Modifier
                             .clickable {
-                                testlerNavViewModel.selectedDersItemText.value = ders.name
-                                testlerNavViewModel.selectedDersItemIndex.value = index
+                                viewModel.setSelectedLessonItemText(lesson.name)
+                                viewModel.setSelectedLessonItemIndex(index)
                             }
                             .padding(4.dp)
                             .fillMaxWidth(),
@@ -105,16 +105,16 @@ fun Testler(
                             horizontalArrangement = Arrangement.Start
                         ) {
                             Image(
-                                painter = painterResource(id = ders.icon),
+                                painter = painterResource(id = lesson.icon),
                                 contentDescription = "",
                                 alignment = Alignment.TopCenter,
                                 modifier = Modifier.size(75.dp)
                             )
                             Text(
-                                text = ders.name,
+                                text = lesson.name,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 18.sp,
-                                color = Color(0xFFFFFFFF),
+                                color = Color.White,
                                 textAlign = TextAlign.Center,
                                 modifier = Modifier.padding(16.dp)
                             )
@@ -132,25 +132,25 @@ fun Testler(
             Button(
                 colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                 onClick = {
-                    testlerNavViewModel.defaultTestItem(selectedDersItemText.value)
-                    navController.navigate("testEkrani/${selectedDersItemText.value}/${false}")
+                    viewModel.defaultTestItem(selectedLessonItemText.value)
+                    navController.navigate("testScreen/${selectedLessonItemText.value}/${false}")
                 },
                 modifier = Modifier
                     .padding(16.dp)
                     .weight(0.5f)
             ) {
-                Text(text = "Baştan Başla", fontSize = 16.sp)
+                Text(text = stringResource(R.string.Restart), fontSize = 16.sp)
             }
             Button(
                 colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                 onClick = {
-                    navController.navigate("testEkrani/${selectedDersItemText.value}/${true}")
+                    navController.navigate("testScreen/${selectedLessonItemText.value}/${true}")
                 },
                 modifier = Modifier
                     .padding(16.dp)
                     .weight(0.5f)
             ) {
-                Text(text = "Devam Et", fontSize = 16.sp)
+                Text(text = stringResource(R.string.Continue), fontSize = 16.sp)
             }
         }
     }

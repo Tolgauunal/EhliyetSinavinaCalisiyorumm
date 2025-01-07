@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -33,13 +34,10 @@ import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.AutoComplete
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CustomAlertDialog
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.LessonLazyRow
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.SubjectLazyRow
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
 @Composable
-fun Home(
+fun HomeFragment(
     modifier: Modifier,
     navController: NavHostController,
     homeViewModel: HomeViewModel = hiltViewModel()
@@ -48,6 +46,7 @@ fun Home(
     val lessonSelectedItem = homeViewModel.lessonSelectedItem.collectAsState()
     val selectedSubject = homeViewModel.selectedSubject.collectAsState()
     val alertDialog = homeViewModel.alertDialog.collectAsState()
+    val userInfo = homeViewModel.userInfo.collectAsState()
     Column(
         modifier = modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp),
         verticalArrangement = Arrangement.Top,
@@ -63,11 +62,11 @@ fun Home(
                 color = colorResource(id = R.color.kapaliMavi),
                 fontSize = 16.sp
             )
-            homeViewModel.userInfo.value.userPhoto?.let {
+            userInfo.value.userPhoto?.let {
                 val bitmap = BitmapFactory.decodeByteArray(
-                    homeViewModel.userInfo.value.userPhoto,
+                    userInfo.value.userPhoto,
                     0,
-                    homeViewModel.userInfo.value.userPhoto!!.size
+                    userInfo.value.userPhoto!!.size
                 )
                 Image(
                     bitmap = bitmap.asImageBitmap(),
@@ -104,12 +103,12 @@ fun Home(
                         .padding(10.dp)
                 ) {
                     Text(
-                        text = "Bütün Konulara Hızlı ve Kolay Yoldan Ulaşın",
+                        text = stringResource(R.string.Search_Info),
                         color = colorResource(id = R.color.white),
                         textAlign = TextAlign.Center
                     )
                     AutoComplete {
-                        navController.navigate("konuAnlatimi/${it}")
+                        navController.navigate("subjectScreen/${it}")
                     }
                 }
                 Image(
@@ -123,20 +122,20 @@ fun Home(
         }
         Spacer(modifier = Modifier.padding(5.dp))
         LessonLazyRow(lessonSelectedItem = lessonSelectedItem.value) {
-            homeViewModel.lessonSelectedItem.value = it
+            homeViewModel.setLessonSelectedItem(it)
         }
         Spacer(modifier = Modifier.padding(5.dp))
         SubjectLazyRow(lessonSelectedItemIndex = lessonSelectedItem.value,
             controller = true,
-            onSelectedSubject = { homeViewModel.selectedSubject.value = it },
-            onAlertDialog = { homeViewModel.alertDialog.value = it })
+            onSelectedSubject = { homeViewModel.setSelectedSubject(it) },
+            onAlertDialog = { homeViewModel.setAlertDialog(it) })
     }
     if (alertDialog.value) {
         CustomAlertDialog(
             selectedSubject.value,
             onAlertDialogChange = { homeViewModel.alertDialog.value = it },
-            onClickBilgiKartlari = { navController.navigate("bilgiKartlari/${it}") }) {
-            navController.navigate("konuAnlatimi/${it}")
+            onClickInformationCard = { navController.navigate("informationCard/${it}") }) {
+            navController.navigate("subjectScreen/${it}")
         }
     }
 }

@@ -4,6 +4,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class UserEntity(@PrimaryKey(autoGenerate = true) val userid: Int = 0,
+data class UserEntity(
+    @PrimaryKey(autoGenerate = true) val userid: Int = 0,
     val userName: String,
-    var userPhoto: ByteArray?=null)
+    var userPhoto: ByteArray? = null
+)

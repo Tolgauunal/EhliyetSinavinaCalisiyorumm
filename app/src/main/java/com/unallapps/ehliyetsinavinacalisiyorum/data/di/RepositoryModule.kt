@@ -1,11 +1,11 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.data.di
 
-import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.InformationCardiRepository
-import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.InformationCardiRepositoryImpl
+import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.InformationCardRepository
+import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.InformationCardRepositoryImpl
 import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestSaveIdRepository
 import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestSaveIdRepositoryImpl
 import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestRepository
-import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestlerRepositoryImpl
+import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestsRepositoryImpl
 import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.UserRepository
 import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.UserRepositoryImpl
 import dagger.Module
@@ -23,12 +23,12 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideTestlerRepository(testlerRepositoryImpl: TestlerRepositoryImpl): TestRepository =
-        testlerRepositoryImpl
+    fun provideTestlerRepository(testsRepositoryImpl: TestsRepositoryImpl): TestRepository =
+        testsRepositoryImpl
 
     @Provides
     @Singleton
-    fun provideKonuAnlatimRepository(konuAnlatimRepositoyImpl: InformationCardiRepositoryImpl): InformationCardiRepository =
+    fun provideKonuAnlatimRepository(konuAnlatimRepositoyImpl: InformationCardRepositoryImpl): InformationCardRepository =
         konuAnlatimRepositoyImpl
 
     @Provides

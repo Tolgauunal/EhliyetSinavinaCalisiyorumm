@@ -1,4 +1,4 @@
-package com.unallapps.ehliyetsinavinacalisiyorum.ui.konular
+package com.unallapps.ehliyetsinavinacalisiyorum.ui.subject
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,14 +16,14 @@ import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.LessonLazyRow
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.SubjectLazyRow
 
 @Composable
-fun SubjectScreen(
+fun SubjectScreenFragment(
     modifier: Modifier,
     navController: NavHostController,
-    konularViewModel: SubjectScreenViewModel = hiltViewModel()
+    viewModel: SubjectScreenViewModel = hiltViewModel()
 ) {
-    val lessonSelectedItem = konularViewModel.lessonSelectedItem.collectAsState()
-    val selectedSubject = konularViewModel.selectedSubject.collectAsState()
-    val alertDialog = konularViewModel.alertDialog.collectAsState()
+    val lessonSelectedItem = viewModel.lessonSelectedItem.collectAsState()
+    val selectedSubject = viewModel.selectedSubject.collectAsState()
+    val alertDialog = viewModel.alertDialog.collectAsState()
 
     Column(
         modifier = modifier.padding(8.dp),
@@ -31,18 +31,18 @@ fun SubjectScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         LessonLazyRow(lessonSelectedItem = lessonSelectedItem.value) {
-            konularViewModel.setSelectedSubject(it)
+            viewModel.setSelectedSubject(it)
         }
         Spacer(modifier = Modifier.padding(5.dp))
         SubjectLazyRow(lessonSelectedItemIndex = lessonSelectedItem.value,
             controller = false,
-            onSelectedSubject = { konularViewModel.setSelectedSubject(it.id) },
-            onAlertDialog = { konularViewModel.setAlertDialog(it) })
+            onSelectedSubject = { viewModel.setSelectedSubject(it.id) },
+            onAlertDialog = { viewModel.setAlertDialog(it) })
         if (alertDialog.value) {
             CustomAlertDialog(selectedSubject = selectedSubject.value,
-                onAlertDialogChange = { konularViewModel.setAlertDialog(it) },
-                onClickBilgiKartlari = { navController.navigate("bilgiKartlari/${it}") }) {
-                navController.navigate("konuAnlatimi/${it}")
+                onAlertDialogChange = { viewModel.setAlertDialog(it) },
+                onClickInformationCard = { navController.navigate("informationCard/${it}") }) {
+                navController.navigate("subjectScreen/${it}")
             }
         }
     }

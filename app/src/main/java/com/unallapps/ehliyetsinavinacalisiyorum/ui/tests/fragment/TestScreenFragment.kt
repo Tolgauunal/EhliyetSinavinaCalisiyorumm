@@ -1,4 +1,4 @@
-package com.unallapps.ehliyetsinavinacalisiyorum.ui.testler
+package com.unallapps.ehliyetsinavinacalisiyorum.ui.tests.fragment
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -28,18 +29,15 @@ import coil.compose.rememberAsyncImagePainter
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CloseAlert
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.FinishAlert
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.tests.viewmodel.TestScreenViewModel
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun TestScreen(
     modifier: Modifier,
-    lessonName: String,
     navController: NavHostController,
-    restartOrContinue: Boolean,
-    viewModel: TestViewModel = hiltViewModel()
+    viewModel: TestScreenViewModel = hiltViewModel()
 ) {
-    viewModel.setLessonName(lessonName)
-    viewModel.setRestartOrContinue(restartOrContinue)
     val selectedLesson = viewModel.getSelectedLessonInfo.collectAsState()
     val questionIndex = viewModel.questionIndex.collectAsState()
     val questionSize = viewModel.questionSize.collectAsState()
@@ -57,7 +55,6 @@ fun TestScreen(
     val backgroundColorD = viewModel.backgroundColorD.collectAsState()
     val finishAlertDialog = viewModel.finishAlertDialog.collectAsState()
     val exitAlertDialog = viewModel.exitAlertDialog.collectAsState()
-
 
     Column(
         modifier = modifier
@@ -94,7 +91,8 @@ fun TestScreen(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = "Soru Sayısı ${questionIndex.value + 1} / ${questionSize.value}",
+                text = stringResource(R.string.Question_Size) + " " + (questionIndex.value + 1) +
+                    "/" + questionSize.value,
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
             Column {
@@ -105,7 +103,7 @@ fun TestScreen(
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                     Text(
-                        text = "Doğru Sayısı: ${correctSum.value}",
+                        text = stringResource(R.string.Correct_Size) + " " + correctSum.value,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -116,7 +114,7 @@ fun TestScreen(
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                     Text(
-                        text = "Yanlış Sayısı: ${wrongSum.value}",
+                        text = stringResource(R.string.Wrong_Size) + " " + wrongSum.value,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -187,13 +185,13 @@ fun TestScreen(
 
         if (finishAlertDialog.value) {
             FinishAlert(onfinishAlertDialog = { viewModel.setFinishAlertDialog(it) }) {
-                navController.navigate("testEkrani/${selectedLesson.value?.name}")
+                navController.navigate("testScreen/${selectedLesson.value?.name}")
             }
         }
         if (exitAlertDialog.value) {
             CloseAlert(onClose = { viewModel.setExitAlertDialog(it) }) {
                 viewModel.setTestNumber(testNumber = questionIndex.value)
-                navController.navigate("testler")
+                navController.navigate("tests")
             }
         }
     }

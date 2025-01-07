@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">EhliyetSinavinaCalisiyorum</string>
+    //Home
+    <string name="Search_Info">Bütün Konulara Hızlı ve Kolay Yoldan Ulaşın</string>
+    //Profile
+    <string name="Set_Profile_Name">İsminizi Yazınız</string>
+    <string name="Privacy_Policy">Gizlilik Politikası</string>
+    <string name="Terms_And_Conditions">Şartlar ve Koşullar</string>
+    <string name="Vote_For_Us">Bize Oy Verin</string>
+    <string name="Report_Error">Hata Bildir</string>
+    <string name="Contact">İletişim</string>
+    //TestNav
+    <string name="Restart">Baştan Başla</string>
+    <string name="Continue">Devam Et</string>
+    //TestScreen
+    <string name="Question_Size">Soru Sayısı:</string>
+    <string name="Correct_Size">Doğru Sayısı:</string>
+    <string name="Wrong_Size">Yanlış Sayısı:</string>
 </resources>

@@ -15,13 +15,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.unallapps.ehliyetsinavinacalisiyorum.R
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.bilgikartlari.InformationCardsUI
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.home.Home
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.konular.SubjectFilter
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.konular.SubjectScreen
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.profil.Profile
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.testler.TestScreen
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.testler.Testler
+import com.unallapps.ehliyetsinavinacalisiyorum.data.util.Constants
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.home.HomeFragment
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.informationCard.InformationCardFragment
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.subject.SubjectFilter
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.profile.ProfileFragment
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.subject.SubjectScreenFragment
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.tests.fragment.TestScreen
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.tests.fragment.TestsNavFragment
 
 @SuppressLint("NewApi")
 @Composable
@@ -33,50 +34,43 @@ fun BottomNavigationGraph(navController: NavHostController, paddingModifier: Mod
         .background(Color.LightGray)
     NavHost(navController = navController, startDestination = BottomBarScreen.Home.route) {
         composable(route = BottomBarScreen.Home.route) {
-            Home(paddingModifier, navController)
+            HomeFragment(paddingModifier, navController)
         }
-        composable(route = BottomBarScreen.Konular.route) {
-            SubjectScreen(paddingModifier, navController)
+        composable(route = BottomBarScreen.Subjects.route) {
+            SubjectScreenFragment(paddingModifier, navController)
         }
-        composable(route = BottomBarScreen.Testler.route) {
-            Testler(paddingModifier, navController)
+        composable(route = BottomBarScreen.Tests.route) {
+            TestsNavFragment(paddingModifier, navController)
         }
-        composable(route = BottomBarScreen.Profil.route) {
-            Profile(paddingModifier)
+        composable(route = BottomBarScreen.Profile.route) {
+            ProfileFragment(paddingModifier)
         }
         composable(
-            route = BottomBarScreen.BilgiKartlari.route,
-            arguments = listOf(navArgument("konuAdi") {
+            route = BottomBarScreen.InformationCard.route,
+            arguments = listOf(navArgument(Constants.STRING.SUBJECT_NAME) {
                 type = NavType.StringType
             })
         ) {
-            val json = it.arguments?.getString("konuAdi")
-            InformationCardsUI(json!!, paddingModifier)
+            InformationCardFragment(paddingModifier)
         }
         composable(
-            route = BottomBarScreen.TestEkrani.route,
-            arguments = listOf(navArgument("dersAdi") {
+            route = BottomBarScreen.TestScreen.route,
+            arguments = listOf(navArgument(Constants.STRING.LESSON_NAME) {
                 type = NavType.StringType
-            }, navArgument("restartOrContinue") { type = NavType.BoolType })
+            }, navArgument(Constants.STRING.RESTART_OR_CONTINUE) { type = NavType.BoolType })
         ) {
-            val dersAdi = it.arguments?.getString("dersAdi")
-            val restartOrContinue = it.arguments?.getBoolean("restartOrContinue")
-            if (dersAdi != null && restartOrContinue != null) {
-                TestScreen(
-                    paddingModifier,
-                    dersAdi,
-                    navController = navController,
-                    restartOrContinue = restartOrContinue
-                )
-            }
+            TestScreen(
+                paddingModifier,
+                navController = navController
+            )
         }
         composable(
-            route = BottomBarScreen.KonuAnlatimi.route,
-            arguments = listOf(navArgument("konuAdi") {
+            route = BottomBarScreen.SubjectScreen.route,
+            arguments = listOf(navArgument(Constants.STRING.SUBJECT_NAME) {
                 type = NavType.StringType
             })
         ) {
-            val json = it.arguments?.getString("konuAdi")
+            val json = it.arguments?.getString(Constants.STRING.SUBJECT_NAME)
             SubjectFilter(json!!, paddingModifier)
         }
     }

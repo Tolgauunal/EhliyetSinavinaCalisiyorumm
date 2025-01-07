@@ -13,6 +13,5 @@ interface TestSaveIdRepository {
     )
 
     suspend fun getTestList(): List<TestSaveIdEntity>
-    suspend fun getTestData(dersAdi: String): TestSaveIdEntity
-
+    suspend fun getTestData(lessonName: String): TestSaveIdEntity
 }

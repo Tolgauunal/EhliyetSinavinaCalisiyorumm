@@ -23,7 +23,6 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.view.ViewCompat.animate
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -69,10 +68,10 @@ fun Greeting() {
 fun AppBottomBar(navController: NavHostController) {
     val screens = listOf(
         BottomBarScreen.Home,
-        BottomBarScreen.Konular,
-        BottomBarScreen.Testler,
-        BottomBarScreen.Profil,
-        BottomBarScreen.BilgiKartlari
+        BottomBarScreen.Subjects,
+        BottomBarScreen.Tests,
+        BottomBarScreen.Profile,
+        BottomBarScreen.InformationCard
     )
     NavigationBar(
         modifier = Modifier.clip(shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp)),
@@ -80,8 +79,8 @@ fun AppBottomBar(navController: NavHostController) {
     ) {
         screens.forEach { screen ->
             when (screen) {
-                is BottomBarScreen.Home, BottomBarScreen.Konular,
-                BottomBarScreen.Testler, BottomBarScreen.Profil -> AddItem(
+                is BottomBarScreen.Home, BottomBarScreen.Subjects,
+                BottomBarScreen.Tests, BottomBarScreen.Profile -> AddItem(
                     screen = screen,
                     navController = navController
                 )

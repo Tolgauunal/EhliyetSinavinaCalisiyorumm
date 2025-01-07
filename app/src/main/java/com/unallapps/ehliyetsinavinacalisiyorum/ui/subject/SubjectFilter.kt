@@ -1,4 +1,4 @@
-package com.unallapps.ehliyetsinavinacalisiyorum.ui.konular
+package com.unallapps.ehliyetsinavinacalisiyorum.ui.subject
 
 import android.annotation.SuppressLint
 import android.webkit.WebView

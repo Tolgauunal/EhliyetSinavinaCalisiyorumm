@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.unallapps.ehliyetsinavinacalisiyorum.data.AppDatabase
 import com.unallapps.ehliyetsinavinacalisiyorum.data.dao.TestSaveIdDao
 import com.unallapps.ehliyetsinavinacalisiyorum.data.dao.UserDao
+import com.unallapps.ehliyetsinavinacalisiyorum.data.util.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,13 +19,16 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideDatabaseModule(@ApplicationContext context: Context): AppDatabase {
-        return Room.databaseBuilder(context,AppDatabase::class.java,"database").build()
+        return Room.databaseBuilder(context, AppDatabase::class.java, Constants.STRING.DATABASE)
+            .build()
     }
+
     @Provides
     @Singleton
     fun provideUser(appDatabase: AppDatabase): UserDao {
         return appDatabase.userDao()
     }
+
     @Provides
     @Singleton
     fun provideTest(appDatabase: AppDatabase): TestSaveIdDao {

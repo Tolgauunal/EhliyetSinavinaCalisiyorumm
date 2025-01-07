@@ -42,4 +42,14 @@ class HomeViewModel @Inject constructor(private val userRepository: UserReposito
             }
         }
     }
+
+    fun setLessonSelectedItem(data: Int) {
+        _lessonSelectedItem.value = data
+    }
+    fun setSelectedSubject(data: Subject) {
+        _selectedSubject.value = DatabaseSubject.subjectLists[data.id]
+    }
+    fun setAlertDialog(data: Boolean) {
+        _alertDialog.value = data
+    }
 }

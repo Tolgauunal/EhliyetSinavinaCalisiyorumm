@@ -1,4 +1,4 @@
-package com.unallapps.ehliyetsinavinacalisiyorum.ui.konular
+package com.unallapps.ehliyetsinavinacalisiyorum.ui.subject
 
 import androidx.lifecycle.ViewModel
 import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseSubject
@@ -18,10 +18,6 @@ class SubjectScreenViewModel @Inject constructor() : ViewModel() {
 
     private val _alertDialog: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val alertDialog: MutableStateFlow<Boolean> = _alertDialog
-
-    fun setLessonSelectedItem(lessonSelectedItem: Int) {
-        _lessonSelectedItem.value = lessonSelectedItem
-    }
 
     fun setSelectedSubject(lessonSelectedItem: Int) {
         _lessonSelectedItem.value = lessonSelectedItem

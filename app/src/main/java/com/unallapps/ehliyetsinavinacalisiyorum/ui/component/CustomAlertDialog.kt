@@ -23,8 +23,8 @@ import com.unallapps.ehliyetsinavinacalisiyorum.data.Subject
 fun CustomAlertDialog(
     selectedSubject: Subject,
     onAlertDialogChange: (Boolean) -> Unit,
-    onClickBilgiKartlari: (String) -> Unit,
-    onClickKonuAnlatimi: (String) -> Unit
+    onClickInformationCard: (String) -> Unit,
+    onClickSubjectScreen: (String) -> Unit
 ) {
     val click = remember { mutableStateOf(false) }
     MaterialTheme {
@@ -57,7 +57,7 @@ fun CustomAlertDialog(
                                 openDialog.value = false
                                 onAlertDialogChange(false)
                                 click.value = true
-                                onClickBilgiKartlari(selectedSubject.name)
+                                onClickInformationCard(selectedSubject.name)
                             }) {
                             Text(
                                 "Bilgi Kartları",
@@ -77,7 +77,7 @@ fun CustomAlertDialog(
                             onClick = {
                                 openDialog.value = false
                                 onAlertDialogChange(false)
-                                onClickKonuAnlatimi(selectedSubject.name)
+                                onClickSubjectScreen(selectedSubject.name)
                             }) {
                             Text(
                                 "Konu Anlatımı",

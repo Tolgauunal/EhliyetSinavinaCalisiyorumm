@@ -1,11 +1,10 @@
-package com.unallapps.ehliyetsinavinacalisiyorum.ui.profil
+package com.unallapps.ehliyetsinavinacalisiyorum.ui.profile
 
 import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
-import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -41,14 +40,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -64,19 +61,21 @@ import kotlinx.coroutines.launch
 @SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hiltViewModel()) {
-    profileViewModel.getUserName()
+fun ProfileFragment(
+    modifier: Modifier,
+    profileViewModel: ProfileViewModel = hiltViewModel()
+) {
     var photoUri: Uri? by remember { mutableStateOf(null) }
     val settingsState = remember { mutableStateOf(false) }
     val nameStateTextField = remember { mutableStateOf("") }
     val nameStateText = profileViewModel.nameStateText.collectAsState()
     val userImage = profileViewModel.userImage.collectAsState()
-    val settingsIconControl = profileViewModel._isDeleteAll.collectAsState()
+    val settingsIconControl = profileViewModel.isDeleteAll.collectAsState()
     val settingsIcon = profileViewModel.settingsIcon.collectAsState()
     val context = LocalContext.current
     getProfileInfo(profileViewModel, nameStateText.value)
     val launcher =
-        rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri -> //When the user has selected a photo, its URI is returned here
+        rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             photoUri = uri
             photoUri?.let {
                 val source = ImageDecoder.decodeBitmap(
@@ -91,7 +90,7 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = paddingModifier.verticalScroll(rememberScrollState())
+        modifier = modifier.verticalScroll(rememberScrollState())
     ) {
         Box(
             modifier = Modifier
@@ -162,7 +161,12 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
                         OutlinedTextField(
                             value = nameStateTextField.value,
                             onValueChange = { nameStateTextField.value = it },
-                            label = { Text(text = "İsminizi Yazınız", color = Color.White) },
+                            label = {
+                                Text(
+                                    text = stringResource(R.string.Set_Profile_Name),
+                                    color = Color.White
+                                )
+                            },
                             colors = TextFieldDefaults.outlinedTextFieldColors(textColor = Color.White)
                         )
                     }
@@ -171,7 +175,7 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
                         modifier = Modifier
                             .padding(start = 16.dp)
                             .clickable {
-                                profileViewModel._isDeleteAll.value = !settingsIconControl.value
+                                profileViewModel.setDeleteAll(!settingsIconControl.value)
                                 profileViewModel.insertOrUpdate(nameStateTextField.value)
                                 profileViewModel.setSettingsIcon()
                                 settingsState.value = settingsIconControl.value
@@ -183,15 +187,30 @@ fun Profile(paddingModifier: Modifier, profileViewModel: ProfileViewModel = hilt
         Text(text = "Ayarlar", color = colorResource(id = R.color.kapaliMavi), fontSize = 16.sp)
         Column(modifier = Modifier.padding(10.dp)) {
             Spacer(modifier = Modifier.padding(10.dp))
-            CustomButton(title = "Gizlilik Politikası", R.drawable.gizlilik, onClick = {})
+            CustomButton(
+                title = stringResource(R.string.Privacy_Policy),
+                R.drawable.gizlilik,
+                onClick = {})
             Spacer(modifier = Modifier.padding(5.dp))
-            CustomButton(title = "Şartlar ve Koşullar", R.drawable.sartlar, onClick = {})
+            CustomButton(
+                title = stringResource(R.string.Terms_And_Conditions),
+                R.drawable.sartlar,
+                onClick = {})
             Spacer(modifier = Modifier.padding(5.dp))
-            CustomButton(title = "Bize Oy Verin", R.drawable.oy, onClick = {})
+            CustomButton(
+                title = stringResource(R.string.Vote_For_Us),
+                R.drawable.oy,
+                onClick = {})
             Spacer(modifier = Modifier.padding(5.dp))
-            CustomButton(title = "Hata Bildir", R.drawable.error, onClick = {})
+            CustomButton(
+                title = stringResource(R.string.Report_Error),
+                R.drawable.error,
+                onClick = {})
             Spacer(modifier = Modifier.padding(5.dp))
-            CustomButton(title = "İletişim", R.drawable.contact, onClick = {})
+            CustomButton(
+                title = stringResource(R.string.Contact),
+                R.drawable.contact,
+                onClick = {})
         }
     }
 }

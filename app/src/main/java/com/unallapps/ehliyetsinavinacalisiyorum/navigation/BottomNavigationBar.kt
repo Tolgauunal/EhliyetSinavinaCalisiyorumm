@@ -13,39 +13,39 @@ sealed class BottomBarScreen(
         icon = R.drawable.home
     )
 
-    object Konular : BottomBarScreen(
-        route = "konular",
-        label = "Konular",
+    object Subjects : BottomBarScreen(
+        route = "subject",
+        label = "Subjects",
         icon = R.drawable.baseline_library_books_24
     )
 
-    object Testler : BottomBarScreen(
-        route = "testler",
-        label = "Testler",
+    object Tests : BottomBarScreen(
+        route = "tests",
+        label = "Tests",
         icon = R.drawable.test
     )
 
-    object Profil : BottomBarScreen(
-        route = "profil",
-        label = "Profil",
+    object Profile : BottomBarScreen(
+        route = "profile",
+        label = "Profile",
         icon = R.drawable.baseline_person_24
     )
 
-    object BilgiKartlari : BottomBarScreen(
-        route = "bilgiKartlari/{konuAdi}",
-        label = "BilgiKartlari",
+    object InformationCard : BottomBarScreen(
+        route = "informationCard/{subjectName}",
+        label = "InformationCard",
         icon = R.drawable.baseline_person_24
     )
 
-    object TestEkrani : BottomBarScreen(
-        route = "testEkrani/{dersAdi}/{restartOrContinue}",
-        label = "TestEkrani",
+    object TestScreen : BottomBarScreen(
+        route = "testScreen/{lessonName}/{restartOrContinue}",
+        label = "TestScreen",
         icon = R.drawable.baseline_person_24
     )
 
-    object KonuAnlatimi : BottomBarScreen(
-        route = "konuAnlatimi/{konuAdi}",
-        label = "KonuAnlatimi",
+    object SubjectScreen : BottomBarScreen(
+        route = "subjectScreen/{subjectName}",
+        label = "SubjectScreen",
         icon = R.drawable.baseline_person_24
     )
 }
