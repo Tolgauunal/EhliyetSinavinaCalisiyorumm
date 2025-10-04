@@ -29,6 +29,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -138,7 +139,8 @@ fun ProfileFragment(
                         contentScale = ContentScale.Crop
                     )
                 } else {
-                    Image(painter = painterResource(id = R.drawable.person),
+                    Image(
+                        painter = painterResource(id = R.drawable.person),
                         contentDescription = "",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
@@ -166,11 +168,11 @@ fun ProfileFragment(
                                     text = stringResource(R.string.Set_Profile_Name),
                                     color = Color.White
                                 )
-                            },
-                            colors = TextFieldDefaults.outlinedTextFieldColors(textColor = Color.White)
+                            }
                         )
                     }
-                    Icon(painter = painterResource(settingsIcon.value),
+                    Icon(
+                        painter = painterResource(settingsIcon.value),
                         contentDescription = "",
                         modifier = Modifier
                             .padding(start = 16.dp)

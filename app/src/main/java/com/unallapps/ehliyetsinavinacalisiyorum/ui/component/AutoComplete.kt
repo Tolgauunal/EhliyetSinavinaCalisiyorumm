@@ -18,6 +18,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -66,12 +67,6 @@ fun AutoComplete(isClick: (String) -> Unit) {
                     .height(heightTextFields)
                     .background(color = Color.White, shape = RoundedCornerShape(15.dp))
                     .onGloballyPositioned { textFieldSize = it.size.toSize() },
-                colors = TextFieldDefaults.textFieldColors(
-                    containerColor = Color.Transparent,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    cursorColor = Color(R.color.kapaliMavi)
-                ),
                 textStyle = TextStyle(
                     color = colorResource(id = R.color.kapaliMavi),
                     fontSize = 16.sp
@@ -111,9 +106,10 @@ fun AutoComplete(isClick: (String) -> Unit) {
 
 @Composable
 fun CategoryItems(title: String, onSelect: (String) -> Unit) {
-    Row(modifier = Modifier
-        .fillMaxWidth()
-        .clickable { onSelect(title) }) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onSelect(title) }) {
         Text(
             text = title,
             modifier = Modifier.padding(5.dp),
