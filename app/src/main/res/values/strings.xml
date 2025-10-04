@@ -1,31 +1,32 @@
 <resources>
     <string name="app_name">EhliyetSinavinaCalisiyorum</string>
     //Home
-    <string name="Search_Info">Bütün Konulara Hızlı ve Kolay Yoldan Ulaşın</string>
+    <string name="search_Info">Bütün Konulara Hızlı ve Kolay Yoldan Ulaşın</string>
     //Profile
-    <string name="Set_Profile_Name">İsminizi Yazınız</string>
-    <string name="Privacy_Policy">Gizlilik Politikası</string>
-    <string name="Terms_And_Conditions">Şartlar ve Koşullar</string>
-    <string name="Vote_For_Us">Bize Oy Verin</string>
-    <string name="Report_Error">Hata Bildir</string>
-    <string name="Contact">İletişim</string>
-    <string name="Settings">Ayarlar</string>
+    <string name="set_Profile_Name">İsminizi Yazınız</string>
+    <string name="privacy_Policy">Gizlilik Politikası</string>
+    <string name="terms_And_Conditions">Şartlar ve Koşullar</string>
+    <string name="vote_For_Us">Bize Oy Verin</string>
+    <string name="report_Error">Hata Bildir</string>
+    <string name="contact">İletişim</string>
+    <string name="settings">Ayarlar</string>
     //TestNav
-    <string name="Restart">Baştan Başla</string>
-    <string name="Continue">Devam Et</string>
+    <string name="restart">Baştan Başla</string>
+    <string name="continuee">Devam Et</string>
     //TestScreen
-    <string name="Question_Size">Soru Sayısı:</string>
-    <string name="Correct_Size">Doğru Sayısı:</string>
-    <string name="Wrong_Size">Yanlış Sayısı:</string>
+    <string name="question_Size">Soru Sayısı:</string>
+    <string name="correct_Size">Doğru Sayısı:</string>
+    <string name="wrong_Size">Yanlış Sayısı:</string>
     //AlertDialog
-    <string name="Test_Finish">Testi Sonlandırmak İstediğinizden Emin Misiniz ?</string>
-    <string name="Test_Again">Testlerimiz Bitti Baştan Başlamak İster Misiniz ?</string>
-    <string name="Yes">Evet</string>
-    <string name="No">Hayır</string>
+    <string name="test_Finish">Testi Sonlandırmak İstediğinizden Emin Misiniz ?</string>
+    <string name="test_Again">Testlerimiz Bitti Baştan Başlamak İster Misiniz ?</string>
+    <string name="yes">Evet</string>
+    <string name="no">Hayır</string>
     //Others
-    <string name="Selected_Lesson">Ders Seçiniz</string>
-    <string name="Suggestion_lesson">Önerilen Konular</string>
-    <string name="Information_Card">Bilgi Kartları</string>
-    <string name="Subject_Explanation">Konu Anlatımı</string>
-    <string name="Default_User">Misafir Kullanıcı</string>
+    <string name="selected_Lesson">Ders Seçiniz</string>
+    <string name="suggestion_lesson">Önerilen Konular</string>
+    <string name="all_lesson">Tüm Konular</string>
+    <string name="information_Card">Bilgi Kartları</string>
+    <string name="subject_Explanation">Konu Anlatımı</string>
+    <string name="default_User">Misafir Kullanıcı</string>
 </resources>

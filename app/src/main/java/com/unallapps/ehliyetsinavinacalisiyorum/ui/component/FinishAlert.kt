@@ -24,14 +24,14 @@ fun FinishAlert(
             onFinishAlertDialog(false)
         },
         title = {
-            Text(text = stringResource(R.string.Test_Again), color = Color.White)
+            Text(text = stringResource(R.string.test_Again), color = Color.White)
         },
         confirmButton = {
             Button(colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                 onClick = {
                     onClick(false)
                 }) {
-                Text(stringResource(R.string.Yes))
+                Text(stringResource(R.string.yes))
             }
         },
         dismissButton = {
@@ -39,7 +39,7 @@ fun FinishAlert(
                 onClick = {
                     onFinishAlertDialog(false)
                 }) {
-                Text(stringResource(R.string.No))
+                Text(stringResource(R.string.no))
             }
         })
 }

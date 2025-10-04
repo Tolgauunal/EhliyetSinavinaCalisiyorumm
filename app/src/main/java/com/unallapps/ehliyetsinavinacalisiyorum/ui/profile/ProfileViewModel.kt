@@ -22,32 +22,37 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
     val userInfo: StateFlow<UserEntity?> = _userInfo
     private var byteArray: ByteArray? = null
     private val _nameStateText: MutableStateFlow<String> =
-        MutableStateFlow(R.string.Default_User.toString())
+        MutableStateFlow(R.string.default_User.toString())
     val nameStateText: MutableStateFlow<String> = _nameStateText
     private val _userImage: MutableStateFlow<ByteArray?> = MutableStateFlow(null)
     val userImage: MutableStateFlow<ByteArray?> = _userImage
-    private val _isDeleteAll: MutableStateFlow<Boolean> = MutableStateFlow(true)
-    val isDeleteAll: StateFlow<Boolean> = _isDeleteAll
+    private val _changeNameControl: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val changeNameControl: StateFlow<Boolean> = _changeNameControl
 
     @DrawableRes
     private val _settingsIcon = MutableStateFlow(R.drawable.baseline_settings_24)
     val settingsIcon = _settingsIcon
     fun setSettingsIcon() {
         _settingsIcon.value =
-            if (_isDeleteAll.value) R.drawable.baseline_settings_24 else R.drawable.baseline_edit_24
+            if (_changeNameControl.value) {
+                R.drawable.baseline_settings_24
+            } else {
+                R.drawable.baseline_edit_24
+            }
     }
 
     init {
         viewModelScope.launch {
             _userInfo.value = userRepository.getUser()
-            _nameStateText.value = userRepository.getUser()?.userName ?: Constants.String.DEFAULT_USER
+            _nameStateText.value =
+                userRepository.getUser()?.userName ?: Constants.String.DEFAULT_USER
             _userImage.value = userInfo.value?.userPhoto
         }
     }
 
     fun insertOrUpdate(name: String) {
         viewModelScope.launch {
-            if (userRepository.getUserSize().size > 0) {
+            if (userRepository.getUserSize().isNotEmpty()) {
                 userRepository.updateUserName(name, 1)
                 _userInfo.value = userRepository.getUser()
             } else {
@@ -71,7 +76,11 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
         }
     }
 
-    fun setDeleteAll(boolean: Boolean) {
-        _isDeleteAll.value = boolean
+    fun setChangeNameControl(boolean: Boolean) {
+        _changeNameControl.value = boolean
+    }
+
+    fun setName(data: String) {
+        _nameStateText.value = data
     }
 }

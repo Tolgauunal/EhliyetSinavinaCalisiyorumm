@@ -105,7 +105,7 @@ fun HomeFragment(
                         .padding(10.dp)
                 ) {
                     Text(
-                        text = stringResource(R.string.Search_Info),
+                        text = stringResource(R.string.search_Info),
                         color = colorResource(id = R.color.white),
                         textAlign = TextAlign.Center
                     )

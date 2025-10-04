@@ -9,6 +9,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.unallapps.ehliyetsinavinacalisiyorum.R
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CustomAlertDialog
@@ -34,12 +35,16 @@ fun SubjectScreenFragment(
             viewModel.setSelectedSubject(it)
         }
         Spacer(modifier = Modifier.padding(5.dp))
-        SubjectLazyRow(lessonSelectedItemIndex = lessonSelectedItem.value,
+        SubjectLazyRow(
+            lessonSelectedItemIndex = lessonSelectedItem.value,
             controller = false,
             onSelectedSubject = { viewModel.setSelectedSubject(it.id) },
-            onAlertDialog = { viewModel.setAlertDialog(it) })
+            onAlertDialog = { viewModel.setAlertDialog(it) },
+            subjectTitle = R.string.all_lesson
+        )
         if (alertDialog.value) {
-            CustomAlertDialog(selectedSubject = selectedSubject.value,
+            CustomAlertDialog(
+                selectedSubject = selectedSubject.value,
                 onAlertDialogChange = { viewModel.setAlertDialog(it) },
                 onClickInformationCard = { navController.navigate("informationCard/${it}") }) {
                 navController.navigate("subjectScreen/${it}")

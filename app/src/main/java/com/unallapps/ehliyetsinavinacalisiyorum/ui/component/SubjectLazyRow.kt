@@ -34,7 +34,8 @@ fun SubjectLazyRow(
     lessonSelectedItemIndex: Int,
     controller: Boolean,
     onSelectedSubject: (Subject) -> Unit,
-    onAlertDialog: (Boolean) -> Unit
+    onAlertDialog: (Boolean) -> Unit,
+    subjectTitle: Int = R.string.suggestion_lesson
 ) {
     Column(verticalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
         val currentList = if (controller) {
@@ -43,7 +44,7 @@ fun SubjectLazyRow(
         } else {
             DatabaseSubject.subjectLists
         }
-        Text(text = stringResource(R.string.Suggestion_lesson))
+        Text(text = stringResource(subjectTitle))
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.SpaceBetween,
@@ -63,7 +64,8 @@ fun SubjectLazyRow(
                                 .fillMaxWidth()
                                 .padding(5.dp)
                         ) {
-                            Row(verticalAlignment = Alignment.CenterVertically,
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.Start,
                                 modifier = Modifier
                                     .clickable {
@@ -99,7 +101,7 @@ fun SubjectLazyRow(
                                             modifier = Modifier.size(14.dp)
                                         )
                                         Text(
-                                            text = stringResource(R.string.Information_Card),
+                                            text = stringResource(R.string.information_Card),
                                             modifier = Modifier.padding(3.dp),
                                             color = colorResource(id = R.color.kapaliMavi),
                                             fontSize = 12.sp,
@@ -112,7 +114,7 @@ fun SubjectLazyRow(
                                             modifier = Modifier.size(12.dp)
                                         )
                                         Text(
-                                            text = stringResource(R.string.Subject_Explanation),
+                                            text = stringResource(R.string.subject_Explanation),
                                             modifier = Modifier.padding(3.dp),
                                             color = colorResource(id = R.color.kapaliMavi),
                                             fontSize = 12.sp,

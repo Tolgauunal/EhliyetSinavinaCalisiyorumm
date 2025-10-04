@@ -91,7 +91,7 @@ fun TestScreen(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = stringResource(R.string.Question_Size) + " " + (questionIndex.value + 1) +
+                text = stringResource(R.string.question_Size) + " " + (questionIndex.value + 1) +
                     "/" + questionSize.value,
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
@@ -103,7 +103,7 @@ fun TestScreen(
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                     Text(
-                        text = stringResource(R.string.Correct_Size) + " " + correctSum.value,
+                        text = stringResource(R.string.correct_Size) + " " + correctSum.value,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -114,7 +114,7 @@ fun TestScreen(
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                     Text(
-                        text = stringResource(R.string.Wrong_Size) + " " + wrongSum.value,
+                        text = stringResource(R.string.wrong_Size) + " " + wrongSum.value,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }

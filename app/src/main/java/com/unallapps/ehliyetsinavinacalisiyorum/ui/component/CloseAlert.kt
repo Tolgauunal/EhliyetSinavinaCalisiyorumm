@@ -21,14 +21,14 @@ fun CloseAlert(onClose: (Boolean) -> Unit, onClick: () -> Unit) {
             onClose(false)
         },
         title = {
-            Text(text = stringResource(R.string.Test_Finish), color = Color.White)
+            Text(text = stringResource(R.string.test_Finish), color = Color.White)
         },
         dismissButton = {
             Button(colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                 onClick = {
                     onClose(false)
                 }) {
-                Text(stringResource(R.string.Yes))
+                Text(stringResource(R.string.yes))
             }
         },
         confirmButton = {
@@ -37,7 +37,7 @@ fun CloseAlert(onClose: (Boolean) -> Unit, onClick: () -> Unit) {
                     onClose(false)
                     onClick()
                 }) {
-                Text(stringResource(R.string.No))
+                Text(stringResource(R.string.no))
             }
         })
 }

@@ -28,6 +28,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
@@ -67,14 +68,11 @@ fun ProfileFragment(
     profileViewModel: ProfileViewModel = hiltViewModel()
 ) {
     var photoUri: Uri? by remember { mutableStateOf(null) }
-    val settingsState = remember { mutableStateOf(false) }
-    val nameStateTextField = remember { mutableStateOf("") }
+    val changeNameControl = profileViewModel.changeNameControl.collectAsState()
     val nameStateText = profileViewModel.nameStateText.collectAsState()
     val userImage = profileViewModel.userImage.collectAsState()
-    val settingsIconControl = profileViewModel.isDeleteAll.collectAsState()
     val settingsIcon = profileViewModel.settingsIcon.collectAsState()
     val context = LocalContext.current
-    getProfileInfo(profileViewModel, nameStateText.value)
     val launcher =
         rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             photoUri = uri
@@ -104,51 +102,71 @@ fun ProfileFragment(
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxSize()
             ) {
-                if (photoUri != null) {
-                    val painter =
-                        rememberAsyncImagePainter(
-                            ImageRequest.Builder(LocalContext.current).data(data = photoUri)
+                when {
+                    photoUri != null -> {
+                        val painter = rememberAsyncImagePainter(
+                            ImageRequest.Builder(LocalContext.current)
+                                .data(data = photoUri)
                                 .build()
                         )
-                    Image(
-                        painter = painter,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(100.dp)
-                            .clip(CircleShape)
-                            .fillMaxWidth()
-                            .clickable {
-                                launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
-                            },
-                        contentScale = ContentScale.Crop
-                    )
 
-                } else if (userImage.value?.isNotEmpty() == true) {
-                    val userPhoto = userImage.value
-                    val bitmap = BitmapFactory.decodeByteArray(userPhoto, 0, userPhoto!!.size)
-                    Image(
-                        bitmap = bitmap.asImageBitmap(),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(100.dp)
-                            .clip(CircleShape)
-                            .fillMaxWidth()
-                            .clickable {
-                                launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
-                            },
-                        contentScale = ContentScale.Crop
-                    )
-                } else {
-                    Image(
-                        painter = painterResource(id = R.drawable.person),
-                        contentDescription = "",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .clip(CircleShape)
-                            .size(100.dp)
-                            .clickable {
-                                launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly))
-                            })
+                        Image(
+                            painter = painter,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(100.dp)
+                                .clip(CircleShape)
+                                .fillMaxWidth()
+                                .clickable {
+                                    launcher.launch(
+                                        PickVisualMediaRequest(
+                                            mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly
+                                        )
+                                    )
+                                },
+                            contentScale = ContentScale.Crop
+                        )
+                    }
+
+                    userImage.value?.isNotEmpty() == true -> {
+                        val userPhoto = userImage.value
+                        val bitmap = BitmapFactory.decodeByteArray(userPhoto, 0, userPhoto!!.size)
+
+                        Image(
+                            bitmap = bitmap.asImageBitmap(),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(100.dp)
+                                .clip(CircleShape)
+                                .fillMaxWidth()
+                                .clickable {
+                                    launcher.launch(
+                                        PickVisualMediaRequest(
+                                            mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly
+                                        )
+                                    )
+                                },
+                            contentScale = ContentScale.Crop
+                        )
+                    }
+
+                    else -> {
+                        Image(
+                            painter = painterResource(id = R.drawable.person),
+                            contentDescription = "",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .clip(CircleShape)
+                                .size(100.dp)
+                                .clickable {
+                                    launcher.launch(
+                                        PickVisualMediaRequest(
+                                            mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly
+                                        )
+                                    )
+                                }
+                        )
+                    }
                 }
                 Spacer(modifier = Modifier.padding(5.dp))
                 Row(
@@ -156,19 +174,27 @@ fun ProfileFragment(
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier.fillMaxHeight()
                 ) {
-                    if (!settingsState.value) {
+                    if (!changeNameControl.value) {
                         Text(text = nameStateText.value, color = Color.White, fontSize = 15.sp)
-                        nameStateTextField.value = nameStateText.value
                     } else {
                         OutlinedTextField(
-                            value = nameStateTextField.value,
-                            onValueChange = { nameStateTextField.value = it },
+                            value = nameStateText.value,
+                            onValueChange = { profileViewModel.setName(it) },
                             label = {
                                 Text(
-                                    text = stringResource(R.string.Set_Profile_Name),
+                                    text = stringResource(R.string.set_Profile_Name),
                                     color = Color.White
                                 )
-                            }
+                            },
+                            colors = OutlinedTextFieldDefaults.colors(
+                                cursorColor = Color.White,
+                                unfocusedTextColor = Color.White,
+                                focusedTextColor = Color.White,
+                                focusedBorderColor = Color.White,
+                                unfocusedBorderColor = Color.White,
+                                focusedLabelColor = Color.White,
+                                unfocusedLabelColor = Color.White,
+                            ),
                         )
                     }
                     Icon(
@@ -177,59 +203,52 @@ fun ProfileFragment(
                         modifier = Modifier
                             .padding(start = 16.dp)
                             .clickable {
-                                profileViewModel.setDeleteAll(!settingsIconControl.value)
-                                profileViewModel.insertOrUpdate(nameStateTextField.value)
+                                profileViewModel.insertOrUpdate(nameStateText.value)
                                 profileViewModel.setSettingsIcon()
-                                settingsState.value = settingsIconControl.value
-                            })
+                                profileViewModel.setChangeNameControl(!changeNameControl.value)
+                            },
+                        tint = Color.White
+                    )
                 }
             }
         }
         Spacer(modifier = Modifier.padding(10.dp))
         Text(
-            text = stringResource(R.string.Settings),
+            text = stringResource(R.string.settings),
             color = colorResource(id = R.color.kapaliMavi),
             fontSize = 16.sp
         )
         Column(modifier = Modifier.padding(10.dp)) {
             Spacer(modifier = Modifier.padding(10.dp))
             CustomButton(
-                title = stringResource(R.string.Privacy_Policy),
+                title = stringResource(R.string.privacy_Policy),
                 R.drawable.gizlilik,
                 onClick = {}
             )
             Spacer(modifier = Modifier.padding(5.dp))
             CustomButton(
-                title = stringResource(R.string.Terms_And_Conditions),
+                title = stringResource(R.string.terms_And_Conditions),
                 R.drawable.sartlar,
                 onClick = {}
             )
             Spacer(modifier = Modifier.padding(5.dp))
             CustomButton(
-                title = stringResource(R.string.Vote_For_Us),
+                title = stringResource(R.string.vote_For_Us),
                 R.drawable.oy,
                 onClick = {}
             )
             Spacer(modifier = Modifier.padding(5.dp))
             CustomButton(
-                title = stringResource(R.string.Report_Error),
+                title = stringResource(R.string.report_Error),
                 R.drawable.error,
                 onClick = {}
             )
             Spacer(modifier = Modifier.padding(5.dp))
             CustomButton(
-                title = stringResource(R.string.Contact),
+                title = stringResource(R.string.contact),
                 R.drawable.contact,
                 onClick = {}
             )
-        }
-    }
-}
-
-private fun getProfileInfo(profileViewModel: ProfileViewModel, nameStateText: String) {
-    CoroutineScope(Dispatchers.Main).launch {
-        profileViewModel.userInfo.collect {
-            profileViewModel.nameStateText.value = nameStateText
         }
     }
 }

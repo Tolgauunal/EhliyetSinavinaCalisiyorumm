@@ -18,7 +18,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -70,6 +69,29 @@ fun AutoComplete(isClick: (String) -> Unit) {
                 textStyle = TextStyle(
                     color = colorResource(id = R.color.kapaliMavi),
                     fontSize = 16.sp
+                ),
+                colors = TextFieldDefaults.colors(
+                    focusedContainerColor = Color.Transparent,
+                    unfocusedContainerColor = Color.Transparent,
+                    disabledContainerColor = Color.Transparent,
+                    errorContainerColor = Color.Transparent,
+                    focusedTextColor = Color.Black,
+                    unfocusedTextColor = Color.DarkGray,
+                    disabledTextColor = Color.Gray,
+                    errorTextColor = Color.Red,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    disabledIndicatorColor = Color.Transparent,
+                    errorIndicatorColor = Color.Red,
+                    cursorColor = Color(0xFF003366),
+                    focusedLabelColor = Color(0xFF003366),
+                    unfocusedLabelColor = Color.DarkGray,
+                    disabledLabelColor = Color.Gray,
+                    errorLabelColor = Color.Red,
+                    focusedPlaceholderColor = Color.LightGray,
+                    unfocusedPlaceholderColor = Color.Gray,
+                    disabledPlaceholderColor = Color.Gray,
+                    errorPlaceholderColor = Color.Red
                 ),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,

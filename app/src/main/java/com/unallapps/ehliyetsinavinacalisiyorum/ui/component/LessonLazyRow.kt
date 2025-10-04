@@ -28,7 +28,7 @@ import com.unallapps.ehliyetsinavinacalisiyorum.R
 @Composable
 fun LessonLazyRow(lessonSelectedItem: Int, onClick: (Int) -> Unit) {
     Column(verticalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-        Text(text = stringResource(R.string.Selected_Lesson))
+        Text(text = stringResource(R.string.selected_Lesson))
         Spacer(modifier = Modifier.padding(top = 10.dp))
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
