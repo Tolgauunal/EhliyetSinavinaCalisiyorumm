@@ -2,7 +2,6 @@ package com.unallapps.ehliyetsinavinacalisiyorum.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseSubject
 import com.unallapps.ehliyetsinavinacalisiyorum.data.Subject
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.UserEntity
@@ -16,15 +15,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
+
     private val defaultUser = UserEntity(userName = Constants.String.DEFAULT_USER)
+
     private val _userInfo: MutableStateFlow<UserEntity> = MutableStateFlow(defaultUser)
     val userInfo: StateFlow<UserEntity> = _userInfo
 
     private val _lessonSelectedItem: MutableStateFlow<Int> = MutableStateFlow(0)
     val lessonSelectedItem: MutableStateFlow<Int> = _lessonSelectedItem
 
-    private val _nameStateText: MutableStateFlow<String?> = MutableStateFlow(null)
-    val nameStateText: MutableStateFlow<String?> = _nameStateText
+    private val _userName: MutableStateFlow<String?> = MutableStateFlow(null)
+    val userName: MutableStateFlow<String?> = _userName
 
     private val _alertDialog: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val alertDialog: MutableStateFlow<Boolean> = _alertDialog
@@ -37,11 +38,11 @@ class HomeViewModel @Inject constructor(private val userRepository: UserReposito
         viewModelScope.launch {
             userRepository.getUser()?.let {
                 _userInfo.value = it
-                _nameStateText.value = it.userName
+                _userName.value = it.userName
             } ?: run {
                 userRepository.insert(defaultUser)
                 _userInfo.value = defaultUser
-                _nameStateText.value = defaultUser.userName
+                _userName.value = defaultUser.userName
             }
         }
     }

@@ -18,28 +18,25 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(private val userRepository: UserRepository) :
     ViewModel() {
+
     private val _userInfo: MutableStateFlow<UserEntity?> = MutableStateFlow(null)
     val userInfo: StateFlow<UserEntity?> = _userInfo
+
     private var byteArray: ByteArray? = null
+
     private val _nameStateText: MutableStateFlow<String> =
         MutableStateFlow(R.string.default_User.toString())
     val nameStateText: MutableStateFlow<String> = _nameStateText
+
     private val _userImage: MutableStateFlow<ByteArray?> = MutableStateFlow(null)
     val userImage: MutableStateFlow<ByteArray?> = _userImage
+
     private val _changeNameControl: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val changeNameControl: StateFlow<Boolean> = _changeNameControl
 
     @DrawableRes
     private val _settingsIcon = MutableStateFlow(R.drawable.baseline_settings_24)
     val settingsIcon = _settingsIcon
-    fun setSettingsIcon() {
-        _settingsIcon.value =
-            if (_changeNameControl.value) {
-                R.drawable.baseline_settings_24
-            } else {
-                R.drawable.baseline_edit_24
-            }
-    }
 
     init {
         viewModelScope.launch {
@@ -50,14 +47,22 @@ class ProfileViewModel @Inject constructor(private val userRepository: UserRepos
         }
     }
 
+    fun setSettingsIcon() {
+        _settingsIcon.value =
+            if (_changeNameControl.value) {
+                R.drawable.baseline_settings_24
+            } else {
+                R.drawable.baseline_edit_24
+            }
+    }
+
     fun insertOrUpdate(name: String) {
         viewModelScope.launch {
             if (userRepository.getUserSize().isNotEmpty()) {
                 userRepository.updateUserName(name, 1)
                 _userInfo.value = userRepository.getUser()
             } else {
-                val newUser = UserEntity(userName = name)
-                userRepository.insert(newUser)
+                userRepository.insert(UserEntity(userName = name))
                 _userInfo.value = userRepository.getUser()
             }
         }

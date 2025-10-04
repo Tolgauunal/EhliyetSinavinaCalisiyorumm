@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -22,29 +23,29 @@ fun SubjectScreenFragment(
     navController: NavHostController,
     viewModel: SubjectScreenViewModel = hiltViewModel()
 ) {
-    val lessonSelectedItem = viewModel.lessonSelectedItem.collectAsState()
-    val selectedSubject = viewModel.selectedSubject.collectAsState()
-    val alertDialog = viewModel.alertDialog.collectAsState()
+    val lessonSelectedItem by viewModel.lessonSelectedItem.collectAsState()
+    val selectedSubject by viewModel.selectedSubject.collectAsState()
+    val alertDialog by viewModel.alertDialog.collectAsState()
 
     Column(
         modifier = modifier.padding(8.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        LessonLazyRow(lessonSelectedItem = lessonSelectedItem.value) {
+        LessonLazyRow(lessonSelectedItem = lessonSelectedItem) {
             viewModel.setSelectedSubject(it)
         }
         Spacer(modifier = Modifier.padding(5.dp))
         SubjectLazyRow(
-            lessonSelectedItemIndex = lessonSelectedItem.value,
+            lessonSelectedItemIndex = lessonSelectedItem,
             controller = false,
             onSelectedSubject = { viewModel.setSelectedSubject(it.id) },
             onAlertDialog = { viewModel.setAlertDialog(it) },
             subjectTitle = R.string.all_lesson
         )
-        if (alertDialog.value) {
+        if (alertDialog) {
             CustomAlertDialog(
-                selectedSubject = selectedSubject.value,
+                selectedSubject = selectedSubject,
                 onAlertDialogChange = { viewModel.setAlertDialog(it) },
                 onClickInformationCard = { navController.navigate("informationCard/${it}") }) {
                 navController.navigate("subjectScreen/${it}")

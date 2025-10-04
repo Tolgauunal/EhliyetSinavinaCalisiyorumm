@@ -18,7 +18,8 @@ fun FinishAlert(
     onFinishAlertDialog: (Boolean) -> Unit,
     onClick: (Boolean) -> Unit
 ) {
-    AlertDialog(containerColor = colorResource(id = R.color.kapaliMavi),
+    AlertDialog(
+        containerColor = colorResource(id = R.color.kapaliMavi),
         modifier = Modifier.padding(10.dp),
         onDismissRequest = {
             onFinishAlertDialog(false)
@@ -27,7 +28,8 @@ fun FinishAlert(
             Text(text = stringResource(R.string.test_Again), color = Color.White)
         },
         confirmButton = {
-            Button(colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
+            Button(
+                colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                 onClick = {
                     onClick(false)
                 }) {
@@ -35,11 +37,13 @@ fun FinishAlert(
             }
         },
         dismissButton = {
-            Button(colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
+            Button(
+                colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                 onClick = {
                     onFinishAlertDialog(false)
                 }) {
                 Text(stringResource(R.string.no))
             }
-        })
+        }
+    )
 }

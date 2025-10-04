@@ -16,6 +16,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,13 +41,14 @@ import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.SubjectLazyRow
 fun HomeFragment(
     modifier: Modifier,
     navController: NavHostController,
-    homeViewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
-    val nameStateText = homeViewModel.nameStateText.collectAsState()
-    val lessonSelectedItem = homeViewModel.lessonSelectedItem.collectAsState()
-    val selectedSubject = homeViewModel.selectedSubject.collectAsState()
-    val alertDialog = homeViewModel.alertDialog.collectAsState()
-    val userInfo = homeViewModel.userInfo.collectAsState()
+    val userName by viewModel.userName.collectAsState()
+    val lessonSelectedItem by viewModel.lessonSelectedItem.collectAsState()
+    val selectedSubject by viewModel.selectedSubject.collectAsState()
+    val alertDialog by viewModel.alertDialog.collectAsState()
+    val userInfo by viewModel.userInfo.collectAsState()
+
     Column(
         modifier = modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp),
         verticalArrangement = Arrangement.Top,
@@ -57,18 +59,18 @@ fun HomeFragment(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
         ) {
-            nameStateText.value?.let {
+            userName?.let {
                 Text(
                     text = it,
                     color = colorResource(id = R.color.kapaliMavi),
                     fontSize = 16.sp
                 )
             }
-            userInfo.value.userPhoto?.let {
+            userInfo.userPhoto?.let {
                 val bitmap = BitmapFactory.decodeByteArray(
-                    userInfo.value.userPhoto,
+                    userInfo.userPhoto,
                     0,
-                    userInfo.value.userPhoto!!.size
+                    userInfo.userPhoto!!.size
                 )
                 Image(
                     bitmap = bitmap.asImageBitmap(),
@@ -123,19 +125,20 @@ fun HomeFragment(
             }
         }
         Spacer(modifier = Modifier.padding(5.dp))
-        LessonLazyRow(lessonSelectedItem = lessonSelectedItem.value) {
-            homeViewModel.setLessonSelectedItem(it)
+        LessonLazyRow(lessonSelectedItem = lessonSelectedItem) {
+            viewModel.setLessonSelectedItem(it)
         }
         Spacer(modifier = Modifier.padding(5.dp))
-        SubjectLazyRow(lessonSelectedItemIndex = lessonSelectedItem.value,
+        SubjectLazyRow(
+            lessonSelectedItemIndex = lessonSelectedItem,
             controller = true,
-            onSelectedSubject = { homeViewModel.setSelectedSubject(it) },
-            onAlertDialog = { homeViewModel.setAlertDialog(it) })
+            onSelectedSubject = { viewModel.setSelectedSubject(it) },
+            onAlertDialog = { viewModel.setAlertDialog(it) })
     }
-    if (alertDialog.value) {
+    if (alertDialog) {
         CustomAlertDialog(
-            selectedSubject.value,
-            onAlertDialogChange = { homeViewModel.alertDialog.value = it },
+            selectedSubject,
+            onAlertDialogChange = { viewModel.alertDialog.value = it },
             onClickInformationCard = { navController.navigate("informationCard/${it}") }) {
             navController.navigate("subjectScreen/${it}")
         }

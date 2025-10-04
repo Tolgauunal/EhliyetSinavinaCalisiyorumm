@@ -32,6 +32,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
@@ -97,7 +98,7 @@ fun AutoComplete(isClick: (String) -> Unit) {
                     keyboardType = KeyboardType.Text,
                     imeAction = ImeAction.Done
                 ),
-                singleLine = true,
+                singleLine = true
             )
         }
         AnimatedVisibility(visible = expanded) {
@@ -112,7 +113,7 @@ fun AutoComplete(isClick: (String) -> Unit) {
                             it.name.lowercase()
                                 .contains(category.lowercase()) || it.name.lowercase()
                                 .contains("other")
-                        }.take(1)) {
+                        }.take(2)) {
                             CategoryItems(title = it.name) {
                                 category = it
                                 expanded = false
@@ -135,7 +136,9 @@ fun CategoryItems(title: String, onSelect: (String) -> Unit) {
         Text(
             text = title,
             modifier = Modifier.padding(5.dp),
-            color = colorResource(id = R.color.kapaliMavi)
+            color = colorResource(id = R.color.kapaliMavi),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
         )
     }
 }

@@ -3,6 +3,7 @@ package com.unallapps.ehliyetsinavinacalisiyorum.ui.informationCard
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,13 +12,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,11 +28,13 @@ import com.unallapps.ehliyetsinavinacalisiyorum.R
 @Composable
 fun InformationCardFragment(
     modifier: Modifier,
-    informationCardViewModel: InformationCardViewModel = hiltViewModel()
+    viewModel: InformationCardViewModel = hiltViewModel()
 ) {
-    val informationCardsInfo = informationCardViewModel.informationCardsInfo.collectAsState()
-    val informationCardsSize = informationCardViewModel.informationCardsSize.collectAsState()
-    var progress by remember { mutableIntStateOf(1) }
+    val informationCardsInfo by viewModel.informationCardsInfo.collectAsState()
+    val informationCardsSize by viewModel.informationCardsSize.collectAsState()
+    val progressBarCount by viewModel.progressBarCount.collectAsState()
+    val forwardIconShow by viewModel.forwardIconShow.collectAsState()
+    val backIconShow by viewModel.backIconShow.collectAsState()
 
     Column(modifier) {
         Row(
@@ -43,10 +44,12 @@ fun InformationCardFragment(
             verticalAlignment = Alignment.Top,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            informationCardsSize.value?.let { ProgressBar(progress = progress, size = it - 1) }
+            informationCardsSize?.let {
+                ProgressBar(progress = progressBarCount, size = it - 1)
+            }
         }
 
-        informationCardsInfo.value?.let {
+        informationCardsInfo?.let {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -58,48 +61,52 @@ fun InformationCardFragment(
             ) {
                 Column {
                     Text(
-                        text = it[progress].description,
                         modifier = Modifier
                             .padding(20.dp)
                             .fillMaxWidth()
                             .verticalScroll(rememberScrollState()),
+                        text = it[progressBarCount].description
                     )
-                    it[progress].details?.let {
+                    it[progressBarCount].details?.let {
                         Text(
-                            text = it,
                             modifier = Modifier
                                 .padding(20.dp)
                                 .fillMaxWidth()
                                 .verticalScroll(rememberScrollState()),
+                            text = it
                         )
                     }
                 }
-                Row(
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(20.dp),
-                    verticalAlignment = Alignment.Bottom,
-                    horizontalArrangement = Arrangement.SpaceBetween
+                        .padding(20.dp)
                 ) {
-                    Icon(painter = painterResource(id = R.drawable.baseline_keyboard_arrow_left_24),
-                        contentDescription = "",
-                        modifier = Modifier.clickable {
-                            if (progress > 0) {
-                                progress -= 1
-                            }
-                        })
-                    Icon(painter = painterResource(id = R.drawable.baseline_keyboard_arrow_right_24),
-                        contentDescription = "",
-                        modifier = Modifier.clickable {
-                            informationCardsSize.value?.let {
-                                if (progress < it-1) {
-                                    progress += 1
-                                    println(progress)
-                                    println(it)
+                    if (backIconShow) {
+                        Icon(
+                            modifier = Modifier
+                                .clickable {
+                                    viewModel.setProgressBarCount(progressBarCount - 1)
                                 }
-                            }
-                        }
-                    )
+                                .align(Alignment.TopStart),
+                            painter = painterResource(id = R.drawable.baseline_keyboard_arrow_left_24),
+                            contentDescription = ""
+                        )
+                    }
+                    if (forwardIconShow) {
+                        Icon(
+                            modifier = Modifier
+                                .clickable {
+                                    viewModel.setProgressBarCount(progressBarCount + 1)
+                                }
+                                .align(Alignment.TopEnd),
+                            painter = painterResource(
+                                id =
+                                    R.drawable.baseline_keyboard_arrow_right_24
+                            ),
+                            contentDescription = ""
+                        )
+                    }
                 }
             }
         }
@@ -108,5 +115,11 @@ fun InformationCardFragment(
 
 @Composable
 private fun ProgressBar(progress: Int, size: Float) {
-    LinearProgressIndicator(progress = progress / size, modifier = Modifier.fillMaxWidth())
+    LinearProgressIndicator(
+        progress = { progress / size },
+        modifier = Modifier.fillMaxWidth(),
+        color = ProgressIndicatorDefaults.linearColor,
+        trackColor = ProgressIndicatorDefaults.linearTrackColor,
+        strokeCap = ProgressIndicatorDefaults.LinearStrokeCap,
+    )
 }

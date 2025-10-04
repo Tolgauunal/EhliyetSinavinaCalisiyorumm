@@ -30,8 +30,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldColors
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -55,9 +53,6 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CustomButton
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.P)
 @SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
@@ -65,13 +60,13 @@ import kotlinx.coroutines.launch
 @Composable
 fun ProfileFragment(
     modifier: Modifier,
-    profileViewModel: ProfileViewModel = hiltViewModel()
+    viewModel: ProfileViewModel = hiltViewModel()
 ) {
     var photoUri: Uri? by remember { mutableStateOf(null) }
-    val changeNameControl = profileViewModel.changeNameControl.collectAsState()
-    val nameStateText = profileViewModel.nameStateText.collectAsState()
-    val userImage = profileViewModel.userImage.collectAsState()
-    val settingsIcon = profileViewModel.settingsIcon.collectAsState()
+    val changeNameControl = viewModel.changeNameControl.collectAsState()
+    val nameStateText = viewModel.nameStateText.collectAsState()
+    val userImage = viewModel.userImage.collectAsState()
+    val settingsIcon = viewModel.settingsIcon.collectAsState()
     val context = LocalContext.current
     val launcher =
         rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
@@ -83,13 +78,13 @@ fun ProfileFragment(
                         it
                     )
                 )
-                profileViewModel.savePhoto(source)
+                viewModel.savePhoto(source)
             }
         }
     Column(
+        modifier = modifier.verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.verticalScroll(rememberScrollState())
     ) {
         Box(
             modifier = Modifier
@@ -111,8 +106,6 @@ fun ProfileFragment(
                         )
 
                         Image(
-                            painter = painter,
-                            contentDescription = null,
                             modifier = Modifier
                                 .size(100.dp)
                                 .clip(CircleShape)
@@ -124,6 +117,8 @@ fun ProfileFragment(
                                         )
                                     )
                                 },
+                            painter = painter,
+                            contentDescription = null,
                             contentScale = ContentScale.Crop
                         )
                     }
@@ -133,8 +128,6 @@ fun ProfileFragment(
                         val bitmap = BitmapFactory.decodeByteArray(userPhoto, 0, userPhoto!!.size)
 
                         Image(
-                            bitmap = bitmap.asImageBitmap(),
-                            contentDescription = null,
                             modifier = Modifier
                                 .size(100.dp)
                                 .clip(CircleShape)
@@ -146,15 +139,14 @@ fun ProfileFragment(
                                         )
                                     )
                                 },
+                            bitmap = bitmap.asImageBitmap(),
+                            contentDescription = null,
                             contentScale = ContentScale.Crop
                         )
                     }
 
                     else -> {
                         Image(
-                            painter = painterResource(id = R.drawable.person),
-                            contentDescription = "",
-                            contentScale = ContentScale.Crop,
                             modifier = Modifier
                                 .clip(CircleShape)
                                 .size(100.dp)
@@ -164,7 +156,10 @@ fun ProfileFragment(
                                             mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly
                                         )
                                     )
-                                }
+                                },
+                            painter = painterResource(id = R.drawable.person),
+                            contentDescription = "",
+                            contentScale = ContentScale.Crop,
                         )
                     }
                 }
@@ -179,7 +174,7 @@ fun ProfileFragment(
                     } else {
                         OutlinedTextField(
                             value = nameStateText.value,
-                            onValueChange = { profileViewModel.setName(it) },
+                            onValueChange = { viewModel.setName(it) },
                             label = {
                                 Text(
                                     text = stringResource(R.string.set_Profile_Name),
@@ -198,15 +193,15 @@ fun ProfileFragment(
                         )
                     }
                     Icon(
-                        painter = painterResource(settingsIcon.value),
-                        contentDescription = "",
                         modifier = Modifier
                             .padding(start = 16.dp)
                             .clickable {
-                                profileViewModel.insertOrUpdate(nameStateText.value)
-                                profileViewModel.setSettingsIcon()
-                                profileViewModel.setChangeNameControl(!changeNameControl.value)
+                                viewModel.insertOrUpdate(nameStateText.value)
+                                viewModel.setSettingsIcon()
+                                viewModel.setChangeNameControl(!changeNameControl.value)
                             },
+                        painter = painterResource(settingsIcon.value),
+                        contentDescription = "",
                         tint = Color.White
                     )
                 }

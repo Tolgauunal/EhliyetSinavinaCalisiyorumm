@@ -126,7 +126,8 @@ fun SubjectLazyRow(
                         }
                     }
                 }
-            })
+            }
+            )
         }
     }
 }

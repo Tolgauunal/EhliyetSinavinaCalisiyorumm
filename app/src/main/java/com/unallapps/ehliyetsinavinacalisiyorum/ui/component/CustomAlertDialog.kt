@@ -31,7 +31,8 @@ fun CustomAlertDialog(
         Column {
             val openDialog = remember { mutableStateOf(true) }
             if (openDialog.value) {
-                AlertDialog(containerColor = colorResource(id = R.color.kapaliMavi),
+                AlertDialog(
+                    containerColor = colorResource(id = R.color.kapaliMavi),
                     modifier = Modifier.padding(10.dp),
                     onDismissRequest = {
                         openDialog.value = false
@@ -48,11 +49,12 @@ fun CustomAlertDialog(
                         )
                     },
                     confirmButton = {
-                        Button(colors = ButtonDefaults.buttonColors(
-                            containerColor = colorResource(
-                                id = R.color.altinsarisi
-                            )
-                        ),
+                        Button(
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = colorResource(
+                                    id = R.color.altinsarisi
+                                )
+                            ),
                             onClick = {
                                 openDialog.value = false
                                 onAlertDialogChange(false)
@@ -69,11 +71,12 @@ fun CustomAlertDialog(
                         }
                     },
                     dismissButton = {
-                        Button(colors = ButtonDefaults.buttonColors(
-                            containerColor = colorResource(
-                                id = R.color.altinsarisi
-                            )
-                        ),
+                        Button(
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = colorResource(
+                                    id = R.color.altinsarisi
+                                )
+                            ),
                             onClick = {
                                 openDialog.value = false
                                 onAlertDialogChange(false)
@@ -87,7 +90,8 @@ fun CustomAlertDialog(
                                 textAlign = TextAlign.Center
                             )
                         }
-                    })
+                    }
+                )
             }
         }
     }

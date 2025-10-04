@@ -16,16 +16,30 @@ import javax.inject.Inject
 class InformationCardViewModel @Inject constructor(
     private val informationCardRepository: InformationCardRepository,
     savedStateHandle: SavedStateHandle
-) :
-    ViewModel() {
-    private var _informationCardsInfo: MutableStateFlow<List<InformationCardsInfo>?> =
+) : ViewModel() {
+
+    private val _informationCardsInfo: MutableStateFlow<List<InformationCardsInfo>?> =
         MutableStateFlow(null)
-    var informationCardsInfo: StateFlow<List<InformationCardsInfo>?> = _informationCardsInfo
-    private var _informationCardsSize: MutableStateFlow<Float?> =
+    val informationCardsInfo: StateFlow<List<InformationCardsInfo>?> = _informationCardsInfo
+
+    private val _informationCardsSize: MutableStateFlow<Float?> =
         MutableStateFlow(null)
-    var informationCardsSize: StateFlow<Float?> = _informationCardsSize
-    private var _subjectName: MutableStateFlow<String?> =
+    val informationCardsSize: StateFlow<Float?> = _informationCardsSize
+
+    private val _subjectName: MutableStateFlow<String?> =
         MutableStateFlow(null)
+
+    private val _progressBarCount: MutableStateFlow<Int> =
+        MutableStateFlow(0)
+    val progressBarCount: StateFlow<Int> = _progressBarCount
+
+    private val _forwardIconShow: MutableStateFlow<Boolean> =
+        MutableStateFlow(true)
+    val forwardIconShow: StateFlow<Boolean> = _forwardIconShow
+
+    private val _backIconShow: MutableStateFlow<Boolean> =
+        MutableStateFlow(false)
+    val backIconShow: StateFlow<Boolean> = _backIconShow
 
     init {
         savedStateHandle.get<String>(Constants.String.SUBJECT_NAME)?.let {
@@ -45,5 +59,11 @@ class InformationCardViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun setProgressBarCount(data: Int) {
+        _progressBarCount.value = data
+        _forwardIconShow.value = _informationCardsSize.value?.toInt() != _progressBarCount.value + 1
+        _backIconShow.value = 0 != _progressBarCount.value
     }
 }
