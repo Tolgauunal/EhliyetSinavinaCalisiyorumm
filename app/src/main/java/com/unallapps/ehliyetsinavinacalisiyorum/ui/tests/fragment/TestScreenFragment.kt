@@ -56,6 +56,7 @@ fun TestScreen(
     val backgroundColorD by viewModel.backgroundColorD.collectAsState()
     val finishAlertDialog by viewModel.finishAlertDialog.collectAsState()
     val exitAlertDialog by viewModel.exitAlertDialog.collectAsState()
+    val nextQuestionsIconShow by viewModel.nextQuestionsIconShow.collectAsState()
 
     Column(
         modifier = modifier
@@ -84,7 +85,14 @@ fun TestScreen(
                 contentDescription = "",
                 modifier = Modifier.clickable {
                     viewModel.setExitAlertDialog(true)
-                })
+                }
+            )
+            Image(
+                painter = painterResource(id = R.drawable.baseline_close_24),
+                contentDescription = "",
+                modifier = Modifier.clickable {
+                }
+            )
         }
         Spacer(modifier = Modifier.padding(top = 20.dp))
         Row(
@@ -98,7 +106,10 @@ fun TestScreen(
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
             Column {
-                Row {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
                     Image(
                         painter = painterResource(id = R.drawable.dogru),
                         contentDescription = "",
@@ -169,20 +180,22 @@ fun TestScreen(
             viewModel.setSelectedCorrect(it)
         }
         Spacer(modifier = Modifier.padding(5.dp))
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(24.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.End
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.baseline_done_24),
-                contentDescription = "",
-                modifier = Modifier.clickable {
-                    viewModel.nextQuestion()
-                }
-            )
+        if (nextQuestionsIconShow) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(24.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.End
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.baseline_done_24),
+                    contentDescription = "",
+                    modifier = Modifier.clickable {
+                        viewModel.nextQuestion()
+                    }
+                )
+            }
         }
 
         if (finishAlertDialog) {
@@ -191,7 +204,10 @@ fun TestScreen(
             }
         }
         if (exitAlertDialog) {
-            CloseAlert(onClose = { viewModel.setExitAlertDialog(it) }) {
+            CloseAlert(onAlertDialogClose = {
+                viewModel.setExitAlertDialog(it)
+            }) {
+                viewModel.setExitAlertDialog(false)
                 viewModel.setTestNumber(testNumber = questionIndex)
                 navController.navigate("tests")
             }

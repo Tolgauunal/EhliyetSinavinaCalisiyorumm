@@ -14,30 +14,33 @@ import androidx.compose.ui.unit.dp
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 
 @Composable
-fun CloseAlert(onClose: (Boolean) -> Unit, onClick: () -> Unit) {
-    AlertDialog(containerColor = colorResource(id = R.color.kapaliMavi),
+fun CloseAlert(onAlertDialogClose: (Boolean) -> Unit, onSaveAndExit: () -> Unit) {
+    AlertDialog(
+        containerColor = colorResource(id = R.color.kapaliMavi),
         modifier = Modifier.padding(10.dp),
         onDismissRequest = {
-            onClose(false)
+            onAlertDialogClose(false)
         },
         title = {
             Text(text = stringResource(R.string.test_Finish), color = Color.White)
         },
         dismissButton = {
-            Button(colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
+            Button(
+                colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                 onClick = {
-                    onClose(false)
+                    onSaveAndExit()
                 }) {
                 Text(stringResource(R.string.yes))
             }
         },
         confirmButton = {
-            Button(colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
+            Button(
+                colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                 onClick = {
-                    onClose(false)
-                    onClick()
+                    onAlertDialogClose(false)
                 }) {
                 Text(stringResource(R.string.no))
             }
-        })
+        }
+    )
 }

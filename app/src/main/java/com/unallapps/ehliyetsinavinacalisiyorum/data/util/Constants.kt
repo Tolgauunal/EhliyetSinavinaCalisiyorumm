@@ -7,6 +7,7 @@ object Constants {
         const val RESTART_OR_CONTINUE = "restartOrContinue"
         const val DATABASE = "database"
         const val ENGINE = "Motor"
+        const val FAVORITE = "Favoriler"
         const val FIRST_AID = "İlk Yardım"
         const val TRAFFIC = "Trafik"
         const val HOME = "Home"

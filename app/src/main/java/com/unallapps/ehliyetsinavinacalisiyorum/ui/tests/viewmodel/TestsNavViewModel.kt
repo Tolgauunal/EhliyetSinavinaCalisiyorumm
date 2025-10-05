@@ -16,13 +16,15 @@ class TestsNavViewModel @Inject constructor(private val testSaveIdRepository: Te
     private val _selectedLessonItemIndex: MutableStateFlow<Int> = MutableStateFlow(0)
     val selectedLessonItemIndex: MutableStateFlow<Int> = _selectedLessonItemIndex
 
-    private val _selectedLessonItemText: MutableStateFlow<String?> = MutableStateFlow(null)
+    private val _selectedLessonItemText: MutableStateFlow<String?> =
+        MutableStateFlow(Constants.String.FIRST_AID)
     val selectedLessonItemText: MutableStateFlow<String?> = _selectedLessonItemText
     private val testIdNameList =
         listOf(
             TestSaveIdEntity(1, Constants.String.FIRST_AID),
             TestSaveIdEntity(2, Constants.String.TRAFFIC),
-            TestSaveIdEntity(3, Constants.String.ENGINE)
+            TestSaveIdEntity(4, Constants.String.ENGINE),
+            TestSaveIdEntity(3, Constants.String.FAVORITE)
         )
 
     init {
