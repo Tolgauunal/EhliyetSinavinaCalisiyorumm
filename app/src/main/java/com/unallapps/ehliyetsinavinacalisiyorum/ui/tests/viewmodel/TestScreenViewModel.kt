@@ -98,6 +98,9 @@ class TestScreenViewModel @Inject constructor(
 
     private val _currentTestEntity = MutableStateFlow<TestsEntity?>(null)
 
+    private val _nextQuestionIcon = MutableStateFlow(R.drawable.baseline_keyboard_arrow_right_24)
+    val nextQuestionIcon = _nextQuestionIcon.asStateFlow()
+
     init {
         savedStateHandle.get<String>(Constants.String.LESSON_NAME)?.let {
             _currentLessonName.value = it
@@ -120,14 +123,7 @@ class TestScreenViewModel @Inject constructor(
                     _restartOrContinue.value = false
                 }
             }
-
-            val testList = testDetailRepository.getTestDetailList(_currentLessonName.value)
-            if (testList.isNullOrEmpty()) {
-                testDetailRepository.insertTestList(DatabaseTestList.TestList)
-                loadCurrentQuestionData()
-            } else {
-                loadCurrentQuestionData()
-            }
+            loadCurrentQuestionData()
         }
     }
 
@@ -162,6 +158,9 @@ class TestScreenViewModel @Inject constructor(
             } else {
                 val testList = testDetailRepository.getFavoriteTestList()
                 testList?.let {
+                    if (_currentQuestionIndex.value + 1 == it.size) {
+                        _nextQuestionIcon.value = R.drawable.baseline_close_24
+                    }
                     val current = it[_currentQuestionIndex.value]
                     _currentTestEntity.value = current
                     _totalQuestionCount.value = it.size

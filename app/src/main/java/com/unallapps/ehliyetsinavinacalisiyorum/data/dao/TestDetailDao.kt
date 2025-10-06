@@ -22,4 +22,7 @@ interface TestDetailDao {
     )
     @Query("SELECT * FROM TestsEntity WHERE favorite = 1")
     suspend fun getFavoriteTestList(): List<TestsEntity>
+
+    @Query("SELECT * FROM TestsEntity")
+    suspend fun getAllTestListSize(): List<TestsEntity>
 }

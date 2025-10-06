@@ -15,14 +15,14 @@ import com.unallapps.ehliyetsinavinacalisiyorum.R
 
 @Composable
 fun FinishAlert(
-    onFinishAlertDialog: (Boolean) -> Unit,
-    onClick: (Boolean) -> Unit
+    onPopBack: (Boolean) -> Unit,
+    onRestart: (Boolean) -> Unit
 ) {
     AlertDialog(
         containerColor = colorResource(id = R.color.kapaliMavi),
         modifier = Modifier.padding(10.dp),
         onDismissRequest = {
-            onFinishAlertDialog(false)
+            onPopBack(false)
         },
         title = {
             Text(text = stringResource(R.string.test_Again), color = Color.White)
@@ -31,7 +31,7 @@ fun FinishAlert(
             Button(
                 colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                 onClick = {
-                    onClick(false)
+                    onRestart(false)
                 }) {
                 Text(stringResource(R.string.yes))
             }
@@ -40,7 +40,7 @@ fun FinishAlert(
             Button(
                 colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.altinsarisi)),
                 onClick = {
-                    onFinishAlertDialog(false)
+                    onPopBack(false)
                 }) {
                 Text(stringResource(R.string.no))
             }

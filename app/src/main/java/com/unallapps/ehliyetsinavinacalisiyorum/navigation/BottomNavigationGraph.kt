@@ -54,16 +54,18 @@ fun BottomNavigationGraph(navController: NavHostController, paddingModifier: Mod
             InformationCardFragment(paddingModifier)
         }
         composable(
-            route = BottomBarScreen.TestScreen.route,
-            arguments = listOf(navArgument(Constants.String.LESSON_NAME) {
-                type = NavType.StringType
-            }, navArgument(Constants.String.RESTART_OR_CONTINUE) { type = NavType.BoolType })
+            route = "testScreen/{lessonName}/{restartOrContinue}",
+            arguments = listOf(
+                navArgument("lessonName") { type = NavType.StringType },
+                navArgument("restartOrContinue") { type = NavType.BoolType }
+            )
         ) {
             TestScreen(
                 paddingModifier,
                 navController = navController
             )
         }
+
         composable(
             route = BottomBarScreen.SubjectScreen.route,
             arguments = listOf(navArgument(Constants.String.SUBJECT_NAME) {

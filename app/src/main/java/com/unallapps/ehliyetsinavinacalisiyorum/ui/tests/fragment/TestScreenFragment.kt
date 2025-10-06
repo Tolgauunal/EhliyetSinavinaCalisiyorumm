@@ -29,6 +29,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.unallapps.ehliyetsinavinacalisiyorum.R
+import com.unallapps.ehliyetsinavinacalisiyorum.navigation.BottomBarScreen
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CloseAlert
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.FinishAlert
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.tests.viewmodel.TestScreenViewModel
@@ -59,6 +60,7 @@ fun TestScreen(
     val showExitDialog by viewModel.showExitDialog.collectAsState()
     val showNextButton by viewModel.showNextButton.collectAsState()
     val favoriteIconRes by viewModel.favoriteIconRes.collectAsState()
+    val nextQuestionIcon by viewModel.nextQuestionIcon.collectAsState()
 
     Column(
         modifier = modifier
@@ -87,18 +89,22 @@ fun TestScreen(
                     painter = painterResource(id = favoriteIconRes),
                     contentDescription = "",
                     modifier = Modifier
+                        .padding(end = 8.dp)
                         .clickable {
                             viewModel.toggleFavoriteStatus()
                         }
                         .size(24.dp),
                     tint = colorResource(R.color.altinsarisi)
                 )
-                Image(
+                Icon(
                     painter = painterResource(id = R.drawable.baseline_close_24),
                     contentDescription = "",
-                    modifier = Modifier.clickable {
-                        viewModel.setExitDialogVisible(true)
-                    }
+                    tint = colorResource(R.color.altinsarisi),
+                    modifier = Modifier
+                        .size(24.dp)
+                        .clickable {
+                            viewModel.setExitDialogVisible(true)
+                        }
                 )
             }
         }
@@ -196,20 +202,32 @@ fun TestScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.End
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.baseline_done_24),
+                Icon(
+                    painter = painterResource(id = nextQuestionIcon),
                     contentDescription = "",
-                    modifier = Modifier.clickable {
-                        viewModel.nextQuestion()
-                    }
+                    tint = colorResource(R.color.altinsarisi),
+                    modifier = Modifier
+                        .size(36.dp)
+                        .clickable {
+                            viewModel.nextQuestion()
+                        }
                 )
             }
         }
 
         if (showFinishDialog) {
-            FinishAlert(onFinishAlertDialog = { viewModel.setFinishDialogVisible(it) }) {
-                navController.navigate("testScreen/${selectedLesson?.name}")
-            }
+            FinishAlert(
+                onPopBack = {
+                    viewModel.setFinishDialogVisible(it)
+                    navController.popBackStack(
+                        route = BottomBarScreen.Tests.route,
+                        inclusive = false
+                    )
+                },
+                onRestart = {
+                    navController.navigate("testScreen/${selectedLesson?.name}/${it}")
+                }
+            )
         }
         if (showExitDialog) {
             CloseAlert(onAlertDialogClose = {

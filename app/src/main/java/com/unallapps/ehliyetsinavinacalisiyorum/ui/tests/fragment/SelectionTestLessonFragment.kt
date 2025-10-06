@@ -52,6 +52,8 @@ fun TestsNavFragment(
 ) {
     val selectedLessonItemIndex = viewModel.selectedLessonItemIndex.collectAsState()
     val selectedLessonItemText = viewModel.selectedLessonItemText.collectAsState()
+    val favoriteCardVisible = viewModel.favoriteCardVisible.collectAsState()
+
     Column(
         modifier = modifier
             .padding(start = 8.dp, end = 8.dp, top = 8.dp)
@@ -67,6 +69,8 @@ fun TestsNavFragment(
             items(DatabaseLesson.lessonList.size) { index ->
                 val lesson = DatabaseLesson.lessonList[index]
                 val isSelected = selectedLessonItemIndex.value == index
+
+                // Renk animasyonu
                 val backgroundColor by animateColorAsState(
                     targetValue = if (isSelected)
                         colorResource(id = R.color.green)
@@ -74,43 +78,46 @@ fun TestsNavFragment(
                         colorResource(id = R.color.kapaliMavi),
                     label = ""
                 )
-                val textColor = if (isSelected) Color.White else Color.White
+                val textColor = Color.White
+                val shouldShowCard = lesson.name != Constants.String.FAVORITE || favoriteCardVisible.value
 
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 6.dp, horizontal = 8.dp)
-                        .shadow(
-                            elevation = if (isSelected) 8.dp else 3.dp,
-                            shape = MaterialTheme.shapes.medium
-                        )
-                        .clickable {
-                            viewModel.setSelectedLessonItemText(lesson.name)
-                            viewModel.setSelectedLessonItemIndex(index)
-                        },
-                    colors = CardDefaults.cardColors(containerColor = backgroundColor),
-                    shape = MaterialTheme.shapes.medium
-                ) {
-                    Row(
+                if (shouldShowCard) {
+                    Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(16.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Start
+                            .padding(vertical = 6.dp, horizontal = 8.dp)
+                            .shadow(
+                                elevation = if (isSelected) 8.dp else 3.dp,
+                                shape = MaterialTheme.shapes.medium
+                            )
+                            .clickable {
+                                viewModel.setSelectedLessonItemText(lesson.name)
+                                viewModel.setSelectedLessonItemIndex(index)
+                            },
+                        colors = CardDefaults.cardColors(containerColor = backgroundColor),
+                        shape = MaterialTheme.shapes.medium
                     ) {
-                        Image(
-                            painter = painterResource(id = lesson.icon),
-                            contentDescription = null,
-                            modifier = Modifier.size(70.dp)
-                        )
-                        Spacer(modifier = Modifier.width(16.dp))
-                        Text(
-                            text = lesson.name,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 18.sp,
-                            color = textColor,
-                            textAlign = TextAlign.Start
-                        )
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Start
+                        ) {
+                            Image(
+                                painter = painterResource(id = lesson.icon),
+                                contentDescription = null,
+                                modifier = Modifier.size(70.dp)
+                            )
+                            Spacer(modifier = Modifier.width(16.dp))
+                            Text(
+                                text = lesson.name,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 18.sp,
+                                color = textColor,
+                                textAlign = TextAlign.Start
+                            )
+                        }
                     }
                 }
             }

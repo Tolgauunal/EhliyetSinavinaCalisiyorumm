@@ -23,4 +23,8 @@ class TestsDetailRepositoryImpl @Inject constructor(private val testDetailDao: T
     override suspend fun getFavoriteTestList(): List<TestsEntity>? {
         return testDetailDao.getFavoriteTestList()
     }
+
+    override suspend fun getAllTestListSize(): List<TestsEntity>?? {
+        return testDetailDao.getAllTestListSize()
+    }
 }

@@ -7,4 +7,5 @@ interface TestDetailRepository {
     suspend fun insertTestList(testList: List<TestsEntity>)
     suspend fun updateFavoriteTest(testId: Int, favorite: Boolean)
     suspend fun getFavoriteTestList(): List<TestsEntity>?
+    suspend fun getAllTestListSize(): List<TestsEntity>??
 }
