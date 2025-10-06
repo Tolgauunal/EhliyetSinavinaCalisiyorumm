@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -39,24 +40,25 @@ fun TestScreen(
     navController: NavHostController,
     viewModel: TestScreenViewModel = hiltViewModel()
 ) {
-    val selectedLesson by viewModel.getSelectedLessonInfo.collectAsState()
-    val questionIndex by viewModel.questionIndex.collectAsState()
-    val questionSize by viewModel.questionSize.collectAsState()
-    val question by viewModel.question.collectAsState()
-    val correctSum by viewModel.correctSum.collectAsState()
-    val wrongSum by viewModel.wrongSum.collectAsState()
-    val questionImage by viewModel.questionImage.collectAsState()
-    val optionA by viewModel.optionA.collectAsState()
-    val optionB by viewModel.optionB.collectAsState()
-    val optionC by viewModel.optionC.collectAsState()
-    val optionD by viewModel.optionD.collectAsState()
-    val backgroundColorA by viewModel.backgroundColorA.collectAsState()
-    val backgroundColorB by viewModel.backgroundColorB.collectAsState()
-    val backgroundColorC by viewModel.backgroundColorC.collectAsState()
-    val backgroundColorD by viewModel.backgroundColorD.collectAsState()
-    val finishAlertDialog by viewModel.finishAlertDialog.collectAsState()
-    val exitAlertDialog by viewModel.exitAlertDialog.collectAsState()
-    val nextQuestionsIconShow by viewModel.nextQuestionsIconShow.collectAsState()
+    val selectedLesson by viewModel.selectedLesson.collectAsState()
+    val currentQuestionIndex by viewModel.currentQuestionIndex.collectAsState()
+    val totalQuestionCount by viewModel.totalQuestionCount.collectAsState()
+    val currentQuestionText by viewModel.currentQuestionText.collectAsState()
+    val correctAnswerCount by viewModel.correctAnswerCount.collectAsState()
+    val wrongAnswerCount by viewModel.wrongAnswerCount.collectAsState()
+    val questionImageRes by viewModel.questionImageRes.collectAsState()
+    val optionAText by viewModel.optionAText.collectAsState()
+    val optionBText by viewModel.optionBText.collectAsState()
+    val optionCText by viewModel.optionCText.collectAsState()
+    val optionDText by viewModel.optionDText.collectAsState()
+    val optionAColor by viewModel.optionAColor.collectAsState()
+    val optionBColor by viewModel.optionBColor.collectAsState()
+    val optionCColor by viewModel.optionCColor.collectAsState()
+    val optionDColor by viewModel.optionDColor.collectAsState()
+    val showFinishDialog by viewModel.showFinishDialog.collectAsState()
+    val showExitDialog by viewModel.showExitDialog.collectAsState()
+    val showNextButton by viewModel.showNextButton.collectAsState()
+    val favoriteIconRes by viewModel.favoriteIconRes.collectAsState()
 
     Column(
         modifier = modifier
@@ -80,19 +82,25 @@ fun TestScreen(
             selectedLesson?.let {
                 Text(text = it.name, textAlign = TextAlign.Center)
             }
-            Image(
-                painter = painterResource(id = R.drawable.baseline_close_24),
-                contentDescription = "",
-                modifier = Modifier.clickable {
-                    viewModel.setExitAlertDialog(true)
-                }
-            )
-            Image(
-                painter = painterResource(id = R.drawable.baseline_close_24),
-                contentDescription = "",
-                modifier = Modifier.clickable {
-                }
-            )
+            Row {
+                Icon(
+                    painter = painterResource(id = favoriteIconRes),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .clickable {
+                            viewModel.toggleFavoriteStatus()
+                        }
+                        .size(24.dp),
+                    tint = colorResource(R.color.altinsarisi)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.baseline_close_24),
+                    contentDescription = "",
+                    modifier = Modifier.clickable {
+                        viewModel.setExitDialogVisible(true)
+                    }
+                )
+            }
         }
         Spacer(modifier = Modifier.padding(top = 20.dp))
         Row(
@@ -101,8 +109,8 @@ fun TestScreen(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = stringResource(R.string.question_Size) + " " + (questionIndex + 1) +
-                    "/" + questionSize,
+                text = stringResource(R.string.question_Size) + " " + (currentQuestionIndex + 1) +
+                    "/" + totalQuestionCount,
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
             Column {
@@ -116,7 +124,7 @@ fun TestScreen(
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                     Text(
-                        text = stringResource(R.string.correct_Size) + " " + correctSum,
+                        text = stringResource(R.string.correct_Size) + " " + correctAnswerCount,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -127,14 +135,14 @@ fun TestScreen(
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                     Text(
-                        text = stringResource(R.string.wrong_Size) + " " + wrongSum,
+                        text = stringResource(R.string.wrong_Size) + " " + wrongAnswerCount,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
             }
         }
         Spacer(modifier = Modifier.padding(top = 20.dp))
-        questionImage?.let {
+        questionImageRes?.let {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center,
@@ -149,38 +157,38 @@ fun TestScreen(
         }
         Spacer(modifier = Modifier.padding(5.dp))
         Row(modifier = Modifier.fillMaxWidth()) {
-            Text(text = question)
+            Text(text = currentQuestionText)
         }
         CustomOptionCard(
             optionIcon = R.drawable.a,
-            optionTest = optionA,
-            correctColor = backgroundColorA
+            optionTest = optionAText,
+            correctColor = optionAColor
         ) {
-            viewModel.setSelectedCorrect(it)
+            viewModel.selectAnswer(it)
         }
         CustomOptionCard(
             optionIcon = R.drawable.b,
-            optionTest = optionB,
-            correctColor = backgroundColorB
+            optionTest = optionBText,
+            correctColor = optionBColor
         ) {
-            viewModel.setSelectedCorrect(it)
+            viewModel.selectAnswer(it)
         }
         CustomOptionCard(
             optionIcon = R.drawable.c,
-            optionTest = optionC,
-            correctColor = backgroundColorC
+            optionTest = optionCText,
+            correctColor = optionCColor
         ) {
-            viewModel.setSelectedCorrect(it)
+            viewModel.selectAnswer(it)
         }
         CustomOptionCard(
             optionIcon = R.drawable.d,
-            optionTest = optionD,
-            correctColor = backgroundColorD
+            optionTest = optionDText,
+            correctColor = optionDColor
         ) {
-            viewModel.setSelectedCorrect(it)
+            viewModel.selectAnswer(it)
         }
         Spacer(modifier = Modifier.padding(5.dp))
-        if (nextQuestionsIconShow) {
+        if (showNextButton) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -198,17 +206,17 @@ fun TestScreen(
             }
         }
 
-        if (finishAlertDialog) {
-            FinishAlert(onFinishAlertDialog = { viewModel.setFinishAlertDialog(it) }) {
+        if (showFinishDialog) {
+            FinishAlert(onFinishAlertDialog = { viewModel.setFinishDialogVisible(it) }) {
                 navController.navigate("testScreen/${selectedLesson?.name}")
             }
         }
-        if (exitAlertDialog) {
+        if (showExitDialog) {
             CloseAlert(onAlertDialogClose = {
-                viewModel.setExitAlertDialog(it)
+                viewModel.setExitDialogVisible(it)
             }) {
-                viewModel.setExitAlertDialog(false)
-                viewModel.setTestNumber(testNumber = questionIndex)
+                viewModel.setExitDialogVisible(false)
+                viewModel.saveTestProgress(currentQuestion = currentQuestionIndex)
                 navController.navigate("tests")
             }
         }

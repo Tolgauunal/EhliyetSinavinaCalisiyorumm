@@ -3,7 +3,7 @@ package com.unallapps.ehliyetsinavinacalisiyorum.ui.tests.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestSaveIdEntity
-import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestSaveIdRepository
+import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.LessonRepository
 import com.unallapps.ehliyetsinavinacalisiyorum.data.util.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TestsNavViewModel @Inject constructor(private val testSaveIdRepository: TestSaveIdRepository) :
+class TestsNavViewModel @Inject constructor(private val lessonRepository: LessonRepository) :
     ViewModel() {
     private val _selectedLessonItemIndex: MutableStateFlow<Int> = MutableStateFlow(0)
     val selectedLessonItemIndex: MutableStateFlow<Int> = _selectedLessonItemIndex
@@ -29,10 +29,10 @@ class TestsNavViewModel @Inject constructor(private val testSaveIdRepository: Te
 
     init {
         viewModelScope.launch {
-            val testList = testSaveIdRepository.getTestList()
+            val testList = lessonRepository.getSavedInfoTestLesson()
             if (testList.isEmpty()) {
                 testIdNameList.forEach {
-                    testSaveIdRepository.insert(it)
+                    lessonRepository.insertLesson(it)
                 }
             }
         }
@@ -40,7 +40,7 @@ class TestsNavViewModel @Inject constructor(private val testSaveIdRepository: Te
 
     fun defaultTestItem(lessonName: String) {
         viewModelScope.launch {
-            testSaveIdRepository.updateTestSave(
+            lessonRepository.updateLessonDetailInfo(
                 0, lessonName = lessonName, 0,
                 0, 0
             )

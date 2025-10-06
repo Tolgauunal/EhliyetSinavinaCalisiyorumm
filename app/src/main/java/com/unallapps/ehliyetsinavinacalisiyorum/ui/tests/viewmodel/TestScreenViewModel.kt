@@ -5,11 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseLesson
+import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseTestList
 import com.unallapps.ehliyetsinavinacalisiyorum.data.Lesson
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestSaveIdEntity
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestsEntity
-import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestRepository
-import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestSaveIdRepository
+import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestDetailRepository
+import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.LessonRepository
 import com.unallapps.ehliyetsinavinacalisiyorum.data.util.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,207 +21,254 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TestScreenViewModel @Inject constructor(
-    private val testRepository: TestRepository,
-    private val testSaveIdRepository: TestSaveIdRepository,
+    private val testDetailRepository: TestDetailRepository,
+    private val lessonRepository: LessonRepository,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-    private val _getSelectedLessonInfo: MutableStateFlow<Lesson?> = MutableStateFlow(null)
-    val getSelectedLessonInfo = _getSelectedLessonInfo.asStateFlow()
 
-    private val _questionIndex: MutableStateFlow<Int> = MutableStateFlow(0)
-    val questionIndex = _questionIndex.asStateFlow()
+    // region === State ===
+    private val _selectedLesson: MutableStateFlow<Lesson?> = MutableStateFlow(null)
+    val selectedLesson = _selectedLesson.asStateFlow()
 
-    private val _questionSize: MutableStateFlow<Int> = MutableStateFlow(0)
-    val questionSize = _questionSize.asStateFlow()
-
-    private val _question: MutableStateFlow<String> = MutableStateFlow("")
-    val question = _question.asStateFlow()
-
-    private val _correct: MutableStateFlow<String> = MutableStateFlow("")
-
-    private val _correctControl: MutableStateFlow<Boolean> = MutableStateFlow(false)
-
-    private val _selectedCorrect: MutableStateFlow<String?> = MutableStateFlow(null)
-
-    private val _correctSum: MutableStateFlow<Int> = MutableStateFlow(0)
-    val correctSum = _correctSum.asStateFlow()
-
-    private val _wrongSum: MutableStateFlow<Int> = MutableStateFlow(0)
-    val wrongSum = _wrongSum.asStateFlow()
-
-    private val _questionImage: MutableStateFlow<Int?> = MutableStateFlow(null)
-    val questionImage: StateFlow<Int?> = _questionImage
-
-    private val _finishAlertDialog: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val finishAlertDialog = _finishAlertDialog.asStateFlow()
-
-    private val _exitAlertDialog: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val exitAlertDialog = _exitAlertDialog.asStateFlow()
-
-    private val _optionA: MutableStateFlow<String> = MutableStateFlow("")
-    val optionA = _optionA.asStateFlow()
-
-    private val _optionB: MutableStateFlow<String> = MutableStateFlow("")
-    val optionB = _optionB.asStateFlow()
-
-    private val _optionC: MutableStateFlow<String> = MutableStateFlow("")
-    val optionC = _optionC.asStateFlow()
-
-    private val _optionD: MutableStateFlow<String> = MutableStateFlow("")
-    val optionD = _optionD.asStateFlow()
-
-    private val _lessonName: MutableStateFlow<String> = MutableStateFlow("")
-
-    private val _backgroundColorA: MutableStateFlow<Int?> = MutableStateFlow(null)
-    val backgroundColorA = _backgroundColorA.asStateFlow()
-
-    private val _backgroundColorB: MutableStateFlow<Int?> = MutableStateFlow(null)
-    val backgroundColorB = _backgroundColorB.asStateFlow()
-
-    private val _backgroundColorC: MutableStateFlow<Int?> = MutableStateFlow(null)
-    val backgroundColorC = _backgroundColorC.asStateFlow()
-
-    private val _backgroundColorD: MutableStateFlow<Int?> = MutableStateFlow(null)
-    val backgroundColorD = _backgroundColorD.asStateFlow()
-
-    private val _testClickable: MutableStateFlow<Boolean?> = MutableStateFlow(true)
-
-    private val continueTest: MutableStateFlow<TestSaveIdEntity?> = MutableStateFlow(null)
-
+    private val _currentLessonName: MutableStateFlow<String> = MutableStateFlow("")
     private val _restartOrContinue: MutableStateFlow<Boolean?> = MutableStateFlow(null)
+    private val _continueTestInfo: MutableStateFlow<TestSaveIdEntity?> = MutableStateFlow(null)
 
-    private val _nextQuestionsIconShow: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val nextQuestionsIconShow = _nextQuestionsIconShow.asStateFlow()
+    private val _currentQuestionIndex = MutableStateFlow(0)
+    val currentQuestionIndex = _currentQuestionIndex.asStateFlow()
 
-    private val _favoriteTestId: MutableStateFlow<TestsEntity?> = MutableStateFlow(null)
+    private val _totalQuestionCount = MutableStateFlow(0)
+    val totalQuestionCount = _totalQuestionCount.asStateFlow()
+
+    private val _currentQuestionText = MutableStateFlow("")
+    val currentQuestionText = _currentQuestionText.asStateFlow()
+
+    private val _correctAnswer = MutableStateFlow("")
+    private val _selectedAnswer = MutableStateFlow<String?>(null)
+    private val _isAnswerCorrect = MutableStateFlow(false)
+
+    private val _correctAnswerCount = MutableStateFlow(0)
+    val correctAnswerCount = _correctAnswerCount.asStateFlow()
+
+    private val _wrongAnswerCount = MutableStateFlow(0)
+    val wrongAnswerCount = _wrongAnswerCount.asStateFlow()
+
+    private val _questionImageRes = MutableStateFlow<Int?>(null)
+    val questionImageRes: StateFlow<Int?> = _questionImageRes
+
+    private val _optionAText = MutableStateFlow("")
+    val optionAText = _optionAText.asStateFlow()
+
+    private val _optionBText = MutableStateFlow("")
+    val optionBText = _optionBText.asStateFlow()
+
+    private val _optionCText = MutableStateFlow("")
+    val optionCText = _optionCText.asStateFlow()
+
+    private val _optionDText = MutableStateFlow("")
+    val optionDText = _optionDText.asStateFlow()
+
+    private val _optionAColor = MutableStateFlow<Int?>(null)
+    val optionAColor = _optionAColor.asStateFlow()
+
+    private val _optionBColor = MutableStateFlow<Int?>(null)
+    val optionBColor = _optionBColor.asStateFlow()
+
+    private val _optionCColor = MutableStateFlow<Int?>(null)
+    val optionCColor = _optionCColor.asStateFlow()
+
+    private val _optionDColor = MutableStateFlow<Int?>(null)
+    val optionDColor = _optionDColor.asStateFlow()
+
+    private val _isQuestionClickable = MutableStateFlow(true)
+
+    private val _showFinishDialog = MutableStateFlow(false)
+    val showFinishDialog = _showFinishDialog.asStateFlow()
+
+    private val _showExitDialog = MutableStateFlow(false)
+    val showExitDialog = _showExitDialog.asStateFlow()
+
+    private val _showNextButton = MutableStateFlow(false)
+    val showNextButton = _showNextButton.asStateFlow()
+
+    private val _isFavorite = MutableStateFlow(false)
+
+    private val _favoriteIconRes = MutableStateFlow(R.drawable.unfavorite)
+    val favoriteIconRes = _favoriteIconRes.asStateFlow()
+
+    private val _currentTestEntity = MutableStateFlow<TestsEntity?>(null)
 
     init {
         savedStateHandle.get<String>(Constants.String.LESSON_NAME)?.let {
-            _lessonName.value = it
+            _currentLessonName.value = it
         }
         savedStateHandle.get<Boolean>(Constants.String.RESTART_OR_CONTINUE)?.let {
             _restartOrContinue.value = it
         }
-        getTestList()
-        getSelectedLesson()
+        loadTestsForLesson()
+        loadSelectedLessonInfo()
     }
 
-    private fun getTestList() {
+    private fun loadTestsForLesson() {
         viewModelScope.launch {
             if (_restartOrContinue.value == true) {
-                continueTest.value = testSaveIdRepository.getTestData(_lessonName.value)
-                continueTest.value?.let {
-                    _questionIndex.value = it.testNumber
-                    _correctSum.value = it.correctSize
-                    _wrongSum.value = it.wrongSize
-                    _questionIndex.value = it.testNumber
+                _continueTestInfo.value = lessonRepository.getLessonData(_currentLessonName.value)
+                _continueTestInfo.value?.let {
+                    _currentQuestionIndex.value = it.testNumber
+                    _correctAnswerCount.value = it.correctSize
+                    _wrongAnswerCount.value = it.wrongSize
                     _restartOrContinue.value = false
                 }
             }
-            getTestData()
+
+            val testList = testDetailRepository.getTestDetailList(_currentLessonName.value)
+            if (testList.isNullOrEmpty()) {
+                testDetailRepository.insertTestList(DatabaseTestList.TestList)
+                loadCurrentQuestionData()
+            } else {
+                loadCurrentQuestionData()
+            }
         }
     }
 
-    fun setSelectedCorrect(selectedCorrect: String) {
-        _selectedCorrect.value = selectedCorrect
-        _nextQuestionsIconShow.value = true
-        checkCorrectOrWrongControl()
+    private fun loadSelectedLessonInfo() {
+        DatabaseLesson.derslerList.forEach {
+            if (it.name == _currentLessonName.value) {
+                _selectedLesson.value = it
+            }
+        }
     }
 
-    private fun checkCorrectOrWrongControl() {
-        _selectedCorrect.value?.let {
-            if (_correct.value == it) {
-                _correctSum.value += 1
-                _correctControl.value = true
-                when (it) {
-                    _optionA.value -> _backgroundColorA.value = R.color.DarkGreen
-                    _optionB.value -> _backgroundColorB.value = R.color.DarkGreen
-                    _optionC.value -> _backgroundColorC.value = R.color.DarkGreen
-                    _optionD.value -> _backgroundColorD.value = R.color.DarkGreen
+    private fun loadCurrentQuestionData() {
+        viewModelScope.launch {
+            if (_currentLessonName.value != Constants.String.FAVORITE) {
+                val testList = testDetailRepository.getTestDetailList(_currentLessonName.value)
+                testList?.let {
+                    val current = it[_currentQuestionIndex.value]
+                    _currentTestEntity.value = current
+                    _totalQuestionCount.value = it.size
+                    _isFavorite.value = current.favorite
+                    updateFavoriteIcon()
+
+                    _currentQuestionText.value = current.content.orEmpty()
+                    _correctAnswer.value = current.correct.orEmpty()
+                    _questionImageRes.value = current.imageTest
+
+                    _optionAText.value = current.aTest.orEmpty()
+                    _optionBText.value = current.bTest.orEmpty()
+                    _optionCText.value = current.cTest.orEmpty()
+                    _optionDText.value = current.dTest.orEmpty()
                 }
             } else {
-                _wrongSum.value += 1
-                _correctControl.value = false
-                when (it) {
-                    _optionA.value -> _backgroundColorA.value = R.color.DarkRed
-                    _optionB.value -> _backgroundColorB.value = R.color.DarkRed
-                    _optionC.value -> _backgroundColorC.value = R.color.DarkRed
-                    _optionD.value -> _backgroundColorD.value = R.color.DarkRed
-                }
-                when (_correct.value) {
-                    _optionA.value -> _backgroundColorA.value = R.color.DarkGreen
-                    _optionB.value -> _backgroundColorB.value = R.color.DarkGreen
-                    _optionC.value -> _backgroundColorC.value = R.color.DarkGreen
-                    _optionD.value -> _backgroundColorD.value = R.color.DarkGreen
+                val testList = testDetailRepository.getFavoriteTestList()
+                testList?.let {
+                    val current = it[_currentQuestionIndex.value]
+                    _currentTestEntity.value = current
+                    _totalQuestionCount.value = it.size
+                    _isFavorite.value = current.favorite
+                    updateFavoriteIcon()
+
+                    _currentQuestionText.value = current.content.orEmpty()
+                    _correctAnswer.value = current.correct.orEmpty()
+                    _questionImageRes.value = current.imageTest
+
+                    _optionAText.value = current.aTest.orEmpty()
+                    _optionBText.value = current.bTest.orEmpty()
+                    _optionCText.value = current.cTest.orEmpty()
+                    _optionDText.value = current.dTest.orEmpty()
                 }
             }
         }
     }
 
-    private fun getSelectedLesson() {
-        DatabaseLesson.derslerList.forEach {
-            if (it.name == _lessonName.value) {
-                _getSelectedLessonInfo.value = it
+    fun selectAnswer(answer: String) {
+        _selectedAnswer.value = answer
+        _showNextButton.value = true
+        evaluateAnswer()
+    }
+
+    private fun evaluateAnswer() {
+        _selectedAnswer.value?.let { selected ->
+            if (_correctAnswer.value == selected) {
+                _correctAnswerCount.value += 1
+                _isAnswerCorrect.value = true
+                markAnswerColor(selected, true)
+            } else {
+                _wrongAnswerCount.value += 1
+                _isAnswerCorrect.value = false
+                markAnswerColor(selected, false)
+                markAnswerColor(_correctAnswer.value, true)
             }
         }
+    }
 
+    private fun markAnswerColor(answer: String, isCorrect: Boolean) {
+        val colorRes = if (isCorrect) R.color.DarkGreen else R.color.DarkRed
+        when (answer) {
+            _optionAText.value -> _optionAColor.value = colorRes
+            _optionBText.value -> _optionBColor.value = colorRes
+            _optionCText.value -> _optionCColor.value = colorRes
+            _optionDText.value -> _optionDColor.value = colorRes
+        }
     }
 
     fun nextQuestion() {
-        _selectedCorrect.value?.let {
-            if (_questionIndex.value != _questionSize.value - 1) {
-                _backgroundColorA.value = R.color.white
-                _backgroundColorB.value = R.color.white
-                _backgroundColorC.value = R.color.white
-                _backgroundColorD.value = R.color.white
-                _questionIndex.value += 1
-                _selectedCorrect.value = null
+        _selectedAnswer.value?.let {
+            if (_currentQuestionIndex.value < _totalQuestionCount.value - 1) {
+                resetOptionColors()
+                _currentQuestionIndex.value += 1
+                _selectedAnswer.value = null
             } else {
-                _testClickable.value = false
-                setFinishAlertDialog(true)
+                _isQuestionClickable.value = false
+                _showFinishDialog.value = true
             }
         }
-        getTestData()
-        _nextQuestionsIconShow.value = false
+        loadCurrentQuestionData()
+        _showNextButton.value = false
     }
 
-    private fun getTestData() {
-        viewModelScope.launch {
-            if (_lessonName.value != Constants.String.FAVORITE) {
-                testRepository.getTestsData(_lessonName.value, _questionIndex.value)?.let {
-                    _favoriteTestId.value = it[_questionIndex.value]
-                    _questionSize.value = it.size
-                    _question.value = it[_questionIndex.value].content.toString()
-                    _correct.value = it[_questionIndex.value].correct.toString()
-                    it[_questionIndex.value].imageTest?.let { image ->
-                        _questionImage.value = image
-                    }
-                    _optionA.value = it[_questionIndex.value].aTest.toString()
-                    _optionB.value = it[_questionIndex.value].bTest.toString()
-                    _optionC.value = it[_questionIndex.value].cTest.toString()
-                    _optionD.value = it[_questionIndex.value].dTest.toString()
-                }
+    private fun resetOptionColors() {
+        _optionAColor.value = R.color.white
+        _optionBColor.value = R.color.white
+        _optionCColor.value = R.color.white
+        _optionDColor.value = R.color.white
+    }
 
+    fun toggleFavoriteStatus() {
+        _isFavorite.value = !_isFavorite.value
+        updateFavoriteIcon()
+
+        viewModelScope.launch {
+            _currentTestEntity.value?.let { test ->
+                testDetailRepository.updateFavoriteTest(test.testId, _isFavorite.value)
             }
         }
     }
 
-    fun setFinishAlertDialog(finishAlertDialog: Boolean) {
-        _finishAlertDialog.value = finishAlertDialog
+    private fun updateFavoriteIcon() {
+        _favoriteIconRes.value = if (_isFavorite.value) {
+            R.drawable.favorite
+        } else {
+            R.drawable.unfavorite
+        }
     }
 
-    fun setExitAlertDialog(exitAlertDialog: Boolean) {
-        _exitAlertDialog.value = exitAlertDialog
+    fun setFinishDialogVisible(visible: Boolean) {
+        _showFinishDialog.value = visible
     }
 
-    fun setTestNumber(testNumber: Int) {
+    fun setExitDialogVisible(visible: Boolean) {
+        _showExitDialog.value = visible
+    }
+
+    fun saveTestProgress(currentQuestion: Int) {
         viewModelScope.launch {
-            testSaveIdRepository.updateTestSave(
-                testNumber,
-                _lessonName.value,
-                _correctSum.value,
-                _wrongSum.value,
-                _questionSize.value
+            lessonRepository.updateLessonDetailInfo(
+                currentQuestion,
+                _currentLessonName.value,
+                _correctAnswerCount.value,
+                _wrongAnswerCount.value,
+                _totalQuestionCount.value
             )
         }
     }

@@ -4,10 +4,9 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestSaveIdEntity
-import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestsEntity
 
 @Dao
-interface TestSaveIdDao {
+interface LessonDao {
     @Insert
     suspend fun insert(testSaveIdEntity: TestSaveIdEntity)
 

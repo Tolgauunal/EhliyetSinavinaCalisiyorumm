@@ -1,11 +1,12 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.data.entity
 
-import android.os.Parcelable
-import com.unallapps.ehliyetsinavinacalisiyorum.R
-import kotlinx.parcelize.Parcelize
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Parcelize
+@Entity
 data class TestsEntity(
+    val lessonName: String? = null,
+    @PrimaryKey(autoGenerate = true) val testId: Int = 0,
     val idTest: Int? = null,
     val content: String? = null,
     val imageTest: Int? = null,
@@ -14,5 +15,5 @@ data class TestsEntity(
     val cTest: String? = null,
     val dTest: String? = null,
     val correct: String? = null,
-    var color: Int? = R.color.white
-) : Parcelable
+    val favorite: Boolean = false
+)

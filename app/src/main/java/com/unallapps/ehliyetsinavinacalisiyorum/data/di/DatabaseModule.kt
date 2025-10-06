@@ -3,7 +3,8 @@ package com.unallapps.ehliyetsinavinacalisiyorum.data.di
 import android.content.Context
 import androidx.room.Room
 import com.unallapps.ehliyetsinavinacalisiyorum.data.AppDatabase
-import com.unallapps.ehliyetsinavinacalisiyorum.data.dao.TestSaveIdDao
+import com.unallapps.ehliyetsinavinacalisiyorum.data.dao.LessonDao
+import com.unallapps.ehliyetsinavinacalisiyorum.data.dao.TestDetailDao
 import com.unallapps.ehliyetsinavinacalisiyorum.data.dao.UserDao
 import com.unallapps.ehliyetsinavinacalisiyorum.data.util.Constants
 import dagger.Module
@@ -31,7 +32,13 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideTest(appDatabase: AppDatabase): TestSaveIdDao {
-        return appDatabase.testSaveIdDao()
+    fun provideLesson(appDatabase: AppDatabase): LessonDao {
+        return appDatabase.lessonDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideTestDetail(appDatabase: AppDatabase): TestDetailDao {
+        return appDatabase.testDetailDao()
     }
 }

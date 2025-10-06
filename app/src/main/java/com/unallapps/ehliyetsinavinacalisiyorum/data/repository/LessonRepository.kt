@@ -2,9 +2,9 @@ package com.unallapps.ehliyetsinavinacalisiyorum.data.repository
 
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestSaveIdEntity
 
-interface TestSaveIdRepository {
-    suspend fun insert(testSaveIdEntity: TestSaveIdEntity)
-    suspend fun updateTestSave(
+interface LessonRepository {
+    suspend fun insertLesson(testSaveIdEntity: TestSaveIdEntity)
+    suspend fun updateLessonDetailInfo(
         testNumber: Int,
         lessonName: String,
         correctSum: Int,
@@ -12,6 +12,6 @@ interface TestSaveIdRepository {
         questionNumber: Int
     )
 
-    suspend fun getTestList(): List<TestSaveIdEntity>
-    suspend fun getTestData(lessonName: String): TestSaveIdEntity
+    suspend fun getSavedInfoTestLesson(): List<TestSaveIdEntity>
+    suspend fun getLessonData(lessonName: String): TestSaveIdEntity
 }

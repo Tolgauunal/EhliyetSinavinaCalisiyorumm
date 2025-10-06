@@ -7,6 +7,7 @@ import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.InformationCards
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.InformationCardsInfo
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestsEntity
+import com.unallapps.ehliyetsinavinacalisiyorum.data.util.Constants
 import kotlinx.parcelize.Parcelize
 import javax.annotation.concurrent.Immutable
 
@@ -2029,8 +2030,9 @@ object DatabaseInformationCard {
 
 @Immutable
 object DatabaseTestList {
-    val Motor = mutableListOf(
+    val TestList = mutableListOf(
         TestsEntity(
+            Constants.String.ENGINE,
             idTest = 1,
             content = "Motor yağ seviyesi hangi durumda kontrol edilmelidir?",
             imageTest = null,
@@ -2040,6 +2042,7 @@ object DatabaseTestList {
             dTest = "Araç yük taşırken",
             correct = "Motor soğukken"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 2,
             content = "Araç aküsü hangi işaretle gösterilir?",
             imageTest = null,
@@ -2049,6 +2052,7 @@ object DatabaseTestList {
             dTest = "Far işareti",
             correct = "Akü işareti"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 3,
             content = "Hangi işaret, aracın fren lambalarının arızalı olduğunu gösterir?",
             imageTest = null,
@@ -2058,6 +2062,7 @@ object DatabaseTestList {
             dTest = "Yakıt işareti",
             correct = "Fren lambası işareti"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 4,
             content = "ABS sisteminin görevi nedir?",
             imageTest = null,
@@ -2067,6 +2072,7 @@ object DatabaseTestList {
             dTest = "Yakıt tasarrufu sağlamak",
             correct = "Frenlemede tekerleklerin kilitlenmesini önlemek"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 5,
             content = "Dikiz aynaları hangi amaçla kullanılır?",
             imageTest = null,
@@ -2076,6 +2082,7 @@ object DatabaseTestList {
             dTest = "Aracın yağ seviyesini kontrol etmek",
             correct = "Aracın arkasını kontrol etmek"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 6,
             content = "Araç lastiklerinin diş derinliği kaç mm'nin altına inmemelidir?",
             imageTest = null,
@@ -2085,6 +2092,7 @@ object DatabaseTestList {
             dTest = "0.8 mm",
             correct = "1.6 mm"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 7,
             content = "Yağmur ve sisli havalarda hangi farlar kullanılmalıdır?",
             imageTest = null,
@@ -2094,6 +2102,7 @@ object DatabaseTestList {
             dTest = "Arka park lambaları",
             correct = "Sis farları"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 8,
             content = "Araçta bulunan emniyet kemerleri hangi durum için zorunludur?",
             imageTest = null,
@@ -2103,6 +2112,7 @@ object DatabaseTestList {
             dTest = "Sadece ön koltuktaki yolcular için",
             correct = "Tüm yolculuklarda"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 9,
             content = "Dönüşlerde sinyal vermek ne zaman gereklidir?",
             imageTest = null,
@@ -2112,6 +2122,7 @@ object DatabaseTestList {
             dTest = "Yalnızca sağa dönüşlerde",
             correct = "Her dönüş öncesinde"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 10,
             content = "Hangi araç işareti, araçtaki kapılardan birinin açık olduğunu gösterir?",
             imageTest = null,
@@ -2121,6 +2132,7 @@ object DatabaseTestList {
             dTest = "Lastik basıncı işareti",
             correct = "Kapı açık işareti"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 11,
             content = "Bir aracın hız limitini aşmaması için ne yapılmalıdır?",
             imageTest = null,
@@ -2130,6 +2142,7 @@ object DatabaseTestList {
             dTest = "Aracın yükü artırılmalı",
             correct = "Hız limitine uyulmalı"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 12,
             content = "Hangi işaret aracın uzun farlarının açık olduğunu gösterir?",
             imageTest = null,
@@ -2139,6 +2152,7 @@ object DatabaseTestList {
             dTest = "Fren lambası işareti",
             correct = "Uzun far işareti"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 13,
             content = "Motor soğutma sıvısı seviyesi hangi durumda kontrol edilmelidir?",
             imageTest = null,
@@ -2148,6 +2162,7 @@ object DatabaseTestList {
             dTest = "Motor sıcakken",
             correct = "Motor soğukken"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 14,
             content = "Lastik basınçları ne zaman kontrol edilmelidir?",
             imageTest = null,
@@ -2157,6 +2172,7 @@ object DatabaseTestList {
             dTest = "Uzun süreli park sonrası",
             correct = "Yola çıkmadan önce lastikler soğukken"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 15,
             content = "Aşağıdakilerden hangisi motorun aşırı ısınmasını önlemek için yapılmalıdır?",
             imageTest = null,
@@ -2166,6 +2182,7 @@ object DatabaseTestList {
             dTest = "Egzoz sistemini kontrol etmek",
             correct = "Radyatör suyunu düzenli olarak kontrol etmek"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 16,
             content = "ABS fren sistemi nasıl çalışır?",
             imageTest = null,
@@ -2175,6 +2192,7 @@ object DatabaseTestList {
             dTest = "Lastik basıncını kontrol eder",
             correct = "Tekerleklerin kilitlenmesini önler"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 17,
             content = "Dizel araçlarda hangi gösterge ışığı kızdırma bujilerinin ısındığını gösterir?",
             imageTest = null,
@@ -2184,6 +2202,7 @@ object DatabaseTestList {
             dTest = "Fren arıza ışığı",
             correct = "Kızdırma bujisi ışığı"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 18,
             content = "Katalitik konvertörün görevi nedir?",
             imageTest = null,
@@ -2193,6 +2212,7 @@ object DatabaseTestList {
             dTest = "Motorun aşırı ısınmasını önlemek",
             correct = "Egzoz gazlarını temizlemek"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 19,
             content = "Fren balatalarının aşınmasını gösteren ışık yandığında ne yapılmalıdır?",
             imageTest = null,
@@ -2202,6 +2222,7 @@ object DatabaseTestList {
             dTest = "Yağ seviyesi kontrol edilmelidir",
             correct = "Fren balataları değiştirilmelidir"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 20,
             content = "Araç sinyal lambaları ne zaman kullanılmalıdır?",
             imageTest = null,
@@ -2211,6 +2232,7 @@ object DatabaseTestList {
             dTest = "Yalnızca kavşaklarda",
             correct = "Her dönüşte ve şerit değişiminde"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 21,
             content = "Aracın yağ filtresi ne kadar süre sonra değiştirilmelidir?",
             imageTest = null,
@@ -2220,6 +2242,7 @@ object DatabaseTestList {
             dTest = "Her 50.000 kilometrede bir",
             correct = "Her 10.000 kilometrede bir"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 22,
             content = "Dönüşlerde hangi sinyal lambası kullanılır?",
             imageTest = null,
@@ -2229,6 +2252,7 @@ object DatabaseTestList {
             dTest = "Her iki sinyal lambası",
             correct = "Uygun olan sinyal lambası"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 23,
             content = "Yağmur ve sisli havalarda hangi farlar kullanılmalıdır?",
             imageTest = null,
@@ -2238,6 +2262,7 @@ object DatabaseTestList {
             dTest = "Park lambaları",
             correct = "Sis farları"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 24,
             content = "Araç lastiklerinin basıncı ne sıklıkla kontrol edilmelidir?",
             imageTest = null,
@@ -2247,6 +2272,7 @@ object DatabaseTestList {
             dTest = "Her yıl",
             correct = "Yola çıkmadan önce ve her iki haftada bir"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 25,
             content = "Araç yük taşırken hangi önlem alınmalıdır?",
             imageTest = null,
@@ -2256,6 +2282,7 @@ object DatabaseTestList {
             dTest = "Yük, güvenli bir şekilde sabitlenmeli",
             correct = "Yük, güvenli bir şekilde sabitlenmeli"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 26,
             content = "Motorun soğutma sıvısı seviyesi neden kontrol edilmelidir?",
             imageTest = null,
@@ -2265,6 +2292,7 @@ object DatabaseTestList {
             dTest = "Fren performansını artırmak için",
             correct = "Motorun aşırı ısınmasını önlemek için"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 27,
             content = "Aracın hız göstergesi neyi belirtir?",
             imageTest = null,
@@ -2274,6 +2302,7 @@ object DatabaseTestList {
             dTest = "Yakıt seviyesini",
             correct = "Aracın hızını"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 28,
             content = "Akünün bitmiş olduğunu gösteren işaret hangisidir?",
             imageTest = null,
@@ -2283,6 +2312,7 @@ object DatabaseTestList {
             dTest = "Motor arıza işareti",
             correct = "Akü işareti"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 29,
             content = "Katalitik konvertörün temel işlevi nedir?",
             imageTest = null,
@@ -2292,6 +2322,7 @@ object DatabaseTestList {
             dTest = "Motoru soğutur",
             correct = "Egzoz gazlarını zararsız hale getirir"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 30,
             content = "Fren balatalarının ömrünü uzatmak için ne yapılmalıdır?",
             imageTest = null,
@@ -2301,6 +2332,7 @@ object DatabaseTestList {
             dTest = "Motor yağı sık sık değiştirilmeli",
             correct = "Ani fren yapmaktan kaçınılmalı"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 31,
             content = "Lastik basıncı düşükse araçta hangi sorun yaşanabilir?",
             imageTest = null,
@@ -2310,6 +2342,7 @@ object DatabaseTestList {
             dTest = "Fren mesafesi kısalır",
             correct = "Yol tutuşu zayıflar"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 32,
             content = "Emniyet kemeri neden kullanılmalıdır?",
             imageTest = null,
@@ -2319,6 +2352,7 @@ object DatabaseTestList {
             dTest = "Yakıt tasarrufu sağlamak için",
             correct = "Kaza anında güvenlik sağlamak için"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 33,
             content = "Aracın uzun farları ne zaman kullanılmalıdır?",
             imageTest = null,
@@ -2328,6 +2362,7 @@ object DatabaseTestList {
             dTest = "Sisli havada",
             correct = "Karanlık yollarda ve açık alanda"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 34,
             content = "ABS fren sisteminin avantajı nedir?",
             imageTest = null,
@@ -2337,6 +2372,7 @@ object DatabaseTestList {
             dTest = "Yağ basıncını kontrol eder",
             correct = "Fren sırasında tekerleklerin kilitlenmesini önler"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 35,
             content = "Araçtaki hangi sistem frenleme sırasında kaymayı önler?",
             imageTest = null,
@@ -2346,6 +2382,7 @@ object DatabaseTestList {
             dTest = "EBD",
             correct = "ABS"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 36,
             content = "Egzoz emisyon testi hangi amaçla yapılır?",
             imageTest = null,
@@ -2355,6 +2392,7 @@ object DatabaseTestList {
             dTest = "Yakıt tasarrufu sağlamak için",
             correct = "Aracın egzoz gazı seviyesini kontrol etmek için"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 37,
             content = "Sinyal lambaları hangi durumlarda kullanılır?",
             imageTest = null,
@@ -2364,6 +2402,7 @@ object DatabaseTestList {
             dTest = "Aracı durdurma sırasında",
             correct = "Şerit değiştirme ve dönüşlerde"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 38,
             content = "Kış lastikleri ne zaman kullanılmalıdır?",
             imageTest = null,
@@ -2373,6 +2412,7 @@ object DatabaseTestList {
             dTest = "Yaz aylarında",
             correct = "Soğuk ve karlı havalarda"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 39,
             content = "Aracın motor yağı ne sıklıkla kontrol edilmelidir?",
             imageTest = null,
@@ -2382,6 +2422,7 @@ object DatabaseTestList {
             dTest = "Sadece bakım zamanı",
             correct = "Her 5.000 kilometrede"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 40,
             content = "Fren hidroliği seviyesinin düşük olması hangi soruna yol açabilir?",
             imageTest = null,
@@ -2391,6 +2432,7 @@ object DatabaseTestList {
             dTest = "Lastik basıncı düşer",
             correct = "Fren performansı azalır"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 41,
             content = "Kısa farların açık olması gereken durumlar nelerdir?",
             imageTest = null,
@@ -2400,6 +2442,7 @@ object DatabaseTestList {
             dTest = "Yalnızca park ederken",
             correct = "Gece sürüşleri ve sisli havalar"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 42,
             content = "Araç gösterge panelinde 'yağ lambası' yanıyorsa ne yapılmalıdır?",
             imageTest = null,
@@ -2409,6 +2452,7 @@ object DatabaseTestList {
             dTest = "Hiçbir şey yapılmamalı, sürüşe devam edilmeli",
             correct = "Yağ seviyesi kontrol edilmeli ve eksikse tamamlanmalı"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 43,
             content = "Aracın hava filtresi ne işe yarar?",
             imageTest = null,
@@ -2418,6 +2462,7 @@ object DatabaseTestList {
             dTest = "Lastik basıncını kontrol eder",
             correct = "Hava akışını temizleyerek motorun verimliliğini artırır"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 44,
             content = "Hava yastıkları hangi durumda açılır?",
             imageTest = null,
@@ -2427,6 +2472,7 @@ object DatabaseTestList {
             dTest = "Araç park halindeyken",
             correct = "Kaza anında"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 45,
             content = "Aracın hız sınırının aşıldığını gösteren ikaz lambası hangi durumda yanar?",
             imageTest = null,
@@ -2436,6 +2482,7 @@ object DatabaseTestList {
             dTest = "Araç ilk hareket ettiğinde",
             correct = "Aracın hız sınırını geçtiği durumda"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 46,
             content = "Emniyet kemerini takmamak ne tür bir risk oluşturur?",
             imageTest = null,
@@ -2445,6 +2492,7 @@ object DatabaseTestList {
             dTest = "Fren mesafesini artırır",
             correct = "Kaza anında ciddi yaralanma riskini artırır"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 47,
             content = "Aracın motor arıza lambası yanıyorsa ne yapılmalıdır?",
             imageTest = null,
@@ -2454,6 +2502,7 @@ object DatabaseTestList {
             dTest = "Araç hemen stop ettirilmelidir",
             correct = "Aracın servise götürülmesi gerekmektedir"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 48,
             content = "Aracın direksiyon simidi hangi görev için kullanılır?",
             imageTest = null,
@@ -2463,6 +2512,7 @@ object DatabaseTestList {
             dTest = "Frenleri kontrol etmek",
             correct = "Aracın yönünü değiştirmek"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 49,
             content = "Yakıt filtresinin düzenli olarak değiştirilmesinin amacı nedir?",
             imageTest = null,
@@ -2472,6 +2522,7 @@ object DatabaseTestList {
             dTest = "Egzoz emisyonunu azaltmak",
             correct = "Yakıt akışını iyileştirmek ve motorun verimliliğini artırmak"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 50,
             content = "Yakıt filtresinin düzenli olarak değiştirilmesinin amacı nedir?",
             imageTest = null,
@@ -2481,6 +2532,7 @@ object DatabaseTestList {
             dTest = "Egzoz emisyonunu azaltmak",
             correct = "Yakıt akışını iyileştirmek ve motorun verimliliğini artırmak"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 51,
             content = "Aracın motor yağı seviyesi azaldığında ne yapılmalıdır?",
             imageTest = null,
@@ -2490,6 +2542,7 @@ object DatabaseTestList {
             dTest = "Lastik basıncı kontrol edilmelidir",
             correct = "Yağ eklemeli veya değiştirilmelidir"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 52,
             content = "ABS sisteminin amacı nedir?",
             imageTest = null,
@@ -2499,6 +2552,7 @@ object DatabaseTestList {
             dTest = "Fren pedalının sertleşmesini sağlamak",
             correct = "Tekerleklerin frenleme sırasında kilitlenmesini önlemek"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 53,
             content = "Aracın şarj dinamosunun görevi nedir?",
             imageTest = null,
@@ -2508,6 +2562,7 @@ object DatabaseTestList {
             dTest = "Direksiyon hareketlerini yumuşatmak",
             correct = "Aküyü şarj etmek ve elektrik sistemini beslemek"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 54,
             content = "Lastik diş derinliği ne kadar olmalıdır?",
             imageTest = null,
@@ -2517,6 +2572,7 @@ object DatabaseTestList {
             dTest = "En az 3.0 mm",
             correct = "En az 1.6 mm"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 55,
             content = "Motorun soğutma sistemi neden önemlidir?",
             imageTest = null,
@@ -2526,6 +2582,7 @@ object DatabaseTestList {
             dTest = "Aracın hızını artırır",
             correct = "Motorun aşırı ısınmasını önler"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 56,
             content = "Aracın egzoz sistemindeki arıza neye yol açabilir?",
             imageTest = null,
@@ -2535,6 +2592,7 @@ object DatabaseTestList {
             dTest = "Lastiklerin aşınmasını hızlandırır",
             correct = "Yakıt tüketimini artırabilir"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 57,
             content = "Direksiyon sisteminde arıza varsa ne yapılmalıdır?",
             imageTest = null,
@@ -2544,6 +2602,7 @@ object DatabaseTestList {
             dTest = "Motoru durdurulmalıdır",
             correct = "Yavaşlayarak servise götürülmelidir"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 58,
             content = "Sinyal lambası neden önemlidir?",
             imageTest = null,
@@ -2553,6 +2612,7 @@ object DatabaseTestList {
             dTest = "Hız sınırını aşmamızı sağlar",
             correct = "Diğer sürücülere niyetimizi bildirir"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 59,
             content = "Yağmur sensörünün amacı nedir?",
             imageTest = null,
@@ -2562,6 +2622,7 @@ object DatabaseTestList {
             dTest = "Direksiyon tepkisini artırır",
             correct = "Sileceklerin otomatik çalışmasını sağlar"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 60,
             content = "Motorun hava filtresi düzenli olarak değiştirilmezse ne olabilir?",
             imageTest = null,
@@ -2571,6 +2632,7 @@ object DatabaseTestList {
             dTest = "Egzoz emisyonu azalır",
             correct = "Motor verimliliği azalır"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 61,
             content = "Hangi durumda lastik basıncının düzenli olarak kontrol edilmesi gerekir?",
             imageTest = null,
@@ -2580,6 +2642,7 @@ object DatabaseTestList {
             dTest = "Sadece şehir içi kullanımda",
             correct = "Belirli aralıklarla veya her yolculuk öncesinde"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 62,
             content = "ABS fren sistemi hangi durumlarda etkilidir?",
             imageTest = null,
@@ -2589,6 +2652,7 @@ object DatabaseTestList {
             dTest = "Sadece yüksek hızlarda",
             correct = "Hem kuru hem de kaygan yollarda"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 63,
             content = "Hangi gösterge motorun aşırı ısındığını belirtir?",
             imageTest = null,
@@ -2598,6 +2662,7 @@ object DatabaseTestList {
             dTest = "Fren balataları göstergesi",
             correct = "Hararet göstergesi"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 64,
             content = "Egzoz sisteminin arızalanması aracın hangi özelliğini etkileyebilir?",
             imageTest = null,
@@ -2607,6 +2672,7 @@ object DatabaseTestList {
             dTest = "Yakıt tasarrufunu sağlar",
             correct = "Motor performansını düşürebilir"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 65,
             content = "Yağ basıncı ikaz ışığı yanıyorsa ne yapılmalıdır?",
             imageTest = null,
@@ -2616,6 +2682,7 @@ object DatabaseTestList {
             dTest = "Fren balatalarını kontrol edin",
             correct = "Yağ seviyesini kontrol edin"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 66,
             content = "Fren balatalarının aşınmasını gösteren işaret hangi renktedir?",
             imageTest = null,
@@ -2625,6 +2692,7 @@ object DatabaseTestList {
             dTest = "Mavi",
             correct = "Kırmızı"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 67,
             content = "Silecek suyunun bitmesi durumunda ne yapılmalıdır?",
             imageTest = null,
@@ -2634,6 +2702,7 @@ object DatabaseTestList {
             dTest = "Fren sıvısı eklenmelidir",
             correct = "Yeni silecek suyu eklenmelidir"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 68,
             content = "Kısa farlar neden önemlidir?",
             imageTest = null,
@@ -2643,6 +2712,7 @@ object DatabaseTestList {
             dTest = "Fren performansını artırır",
             correct = "Gece sürüşlerinde karşıdan gelenleri rahatsız etmez"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 69,
             content = "Lastik basıncı düşükse bu neye yol açabilir?",
             imageTest = null,
@@ -2652,6 +2722,7 @@ object DatabaseTestList {
             dTest = "Lastiklerin daha uzun ömürlü olmasını sağlar",
             correct = "Yakıt tüketimini artırır"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 70,
             content = "Motorun çalışması sırasında çıkan beyaz duman neyin işareti olabilir?",
             imageTest = null,
@@ -2661,6 +2732,7 @@ object DatabaseTestList {
             dTest = "Fren balatalarının aşınması",
             correct = "Soğutma sıvısının motora karışması"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 71,
             content = "Aşırı hızda sürüşün en büyük dezavantajı nedir?",
             imageTest = null,
@@ -2670,6 +2742,7 @@ object DatabaseTestList {
             dTest = "Motorun ömrünü uzatır",
             correct = "Fren mesafesini uzatır"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 72,
             content = "Araç aküsünün boşalmasına ne yol açabilir?",
             imageTest = null,
@@ -2679,6 +2752,7 @@ object DatabaseTestList {
             dTest = "Düşük lastik basıncı",
             correct = "Sık sık farların açık kalması"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 73,
             content = "Kışın araç kullanırken nelere dikkat edilmelidir?",
             imageTest = null,
@@ -2688,6 +2762,7 @@ object DatabaseTestList {
             dTest = "Sadece lastikler kontrol edilmelidir",
             correct = "Kış lastikleri kullanılmalıdır"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 74,
             content = "Motor arıza lambası yanıyorsa ne yapılmalıdır?",
             imageTest = null,
@@ -2697,6 +2772,7 @@ object DatabaseTestList {
             dTest = "Fren sistemi kontrol edilmelidir",
             correct = "Servise götürülmeli"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 75,
             content = "Aracın lastikleri neden düzenli olarak kontrol edilmelidir?",
             imageTest = null,
@@ -2706,6 +2782,7 @@ object DatabaseTestList {
             dTest = "Motor performansını artırmak için",
             correct = "Yol tutuşu ve güvenliği artırmak için"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 76,
             content = "Fren sistemindeki hidrolik sıvısının azalması neye yol açabilir?",
             imageTest = null,
@@ -2715,6 +2792,7 @@ object DatabaseTestList {
             dTest = "Motorun ısınmasını engeller",
             correct = "Frenlerin etkisiz çalışmasına yol açar"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 77,
             content = "Aracın lastik diş derinliği ne zaman kontrol edilmelidir?",
             imageTest = null,
@@ -2724,6 +2802,7 @@ object DatabaseTestList {
             dTest = "Sadece kışın",
             correct = "Düzenli aralıklarla"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 78,
             content = "Karbüratörlü araçlarda hava filtresi tıkalı ise ne olur?",
             imageTest = null,
@@ -2733,6 +2812,7 @@ object DatabaseTestList {
             dTest = "Lastik ömrü uzar",
             correct = "Yakıt tüketimi artar"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 79,
             content = "Egzoz gazı rengi mavi ise bu neyin işareti olabilir?",
             imageTest = null,
@@ -2742,6 +2822,7 @@ object DatabaseTestList {
             dTest = "Soğutma sıvısının bittiği",
             correct = "Yağın yanmaya başladığı"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 80,
             content = "Aracın fren lambalarının arızalı olması ne tür bir sorun yaratabilir?",
             imageTest = null,
@@ -2751,6 +2832,7 @@ object DatabaseTestList {
             dTest = "Motorun fazla ısınmasına neden olur",
             correct = "Arkadan gelen araçların durumu anlamasını zorlaştırır"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 81,
             content = "Dört çeker sistem ne zaman kullanışlıdır?",
             imageTest = null,
@@ -2760,6 +2842,7 @@ object DatabaseTestList {
             dTest = "Yalnızca uzun yolda",
             correct = "Kaygan ve engebeli arazilerde"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 82,
             content = "Sürüş sırasında araç lastiğinde oluşabilecek en büyük sorun nedir?",
             imageTest = null,
@@ -2769,6 +2852,7 @@ object DatabaseTestList {
             dTest = "Lastiğin ağırlık kaybetmesi",
             correct = "Lastiğin patlaması"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 83,
             content = "Hangi durumlarda sis lambaları kullanılmalıdır?",
             imageTest = null,
@@ -2778,6 +2862,7 @@ object DatabaseTestList {
             dTest = "Gündüz açık havalarda",
             correct = "Sisli, karlı ve yoğun yağışlı havalarda"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 84,
             content = "Hangi işaret lastik basıncı düşük olduğunu gösterir?",
             imageTest = null,
@@ -2787,6 +2872,7 @@ object DatabaseTestList {
             dTest = "Motor arıza ışığı",
             correct = "Lastik basınç uyarı ışığı"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 85,
             content = "Araçta far ayarlarının yanlış olması neye sebep olabilir?",
             imageTest = null,
@@ -2796,6 +2882,7 @@ object DatabaseTestList {
             dTest = "Motor performansını düşürür",
             correct = "Diğer sürücüleri rahatsız eder"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 86,
             content = "Hangi durumda antifriz kullanılması önemlidir?",
             imageTest = null,
@@ -2805,6 +2892,7 @@ object DatabaseTestList {
             dTest = "Yalnızca uzun yolculuklarda",
             correct = "Soğuk hava koşullarında"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 87,
             content = "ABS fren sistemi ne işe yarar?",
             imageTest = null,
@@ -2814,6 +2902,7 @@ object DatabaseTestList {
             dTest = "Yakıt tüketimini azaltır",
             correct = "Frenleme sırasında direksiyon hakimiyetini artırır"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 88,
             content = "Araç yağ filtresi tıkalı ise bu neye yol açabilir?",
             imageTest = null,
@@ -2823,6 +2912,7 @@ object DatabaseTestList {
             dTest = "Fren performansını artırır",
             correct = "Yağ akışını engelleyebilir ve motora zarar verebilir"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 89,
             content = "Süspansiyon sisteminin arızalı olması neyi etkiler?",
             imageTest = null,
@@ -2832,6 +2922,7 @@ object DatabaseTestList {
             dTest = "Lastik basıncını artırır",
             correct = "Sürüş konforunu ve yol tutuşunu olumsuz etkiler"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 90,
             content = "Yağ değişim zamanını belirlemenin en iyi yolu nedir?",
             imageTest = null,
@@ -2841,6 +2932,7 @@ object DatabaseTestList {
             dTest = "Her sürüşten sonra değiştirmek",
             correct = "Araç kullanım kılavuzuna göre belirli aralıklarla değiştirmek"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 91,
             content = "Motorun çalışması sırasında meydana gelen aşırı titreşim neyi gösterebilir?",
             imageTest = null,
@@ -2850,6 +2942,7 @@ object DatabaseTestList {
             dTest = "Fren sistemi arızasını",
             correct = "Motor montajında sorun olduğunu"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 92,
             content = "Fren balatalarının sık sık kontrol edilmesinin nedeni nedir?",
             imageTest = null,
@@ -2859,6 +2952,7 @@ object DatabaseTestList {
             dTest = "Motoru soğutmak",
             correct = "Fren performansını ve güvenliği sağlamak"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 93,
             content = "Hangi gösterge motorun çalışma sıcaklığını gösterir?",
             imageTest = null,
@@ -2868,6 +2962,7 @@ object DatabaseTestList {
             dTest = "Lastik basınç göstergesi",
             correct = "Hararet göstergesi"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 94,
             content = "Yakıt filtresinin tıkalı olması hangi soruna yol açabilir?",
             imageTest = null,
@@ -2877,6 +2972,7 @@ object DatabaseTestList {
             dTest = "Lastik basıncını düşürür",
             correct = "Yakıt akışını engelleyerek motorun çalışmasını zorlaştırır"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 95,
             content = "Hangi durumda aracın motoru aşırı ısınabilir?",
             imageTest = null,
@@ -2886,6 +2982,7 @@ object DatabaseTestList {
             dTest = "Yakıt filtresi tıkalıysa",
             correct = "Antifriz sıvısı bitmişse"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 96,
             content = "Hangi durum lastiklerin aşırı ısınmasına sebep olabilir?",
             imageTest = null,
@@ -2895,6 +2992,7 @@ object DatabaseTestList {
             dTest = "Sis lambası açıkken uzun yola çıkılmışsa",
             correct = "Lastik basıncı düşükse"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 97,
             content = "Aracınızın direksiyon simidi sertleştiğinde ne yapmalısınız?",
             imageTest = null,
@@ -2904,6 +3002,7 @@ object DatabaseTestList {
             dTest = "Lastik basıncını kontrol etmelisiniz",
             correct = "Direksiyon sisteminde bir arıza olabilir, servise gitmelisiniz"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 98,
             content = "Aracınızın yakıt göstergesi neden hızlı bir şekilde düşer?",
             imageTest = null,
@@ -2913,6 +3012,7 @@ object DatabaseTestList {
             dTest = "Yakıt sızıntısı olabilir",
             correct = "Yakıt sızıntısı olabilir"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 99,
             content = "Araçta duman çıkıyorsa hangi durum söz konusu olabilir?",
             imageTest = null,
@@ -2922,6 +3022,7 @@ object DatabaseTestList {
             dTest = "Yağ filtresi kirlenmiştir",
             correct = "Egzoz sistemi tıkalıdır"
         ), TestsEntity(
+            Constants.String.ENGINE,
             idTest = 100,
             content = "Fren pedalına sert basıldığında aracın durmaması, hangi sorunla ilişkili olabilir?",
             imageTest = null,
@@ -2930,10 +3031,9 @@ object DatabaseTestList {
             cTest = "Yağ seviyesinin arttığı",
             dTest = "Lastiklerin fazla şişirildiği",
             correct = "Fren balatalarının aşındığı"
-        )
-    )
-    val IlkYardim = mutableListOf(
+        ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 1,
             content = "Kaza sonucu baygınlık geçiren birine nasıl müdahale etmelisiniz?",
             imageTest = null,
@@ -2944,6 +3044,7 @@ object DatabaseTestList {
             correct = "Kişiyi sırt üstü yatırıp hava yolunu açmalısınız"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 2,
             content = "Bir kişi bayıldığında ne yapmalısınız?",
             imageTest = null,
@@ -2954,6 +3055,7 @@ object DatabaseTestList {
             correct = "Kişiyi sırt üstü yatırıp başını hafifçe eğmelisiniz"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 3,
             content = "Yaralanan birine nasıl ilk yardım yapılır?",
             imageTest = null,
@@ -2964,6 +3066,7 @@ object DatabaseTestList {
             correct = "Yarayı temizleyip, üzerine bandaj sarılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 4,
             content = "Ağır bir yaralanma durumunda, nasıl müdahale edilmelidir?",
             imageTest = null,
@@ -2974,6 +3077,7 @@ object DatabaseTestList {
             correct = "Yaralıyı sabırla yerinde tutmalı ve yardım çağırmalısınız"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 5,
             content = "Bir kişiye kalp masajı yaparken nelere dikkat edilmelidir?",
             imageTest = null,
@@ -2984,6 +3088,7 @@ object DatabaseTestList {
             correct = "Ellerinizi göğsün ortasında yerleştirip ritmik bir şekilde baskı yapmalısınız"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 6,
             content = "Yanık durumda yapılacak ilk müdahale nedir?",
             imageTest = null,
@@ -2994,6 +3099,7 @@ object DatabaseTestList {
             correct = "Yanık bölgesini soğuk suyla en az 10 dakika boyunca yıkamalısınız"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 7,
             content = "Boğulma durumunda ne yapılmalıdır?",
             imageTest = null,
@@ -3004,6 +3110,7 @@ object DatabaseTestList {
             correct = "Kişiyi sırt üstü yatırmalı ve hava yolunu açmalısınız"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 8,
             content = "Kusma halinde ne yapılması gerekmektedir?",
             imageTest = null,
@@ -3014,6 +3121,7 @@ object DatabaseTestList {
             correct = "Kişiyi yavaşça sırt üstü yatırarak, başını yan yatırmalısınız"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 9,
             content = "Kanama durumunda hangi önlem alınmalıdır?",
             imageTest = null,
@@ -3024,6 +3132,7 @@ object DatabaseTestList {
             correct = "Kanayan bölgeye basınç uygulanmalı ve yüksek tutularak hastaneye götürülmelidir"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 10,
             content = "Bir kişinin şok geçirdiği nasıl anlaşılır?",
             imageTest = null,
@@ -3034,6 +3143,7 @@ object DatabaseTestList {
             correct = "Kişinin nabzı hızlanır ve cildi solgunlaşır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 11,
             content = "Bir kişinin bilincinin kapalı olduğu durumlarda ne yapılmalıdır?",
             imageTest = null,
@@ -3044,6 +3154,7 @@ object DatabaseTestList {
             correct = "Kişiyi sırt üstü yatırarak hava yolunu açmalısınız"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 12,
             content = "Ağır bir kanama durumunda, nasıl müdahale edilmelidir?",
             imageTest = null,
@@ -3054,6 +3165,7 @@ object DatabaseTestList {
             correct = "Kanayan bölgeye baskı yapmalı ve yaralıyı en yakın sağlık kuruluşuna götürmelisiniz"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 13,
             content = "Boğulma durumunda hangi işlem yapılmalıdır?",
             imageTest = null,
@@ -3064,6 +3176,7 @@ object DatabaseTestList {
             correct = "Kişiyi sırt üstü yatırıp, başını geri doğru eğmelisiniz"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 14,
             content = "Fren balatası problemi ile ilgili aşağıdakilerden hangisi doğru bir müdahale olur?",
             imageTest = null,
@@ -3074,6 +3187,7 @@ object DatabaseTestList {
             correct = "Fren sistemi arızalandığında öncelikle fren balataları kontrol edilmelidir"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 15,
             content = "Ellerinizde bir yabancı cisim batarsa, nasıl bir müdahale yapılmalıdır?",
             imageTest = null,
@@ -3084,6 +3198,7 @@ object DatabaseTestList {
             correct = "Yabancı cismi çıkarmadan, yaranın etrafına bandaj sararak hastaneye gitmelisiniz"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 16,
             content = "Yaralanan bir kişi bilinç kaybı yaşarsa, nasıl müdahale etmelisiniz?",
             imageTest = null,
@@ -3094,6 +3209,7 @@ object DatabaseTestList {
             correct = "Hemen bir sağlık ekiplerinden yardım istemeli ve kişiyi sırt üstü yatırmalısınız"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 17,
             content = "Kişinin şok geçirdiği bir durumda ne yapılmalıdır?",
             imageTest = null,
@@ -3104,6 +3220,7 @@ object DatabaseTestList {
             correct = "Kişiyi düz bir zemin üzerine yatırıp bacaklarını yukarı kaldırmalısınız"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 18,
             content = "Yanık durumunda nasıl müdahale edilmelidir?",
             imageTest = null,
@@ -3114,6 +3231,7 @@ object DatabaseTestList {
             correct = "Yanık bölgesini hemen soğuk su ile en az 10 dakika boyunca yıkamalısınız"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 19,
             content = "Bir kişinin boğazına yabancı bir cisim kaçarsa, ne yapılmalıdır?",
             imageTest = null,
@@ -3124,6 +3242,7 @@ object DatabaseTestList {
             correct = "Yabancı cismi karnına baskı yaparak çıkarmalısınız"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 20,
             content = "Kusma durumu yaşayan bir kişiye nasıl yardımcı olabilirsiniz?",
             imageTest = null,
@@ -3134,6 +3253,7 @@ object DatabaseTestList {
             correct = "Kişiyi sırt üstü yatırmalı ve başını yan yatırmalısınız"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 20,
             content = "Bir kişiye kalp masajı yapılırken nelere dikkat edilmelidir?",
             imageTest = null,
@@ -3144,6 +3264,7 @@ object DatabaseTestList {
             correct = "Masaj sırasında kişinin sırt üstü pozisyonda olması gerekmektedir"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 21,
             content = "Yüksekten düşen bir kişiye nasıl müdahale edilmelidir?",
             imageTest = null,
@@ -3154,6 +3275,7 @@ object DatabaseTestList {
             correct = "Kişiyi yerinden hareket ettirmemeli, acil yardım çağırılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 22,
             content = "Hangi durumlarda kalp krizi geçiren bir kişiye aspirin verilmelidir?",
             imageTest = null,
@@ -3164,6 +3286,7 @@ object DatabaseTestList {
             correct = "Eğer kişi bilinçli ve yutma gücü varsa"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 23,
             content = "Bir kişinin vücut ısısının 35°C'nin altına düştüğü durum nedir?",
             imageTest = null,
@@ -3174,6 +3297,7 @@ object DatabaseTestList {
             correct = "Hipotermi"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 24,
             content = "Kişinin burnu kanadığında yapılması gereken ilk müdahale nedir?",
             imageTest = null,
@@ -3184,6 +3308,7 @@ object DatabaseTestList {
             correct = "Kişiyi oturtmalı ve başını öne doğru eğmelisiniz"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 25,
             content = "Fren balatalarındaki sorunla ilgili nasıl bir müdahale yapılmalıdır?",
             imageTest = null,
@@ -3194,6 +3319,7 @@ object DatabaseTestList {
             correct = "Fren balataları kontrol edilmeli ve gerektiğinde değiştirilmeli"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 26,
             content = "Ağır bir elektrik çarpması durumunda nasıl bir müdahale yapılmalıdır?",
             imageTest = null,
@@ -3204,6 +3330,7 @@ object DatabaseTestList {
             correct = "Elektrik akımı kesilmeli, kişiyi elektrik akımından uzaklaştırılmalı"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 27,
             content = "Bilinç kaybı yaşayan bir kişiye yapılması gereken ilk şey nedir?",
             imageTest = null,
@@ -3214,6 +3341,7 @@ object DatabaseTestList {
             correct = "Kişiyi sırt üstü yatırmalı ve hava yolunu açmalısınız"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 28,
             content = "Bir kişiye nasıl suni teneffüs yapılır?",
             imageTest = null,
@@ -3224,6 +3352,7 @@ object DatabaseTestList {
             correct = "Ağız yoluyla 5 saniye arayla 2 kez solunum yaparak başlatılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 29,
             content = "Zehirlenme durumunda hangi maddeler için ilk yardım gereklidir?",
             imageTest = null,
@@ -3234,6 +3363,7 @@ object DatabaseTestList {
             correct = "Asidik ve alkali maddeler, gazlar, ilaçlar ve bazı bitkiler"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 30,
             content = "Bir kişinin kalbi durmuşsa ne yapılmalıdır?",
             imageTest = null,
@@ -3244,6 +3374,7 @@ object DatabaseTestList {
             correct = "Hemen kalp masajı ve suni teneffüs yapılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 31,
             content = "Bir kişi bayıldığında nasıl bir müdahale yapılmalıdır?",
             imageTest = null,
@@ -3254,6 +3385,7 @@ object DatabaseTestList {
             correct = "Kişiyi sırt üstü yatırmalı ve ayaklarını yukarı kaldırmalısınız"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 32,
             content = "Yüksek sıcaklık altında boğulma durumu yaşayan birine nasıl müdahale edilmelidir?",
             imageTest = null,
@@ -3264,6 +3396,7 @@ object DatabaseTestList {
             correct = "Kişi soğuk bir ortama alınmalı ve su içirilmelidir"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 33,
             content = "Bir kişiye nasıl şok tedavisi yapılır?",
             imageTest = null,
@@ -3274,6 +3407,7 @@ object DatabaseTestList {
             correct = "Kişiyi sırt üstü yatırmalı ve bacaklarını yukarı kaldırmalısınız"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 34,
             content = "Bir kişiye baş dönmesi şikayeti ile müdahale ediliyorsa, yapılması gereken ilk şey nedir?",
             imageTest = null,
@@ -3284,6 +3418,7 @@ object DatabaseTestList {
             correct = "Kişiyi sırt üstü yatırmalı ve kafasını hafifçe yukarı kaldırmalısınız"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 35,
             content = "Çocuklarda zehirlenme durumunda yapılması gereken ilk müdahale nedir?",
             imageTest = null,
@@ -3294,6 +3429,7 @@ object DatabaseTestList {
             correct = "Acil servise bilgi verilmeli ve çocuk hemen hastaneye götürülmelidir"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 36,
             content = "Bir kişiye travma sonucu kanama meydana geldiyse, ilk müdahale nasıl olmalıdır?",
             imageTest = null,
@@ -3304,6 +3440,7 @@ object DatabaseTestList {
             correct = "Kanamanın olduğu bölgeye baskı uygulayarak kanama durdurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 37,
             content = "Bir kişinin şiddetli yanığı olduğunda ne yapılmalıdır?",
             imageTest = null,
@@ -3314,6 +3451,7 @@ object DatabaseTestList {
             correct = "Yanık bölgeye soğuk su uygulanmalı ve bir acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 38,
             content = "Bir kişiye alerjik reaksiyon sonucu solunum zorluğu çekiyorsa, yapılması gereken ilk müdahale nedir?",
             imageTest = null,
@@ -3324,6 +3462,7 @@ object DatabaseTestList {
             correct = "Hemen acil servise başvurulmalı ve kişi rahat bir pozisyonda tutulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 39,
             content = "Bir kişiye sokma durumunda ne yapılmalıdır?",
             imageTest = null,
@@ -3334,6 +3473,7 @@ object DatabaseTestList {
             correct = "Sokmanın olduğu bölgeye soğuk kompres uygulanmalı ve kişiye acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 40,
             content = "Kanama durdurulamadığında, ne yapılması gerekir?",
             imageTest = null,
@@ -3344,6 +3484,7 @@ object DatabaseTestList {
             correct = "Kanama bölgesine bir bandaj sarılmalı ve acil yardım çağrılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 41,
             content = "Bir kişiye ani bir nöbet geçirdiğinde yapılması gereken ilk şey nedir?",
             imageTest = null,
@@ -3354,6 +3495,7 @@ object DatabaseTestList {
             correct = "Kişiyi güvenli bir yere yatırmalı ve başını korumalısınız"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 42,
             content = "Ağır bir baş yaralanmasında ilk yapılacak müdahale nedir?",
             imageTest = null,
@@ -3364,6 +3506,7 @@ object DatabaseTestList {
             correct = "Baş bölgesine baskı uygulanmalı ve kanama kontrol altına alınmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 43,
             content = "Bir kişide boğulma durumu varsa, ne yapılmalıdır?",
             imageTest = null,
@@ -3374,6 +3517,7 @@ object DatabaseTestList {
             correct = "Kişiyi öne doğru eğmeli ve sırtına vurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 44,
             content = "Buzlu yollar veya kaygan zeminler nedeniyle bir kişi düşerse, ilk müdahale nasıl yapılmalıdır?",
             imageTest = null,
@@ -3384,6 +3528,7 @@ object DatabaseTestList {
             correct = "Kişiyi sakinleştirerek, kırık veya yaralanma durumlarını kontrol edin ve acil yardım çağırın"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 45,
             content = "Bir kişi elektrik çarpması sonucu bayıldığında yapılacak ilk müdahale nedir?",
             imageTest = null,
@@ -3394,6 +3539,7 @@ object DatabaseTestList {
             correct = "Kişiyi güvenli bir alana taşıyıp, acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 46,
             content = "Bir kişi göğsüne darbeye bağlı olarak bayıldığında ne yapılmalıdır?",
             imageTest = null,
@@ -3404,6 +3550,7 @@ object DatabaseTestList {
             correct = "Kişiyi sırt üstü yatırmalı ve acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 47,
             content = "Bir kişiye boğulma durumu yaşanıyorsa, ilk yapılacak müdahale nedir?",
             imageTest = null,
@@ -3414,6 +3561,7 @@ object DatabaseTestList {
             correct = "Kişiyi öne doğru eğmeli ve sırtına vurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 48,
             content = "Ağır bir yanık durumunda ilk müdahale nasıl olmalıdır?",
             imageTest = null,
@@ -3424,6 +3572,7 @@ object DatabaseTestList {
             correct = "Yanık bölgeye soğuk su uygulamalı ve acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 49,
             content = "Yüksekten düşme sonucu bir kişide kırık meydana geldiyse, yapılması gereken ilk müdahale nedir?",
             imageTest = null,
@@ -3434,6 +3583,7 @@ object DatabaseTestList {
             correct = "Kişi hareket ettirilmeden hemen bir sağlık kuruluşuna yönlendirilmelidir"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 50,
             content = "Kanama durdurulamazsa, ne yapılmalıdır?",
             imageTest = null,
@@ -3444,6 +3594,7 @@ object DatabaseTestList {
             correct = "Kanamanın olduğu bölgeye baskı yapılmalı ve acil yardım çağrılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 51,
             content = "Alerjik bir reaksiyon sonucu bir kişide nefes darlığı başlamışsa, ilk yapılacak müdahale nedir?",
             imageTest = null,
@@ -3454,6 +3605,7 @@ object DatabaseTestList {
             correct = "Kişi sakin bir şekilde oturtulmalı ve acil yardım çağrılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 52,
             content = "Zehirlenme durumunda ne yapılmalıdır?",
             imageTest = null,
@@ -3464,6 +3616,7 @@ object DatabaseTestList {
             correct = "Zehirlenme türüne göre derhal acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 53,
             content = "Baş dönmesi ve halsizlik yaşayan bir kişiye ne yapılmalıdır?",
             imageTest = null,
@@ -3474,6 +3627,7 @@ object DatabaseTestList {
             correct = "Kişi sırt üstü yatırılmalı ve bir sağlık kuruluşuna yönlendirilmelidir"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 54,
             content = "Bilinç kaybı yaşayan bir kişiye yapılacak ilk müdahale nedir?",
             imageTest = null,
@@ -3484,6 +3638,7 @@ object DatabaseTestList {
             correct = "Kişiyi sırt üstü yatırmalı ve acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 55,
             content = "Kafaya darbeye bağlı baş ağrısı yaşayan bir kişi ne yapmalıdır?",
             imageTest = null,
@@ -3494,6 +3649,7 @@ object DatabaseTestList {
             correct = "Kişi dinlenmeli ve sağlık kuruluşuna başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 56,
             content = "Kişiye ciddi bir sokma durumunda nasıl müdahale edilmelidir?",
             imageTest = null,
@@ -3504,6 +3660,7 @@ object DatabaseTestList {
             correct = "Sokma bölgesine soğuk kompres yapılmalı ve kişi acil servise yönlendirilmelidir"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 57,
             content = "Kişinin cilt rengi morarmışsa, ne yapılmalıdır?",
             imageTest = null,
@@ -3514,6 +3671,7 @@ object DatabaseTestList {
             correct = "Kişi hemen sırt üstü yatırılmalı ve acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 58,
             content = "Bir kişi vücudunda baş dönmesi ve sersemlik hissediyorsa, ne yapılmalıdır?",
             imageTest = null,
@@ -3524,6 +3682,7 @@ object DatabaseTestList {
             correct = "Kişi sırt üstü yatırılmalı ve başı yukarı kaldırılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 59,
             content = "Bir kişide kasılmalar başladıysa, ilk müdahale nasıl olmalıdır?",
             imageTest = null,
@@ -3534,6 +3693,7 @@ object DatabaseTestList {
             correct = "Kişinin etrafındaki sert cisimler kaldırılmalı ve acil servis aranmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 60,
             content = "Bir kişiye zehirli bir madde yutmuşsa, ne yapılmalıdır?",
             imageTest = null,
@@ -3544,6 +3704,7 @@ object DatabaseTestList {
             correct = "Kişiye kesinlikle herhangi bir şey verilmemelidir ve acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 61,
             content = "Ağır bir düşme sonucu bel ağrısı yaşayan bir kişiye ne yapılmalıdır?",
             imageTest = null,
@@ -3554,6 +3715,7 @@ object DatabaseTestList {
             correct = "Kişiye hareket ettirilmemeli ve hemen acil servis çağrılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 62,
             content = "Bir kişi gözünde kimyasal madde görmüşse, ne yapılmalıdır?",
             imageTest = null,
@@ -3564,6 +3726,7 @@ object DatabaseTestList {
             correct = "Göz bol su ile yıkanmalıdır ve hemen acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 63,
             content = "Bir kişi solunum durması sonucu bayıldığında, ilk yapılacak müdahale nedir?",
             imageTest = null,
@@ -3574,6 +3737,7 @@ object DatabaseTestList {
             correct = "Ağızdan ağza solunum yapılmalı ve acil servis çağrılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 64,
             content = "Bir kişiye zehirli bir madde cildine sıçradığında, ne yapılmalıdır?",
             imageTest = null,
@@ -3584,6 +3748,7 @@ object DatabaseTestList {
             correct = "Cilt hemen bol su ile yıkanmalıdır ve acil servis aranmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 65,
             content = "Ağır bir zehirlenme durumunda kişiye hangi durumlarda kusma yaptırılmalıdır?",
             imageTest = null,
@@ -3594,6 +3759,7 @@ object DatabaseTestList {
             correct = "Yalnızca uzman bir sağlık personeli tarafından yapılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 66,
             content = "Bir kişi aşırı sıcak çarpması geçiriyorsa, ne yapılmalıdır?",
             imageTest = null,
@@ -3604,6 +3770,7 @@ object DatabaseTestList {
             correct = "Kişi serin bir yere alınmalı ve bol sıvı verilmelidir"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 67,
             content = "Bir kişi, bilincini kaybedip bayıldığında, ne yapılmalıdır?",
             imageTest = null,
@@ -3614,6 +3781,7 @@ object DatabaseTestList {
             correct = "Kişi sırt üstü yatırılmalı ve başı hafifçe kaldırılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 68,
             content = "Bir kişi, ağır bir kanama geçiriyorsa, ne yapılmalıdır?",
             imageTest = null,
@@ -3624,6 +3792,7 @@ object DatabaseTestList {
             correct = "Kanama bölgesine baskı yapılmalı ve acil servis çağrılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 69,
             content = "Ağır bir yanık meydana geldiğinde hangi müdahale yapılmalıdır?",
             imageTest = null,
@@ -3634,6 +3803,7 @@ object DatabaseTestList {
             correct = "Yanık bölgesi soğuk su ile yıkanmalı ve hemen hastaneye başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 70,
             content = "Bir kişi kalp krizi geçiriyorsa, ne yapılmalıdır?",
             imageTest = null,
@@ -3644,6 +3814,7 @@ object DatabaseTestList {
             correct = "Kişiye aspirin verilmelidir ve acil servis çağrılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 71,
             content = "Bir kişi, vücudunda ani bir ağrı hissediyorsa, ne yapılmalıdır?",
             imageTest = null,
@@ -3654,6 +3825,7 @@ object DatabaseTestList {
             correct = "Kişi hemen oturmalı ve dinlenmelidir"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 72,
             content = "Bir kişi, göğüs kafesinde sıkışma hissi yaşıyorsa, hangi durumlar söz konusu olabilir?",
             imageTest = null,
@@ -3664,6 +3836,7 @@ object DatabaseTestList {
             correct = "Kalp krizi, solunum yolu tıkanıklığı, veya gıda tıkanması olabilir"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 73,
             content = "Ağır bir alerjik reaksiyon sonucu kişinin nefes alması zorlaşıyorsa, ne yapılmalıdır?",
             imageTest = null,
@@ -3674,6 +3847,7 @@ object DatabaseTestList {
             correct = "Kişiye adrenalin iğnesi yapılmalı ve acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 74,
             content = "Bir kişi aniden bayıldığında, ne yapılmalıdır?",
             imageTest = null,
@@ -3684,6 +3858,7 @@ object DatabaseTestList {
             correct = "Kişi sırt üstü yatırılmalı ve bacakları yukarı kaldırılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 75,
             content = "Bir kişi boğuluyorsa, ne yapılmalıdır?",
             imageTest = null,
@@ -3694,6 +3869,7 @@ object DatabaseTestList {
             correct = "Kişinin sırtına vurulmalı ve boğulma sırasında yardımcı olunmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 76,
             content = "Bacak veya kol kırılması durumunda ilk yardım nasıl yapılmalıdır?",
             imageTest = null,
@@ -3704,6 +3880,7 @@ object DatabaseTestList {
             correct = "Kırık bölge sabitlenmeli ve acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 77,
             content = "Bir kişi kafa travması geçirmişse, ilk müdahale nasıl yapılmalıdır?",
             imageTest = null,
@@ -3714,6 +3891,7 @@ object DatabaseTestList {
             correct = "Kişi kesinlikle hareket ettirilmemeli ve acil servis aranmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 78,
             content = "Bir kişi kalp krizi geçiriyorsa, hangi belirtiler görülür?",
             imageTest = null,
@@ -3724,6 +3902,7 @@ object DatabaseTestList {
             correct = "Göğüs ağrısı, nefes darlığı, soğuk terleme"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 79,
             content = "Bir kişi solunum sıkıntısı yaşıyorsa, ne yapılmalıdır?",
             imageTest = null,
@@ -3734,6 +3913,7 @@ object DatabaseTestList {
             correct = "Kişiye sık sık nefes alması için yardımcı olunmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 80,
             content = "Bir kişi zehirlenmişse, ilk yapılacak şey nedir?",
             imageTest = null,
@@ -3744,6 +3924,7 @@ object DatabaseTestList {
             correct = "Kişiye bir şey verilmemeli ve acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 81,
             content = "Bir kişi boğuluyorsa, acil müdahale nasıl yapılmalıdır?",
             imageTest = null,
@@ -3754,6 +3935,7 @@ object DatabaseTestList {
             correct = "Kişinin sırtına vurulmalı ve solunum yolunun açılması için yardımcı olunmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 82,
             content = "Bir kişi, yüksekten düşme sonucu bilinç kaybı yaşıyorsa, nasıl bir müdahale yapılmalıdır?",
             imageTest = null,
@@ -3764,6 +3946,7 @@ object DatabaseTestList {
             correct = "Kişi hareket ettirilmemeli ve başı desteklenmelidir"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 83,
             content = "Ağız yoluyla nefes alması zorlaşan bir kişi için ne yapılmalıdır?",
             imageTest = null,
@@ -3774,6 +3957,7 @@ object DatabaseTestList {
             correct = "Hızlıca müdahale edilerek hava yolu açılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 84,
             content = "Bir kişi travma nedeniyle şok geçiriyorsa, ilk yardım nasıl yapılmalıdır?",
             imageTest = null,
@@ -3784,6 +3968,7 @@ object DatabaseTestList {
             correct = "Kişiye hemen bir şey verilmemeli ve acil servis çağrılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 85,
             content = "Bir kişi bayıldığında, ne yapılmalıdır?",
             imageTest = null,
@@ -3794,6 +3979,7 @@ object DatabaseTestList {
             correct = "Kişi sırt üstü yatırılmalı, bacakları yukarı kaldırılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 86,
             content = "Bir kişi, ağır bir alerjik reaksiyon geçiriyorsa, nasıl bir müdahale yapılmalıdır?",
             imageTest = null,
@@ -3804,6 +3990,7 @@ object DatabaseTestList {
             correct = "Kişiye antihistaminik ilaç verilmelidir ve acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 87,
             content = "Bir kişi kafa travması geçiriyorsa, ilk müdahale nasıl yapılmalıdır?",
             imageTest = null,
@@ -3814,6 +4001,7 @@ object DatabaseTestList {
             correct = "Kişi hareket ettirilmemeli ve acil servis çağrılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 88,
             content = "Ağır bir zehirlenme durumunda, nasıl bir müdahale yapılmalıdır?",
             imageTest = null,
@@ -3824,6 +4012,7 @@ object DatabaseTestList {
             correct = "Kişiye sıvı verilmeden acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 89,
             content = "Bir kişi, bir kesik veya yaralanma sonucu kanama geçiriyorsa, ilk yapılacak şey nedir?",
             imageTest = null,
@@ -3834,6 +4023,7 @@ object DatabaseTestList {
             correct = "Kanama bölgesine baskı yaparak kanama durdurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 90,
             content = "Ağır bir kırık durumunda ilk yapılacak müdahale nedir?",
             imageTest = null,
@@ -3844,6 +4034,7 @@ object DatabaseTestList {
             correct = "Kırık bölge sabitlenmeli ve acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 80,
             content = "Bir kişi zehirlenmişse, ilk yapılacak şey nedir?",
             imageTest = null,
@@ -3854,6 +4045,7 @@ object DatabaseTestList {
             correct = "Kişiye bir şey verilmemeli ve acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 81,
             content = "Bir kişi boğuluyorsa, acil müdahale nasıl yapılmalıdır?",
             imageTest = null,
@@ -3864,6 +4056,7 @@ object DatabaseTestList {
             correct = "Kişinin sırtına vurulmalı ve solunum yolunun açılması için yardımcı olunmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 82,
             content = "Bir kişi, yüksekten düşme sonucu bilinç kaybı yaşıyorsa, nasıl bir müdahale yapılmalıdır?",
             imageTest = null,
@@ -3874,6 +4067,7 @@ object DatabaseTestList {
             correct = "Kişi hareket ettirilmemeli ve başı desteklenmelidir"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 83,
             content = "Ağız yoluyla nefes alması zorlaşan bir kişi için ne yapılmalıdır?",
             imageTest = null,
@@ -3884,6 +4078,7 @@ object DatabaseTestList {
             correct = "Hızlıca müdahale edilerek hava yolu açılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 84,
             content = "Bir kişi travma nedeniyle şok geçiriyorsa, ilk yardım nasıl yapılmalıdır?",
             imageTest = null,
@@ -3894,6 +4089,7 @@ object DatabaseTestList {
             correct = "Kişiye hemen bir şey verilmemeli ve acil servis çağrılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 85,
             content = "Bir kişi bayıldığında, ne yapılmalıdır?",
             imageTest = null,
@@ -3904,6 +4100,7 @@ object DatabaseTestList {
             correct = "Kişi sırt üstü yatırılmalı, bacakları yukarı kaldırılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 86,
             content = "Bir kişi, ağır bir alerjik reaksiyon geçiriyorsa, nasıl bir müdahale yapılmalıdır?",
             imageTest = null,
@@ -3914,6 +4111,7 @@ object DatabaseTestList {
             correct = "Kişiye antihistaminik ilaç verilmelidir ve acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 87,
             content = "Bir kişi kafa travması geçiriyorsa, ilk müdahale nasıl yapılmalıdır?",
             imageTest = null,
@@ -3924,6 +4122,7 @@ object DatabaseTestList {
             correct = "Kişi hareket ettirilmemeli ve acil servis çağrılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 88,
             content = "Ağır bir zehirlenme durumunda, nasıl bir müdahale yapılmalıdır?",
             imageTest = null,
@@ -3934,6 +4133,7 @@ object DatabaseTestList {
             correct = "Kişiye sıvı verilmeden acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 89,
             content = "Bir kişi, bir kesik veya yaralanma sonucu kanama geçiriyorsa, ilk yapılacak şey nedir?",
             imageTest = null,
@@ -3944,6 +4144,7 @@ object DatabaseTestList {
             correct = "Kanama bölgesine baskı yaparak kanama durdurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 90,
             content = "Ağır bir kırık durumunda ilk yapılacak müdahale nedir?",
             imageTest = null,
@@ -3954,6 +4155,7 @@ object DatabaseTestList {
             correct = "Kırık bölge sabitlenmeli ve acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 91,
             content = "Bir kişi zehirli bir madde yuttuktan sonra ne yapılmalıdır?",
             imageTest = null,
@@ -3964,6 +4166,7 @@ object DatabaseTestList {
             correct = "Kişiye hiçbir şey verilmemelidir ve acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 92,
             content = "Bir kişi kalp krizi geçiriyorsa, ilk yardım olarak ne yapılmalıdır?",
             imageTest = null,
@@ -3974,6 +4177,7 @@ object DatabaseTestList {
             correct = "Kişiyi sakinleştirmeli ve acil servise başvurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 93,
             content = "Bir kişi travma sonucu başında kanama varsa, ilk yardım nasıl yapılmalıdır?",
             imageTest = null,
@@ -3984,6 +4188,7 @@ object DatabaseTestList {
             correct = "Baş bölgesine baskı yaparak kanama durdurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 94,
             content = "Bir kişi aşırı sıcak çarpması geçiriyorsa, ilk yapılacak şey nedir?",
             imageTest = null,
@@ -3994,6 +4199,7 @@ object DatabaseTestList {
             correct = "Kişi serin bir yere alınmalı ve sıvı verilmelidir"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 95,
             content = "Bir kişi elektrik çarpması sonucu bayıldığında, ne yapılmalıdır?",
             imageTest = null,
@@ -4004,6 +4210,7 @@ object DatabaseTestList {
             correct = "Elektrik bağlantısı kesilmeli, kişi kalp masajı ile uandırılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 96,
             content = "Bir kişi ağır bir kanama geçiriyorsa, hangi ilk yardım uygulaması yapılmalıdır?",
             imageTest = null,
@@ -4014,6 +4221,7 @@ object DatabaseTestList {
             correct = "Kanama bölgesine baskı yaparak kanama durdurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 97,
             content = "Bir kişi zehirli gazla zehirlenmişse, ilk yardım olarak ne yapılmalıdır?",
             imageTest = null,
@@ -4024,6 +4232,7 @@ object DatabaseTestList {
             correct = "Kişi hemen havalandırılan bir alana çıkarılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 98,
             content = "Bir kişi kalp durması geçiriyorsa, ilk yapılacak şey nedir?",
             imageTest = null,
@@ -4034,6 +4243,7 @@ object DatabaseTestList {
             correct = "Kalp masajı ve suni solunum yapılmalıdır"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 99,
             content = "Bir kişi boğulma tehlikesi geçirdiğinde, nasıl bir müdahale yapılmalıdır?",
             imageTest = null,
@@ -4044,6 +4254,7 @@ object DatabaseTestList {
             correct = "Kişiye sırtına vurulmalı ve su yutması engellenmelidir"
         ),
         TestsEntity(
+            Constants.String.FIRST_AID,
             idTest = 100,
             content = "Bir kişi hipotermi geçiriyorsa, ilk yapılacak şey nedir?",
             imageTest = null,
@@ -4052,10 +4263,9 @@ object DatabaseTestList {
             cTest = "Kişi hemen uyandırılmalıdır",
             dTest = "Kişiye soğuk kompres yapılmalıdır",
             correct = "Kişi sıcak bir yere alınmalı ve ısıtılmalıdır"
-        )
-    )
-    val Trafik = mutableListOf(
+        ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 1,
             content = "Aşağıdakilerden hangisi hız limitini aşan bir sürücünün yapması gereken ilk şeydir?",
             imageTest = null,
@@ -4066,6 +4276,7 @@ object DatabaseTestList {
             correct = "Hız limitine uygun hızda araç kullanmaya başlamak"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 2,
             content = "Trafik ışıkları kırmızı iken ne yapılmalıdır?",
             imageTest = null,
@@ -4076,6 +4287,7 @@ object DatabaseTestList {
             correct = "Aracı durdurmak"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 3,
             content = "Bir kavşağa yaklaşıyorken ne yapılmalıdır?",
             imageTest = null,
@@ -4086,6 +4298,7 @@ object DatabaseTestList {
             correct = "Hız yavaşlatılmalı"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 4,
             content = "Trafikteki yaya geçidinin önünde durulması gereken durum nedir?",
             imageTest = null,
@@ -4096,6 +4309,7 @@ object DatabaseTestList {
             correct = "Yaya geçidinin önünde durulmalıdır"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 5,
             content = "Motorlu araçlar hangi hızda otoyol girişine çıkabilirler?",
             imageTest = null,
@@ -4106,6 +4320,7 @@ object DatabaseTestList {
             correct = "120 km/saat"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 6,
             content = "Biri sinyal vermeden şerit değiştirdiğinde hangi işaret yakılır?",
             imageTest = null,
@@ -4116,6 +4331,7 @@ object DatabaseTestList {
             correct = "Sağa/sola sinyal işareti"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 7,
             content = "Trafikte bir araç sollarken dikkat edilmesi gereken en önemli husus nedir?",
             imageTest = null,
@@ -4126,6 +4342,7 @@ object DatabaseTestList {
             correct = "Aracı geçmek için yeterli mesafe bırakmak"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 8,
             content = "Bütün araçların zorunlu olarak sahip olması gereken araç gereç nedir?",
             imageTest = null,
@@ -4136,6 +4353,7 @@ object DatabaseTestList {
             correct = "Yangın tüpü"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 9,
             content = "Bir araç, başka bir aracın kavşakta geçiş önceliğine sahip olduğunu fark ederse, ne yapmalıdır?",
             imageTest = null,
@@ -4146,6 +4364,7 @@ object DatabaseTestList {
             correct = "Yol vermelidir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 10,
             content = "Araba park ederken nelere dikkat edilmelidir?",
             imageTest = null,
@@ -4156,6 +4375,7 @@ object DatabaseTestList {
             correct = "Park yerinin işaretlerine"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 11,
             content = "Bir trafik işareti olan hız sınırını, belirtilen değerin ne kadar üzerine çıkmak mümkündür?",
             imageTest = null,
@@ -4166,6 +4386,7 @@ object DatabaseTestList {
             correct = "Hız sınırı aşılamaz"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 12,
             content = "Bir aracın acil durum sinyalleri nasıl yakılır?",
             imageTest = null,
@@ -4176,6 +4397,7 @@ object DatabaseTestList {
             correct = "Dörtlü sinyaller açılarak"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 13,
             content = "Hangi durumda öncelikli geçiş hakkı sağlanır?",
             imageTest = null,
@@ -4186,6 +4408,7 @@ object DatabaseTestList {
             correct = "Diğer araçlar geçiş önceliğini bırakmalıdır"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 14,
             content = "Trafik işaretlerinde yeşil ışık yakıldığında ne yapılmalıdır?",
             imageTest = null,
@@ -4196,6 +4419,7 @@ object DatabaseTestList {
             correct = "İleriye doğru gitmek"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 15,
             content = "Araçlar, hangi durumda park edilirken 'no parking' işaretini dikkate almalıdır?",
             imageTest = null,
@@ -4206,6 +4430,7 @@ object DatabaseTestList {
             correct = "Park yasağı olan tüm zamanlarda"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 16,
             content = "Bir yolun sağında park etmek yasak olduğunda, araç park edilmemelidir çünkü:",
             imageTest = null,
@@ -4216,6 +4441,7 @@ object DatabaseTestList {
             correct = "Karşıdan gelen araçların görüşü kapanır"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 17,
             content = "Trafikte hız limitine uymadığınızda ne tür bir ceza uygulanır?",
             imageTest = null,
@@ -4226,6 +4452,7 @@ object DatabaseTestList {
             correct = "Para cezası ve ehliyetin geçici olarak alınması"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 18,
             content = "Hangi durumda kırmızı ışıkta geçiş yapılabilir?",
             imageTest = null,
@@ -4236,6 +4463,7 @@ object DatabaseTestList {
             correct = "Ambulans gibi acil araçlar geçerken"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 19,
             content = "Bir kavşağa geldiğinizde önceliği kime vermelisiniz?",
             imageTest = null,
@@ -4246,6 +4474,7 @@ object DatabaseTestList {
             correct = "Sağdan gelen araçlara"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 20,
             content = "Aşağıdakilerden hangisi trafiğe çıkmadan önce yapmanız gereken bir kontrol değil?",
             imageTest = null,
@@ -4256,6 +4485,7 @@ object DatabaseTestList {
             correct = "Yol kenarındaki çukurları incelemek"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 21,
             content = "Hangi durumlarda hız limitine dikkat edilmelidir?",
             imageTest = null,
@@ -4266,6 +4496,7 @@ object DatabaseTestList {
             correct = "Yağmurlu havalarda"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 22,
             content = "Sadece hangi durumda sol şeridi kullanmak yasal değildir?",
             imageTest = null,
@@ -4276,6 +4507,7 @@ object DatabaseTestList {
             correct = "Kavşağa yaklaşırken"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 23,
             content = "Trafik ışığı yanarken bir aracın geçişini engellemek hangi durumda uygulanabilir?",
             imageTest = null,
@@ -4286,6 +4518,7 @@ object DatabaseTestList {
             correct = "Acil bir durumda olmak"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 24,
             content = "Bir yolun sonunda 'dur' işareti varken, araç ne yapmalıdır?",
             imageTest = null,
@@ -4296,6 +4529,7 @@ object DatabaseTestList {
             correct = "Durmalı ve geçiş önceliği olan varsa yol vermeli"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 25,
             content = "Bir aracı gece yolculuğunda kullanırken hangi özelliklerin doğru olduğuna dikkat edilmelidir?",
             imageTest = null,
@@ -4306,6 +4540,7 @@ object DatabaseTestList {
             correct = "Farların temiz ve açık olması"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 26,
             content = "Yolda bir kazaya tanık olduğunuzda ilk yapmanız gereken nedir?",
             imageTest = null,
@@ -4316,6 +4551,7 @@ object DatabaseTestList {
             correct = "Polisi aramak"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 27,
             content = "Trafik kazasında yaralı bir kişi bulunduğunda, ilk yardım yapmadan önce hangi adım izlenmelidir?",
             imageTest = null,
@@ -4326,6 +4562,7 @@ object DatabaseTestList {
             correct = "Ambulans çağırmak"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 28,
             content = "Trafik ışıklarında yeşil yanarken, ancak karşıdan gelen araçlar geçiyorsa ne yapılmalıdır?",
             imageTest = null,
@@ -4336,6 +4573,7 @@ object DatabaseTestList {
             correct = "Bekleyip yolun temizlenmesini beklemek"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 29,
             content = "Bir otobüs durağında aracın durması gerektiği durumda ne yapılmalıdır?",
             imageTest = null,
@@ -4346,6 +4584,7 @@ object DatabaseTestList {
             correct = "Bir otobüs varsa durmak"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 30,
             content = "Bir şehir içinde hız sınırına uymanın önemi nedir?",
             imageTest = null,
@@ -4356,6 +4595,7 @@ object DatabaseTestList {
             correct = "Yolda kazaların önlenmesi"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 31,
             content = "Bir şerit değişikliği yaparken, hangi adım izlenmelidir?",
             imageTest = null,
@@ -4366,6 +4606,7 @@ object DatabaseTestList {
             correct = "Sinyal verilmeli ve şerit değiştirilmeli"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 32,
             content = "Yolda hız yapmanın en önemli nedeni nedir?",
             imageTest = null,
@@ -4376,6 +4617,7 @@ object DatabaseTestList {
             correct = "Güvenliği sağlamak"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 33,
             content = "Trafikte yavaş hareket eden bir araç gördüğünüzde ne yapmalısınız?",
             imageTest = null,
@@ -4386,6 +4628,7 @@ object DatabaseTestList {
             correct = "Sabırlı olup takip etmelisiniz"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 34,
             content = "Gece sürüşü sırasında araç farlarının ne zaman yüksek konumda olması gerekir?",
             imageTest = null,
@@ -4396,6 +4639,7 @@ object DatabaseTestList {
             correct = "Yalnızca şehir dışına çıktığınızda"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 35,
             content = "Bir trafik işareti 'yavaş' levhasını gösteriyorsa, hangi durumda hızınızı düşürmelisiniz?",
             imageTest = null,
@@ -4406,6 +4650,7 @@ object DatabaseTestList {
             correct = "Trafik sıkışıklığında"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 36,
             content = "Eğer yol boyunca ilerleyen bir ambulans görürseniz, ne yapmalısınız?",
             imageTest = null,
@@ -4416,6 +4661,7 @@ object DatabaseTestList {
             correct = "Durmalı ve geçiş hakkı vermelisiniz"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 37,
             content = "Yolda trafik ışığı kırmızı olduğunda, araçların ne yapması gereklidir?",
             imageTest = null,
@@ -4426,6 +4672,7 @@ object DatabaseTestList {
             correct = "Durmalı ve ışığın yeşil olmasını beklemelidir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 38,
             content = "Trafikte karşıdan gelen araçla olan mesafenin güvenli olması için hangi kuralı izlemelisiniz?",
             imageTest = null,
@@ -4436,6 +4683,7 @@ object DatabaseTestList {
             correct = "Yolun durumu ve trafik yoğunluğuna göre mesafeyi ayarlamalısınız"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 39,
             content = "Bir park yerinde aracınızı park ederken en önemli güvenlik önlemi nedir?",
             imageTest = null,
@@ -4446,6 +4694,7 @@ object DatabaseTestList {
             correct = "Park alanına dikkatlice yaklaşmak"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 40,
             content = "Trafikte en güvenli hızda ilerlemek için ne yapmalısınız?",
             imageTest = null,
@@ -4456,6 +4705,7 @@ object DatabaseTestList {
             correct = "Yol ve hava koşullarına göre hızınızı ayarlamalısınız"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 41,
             content = "Hangi durumda sürücü direksiyon başında cep telefonunu kullanabilir?",
             imageTest = null,
@@ -4466,6 +4716,7 @@ object DatabaseTestList {
             correct = "Yalnızca acil bir durumda"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 42,
             content = "Sürüş sırasında bir araç lastiği patlarsa, sürücü ne yapmalıdır?",
             imageTest = null,
@@ -4476,6 +4727,7 @@ object DatabaseTestList {
             correct = "Yavaşça kenara çekmeli ve lastiği değiştirmelidir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 43,
             content = "Bir aracın viraj alırken kayması halinde, sürücü hangi adımı izlemelidir?",
             imageTest = null,
@@ -4486,6 +4738,7 @@ object DatabaseTestList {
             correct = "Süratini azaltmalı ve direksiyonu yavaşça çevirmelidir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 44,
             content = "Bir aracın arkasında park ederken en önemli şey nedir?",
             imageTest = null,
@@ -4496,6 +4749,7 @@ object DatabaseTestList {
             correct = "Diğer araçların park durumlarına dikkat etmek"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 45,
             content = "Trafikte en fazla dikkat edilmesi gereken unsurlardan biri nedir?",
             imageTest = null,
@@ -4506,6 +4760,7 @@ object DatabaseTestList {
             correct = "Trafik işaretlerine ve sinyallere dikkat etmek"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 46,
             content = "Bir aracı sağa veya sola dönerken hangi işaret yapılmalıdır?",
             imageTest = null,
@@ -4516,6 +4771,7 @@ object DatabaseTestList {
             correct = "Sinyal verilmelidir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 47,
             content = "Aracın farları ne zaman kullanılmalıdır?",
             imageTest = null,
@@ -4526,6 +4782,7 @@ object DatabaseTestList {
             correct = "Gece ve kötü hava koşullarında"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 48,
             content = "Trafikte araç kullanırken telefonla konuşmak için hangi durum geçerlidir?",
             imageTest = null,
@@ -4536,6 +4793,7 @@ object DatabaseTestList {
             correct = "Sadece hands-free cihazları kullanarak konuşmak"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 49,
             content = "Bir aracı park etmek için ne kadar mesafe bırakılmalıdır?",
             imageTest = null,
@@ -4546,6 +4804,7 @@ object DatabaseTestList {
             correct = "Aracın ön ve arkasında yeterli alan bırakılmalıdır"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 50,
             content = "Bir aracın lastiklerinin havası nasıl kontrol edilmelidir?",
             imageTest = null,
@@ -4556,6 +4815,7 @@ object DatabaseTestList {
             correct = "Araç durdurulup lastiklerin havası kontrol edilmelidir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 51,
             content = "Bir trafik işareti 'tehlikeli viraj' uyarısı yapıyorsa, sürücü ne yapmalıdır?",
             imageTest = null,
@@ -4566,6 +4826,7 @@ object DatabaseTestList {
             correct = "Hızını azaltmalı ve virajı dikkatlice almalıdır"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 52,
             content = "Sürekli sağa sinyal vererek ilerlemek, trafik güvenliği açısından neyi işaret eder?",
             imageTest = null,
@@ -4576,6 +4837,7 @@ object DatabaseTestList {
             correct = "Yanlış bir davranıştır ve trafikte tehlike oluşturur"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 53,
             content = "Trafikte hız sınırına uymamak ne gibi sonuçlar doğurabilir?",
             imageTest = null,
@@ -4586,6 +4848,7 @@ object DatabaseTestList {
             correct = "Cezai işlem ve trafikte tehlike oluşturma"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 54,
             content = "Bir aracın arka camında kullanılan sileceklerin durumu ne zaman kontrol edilmelidir?",
             imageTest = null,
@@ -4596,6 +4859,7 @@ object DatabaseTestList {
             correct = "Her gün ve araç kullanmadan önce"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 55,
             content = "Trafikte bir aracı takip ederken hangi mesafeyi bırakmalısınız?",
             imageTest = null,
@@ -4606,6 +4870,7 @@ object DatabaseTestList {
             correct = "Her iki araç arasındaki mesafe, hızınıza bağlı olarak ayarlanmalıdır"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 56,
             content = "Bir aracın arkasında hızla yaklaşırken nasıl güvenli bir mesafe sağlanır?",
             imageTest = null,
@@ -4616,6 +4881,7 @@ object DatabaseTestList {
             correct = "Takip mesafesini artırarak ve hızınızı düşürerek"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 57,
             content = "Bir kavşağa yaklaşırken dikkat edilmesi gereken en önemli şey nedir?",
             imageTest = null,
@@ -4626,6 +4892,7 @@ object DatabaseTestList {
             correct = "Hızınızı azaltarak kavşağa yavaşça yaklaşmak"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 58,
             content = "Sürücülerin hız sınırlarına uymalarının amacı nedir?",
             imageTest = null,
@@ -4635,6 +4902,7 @@ object DatabaseTestList {
             dTest = "Sadece cezai yaptırımlardan kaçınmak",
             correct = "Trafik güvenliğini sağlamak ve kaza riskini azaltmak"
         ), TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 59,
             content = "Trafik ışıkları yeşil yandığında sürücü ne yapmalıdır?",
             imageTest = null,
@@ -4645,6 +4913,7 @@ object DatabaseTestList {
             correct = "Aracı hızla geçirmelidir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 60,
             content = "Bir kavşaktan sağa dönerken hangi kurallara uyulmalıdır?",
             imageTest = null,
@@ -4655,6 +4924,7 @@ object DatabaseTestList {
             correct = "Kavşağa dikkatlice girilmeli, sinyal verilmelidir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 61,
             content = "Bir araçta lastik patladığında ne yapılmalıdır?",
             imageTest = null,
@@ -4665,6 +4935,7 @@ object DatabaseTestList {
             correct = "Araç durdurulup, lastik değiştirilmelidir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 62,
             content = "Otoyol çıkışlarına yaklaşırken sürücü ne yapmalıdır?",
             imageTest = null,
@@ -4675,6 +4946,7 @@ object DatabaseTestList {
             correct = "Çıkış yapacağı yeri ve şeridi kontrol etmelidir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 63,
             content = "Trafikte yavaş ilerleyen araçlarla karşılaşıldığında hangi önlem alınmalıdır?",
             imageTest = null,
@@ -4685,6 +4957,7 @@ object DatabaseTestList {
             correct = "Sabırlı olmalı ve aracı takip etmelidir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 64,
             content = "Trafikte yaya geçidinden geçtiğinizde nelere dikkat etmelisiniz?",
             imageTest = null,
@@ -4695,6 +4968,7 @@ object DatabaseTestList {
             correct = "Yaya geçidine yaklaşırken yavaşlamalı ve yayaların geçişine izin verilmelidir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 65,
             content = "Trafik kazası sırasında ilk olarak yapılması gereken nedir?",
             imageTest = null,
@@ -4705,6 +4979,7 @@ object DatabaseTestList {
             correct = "Olay yerinde yardım çağırmak ve gerekli güvenlik önlemlerini almak"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 66,
             content = "Karanlıkta, farlarınızı kullanmak için en iyi yaklaşım nedir?",
             imageTest = null,
@@ -4715,6 +4990,7 @@ object DatabaseTestList {
             correct = "Farları açarak görüş mesafesini artırmalısınız"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 67,
             content = "Bir yol kenarında, trafik güvenliğini tehlikeye atacak bir durum varsa, ne yapılmalıdır?",
             imageTest = null,
@@ -4725,6 +5001,7 @@ object DatabaseTestList {
             correct = "Durum hemen rapor edilmelidir ve trafik polisi çağrılmalıdır"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 68,
             content = "Bir sürücü hız sınırını aşarsa hangi sonuçlar ortaya çıkabilir?",
             imageTest = null,
@@ -4735,6 +5012,7 @@ object DatabaseTestList {
             correct = "Para cezası ve ehliyeti geçici olarak iptal edilebilir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 69,
             content = "Hangi durumda sürücüler alkollü içki kullanarak araç kullanamazlar?",
             imageTest = null,
@@ -4745,6 +5023,7 @@ object DatabaseTestList {
             correct = "Alkol oranı yasal limitin üzerinde olduğunda"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 70,
             content = "Bir araç, karşıdan gelen aracı geçmek için hangi manevrayı yapmalıdır?",
             imageTest = null,
@@ -4755,6 +5034,7 @@ object DatabaseTestList {
             correct = "Soldan geçmelidir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 71,
             content = "Trafik ışıkları kırmızı yandığında bir sürücü ne yapmalıdır?",
             imageTest = null,
@@ -4765,6 +5045,7 @@ object DatabaseTestList {
             correct = "Durmalı ve etrafı kontrol etmelidir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 72,
             content = "Otoyol gişelerinden geçerken hangi hızda gitmek gerekir?",
             imageTest = null,
@@ -4775,6 +5056,7 @@ object DatabaseTestList {
             correct = "Hız sınırını aşmadan ilerlemelidir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 73,
             content = "Bir araç kavşağa yaklaşıyor ve trafik ışıkları sönük. Ne yapılmalıdır?",
             imageTest = null,
@@ -4785,6 +5067,7 @@ object DatabaseTestList {
             correct = "Her iki yönden gelen araçlar kontrol edilmeli ve dikkatlice geçilmelidir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 74,
             content = "Bir araç, sağa dönmek için sinyal verdikten sonra ne yapılmalıdır?",
             imageTest = null,
@@ -4795,6 +5078,7 @@ object DatabaseTestList {
             correct = "Sağa dönmeden önce kavşağa dikkatlice yaklaşılmalıdır"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 75,
             content = "Trafikte bir araca yaklaşırken ne yapmalıyız?",
             imageTest = null,
@@ -4805,6 +5089,7 @@ object DatabaseTestList {
             correct = "Yavaşlamalı ve gerekli güvenliği sağlamalıyız"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 76,
             content = "Bir araçta kış lastiği kullanımı ne zaman zorunludur?",
             imageTest = null,
@@ -4815,6 +5100,7 @@ object DatabaseTestList {
             correct = "Kış aylarında, kar ve buz görülen bölgelerde"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 77,
             content = "Trafikte seyir halindeyken dikkat edilmesi gereken önemli unsurlar nelerdir?",
             imageTest = null,
@@ -4825,6 +5111,7 @@ object DatabaseTestList {
             correct = "Hız, dikkat ve araç kontrolü"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 78,
             content = "Trafikte, karşıdan gelen bir aracı sollarken nelere dikkat edilmelidir?",
             imageTest = null,
@@ -4835,6 +5122,7 @@ object DatabaseTestList {
             correct = "Geçiş için uygun olan alanı beklemek"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 79,
             content = "Hangi durumda araç hızını artırmak doğru değildir?",
             imageTest = null,
@@ -4844,6 +5132,7 @@ object DatabaseTestList {
             dTest = "Güvenli bir şeritte hızlanmak",
             correct = "Trafik sıkışıklığında hızlanmak"
         ), TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 80,
             content = "Bir aracın önünde duruyorken, aracın motoru neden çalıştırılmamalıdır?",
             imageTest = null,
@@ -4854,6 +5143,7 @@ object DatabaseTestList {
             correct = "Sıkışan hava ve yakıt tüketimi riski"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 81,
             content = "Bir araç, zemin kaygan olduğunda nasıl davranmalıdır?",
             imageTest = null,
@@ -4864,6 +5154,7 @@ object DatabaseTestList {
             correct = "Yavaşlayarak ilerlemeli ve fren kullanmamalıdır"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 82,
             content = "Hangi durumda yaya geçidi öncesinde durulmalıdır?",
             imageTest = null,
@@ -4874,6 +5165,7 @@ object DatabaseTestList {
             correct = "Yaya geçidinden önce durulmalıdır"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 83,
             content = "Bir kavşaktan geçerken nelere dikkat edilmelidir?",
             imageTest = null,
@@ -4884,6 +5176,7 @@ object DatabaseTestList {
             correct = "Sağa ve sola bakılmalı, trafik işaretleri göz önünde bulundurulmalıdır"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 84,
             content = "Trafik ışıkları yeşil yanarken, geçiş önceliği kime aittir?",
             imageTest = null,
@@ -4894,6 +5187,7 @@ object DatabaseTestList {
             correct = "Trafikteki tüm araçlara aittir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 85,
             content = "Bir aracı sollarken hangi kurallara dikkat edilmelidir?",
             imageTest = null,
@@ -4904,6 +5198,7 @@ object DatabaseTestList {
             correct = "Karşıdan gelen araçları dikkate alarak geçiş yapılmalıdır"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 86,
             content = "Yolun ortasında park etmiş bir araç karşısında ne yapılmalıdır?",
             imageTest = null,
@@ -4914,6 +5209,7 @@ object DatabaseTestList {
             correct = "Sağdan ya da soldan geçilmelidir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 87,
             content = "Trafik kazasında, sürücüler ne yapmalıdır?",
             imageTest = null,
@@ -4924,6 +5220,7 @@ object DatabaseTestList {
             correct = "Kazaya karışan kişilere yardım etmelidir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 88,
             content = "Motorlu taşıtlar için hız sınırı nedir?",
             imageTest = null,
@@ -4934,6 +5231,7 @@ object DatabaseTestList {
             correct = "Yolun türüne ve trafik koşullarına göre değişir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 89,
             content = "Aracın ışıkları yanmadığında ne yapılmalıdır?",
             imageTest = null,
@@ -4944,6 +5242,7 @@ object DatabaseTestList {
             correct = "Aracın ışıkları kontrol edilip değiştirilmelidir"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 90,
             content = "Bir araç, kavşağa yaklaştığında ne yapmalıdır?",
             imageTest = null,
@@ -4954,6 +5253,7 @@ object DatabaseTestList {
             correct = "Hızını azaltarak dikkatlice yaklaşmalıdır"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 91,
             content = "Trafikte, sinyal vermek ne zaman gereklidir?",
             imageTest = null,
@@ -4964,6 +5264,7 @@ object DatabaseTestList {
             correct = "Yol değiştireceğiniz zaman"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 92,
             content = "Bir trafik işaretinin kırmızı ışıkta olması durumunda ne yapılmalıdır?",
             imageTest = null,
@@ -4974,6 +5275,7 @@ object DatabaseTestList {
             correct = "Geçmeden önce durulmalıdır"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 93,
             content = "Bir araç şerit değiştirmek için ne yapmalıdır?",
             imageTest = null,
@@ -4984,6 +5286,7 @@ object DatabaseTestList {
             correct = "Sinyal vermeli ve şeridi değiştirmeli"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 94,
             content = "Hangi durumda hızınızı artırmanız gereklidir?",
             imageTest = null,
@@ -4994,6 +5297,7 @@ object DatabaseTestList {
             correct = "Yolun boş olduğu durumlarda"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 95,
             content = "Otoparkta, bir aracı park ederken dikkat edilmesi gereken şey nedir?",
             imageTest = null,
@@ -5004,6 +5308,7 @@ object DatabaseTestList {
             correct = "Diğer araçların ve yayaların engellenmemesi"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 96,
             content = "Sürekli yola odaklanmak yerine ne zaman çevreye dikkat edilmelidir?",
             imageTest = null,
@@ -5014,6 +5319,7 @@ object DatabaseTestList {
             correct = "Yol dışındaki dikkat çekici durumlarda"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 97,
             content = "Bütün yol kullanıcılarının dikkat etmesi gereken en önemli kural nedir?",
             imageTest = null,
@@ -5024,6 +5330,7 @@ object DatabaseTestList {
             correct = "Diğer araçların ve yayaların haklarına saygı göstermek"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 98,
             content = "Aşağıdakilerden hangisi sürücünün güvenliğini artırmaz?",
             imageTest = null,
@@ -5034,6 +5341,7 @@ object DatabaseTestList {
             correct = "Sadece emniyet kemerinin takılması"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 99,
             content = "Trafikte gece sürüşü sırasında farlar hangi durumda kullanılmalıdır?",
             imageTest = null,
@@ -5044,6 +5352,7 @@ object DatabaseTestList {
             correct = "Gece vakti ve yoğun karanlıkta"
         ),
         TestsEntity(
+            Constants.String.TRAFFIC,
             idTest = 100,
             content = "Yolculuk sırasında telefonla konuşmanın en iyi alternatifi nedir?",
             imageTest = null,

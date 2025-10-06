@@ -2,10 +2,10 @@ package com.unallapps.ehliyetsinavinacalisiyorum.data.di
 
 import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.InformationCardRepository
 import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.InformationCardRepositoryImpl
-import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestSaveIdRepository
-import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestSaveIdRepositoryImpl
-import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestRepository
-import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestsRepositoryImpl
+import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.LessonRepository
+import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.LessonRepositoryImpl
+import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestDetailRepository
+import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.TestsDetailRepositoryImpl
 import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.UserRepository
 import com.unallapps.ehliyetsinavinacalisiyorum.data.repository.UserRepositoryImpl
 import dagger.Module
@@ -24,8 +24,8 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideTestsRepository(testsRepositoryImpl: TestsRepositoryImpl): TestRepository =
-        testsRepositoryImpl
+    fun provideTestsDetailRepository(testsDetailRepositoryImpl: TestsDetailRepositoryImpl): TestDetailRepository =
+        testsDetailRepositoryImpl
 
     @Provides
     @Singleton
@@ -35,6 +35,6 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideTestSaveIdRepository(testSaveIdRepositoryImpl: TestSaveIdRepositoryImpl): TestSaveIdRepository =
-        testSaveIdRepositoryImpl
+    fun provideLessonRepository(lessonRepositoryImpl: LessonRepositoryImpl): LessonRepository =
+        lessonRepositoryImpl
 }
