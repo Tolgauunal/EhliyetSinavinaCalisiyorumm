@@ -38,8 +38,9 @@ fun LessonLazyRow(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            items(DatabaseLesson.derslerList.size) { index ->
-                val lesson = DatabaseLesson.derslerList[index]
+            val limitedList = DatabaseLesson.lessonList.take(3)
+            items(limitedList.size) { index ->
+                val lesson = DatabaseLesson.lessonList[index]
                 val isSelected = lessonSelectedItem == index
 
                 Card(

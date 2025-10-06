@@ -132,7 +132,7 @@ class TestScreenViewModel @Inject constructor(
     }
 
     private fun loadSelectedLessonInfo() {
-        DatabaseLesson.derslerList.forEach {
+        DatabaseLesson.lessonList.forEach {
             if (it.name == _currentLessonName.value) {
                 _selectedLesson.value = it
             }

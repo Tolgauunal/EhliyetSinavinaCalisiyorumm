@@ -19,11 +19,11 @@ data class Subject(val id: Int, val name: String, val icon: Int) : Parcelable
 
 @Immutable
 object DatabaseLesson {
-    val derslerList = mutableListOf(
+    val lessonList = mutableListOf(
         Lesson(0, "İlk Yardım", R.drawable.ilkyardimm),
         Lesson(1, "Trafik", R.drawable.carr),
         Lesson(2, "Motor", R.drawable.enginee),
-        Lesson(2, "Favoriler", R.drawable.car)
+        Lesson(2, "Favoriler", R.drawable.favorite)
     )
 }
 

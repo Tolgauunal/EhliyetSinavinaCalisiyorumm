@@ -64,8 +64,8 @@ fun TestsNavFragment(
                 .fillMaxWidth()
                 .weight(1f)
         ) {
-            items(DatabaseLesson.derslerList.size) { index ->
-                val lesson = DatabaseLesson.derslerList[index]
+            items(DatabaseLesson.lessonList.size) { index ->
+                val lesson = DatabaseLesson.lessonList[index]
                 val isSelected = selectedLessonItemIndex.value == index
                 val backgroundColor by animateColorAsState(
                     targetValue = if (isSelected)
