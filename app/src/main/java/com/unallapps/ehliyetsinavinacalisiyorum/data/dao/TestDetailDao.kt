@@ -8,21 +8,21 @@ import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestsEntity
 @Dao
 interface TestDetailDao {
     @Insert
-    suspend fun insertTestDetailList(testsEntity: List<TestsEntity>)
+    suspend fun insertTestList(testsEntity: List<TestsEntity>)
 
     @Query("SELECT * FROM TestsEntity Where lessonName=:lessonName")
-    suspend fun getLessonTestList(lessonName: String): List<TestsEntity>
+    suspend fun getTestsByLesson(lessonName: String): List<TestsEntity>
 
     @Query(
         "UPDATE TestsEntity SET favorite = :favorite WHERE testId = :testId"
     )
-    suspend fun updateFavoriteTest(
+    suspend fun updateFavoriteStatus(
         testId: Int,
         favorite: Boolean
     )
     @Query("SELECT * FROM TestsEntity WHERE favorite = 1")
-    suspend fun getFavoriteTestList(): List<TestsEntity>
+    suspend fun getFavoriteTests(): List<TestsEntity>
 
     @Query("SELECT * FROM TestsEntity")
-    suspend fun getAllTestListSize(): List<TestsEntity>
+    suspend fun getAllTests(): List<TestsEntity>
 }

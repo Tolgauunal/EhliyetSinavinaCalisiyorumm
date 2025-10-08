@@ -30,11 +30,11 @@ fun InformationCardFragment(
     modifier: Modifier,
     viewModel: InformationCardViewModel = hiltViewModel()
 ) {
-    val informationCardsInfo by viewModel.informationCardsInfo.collectAsState()
-    val informationCardsSize by viewModel.informationCardsSize.collectAsState()
-    val progressBarCount by viewModel.progressBarCount.collectAsState()
-    val forwardIconShow by viewModel.forwardIconShow.collectAsState()
-    val backIconShow by viewModel.backIconShow.collectAsState()
+    val cards by viewModel.cards.collectAsState()
+    val totalCards by viewModel.totalCards.collectAsState()
+    val progressIndex by viewModel.progressIndex.collectAsState()
+    val showForwardIcon by viewModel.showForwardIcon.collectAsState()
+    val showBackIcon by viewModel.showBackIcon.collectAsState()
 
     Column(modifier) {
         Row(
@@ -44,12 +44,12 @@ fun InformationCardFragment(
             verticalAlignment = Alignment.Top,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            informationCardsSize?.let {
-                ProgressBar(progress = progressBarCount, size = it - 1)
+            totalCards?.let {
+                ProgressBar(progress = progressIndex, size = it - 1)
             }
         }
 
-        informationCardsInfo?.let {
+        cards?.let {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -65,9 +65,9 @@ fun InformationCardFragment(
                             .padding(20.dp)
                             .fillMaxWidth()
                             .verticalScroll(rememberScrollState()),
-                        text = it[progressBarCount].description
+                        text = it[progressIndex].description
                     )
-                    it[progressBarCount].details?.let {
+                    it[progressIndex].details?.let {
                         Text(
                             modifier = Modifier
                                 .padding(20.dp)
@@ -82,22 +82,22 @@ fun InformationCardFragment(
                         .fillMaxWidth()
                         .padding(20.dp)
                 ) {
-                    if (backIconShow) {
+                    if (showBackIcon) {
                         Icon(
                             modifier = Modifier
                                 .clickable {
-                                    viewModel.setProgressBarCount(progressBarCount - 1)
+                                    viewModel.updateProgress(progressIndex - 1)
                                 }
                                 .align(Alignment.TopStart),
                             painter = painterResource(id = R.drawable.baseline_keyboard_arrow_left_24),
                             contentDescription = ""
                         )
                     }
-                    if (forwardIconShow) {
+                    if (showForwardIcon) {
                         Icon(
                             modifier = Modifier
                                 .clickable {
-                                    viewModel.setProgressBarCount(progressBarCount + 1)
+                                    viewModel.updateProgress(progressIndex + 1)
                                 }
                                 .align(Alignment.TopEnd),
                             painter = painterResource(

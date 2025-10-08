@@ -7,7 +7,7 @@ import javax.inject.Inject
 class LessonRepositoryImpl @Inject constructor(private val lessonDao: LessonDao) :
     LessonRepository {
     override suspend fun insertLesson(testSaveIdEntity: TestSaveIdEntity) {
-        lessonDao.insert(testSaveIdEntity = testSaveIdEntity)
+        lessonDao.insertTest(testSaveIdEntity = testSaveIdEntity)
     }
 
     override suspend fun updateLessonDetailInfo(
@@ -17,7 +17,7 @@ class LessonRepositoryImpl @Inject constructor(private val lessonDao: LessonDao)
         wrongSum: Int,
         questionNumber: Int
     ) {
-        lessonDao.updateTestSaveId(
+        lessonDao.updateTestProgress(
             testNumber = testNumber,
             testName = lessonName,
             correctSize = correctSum,
@@ -27,11 +27,11 @@ class LessonRepositoryImpl @Inject constructor(private val lessonDao: LessonDao)
     }
 
     override suspend fun getSavedInfoTestLesson(): List<TestSaveIdEntity> {
-        return lessonDao.getTestNumber()
+        return lessonDao.getAllTests()
     }
 
     override suspend fun getLessonData(lessonName: String): TestSaveIdEntity {
-        return lessonDao.getTestData(testName = lessonName)
+        return lessonDao.getTestByName(testName = lessonName)
     }
 
 }

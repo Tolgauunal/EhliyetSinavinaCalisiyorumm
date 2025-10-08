@@ -22,7 +22,7 @@ import com.unallapps.ehliyetsinavinacalisiyorum.ui.subject.SubjectFilter
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.profile.ProfileFragment
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.subject.SubjectScreenFragment
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.tests.fragment.TestScreen
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.tests.fragment.TestsNavFragment
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.tests.fragment.SelectionTestLessonFragment
 
 @SuppressLint("NewApi")
 @Composable
@@ -40,7 +40,7 @@ fun BottomNavigationGraph(navController: NavHostController, paddingModifier: Mod
             SubjectScreenFragment(paddingModifier, navController)
         }
         composable(route = BottomBarScreen.Tests.route) {
-            TestsNavFragment(paddingModifier, navController)
+            SelectionTestLessonFragment(paddingModifier, navController)
         }
         composable(route = BottomBarScreen.Profile.route) {
             ProfileFragment(paddingModifier)

@@ -9,22 +9,22 @@ class TestsDetailRepositoryImpl @Inject constructor(private val testDetailDao: T
     override suspend fun getTestDetailList(
         lessonName: String
     ): List<TestsEntity>? {
-        return testDetailDao.getLessonTestList(lessonName = lessonName)
+        return testDetailDao.getTestsByLesson(lessonName = lessonName)
     }
 
     override suspend fun insertTestList(testList: List<TestsEntity>) {
-        testDetailDao.insertTestDetailList(testsEntity = testList)
+        testDetailDao.insertTestList(testsEntity = testList)
     }
 
     override suspend fun updateFavoriteTest(testId: Int, favorite: Boolean) {
-        testDetailDao.updateFavoriteTest(testId = testId, favorite = favorite)
+        testDetailDao.updateFavoriteStatus(testId = testId, favorite = favorite)
     }
 
     override suspend fun getFavoriteTestList(): List<TestsEntity>? {
-        return testDetailDao.getFavoriteTestList()
+        return testDetailDao.getFavoriteTests()
     }
 
     override suspend fun getAllTestListSize(): List<TestsEntity>?? {
-        return testDetailDao.getAllTestListSize()
+        return testDetailDao.getAllTests()
     }
 }

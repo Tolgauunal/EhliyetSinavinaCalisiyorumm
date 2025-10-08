@@ -40,19 +40,19 @@ import androidx.navigation.NavHostController
 import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseLesson
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.data.util.Constants
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.tests.viewmodel.TestsNavViewModel
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.tests.viewmodel.SelectionTestLessonViewModel
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.theme.gradientYellow
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
-fun TestsNavFragment(
+fun SelectionTestLessonFragment(
     modifier: Modifier,
     navController: NavHostController,
-    viewModel: TestsNavViewModel = hiltViewModel()
+    viewModel: SelectionTestLessonViewModel = hiltViewModel()
 ) {
-    val selectedLessonItemIndex = viewModel.selectedLessonItemIndex.collectAsState()
-    val selectedLessonItemText = viewModel.selectedLessonItemText.collectAsState()
-    val favoriteCardVisible = viewModel.favoriteCardVisible.collectAsState()
+    val selectedLessonIndex = viewModel.selectedLessonIndex.collectAsState()
+    val selectedLessonName = viewModel.selectedLessonName.collectAsState()
+    val isFavoriteCardVisible = viewModel.isFavoriteCardVisible.collectAsState()
 
     Column(
         modifier = modifier
@@ -68,7 +68,7 @@ fun TestsNavFragment(
         ) {
             items(DatabaseLesson.lessonList.size) { index ->
                 val lesson = DatabaseLesson.lessonList[index]
-                val isSelected = selectedLessonItemIndex.value == index
+                val isSelected = selectedLessonIndex.value == index
 
                 // Renk animasyonu
                 val backgroundColor by animateColorAsState(
@@ -79,7 +79,8 @@ fun TestsNavFragment(
                     label = ""
                 )
                 val textColor = Color.White
-                val shouldShowCard = lesson.name != Constants.String.FAVORITE || favoriteCardVisible.value
+                val shouldShowCard =
+                    lesson.name != Constants.String.FAVORITE || isFavoriteCardVisible.value
 
                 if (shouldShowCard) {
                     Card(
@@ -91,8 +92,8 @@ fun TestsNavFragment(
                                 shape = MaterialTheme.shapes.medium
                             )
                             .clickable {
-                                viewModel.setSelectedLessonItemText(lesson.name)
-                                viewModel.setSelectedLessonItemIndex(index)
+                                viewModel.selectLessonName(lesson.name)
+                                viewModel.selectLessonIndex(index)
                             },
                         colors = CardDefaults.cardColors(containerColor = backgroundColor),
                         shape = MaterialTheme.shapes.medium
@@ -131,8 +132,8 @@ fun TestsNavFragment(
             Button(
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
                 onClick = {
-                    selectedLessonItemText.value?.let { viewModel.defaultTestItem(it) }
-                    navController.navigate("testScreen/${selectedLessonItemText.value}/${false}")
+                    selectedLessonName .value?.let { viewModel.resetLessonInfo(it) }
+                    navController.navigate("testScreen/${selectedLessonIndex.value}/${false}")
                 },
                 modifier = Modifier
                     .padding(16.dp)
@@ -144,7 +145,7 @@ fun TestsNavFragment(
             Button(
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
                 onClick = {
-                    navController.navigate("testScreen/${selectedLessonItemText.value}/${true}")
+                    navController.navigate("testScreen/${selectedLessonName.value}/${true}")
                 },
                 modifier = Modifier
                     .padding(16.dp)

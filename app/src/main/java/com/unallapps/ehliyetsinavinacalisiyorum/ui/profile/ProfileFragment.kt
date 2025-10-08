@@ -1,6 +1,5 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.ui.profile
 
-import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.net.Uri
@@ -25,7 +24,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -52,35 +50,33 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.unallapps.ehliyetsinavinacalisiyorum.R
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CustomButton
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.LessonButton
 
 @RequiresApi(Build.VERSION_CODES.P)
-@SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileFragment(
     modifier: Modifier,
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
     var photoUri: Uri? by remember { mutableStateOf(null) }
-    val changeNameControl = viewModel.changeNameControl.collectAsState()
-    val nameStateText = viewModel.nameStateText.collectAsState()
-    val userImage = viewModel.userImage.collectAsState()
-    val settingsIcon = viewModel.settingsIcon.collectAsState()
+    val isEditingName by viewModel.isEditingName.collectAsState()
+    val userName by viewModel.userName.collectAsState()
+    val userPhoto by viewModel.userPhoto.collectAsState()
+    val settingsIcon by viewModel.settingsIcon.collectAsState()
     val context = LocalContext.current
-    val launcher =
-        rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-            photoUri = uri
-            photoUri?.let {
-                val source = ImageDecoder.decodeBitmap(
-                    ImageDecoder.createSource(
-                        context.contentResolver,
-                        it
-                    )
-                )
-                viewModel.savePhoto(source)
-            }
+
+    val launcher = rememberLauncherForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri ->
+        photoUri = uri
+        photoUri?.let {
+            val source = ImageDecoder.decodeBitmap(
+                ImageDecoder.createSource(context.contentResolver, it)
+            )
+            viewModel.saveUserPhoto(source)
         }
+    }
+
     Column(
         modifier = modifier.verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Top,
@@ -101,10 +97,9 @@ fun ProfileFragment(
                     photoUri != null -> {
                         val painter = rememberAsyncImagePainter(
                             ImageRequest.Builder(LocalContext.current)
-                                .data(data = photoUri)
+                                .data(photoUri)
                                 .build()
                         )
-
                         Image(
                             modifier = Modifier
                                 .size(100.dp)
@@ -123,10 +118,8 @@ fun ProfileFragment(
                         )
                     }
 
-                    userImage.value?.isNotEmpty() == true -> {
-                        val userPhoto = userImage.value
+                    userPhoto?.isNotEmpty() == true -> {
                         val bitmap = BitmapFactory.decodeByteArray(userPhoto, 0, userPhoto!!.size)
-
                         Image(
                             modifier = Modifier
                                 .size(100.dp)
@@ -163,18 +156,20 @@ fun ProfileFragment(
                         )
                     }
                 }
+
                 Spacer(modifier = Modifier.padding(5.dp))
+
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier.fillMaxHeight()
                 ) {
-                    if (!changeNameControl.value) {
-                        Text(text = nameStateText.value, color = Color.White, fontSize = 15.sp)
+                    if (!isEditingName) {
+                        Text(text = userName, color = Color.White, fontSize = 15.sp)
                     } else {
                         OutlinedTextField(
-                            value = nameStateText.value,
-                            onValueChange = { viewModel.setName(it) },
+                            value = userName,
+                            onValueChange = { viewModel.updateUserNameLocally(it) },
                             label = {
                                 Text(
                                     text = stringResource(R.string.set_Profile_Name),
@@ -192,56 +187,60 @@ fun ProfileFragment(
                             ),
                         )
                     }
+
                     Icon(
                         modifier = Modifier
                             .padding(start = 16.dp)
                             .clickable {
-                                viewModel.insertOrUpdate(nameStateText.value)
-                                viewModel.setSettingsIcon()
-                                viewModel.setChangeNameControl(!changeNameControl.value)
+                                viewModel.saveUserName(userName)
+                                viewModel.toggleSettingsIcon()
+                                viewModel.setEditingName(!isEditingName)
                             },
-                        painter = painterResource(settingsIcon.value),
+                        painter = painterResource(settingsIcon),
                         contentDescription = "",
                         tint = Color.White
                     )
                 }
             }
         }
+
         Spacer(modifier = Modifier.padding(10.dp))
+
         Text(
             text = stringResource(R.string.settings),
             color = colorResource(id = R.color.kapaliMavi),
             fontSize = 16.sp
         )
+
         Column(modifier = Modifier.padding(10.dp)) {
             Spacer(modifier = Modifier.padding(10.dp))
-            CustomButton(
+            LessonButton(
                 title = stringResource(R.string.privacy_Policy),
-                R.drawable.gizlilik,
+                iconResId = R.drawable.gizlilik,
                 onClick = {}
             )
             Spacer(modifier = Modifier.padding(5.dp))
-            CustomButton(
+            LessonButton(
                 title = stringResource(R.string.terms_And_Conditions),
-                R.drawable.sartlar,
+                iconResId = R.drawable.sartlar,
                 onClick = {}
             )
             Spacer(modifier = Modifier.padding(5.dp))
-            CustomButton(
+            LessonButton(
                 title = stringResource(R.string.vote_For_Us),
-                R.drawable.oy,
+                iconResId = R.drawable.oy,
                 onClick = {}
             )
             Spacer(modifier = Modifier.padding(5.dp))
-            CustomButton(
+            LessonButton(
                 title = stringResource(R.string.report_Error),
-                R.drawable.error,
+                iconResId = R.drawable.error,
                 onClick = {}
             )
             Spacer(modifier = Modifier.padding(5.dp))
-            CustomButton(
+            LessonButton(
                 title = stringResource(R.string.contact),
-                R.drawable.contact,
+                iconResId = R.drawable.contact,
                 onClick = {}
             )
         }

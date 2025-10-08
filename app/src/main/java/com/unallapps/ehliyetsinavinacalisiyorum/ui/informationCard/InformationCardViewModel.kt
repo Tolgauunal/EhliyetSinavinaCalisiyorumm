@@ -14,56 +14,48 @@ import javax.inject.Inject
 
 @HiltViewModel
 class InformationCardViewModel @Inject constructor(
-    private val informationCardRepository: InformationCardRepository,
+    private val repository: InformationCardRepository,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _informationCardsInfo: MutableStateFlow<List<InformationCardsInfo>?> =
-        MutableStateFlow(null)
-    val informationCardsInfo: StateFlow<List<InformationCardsInfo>?> = _informationCardsInfo
+    private val _cards: MutableStateFlow<List<InformationCardsInfo>?> = MutableStateFlow(null)
+    val cards: StateFlow<List<InformationCardsInfo>?> = _cards
 
-    private val _informationCardsSize: MutableStateFlow<Float?> =
-        MutableStateFlow(null)
-    val informationCardsSize: StateFlow<Float?> = _informationCardsSize
+    private val _totalCards: MutableStateFlow<Float?> = MutableStateFlow(null)
+    val totalCards: StateFlow<Float?> = _totalCards
 
-    private val _subjectName: MutableStateFlow<String?> =
-        MutableStateFlow(null)
+    private val _progressIndex: MutableStateFlow<Int> = MutableStateFlow(0)
+    val progressIndex: StateFlow<Int> = _progressIndex
 
-    private val _progressBarCount: MutableStateFlow<Int> =
-        MutableStateFlow(0)
-    val progressBarCount: StateFlow<Int> = _progressBarCount
+    private val _showForwardIcon: MutableStateFlow<Boolean> = MutableStateFlow(true)
+    val showForwardIcon: StateFlow<Boolean> = _showForwardIcon
 
-    private val _forwardIconShow: MutableStateFlow<Boolean> =
-        MutableStateFlow(true)
-    val forwardIconShow: StateFlow<Boolean> = _forwardIconShow
+    private val _showBackIcon: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val showBackIcon: StateFlow<Boolean> = _showBackIcon
 
-    private val _backIconShow: MutableStateFlow<Boolean> =
-        MutableStateFlow(false)
-    val backIconShow: StateFlow<Boolean> = _backIconShow
+    private val _subjectName: MutableStateFlow<String?> = MutableStateFlow(null)
 
     init {
         savedStateHandle.get<String>(Constants.String.SUBJECT_NAME)?.let {
             _subjectName.value = it
         }
-        getInformationCard()
+        loadInformationCards()
     }
 
-    private fun getInformationCard() {
+    private fun loadInformationCards() {
         viewModelScope.launch {
-            _subjectName.value?.let {
-                informationCardRepository.getSubject(it)?.let { subject ->
-                    _informationCardsInfo.value = subject.lessonInformationCards
-                    subject.lessonInformationCards?.size?.let { subjectSize ->
-                        _informationCardsSize.value = subjectSize.toFloat()
-                    }
+            _subjectName.value?.let { subjectName ->
+                repository.getSubject(subjectName)?.let { subject ->
+                    _cards.value = subject.lessonInformationCards
+                    _totalCards.value = subject.lessonInformationCards?.size?.toFloat()
                 }
             }
         }
     }
 
-    fun setProgressBarCount(data: Int) {
-        _progressBarCount.value = data
-        _forwardIconShow.value = _informationCardsSize.value?.toInt() != _progressBarCount.value + 1
-        _backIconShow.value = 0 != _progressBarCount.value
+    fun updateProgress(index: Int) {
+        _progressIndex.value = index
+        _showForwardIcon.value = _totalCards.value?.toInt() != _progressIndex.value + 1
+        _showBackIcon.value = _progressIndex.value != 0
     }
 }

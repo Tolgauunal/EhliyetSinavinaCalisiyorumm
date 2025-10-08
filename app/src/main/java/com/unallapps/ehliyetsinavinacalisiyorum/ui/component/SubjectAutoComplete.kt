@@ -33,6 +33,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
@@ -42,19 +43,19 @@ import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseSubject
 @SuppressLint("ResourceAsColor")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AutoComplete(isClick: (String) -> Unit) {
-    var category by remember { mutableStateOf("") }
-    val heightTextFields by remember { mutableStateOf(55.dp) }
+fun SubjectAutoComplete(onItemSelected: (String) -> Unit) {
+    var query by remember { mutableStateOf("") }
+    val textFieldHeight = 55.dp
     var textFieldSize by remember { mutableStateOf(Size.Zero) }
-    var expanded by remember { mutableStateOf(false) }
+    var isExpanded by remember { mutableStateOf(false) }
 
     Column(modifier = Modifier.fillMaxWidth()) {
         Row(modifier = Modifier.fillMaxWidth()) {
             TextField(
-                value = category,
+                value = query,
                 onValueChange = {
-                    category = it
-                    expanded = true
+                    query = it
+                    isExpanded = true
                 },
                 label = {
                     Text(
@@ -64,7 +65,7 @@ fun AutoComplete(isClick: (String) -> Unit) {
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(heightTextFields)
+                    .height(textFieldHeight)
                     .background(color = Color.White, shape = RoundedCornerShape(15.dp))
                     .onGloballyPositioned { textFieldSize = it.size.toSize() },
                 textStyle = TextStyle(
@@ -101,24 +102,29 @@ fun AutoComplete(isClick: (String) -> Unit) {
                 singleLine = true
             )
         }
-        AnimatedVisibility(visible = expanded) {
+
+        AnimatedVisibility(visible = isExpanded) {
             Card(
                 modifier = Modifier
                     .padding(5.dp)
                     .width(textFieldSize.width.dp)
             ) {
                 LazyColumn {
-                    if (category.isNotEmpty()) {
-                        items(DatabaseSubject.subjectLists.filter {
-                            it.name.lowercase()
-                                .contains(category.lowercase()) || it.name.lowercase()
-                                .contains("other")
-                        }.take(2)) {
-                            CategoryItems(title = it.name) {
-                                category = it
-                                expanded = false
-                                isClick(it)
-                            }
+                    if (query.isNotEmpty()) {
+                        val filteredSubjects = DatabaseSubject.subjectLists.filter {
+                            it.name.contains(query, ignoreCase = true) ||
+                                it.name.contains("other", ignoreCase = true)
+                        }.take(2)
+
+                        items(filteredSubjects) { subject ->
+                            SubjectListItem(
+                                title = subject.name,
+                                onSelect = {
+                                    query = it
+                                    isExpanded = false
+                                    onItemSelected(it)
+                                }
+                            )
                         }
                     }
                 }
@@ -128,17 +134,30 @@ fun AutoComplete(isClick: (String) -> Unit) {
 }
 
 @Composable
-fun CategoryItems(title: String, onSelect: (String) -> Unit) {
+fun SubjectListItem(title: String, onSelect: (String) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onSelect(title) }) {
+            .clickable { onSelect(title) }
+    ) {
         Text(
             text = title,
             modifier = Modifier.padding(5.dp),
             color = colorResource(id = R.color.kapaliMavi),
             maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
+            overflow = TextOverflow.Ellipsis
         )
     }
+}
+
+@Preview
+@Composable
+fun SubjectListItemPreview() {
+    SubjectListItem(onSelect = {}, title = "Motor Bilgisi")
+}
+
+@Preview
+@Composable
+fun SubjectAutoCompletePreview() {
+    SubjectAutoComplete(onItemSelected = {})
 }

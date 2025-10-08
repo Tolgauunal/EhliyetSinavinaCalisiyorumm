@@ -16,76 +16,76 @@ import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor(private val userRepository: UserRepository) :
-    ViewModel() {
+class ProfileViewModel @Inject constructor(
+    private val userRepository: UserRepository
+) : ViewModel() {
 
-    private val _userInfo: MutableStateFlow<UserEntity?> = MutableStateFlow(null)
-    val userInfo: StateFlow<UserEntity?> = _userInfo
+    private val _user: MutableStateFlow<UserEntity?> = MutableStateFlow(null)
+    val user: StateFlow<UserEntity?> = _user
 
-    private var byteArray: ByteArray? = null
+    private val _userName: MutableStateFlow<String> =
+        MutableStateFlow(Constants.String.DEFAULT_USER)
+    val userName: StateFlow<String> = _userName
 
-    private val _nameStateText: MutableStateFlow<String> =
-        MutableStateFlow(R.string.default_User.toString())
-    val nameStateText: MutableStateFlow<String> = _nameStateText
+    private val _userPhoto: MutableStateFlow<ByteArray?> = MutableStateFlow(null)
+    val userPhoto: StateFlow<ByteArray?> = _userPhoto
 
-    private val _userImage: MutableStateFlow<ByteArray?> = MutableStateFlow(null)
-    val userImage: MutableStateFlow<ByteArray?> = _userImage
-
-    private val _changeNameControl: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val changeNameControl: StateFlow<Boolean> = _changeNameControl
+    private val _isEditingName: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val isEditingName: StateFlow<Boolean> = _isEditingName
 
     @DrawableRes
-    private val _settingsIcon = MutableStateFlow(R.drawable.baseline_settings_24)
-    val settingsIcon = _settingsIcon
+    private val _settingsIcon: MutableStateFlow<Int> =
+        MutableStateFlow(R.drawable.baseline_settings_24)
+    val settingsIcon: StateFlow<Int> = _settingsIcon
+
+    private var photoByteArray: ByteArray? = null
 
     init {
         viewModelScope.launch {
-            _userInfo.value = userRepository.getUser()
-            _nameStateText.value =
-                userRepository.getUser()?.userName ?: Constants.String.DEFAULT_USER
-            _userImage.value = userInfo.value?.userPhoto
+            val currentUser = userRepository.getUser()
+            _user.value = currentUser
+            _userName.value = currentUser?.userName ?: Constants.String.DEFAULT_USER
+            _userPhoto.value = currentUser?.userPhoto
         }
     }
 
-    fun setSettingsIcon() {
-        _settingsIcon.value =
-            if (_changeNameControl.value) {
-                R.drawable.baseline_settings_24
-            } else {
-                R.drawable.baseline_edit_24
-            }
+    fun toggleSettingsIcon() {
+        _settingsIcon.value = if (_isEditingName.value) {
+            R.drawable.baseline_settings_24
+        } else {
+            R.drawable.baseline_edit_24
+        }
     }
 
-    fun insertOrUpdate(name: String) {
+    fun saveUserName(name: String) {
         viewModelScope.launch {
             if (userRepository.getUserSize().isNotEmpty()) {
                 userRepository.updateUserName(name, 1)
-                _userInfo.value = userRepository.getUser()
             } else {
                 userRepository.insert(UserEntity(userName = name))
-                _userInfo.value = userRepository.getUser()
             }
+            _user.value = userRepository.getUser()
+            _userName.value = name
         }
-        _nameStateText.value = name
     }
 
-    fun savePhoto(photoBitmap: Bitmap) {
+    fun saveUserPhoto(photoBitmap: Bitmap) {
         viewModelScope.launch {
-            photoBitmap.let {
-                val outputStream = ByteArrayOutputStream()
-                photoBitmap.compress(Bitmap.CompressFormat.JPEG, 10, outputStream)
-                byteArray = outputStream.toByteArray()
-                userRepository.updateImage(byteArray, 1)
-                _userInfo.value = userRepository.getUser()
-            }.runCatching {}
+            val outputStream = ByteArrayOutputStream()
+            photoBitmap.compress(Bitmap.CompressFormat.JPEG, 10, outputStream)
+            photoByteArray = outputStream.toByteArray()
+            userRepository.updateImage(photoByteArray, 1)
+            _user.value = userRepository.getUser()
+            _userPhoto.value = photoByteArray
         }
     }
 
-    fun setChangeNameControl(boolean: Boolean) {
-        _changeNameControl.value = boolean
+    fun setEditingName(isEditing: Boolean) {
+        _isEditingName.value = isEditing
+        toggleSettingsIcon()
     }
 
-    fun setName(data: String) {
-        _nameStateText.value = data
+    fun updateUserNameLocally(name: String) {
+        _userName.value = name
     }
 }

@@ -8,19 +8,19 @@ import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestSaveIdEntity
 @Dao
 interface LessonDao {
     @Insert
-    suspend fun insert(testSaveIdEntity: TestSaveIdEntity)
+    suspend fun insertTest(testSaveIdEntity: TestSaveIdEntity)
 
     @Query("SELECT * FROM TestSaveIdEntity")
-    suspend fun getTestNumber(): List<TestSaveIdEntity>
+    suspend fun getAllTests(): List<TestSaveIdEntity>
 
-    @Query("SELECT * FROM TestSaveIdEntity Where testName=:testName")
-    suspend fun getTestData(testName: String): TestSaveIdEntity
+    @Query("SELECT * FROM TestSaveIdEntity Where name=:testName")
+    suspend fun getTestByName(testName: String): TestSaveIdEntity
 
     @Query(
-        "UPDATE TestSaveIdEntity SET testNumber = :testNumber, correctSize =:correctSize , " +
-            "wrongSize =:wrongSize, questionSize =:questionSize WHERE testName = :testName"
+        "UPDATE TestSaveIdEntity SET number = :testNumber, correctCount =:correctSize , " +
+            "wrongCount =:wrongSize, questionCount =:questionSize WHERE name = :testName"
     )
-    suspend fun updateTestSaveId(
+    suspend fun updateTestProgress(
         testNumber: Int,
         correctSize: Int,
         wrongSize: Int,

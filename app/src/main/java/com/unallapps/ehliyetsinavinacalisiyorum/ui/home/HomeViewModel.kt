@@ -10,36 +10,39 @@ import com.unallapps.ehliyetsinavinacalisiyorum.data.util.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
+class HomeViewModel @Inject constructor(
+    private val userRepository: UserRepository
+) : ViewModel() {
 
     private val defaultUser = UserEntity(userName = Constants.String.DEFAULT_USER)
 
-    private val _userInfo: MutableStateFlow<UserEntity> = MutableStateFlow(defaultUser)
-    val userInfo: StateFlow<UserEntity> = _userInfo
+    private val _userInfo = MutableStateFlow(defaultUser)
+    val userInfo: StateFlow<UserEntity> = _userInfo.asStateFlow()
 
-    private val _lessonSelectedItem: MutableStateFlow<Int> = MutableStateFlow(0)
-    val lessonSelectedItem: MutableStateFlow<Int> = _lessonSelectedItem
+    private val _userName = MutableStateFlow(defaultUser.userName)
+    val userName: StateFlow<String?> = _userName.asStateFlow()
 
-    private val _userName: MutableStateFlow<String?> = MutableStateFlow(null)
-    val userName: MutableStateFlow<String?> = _userName
+    private val _selectedLessonIndex = MutableStateFlow(0)
+    val selectedLessonIndex: StateFlow<Int> = _selectedLessonIndex.asStateFlow()
 
-    private val _alertDialog: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val alertDialog: MutableStateFlow<Boolean> = _alertDialog
+    private val _selectedSubject = MutableStateFlow(DatabaseSubject.subjectLists.first())
+    val selectedSubject: StateFlow<Subject> = _selectedSubject.asStateFlow()
 
-    private val _selectedSubject: MutableStateFlow<Subject> =
-        MutableStateFlow(DatabaseSubject.subjectLists[lessonSelectedItem.value])
-    val selectedSubject: MutableStateFlow<Subject> = _selectedSubject
+    private val _isDialogVisible = MutableStateFlow(false)
+    val isDialogVisible: StateFlow<Boolean> = _isDialogVisible.asStateFlow()
 
     init {
         viewModelScope.launch {
-            userRepository.getUser()?.let {
-                _userInfo.value = it
-                _userName.value = it.userName
-            } ?: run {
+            val existingUser = userRepository.getUser()
+            if (existingUser != null) {
+                _userInfo.value = existingUser
+                _userName.value = existingUser.userName
+            } else {
                 userRepository.insert(defaultUser)
                 _userInfo.value = defaultUser
                 _userName.value = defaultUser.userName
@@ -47,15 +50,16 @@ class HomeViewModel @Inject constructor(private val userRepository: UserReposito
         }
     }
 
-    fun setLessonSelectedItem(data: Int) {
-        _lessonSelectedItem.value = data
+    fun updateSelectedLesson(index: Int) {
+        _selectedLessonIndex.value = index
     }
 
-    fun setSelectedSubject(data: Subject) {
-        _selectedSubject.value = DatabaseSubject.subjectLists[data.id]
+    fun updateSelectedSubject(subject: Subject) {
+        val safeSubject = DatabaseSubject.subjectLists.getOrNull(subject.id)
+        _selectedSubject.value = safeSubject ?: subject
     }
 
-    fun setAlertDialog(data: Boolean) {
-        _alertDialog.value = data
+    fun showDialog(isVisible: Boolean) {
+        _isDialogVisible.value = isVisible
     }
 }

@@ -31,10 +31,10 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.unallapps.ehliyetsinavinacalisiyorum.R
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.AutoComplete
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CustomAlertDialog
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.LessonLazyRow
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.SubjectLazyRow
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.LessonSelectorRow
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.SubjectAutoComplete
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.SubjectList
 
 @SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
 @Composable
@@ -44,9 +44,9 @@ fun HomeFragment(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val userName by viewModel.userName.collectAsState()
-    val lessonSelectedItem by viewModel.lessonSelectedItem.collectAsState()
+    val selectedLessonIndex by viewModel.selectedLessonIndex.collectAsState()
     val selectedSubject by viewModel.selectedSubject.collectAsState()
-    val alertDialog by viewModel.alertDialog.collectAsState()
+    val isDialogVisible by viewModel.isDialogVisible.collectAsState()
     val userInfo by viewModel.userInfo.collectAsState()
 
     Column(
@@ -111,7 +111,7 @@ fun HomeFragment(
                         color = colorResource(id = R.color.white),
                         textAlign = TextAlign.Center
                     )
-                    AutoComplete {
+                    SubjectAutoComplete {
                         navController.navigate("subjectScreen/${it}")
                     }
                 }
@@ -125,22 +125,26 @@ fun HomeFragment(
             }
         }
         Spacer(modifier = Modifier.padding(5.dp))
-        LessonLazyRow(lessonSelectedItem = lessonSelectedItem) {
-            viewModel.setLessonSelectedItem(it)
+        LessonSelectorRow(selectedLessonIndex = selectedLessonIndex) {
+            viewModel.updateSelectedLesson(it)
         }
         Spacer(modifier = Modifier.padding(5.dp))
-        SubjectLazyRow(
-            lessonSelectedItemIndex = lessonSelectedItem,
-            controller = true,
-            onSelectedSubject = { viewModel.setSelectedSubject(it) },
-            onAlertDialog = { viewModel.setAlertDialog(it) })
+        SubjectList(
+            selectedLessonIndex = selectedLessonIndex,
+            isLessonMode = true,
+            onSubjectSelected = { viewModel.updateSelectedSubject(it) },
+            onShowDialog = { viewModel.showDialog(it) })
     }
-    if (alertDialog) {
+    if (isDialogVisible) {
         CustomAlertDialog(
-            selectedSubject,
-            onAlertDialogChange = { viewModel.alertDialog.value = it },
-            onClickInformationCard = { navController.navigate("informationCard/${it}") }) {
-            navController.navigate("subjectScreen/${it}")
-        }
+            selectedSubject = selectedSubject,
+            onAlertDialogChange = { viewModel.isDialogVisible.value == it },
+            onClickAction = { action, name ->
+                when (action) {
+                    "informationCard" -> navController.navigate("informationCard/${name}")
+                    "subjectScreen" -> navController.navigate("subjectScreen/${name}")
+                }
+            }
+        )
     }
 }

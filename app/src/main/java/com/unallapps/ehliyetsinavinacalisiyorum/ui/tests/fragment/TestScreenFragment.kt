@@ -30,7 +30,7 @@ import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.navigation.BottomBarScreen
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CloseAlert
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.ExitConfirmationDialog
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.FinishAlert
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.tests.viewmodel.TestScreenViewModel
 
@@ -230,7 +230,7 @@ fun TestScreen(
             )
         }
         if (showExitDialog) {
-            CloseAlert(onAlertDialogClose = {
+            ExitConfirmationDialog(onDismiss = {
                 viewModel.setExitDialogVisible(it)
             }) {
                 viewModel.setExitDialogVisible(false)

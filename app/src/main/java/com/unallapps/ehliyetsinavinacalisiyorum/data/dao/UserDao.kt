@@ -8,17 +8,17 @@ import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.UserEntity
 @Dao
 interface UserDao {
     @Insert
-    suspend fun insert(userEntity: UserEntity)
+    suspend fun insertUser(userEntity: UserEntity)
 
     @Query("SELECT * FROM USERENTITY")
-    suspend fun getUserSize(): MutableList<UserEntity>
+    suspend fun getAllUsers(): MutableList<UserEntity>
 
     @Query("SELECT * FROM USERENTITY")
-    suspend fun getUserName(): UserEntity
+    suspend fun getUser(): UserEntity
 
     @Query("UPDATE UserEntity SET userName = :userName WHERE userid = :id")
     suspend fun updateUserName(userName: String, id: Int)
 
     @Query("UPDATE UserEntity SET userPhoto = :image WHERE userid = :id")
-    suspend fun updateUserImage(image: ByteArray?, id: Int)
+    suspend fun updateUserPhoto(image: ByteArray?, id: Int)
 }

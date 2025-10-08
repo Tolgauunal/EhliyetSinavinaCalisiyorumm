@@ -14,8 +14,8 @@ import com.unallapps.ehliyetsinavinacalisiyorum.R
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CustomAlertDialog
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.LessonLazyRow
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.SubjectLazyRow
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.LessonSelectorRow
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.SubjectList
 
 @Composable
 fun SubjectScreenFragment(
@@ -23,33 +23,37 @@ fun SubjectScreenFragment(
     navController: NavHostController,
     viewModel: SubjectScreenViewModel = hiltViewModel()
 ) {
-    val lessonSelectedItem by viewModel.lessonSelectedItem.collectAsState()
+    val selectedLessonIndex by viewModel.selectedLessonIndex.collectAsState()
     val selectedSubject by viewModel.selectedSubject.collectAsState()
-    val alertDialog by viewModel.alertDialog.collectAsState()
+    val isAlertDialogVisible by viewModel.isAlertDialogVisible.collectAsState()
 
     Column(
         modifier = modifier.padding(8.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        LessonLazyRow(lessonSelectedItem = lessonSelectedItem) {
-            viewModel.setSelectedSubject(it)
+        LessonSelectorRow(selectedLessonIndex = selectedLessonIndex) {
+            viewModel.selectLesson(it)
         }
         Spacer(modifier = Modifier.padding(5.dp))
-        SubjectLazyRow(
-            lessonSelectedItemIndex = lessonSelectedItem,
-            controller = false,
-            onSelectedSubject = { viewModel.setSelectedSubject(it.id) },
-            onAlertDialog = { viewModel.setAlertDialog(it) },
-            subjectTitle = R.string.all_lesson
+        SubjectList(
+            selectedLessonIndex = selectedLessonIndex,
+            isLessonMode = false,
+            onSubjectSelected = { viewModel.selectLesson(it.id) },
+            onShowDialog = { viewModel.setAlertDialogVisible(it) },
+            titleRes = R.string.all_lesson
         )
-        if (alertDialog) {
+        if (isAlertDialogVisible) {
             CustomAlertDialog(
                 selectedSubject = selectedSubject,
-                onAlertDialogChange = { viewModel.setAlertDialog(it) },
-                onClickInformationCard = { navController.navigate("informationCard/${it}") }) {
-                navController.navigate("subjectScreen/${it}")
-            }
+                onAlertDialogChange = { viewModel.isAlertDialogVisible.value == it },
+                onClickAction = { action, name ->
+                    when (action) {
+                        "informationCard" -> navController.navigate("informationCard/${name}")
+                        "subjectScreen" -> navController.navigate("subjectScreen/${name}")
+                    }
+                }
+            )
         }
     }
 }

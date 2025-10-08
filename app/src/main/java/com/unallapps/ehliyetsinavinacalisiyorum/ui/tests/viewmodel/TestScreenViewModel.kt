@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseLesson
-import com.unallapps.ehliyetsinavinacalisiyorum.data.DatabaseTestList
 import com.unallapps.ehliyetsinavinacalisiyorum.data.Lesson
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestSaveIdEntity
 import com.unallapps.ehliyetsinavinacalisiyorum.data.entity.TestsEntity
@@ -26,7 +25,6 @@ class TestScreenViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    // region === State ===
     private val _selectedLesson: MutableStateFlow<Lesson?> = MutableStateFlow(null)
     val selectedLesson = _selectedLesson.asStateFlow()
 
@@ -117,9 +115,9 @@ class TestScreenViewModel @Inject constructor(
             if (_restartOrContinue.value == true) {
                 _continueTestInfo.value = lessonRepository.getLessonData(_currentLessonName.value)
                 _continueTestInfo.value?.let {
-                    _currentQuestionIndex.value = it.testNumber
-                    _correctAnswerCount.value = it.correctSize
-                    _wrongAnswerCount.value = it.wrongSize
+                    _currentQuestionIndex.value = it.number
+                    _correctAnswerCount.value = it.correctCount
+                    _wrongAnswerCount.value = it.wrongCount
                     _restartOrContinue.value = false
                 }
             }

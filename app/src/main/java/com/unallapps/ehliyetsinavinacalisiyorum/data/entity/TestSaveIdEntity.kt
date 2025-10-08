@@ -5,10 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class TestSaveIdEntity(
-    @PrimaryKey(autoGenerate = true) val testId: Int = 0,
-    val testName: String,
-    val correctSize: Int = 0,
-    val wrongSize: Int = 0,
-    val questionSize: Int = 0,
-    val testNumber: Int = 0
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    val name: String,
+    val correctCount: Int = 0,
+    val wrongCount: Int = 0,
+    val questionCount: Int = 0,
+    val number: Int = 0
 )
