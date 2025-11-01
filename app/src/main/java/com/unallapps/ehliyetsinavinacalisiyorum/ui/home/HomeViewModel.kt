@@ -37,6 +37,10 @@ class HomeViewModel @Inject constructor(
     val isDialogVisible: StateFlow<Boolean> = _isDialogVisible.asStateFlow()
 
     init {
+        getInitialData()
+    }
+
+    fun getInitialData() {
         viewModelScope.launch {
             val existingUser = userRepository.getUser()
             if (existingUser != null) {
@@ -49,6 +53,7 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
+
 
     fun updateSelectedLesson(index: Int) {
         _selectedLessonIndex.value = index
