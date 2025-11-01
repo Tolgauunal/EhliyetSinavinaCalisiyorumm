@@ -21,9 +21,9 @@ data class Subject(val id: Int, val name: String, val icon: Int) : Parcelable
 object DatabaseLesson {
     val lessonList = mutableListOf(
         Lesson(0, Constants.String.FIRST_AID, R.drawable.ilkyardimm),
-        Lesson(1, Constants.String.INFORMATION_CARD, R.drawable.carr),
+        Lesson(1, Constants.String.TRAFFIC, R.drawable.carr),
         Lesson(2, Constants.String.ENGINE, R.drawable.enginee),
-        Lesson(2, Constants.String.FAVORITE, R.drawable.favorite)
+        Lesson(3, Constants.String.FAVORITE, R.drawable.favorite)
     )
 }
 

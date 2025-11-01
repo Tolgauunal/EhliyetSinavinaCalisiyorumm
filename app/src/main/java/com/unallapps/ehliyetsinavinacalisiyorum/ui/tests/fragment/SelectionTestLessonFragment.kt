@@ -133,7 +133,7 @@ fun SelectionTestLessonFragment(
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
                 onClick = {
                     selectedLessonName .value?.let { viewModel.resetLessonInfo(it) }
-                    navController.navigate("testScreen/${selectedLessonIndex.value}/${false}")
+                    navController.navigate("testScreen/${selectedLessonName.value}/${false}")
                 },
                 modifier = Modifier
                     .padding(16.dp)
