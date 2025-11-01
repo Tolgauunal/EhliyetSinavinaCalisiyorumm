@@ -138,20 +138,7 @@ class TestScreenViewModel @Inject constructor(
             if (_currentLessonName.value != Constants.String.FAVORITE) {
                 val testList = testDetailRepository.getTestDetailList(_currentLessonName.value)
                 testList?.let {
-                    val current = it[_currentQuestionIndex.value]
-                    _currentTestEntity.value = current
-                    _totalQuestionCount.value = it.size
-                    _isFavorite.value = current.favorite
-                    updateFavoriteIcon()
-
-                    _currentQuestionText.value = current.content.orEmpty()
-                    _correctAnswer.value = current.correct.orEmpty()
-                    _questionImageRes.value = current.imageTest
-
-                    _optionAText.value = current.aTest.orEmpty()
-                    _optionBText.value = current.bTest.orEmpty()
-                    _optionCText.value = current.cTest.orEmpty()
-                    _optionDText.value = current.dTest.orEmpty()
+                    displayQuestion(it)
                 }
             } else {
                 val testList = testDetailRepository.getFavoriteTestList()
@@ -159,23 +146,27 @@ class TestScreenViewModel @Inject constructor(
                     if (_currentQuestionIndex.value + 1 == it.size) {
                         _nextQuestionIcon.value = R.drawable.baseline_close_24
                     }
-                    val current = it[_currentQuestionIndex.value]
-                    _currentTestEntity.value = current
-                    _totalQuestionCount.value = it.size
-                    _isFavorite.value = current.favorite
-                    updateFavoriteIcon()
-
-                    _currentQuestionText.value = current.content.orEmpty()
-                    _correctAnswer.value = current.correct.orEmpty()
-                    _questionImageRes.value = current.imageTest
-
-                    _optionAText.value = current.aTest.orEmpty()
-                    _optionBText.value = current.bTest.orEmpty()
-                    _optionCText.value = current.cTest.orEmpty()
-                    _optionDText.value = current.dTest.orEmpty()
+                    displayQuestion(it)
                 }
             }
         }
+    }
+
+    private fun displayQuestion(data: List<TestsEntity>) {
+        val current = data[_currentQuestionIndex.value]
+        _currentTestEntity.value = current
+        _totalQuestionCount.value = data.size
+        _isFavorite.value = current.favorite
+        updateFavoriteIcon()
+
+        _currentQuestionText.value = current.content.orEmpty()
+        _correctAnswer.value = current.correct.orEmpty()
+        _questionImageRes.value = current.imageTest
+
+        _optionAText.value = current.aTest.orEmpty()
+        _optionBText.value = current.bTest.orEmpty()
+        _optionCText.value = current.cTest.orEmpty()
+        _optionDText.value = current.dTest.orEmpty()
     }
 
     fun selectAnswer(answer: String) {
