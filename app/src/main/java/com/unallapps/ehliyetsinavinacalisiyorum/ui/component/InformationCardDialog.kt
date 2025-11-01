@@ -17,12 +17,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.data.Subject
+import com.unallapps.ehliyetsinavinacalisiyorum.data.enums.InformationActionType
 
 @Composable
-fun CustomAlertDialog(
+fun InformationCardDialog(
     selectedSubject: Subject,
     onAlertDialogChange: (Boolean) -> Unit,
-    onClickAction: (actionType: String, subjectName: String) -> Unit
+    onClickAction: (actionType: InformationActionType, subjectName: String) -> Unit
 ) {
     val openDialog = remember { mutableStateOf(true) }
 
@@ -52,7 +53,7 @@ fun CustomAlertDialog(
                     onClick = {
                         openDialog.value = false
                         onAlertDialogChange(false)
-                        onClickAction("informationCard", selectedSubject.name)
+                        onClickAction(InformationActionType.InformationCard, selectedSubject.name)
                     }
                 ) {
                     Text(
@@ -70,7 +71,7 @@ fun CustomAlertDialog(
                     onClick = {
                         openDialog.value = false
                         onAlertDialogChange(false)
-                        onClickAction("subjectScreen", selectedSubject.name)
+                        onClickAction(InformationActionType.SubjectScreen, selectedSubject.name)
                     }
                 ) {
                     Text(
@@ -87,7 +88,7 @@ fun CustomAlertDialog(
 @Preview
 @Composable
 fun CustomAlertDialogPreview() {
-    CustomAlertDialog(
+    InformationCardDialog(
         selectedSubject = Subject(
             id = 1,
             name = "Genel İlk Yardım Bilgileri",

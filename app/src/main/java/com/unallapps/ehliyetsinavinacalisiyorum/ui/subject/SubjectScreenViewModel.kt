@@ -25,7 +25,6 @@ class SubjectScreenViewModel @Inject constructor() : ViewModel() {
         _selectedSubject.value = DatabaseSubject.subjectLists.getOrElse(index) { _selectedSubject.value }
     }
 
-    /** Alert dialog görünürlüğünü ayarlar */
     fun setAlertDialogVisible(isVisible: Boolean) {
         _isAlertDialogVisible.value = isVisible
     }

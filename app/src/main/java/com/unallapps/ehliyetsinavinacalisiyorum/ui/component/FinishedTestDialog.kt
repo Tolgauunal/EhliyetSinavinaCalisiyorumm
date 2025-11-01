@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 
 @Composable
-fun FinishAlert(
+fun FinishedTestDialog(
     onPopBack: (Boolean) -> Unit,
     onRestart: (Boolean) -> Unit
 ) {
@@ -52,5 +52,5 @@ fun FinishAlert(
 @Composable
 @Preview
 fun FinishAlertPreview() {
-    FinishAlert(onPopBack = {}, onRestart = {})
+    FinishedTestDialog(onPopBack = {}, onRestart = {})
 }

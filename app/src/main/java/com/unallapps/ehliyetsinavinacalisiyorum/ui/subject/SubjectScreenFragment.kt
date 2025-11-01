@@ -13,7 +13,8 @@ import androidx.compose.ui.unit.dp
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CustomAlertDialog
+import com.unallapps.ehliyetsinavinacalisiyorum.data.enums.InformationActionType
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.InformationCardDialog
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.LessonSelectorRow
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.SubjectList
 
@@ -44,13 +45,13 @@ fun SubjectScreenFragment(
             titleRes = R.string.all_lesson
         )
         if (isAlertDialogVisible) {
-            CustomAlertDialog(
+            InformationCardDialog(
                 selectedSubject = selectedSubject,
                 onAlertDialogChange = { viewModel.isAlertDialogVisible.value == it },
                 onClickAction = { action, name ->
                     when (action) {
-                        "informationCard" -> navController.navigate("informationCard/${name}")
-                        "subjectScreen" -> navController.navigate("subjectScreen/${name}")
+                        InformationActionType.InformationCard -> navController.navigate("informationCard/${name}")
+                        InformationActionType.SubjectScreen -> navController.navigate("subjectScreen/${name}")
                     }
                 }
             )

@@ -31,7 +31,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.unallapps.ehliyetsinavinacalisiyorum.R
 import com.unallapps.ehliyetsinavinacalisiyorum.navigation.BottomBarScreen
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.ExitConfirmationDialog
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.FinishAlert
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.FinishedTestDialog
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.tests.viewmodel.TestScreenViewModel
 
 @SuppressLint("StateFlowValueCalledInComposition")
@@ -216,7 +216,7 @@ fun TestScreen(
         }
 
         if (showFinishDialog) {
-            FinishAlert(
+            FinishedTestDialog(
                 onPopBack = {
                     viewModel.setFinishDialogVisible(it)
                     navController.popBackStack(

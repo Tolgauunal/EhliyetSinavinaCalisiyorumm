@@ -50,7 +50,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.unallapps.ehliyetsinavinacalisiyorum.R
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.LessonButton
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.ProfileSettingsButton
 
 @RequiresApi(Build.VERSION_CODES.P)
 @Composable
@@ -214,32 +214,32 @@ fun ProfileFragment(
 
         Column(modifier = Modifier.padding(10.dp)) {
             Spacer(modifier = Modifier.padding(10.dp))
-            LessonButton(
-                title = stringResource(R.string.privacy_Policy),
+            ProfileSettingsButton(
+                textResId = R.string.privacy_Policy,
                 iconResId = R.drawable.gizlilik,
                 onClick = {}
             )
             Spacer(modifier = Modifier.padding(5.dp))
-            LessonButton(
-                title = stringResource(R.string.terms_And_Conditions),
+            ProfileSettingsButton(
+                textResId = R.string.terms_And_Conditions,
                 iconResId = R.drawable.sartlar,
                 onClick = {}
             )
             Spacer(modifier = Modifier.padding(5.dp))
-            LessonButton(
-                title = stringResource(R.string.vote_For_Us),
+            ProfileSettingsButton(
+                textResId = R.string.vote_For_Us,
                 iconResId = R.drawable.oy,
                 onClick = {}
             )
             Spacer(modifier = Modifier.padding(5.dp))
-            LessonButton(
-                title = stringResource(R.string.report_Error),
+            ProfileSettingsButton(
+                textResId = R.string.report_Error,
                 iconResId = R.drawable.error,
                 onClick = {}
             )
             Spacer(modifier = Modifier.padding(5.dp))
-            LessonButton(
-                title = stringResource(R.string.contact),
+            ProfileSettingsButton(
+                textResId = R.string.contact,
                 iconResId = R.drawable.contact,
                 onClick = {}
             )

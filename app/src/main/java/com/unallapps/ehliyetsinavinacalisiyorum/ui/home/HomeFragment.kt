@@ -1,6 +1,5 @@
 package com.unallapps.ehliyetsinavinacalisiyorum.ui.home
 
-import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -31,12 +30,12 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.unallapps.ehliyetsinavinacalisiyorum.R
-import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.CustomAlertDialog
+import com.unallapps.ehliyetsinavinacalisiyorum.data.enums.InformationActionType
+import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.InformationCardDialog
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.LessonSelectorRow
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.SubjectAutoComplete
 import com.unallapps.ehliyetsinavinacalisiyorum.ui.component.SubjectList
 
-@SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
 @Composable
 fun HomeFragment(
     modifier: Modifier,
@@ -136,13 +135,13 @@ fun HomeFragment(
             onShowDialog = { viewModel.showDialog(it) })
     }
     if (isDialogVisible) {
-        CustomAlertDialog(
+        InformationCardDialog(
             selectedSubject = selectedSubject,
             onAlertDialogChange = { viewModel.isDialogVisible.value == it },
             onClickAction = { action, name ->
                 when (action) {
-                    "informationCard" -> navController.navigate("informationCard/${name}")
-                    "subjectScreen" -> navController.navigate("subjectScreen/${name}")
+                    InformationActionType.InformationCard -> navController.navigate("informationCard/${name}")
+                    InformationActionType.SubjectScreen -> navController.navigate("subjectScreen/${name}")
                 }
             }
         )
